@@ -1,8 +1,8 @@
 package com.mj.test;
 
-public class Base {
+public class Test {
 	public static void main(String[] args) {
-		System.out.println("ss");
+		System.out.println(66);
 	}
 
 }
