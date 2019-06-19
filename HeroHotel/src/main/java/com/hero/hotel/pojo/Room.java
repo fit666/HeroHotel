@@ -3,21 +3,15 @@ package com.hero.hotel.pojo;
 public class Room {
     private Integer id;
     private Integer roomTypeId;
-    private Integer clean;
-    private Integer repair;
+    private Integer flag;
+    
 
     @Override
-    public String toString() {
-        return "Room{" +
-                "id=" + id +
-                ", roomTypeId=" + roomTypeId +
-                ", clean=" + clean +
-                ", repair=" + repair +
-                ", flag=" + flag +
-                '}';
-    }
+	public String toString() {
+		return "Room [id=" + id + ", roomTypeId=" + roomTypeId + ", flag=" + flag + "]";
+	}
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
@@ -33,21 +27,6 @@ public class Room {
         this.roomTypeId = roomTypeId;
     }
 
-    public Integer getClean() {
-        return clean;
-    }
-
-    public void setClean(Integer clean) {
-        this.clean = clean;
-    }
-
-    public Integer getRepair() {
-        return repair;
-    }
-
-    public void setRepair(Integer repair) {
-        this.repair = repair;
-    }
 
     public Integer getFlag() {
         return flag;
@@ -60,13 +39,11 @@ public class Room {
     public Room() {
     }
 
-    public Room(Integer id, Integer roomTypeId, Integer clean, Integer repair, Integer flag) {
+    public Room(Integer id, Integer roomTypeId, Integer flag) {
         this.id = id;
         this.roomTypeId = roomTypeId;
-        this.clean = clean;
-        this.repair = repair;
         this.flag = flag;
     }
 
-    private Integer flag;
+   
 }
