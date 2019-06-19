@@ -3,19 +3,13 @@ package com.hero.hotel.pojo;
 public class Orderinfor {
     private Integer id;
     private Integer orderId;
-    private Integer rid;
-    private Double truePayMoney;
-    private Double discount;
-    private String liveTime;
-    private String leaveTime;
-    private Integer flag;
 
     @Override
     public String toString() {
         return "Orderinfor{" +
                 "id=" + id +
                 ", orderId=" + orderId +
-                ", rid=" + rid +
+                ", roomid=" + roomid +
                 ", truePayMoney=" + truePayMoney +
                 ", discount=" + discount +
                 ", liveTime='" + liveTime + '\'' +
@@ -40,12 +34,12 @@ public class Orderinfor {
         this.orderId = orderId;
     }
 
-    public Integer getRid() {
-        return rid;
+    public Integer getRoomid() {
+        return roomid;
     }
 
-    public void setRid(Integer rid) {
-        this.rid = rid;
+    public void setRoomid(Integer roomid) {
+        this.roomid = roomid;
     }
 
     public Double getTruePayMoney() {
@@ -91,14 +85,23 @@ public class Orderinfor {
     public Orderinfor() {
     }
 
-    public Orderinfor(Integer id, Integer orderId, Integer rid, Double truePayMoney, Double discount, String liveTime, String leaveTime, Integer flag) {
+    public Orderinfor(Integer id, Integer orderId, Integer roomid, Double truePayMoney, Double discount, String liveTime, String leaveTime, Integer flag) {
         this.id = id;
         this.orderId = orderId;
-        this.rid = rid;
+        this.roomid = roomid;
         this.truePayMoney = truePayMoney;
         this.discount = discount;
         this.liveTime = liveTime;
         this.leaveTime = leaveTime;
         this.flag = flag;
     }
+
+    private Integer roomid;
+    private Double truePayMoney;
+    private Double discount;
+    private String liveTime;
+    private String leaveTime;
+    private Integer flag;
+
+
 }

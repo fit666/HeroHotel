@@ -4,27 +4,28 @@ public class ReverseInfor {
     private Integer id;
     private Integer reverseId;
     private Integer roomTypeId;
+    private Integer orderNumber;
     private Double truePayMoney;
     private Double discount;
     private String liveTime;
     private String leaveTime;
     private Integer cancelTime;
     private Integer flag;
-    private Integer number;
 
     @Override
-    public String toString() {
+    public String
+    toString() {
         return "ReverseInfor{" +
                 "id=" + id +
                 ", reverseId=" + reverseId +
                 ", roomTypeId=" + roomTypeId +
+                ", orderNumber=" + orderNumber +
                 ", truePayMoney=" + truePayMoney +
                 ", discount=" + discount +
                 ", liveTime='" + liveTime + '\'' +
                 ", leaveTime='" + leaveTime + '\'' +
                 ", cancelTime=" + cancelTime +
                 ", flag=" + flag +
-                ", number=" + number +
                 '}';
     }
 
@@ -50,6 +51,14 @@ public class ReverseInfor {
 
     public void setRoomTypeId(Integer roomTypeId) {
         this.roomTypeId = roomTypeId;
+    }
+
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public Double getTruePayMoney() {
@@ -100,27 +109,19 @@ public class ReverseInfor {
         this.flag = flag;
     }
 
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
     public ReverseInfor() {
     }
 
-    public ReverseInfor(Integer id, Integer reverseId, Integer roomTypeId, Double truePayMoney, Double discount, String liveTime, String leaveTime, Integer cancelTime, Integer flag, Integer number) {
+    public ReverseInfor(Integer id, Integer reverseId, Integer roomTypeId, Integer orderNumber, Double truePayMoney, Double discount, String liveTime, String leaveTime, Integer cancelTime, Integer flag) {
         this.id = id;
         this.reverseId = reverseId;
         this.roomTypeId = roomTypeId;
+        this.orderNumber = orderNumber;
         this.truePayMoney = truePayMoney;
         this.discount = discount;
         this.liveTime = liveTime;
         this.leaveTime = leaveTime;
         this.cancelTime = cancelTime;
         this.flag = flag;
-        this.number = number;
     }
 }
