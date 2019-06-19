@@ -5,6 +5,14 @@ public class Reserve {
     private Integer lid;
     private Integer depositMoney;
     private Integer autoCancel;
+    private String arriveTime;
+    private String leaveMessage;
+    private String reverseOrderStartTime;
+    private String payNumber;
+    private Double discount;
+    private Integer orderStatus;
+    private String reserveNumber;
+    private Integer flag;
 
     @Override
     public String toString() {
@@ -14,9 +22,9 @@ public class Reserve {
                 ", depositMoney=" + depositMoney +
                 ", autoCancel=" + autoCancel +
                 ", arriveTime='" + arriveTime + '\'' +
-                ", leaveMessage=" + leaveMessage +
-                ", reverseOrderStartTime=" + reverseOrderStartTime +
-                ", payNumber=" + payNumber +
+                ", leaveMessage='" + leaveMessage + '\'' +
+                ", reverseOrderStartTime='" + reverseOrderStartTime + '\'' +
+                ", payNumber='" + payNumber + '\'' +
                 ", discount=" + discount +
                 ", orderStatus=" + orderStatus +
                 ", reserveNumber='" + reserveNumber + '\'' +
@@ -64,27 +72,27 @@ public class Reserve {
         this.arriveTime = arriveTime;
     }
 
-    public Integer getLeaveMessage() {
+    public String getLeaveMessage() {
         return leaveMessage;
     }
 
-    public void setLeaveMessage(Integer leaveMessage) {
+    public void setLeaveMessage(String leaveMessage) {
         this.leaveMessage = leaveMessage;
     }
 
-    public Integer getReverseOrderStartTime() {
+    public String getReverseOrderStartTime() {
         return reverseOrderStartTime;
     }
 
-    public void setReverseOrderStartTime(Integer reverseOrderStartTime) {
+    public void setReverseOrderStartTime(String reverseOrderStartTime) {
         this.reverseOrderStartTime = reverseOrderStartTime;
     }
 
-    public Integer getPayNumber() {
+    public String getPayNumber() {
         return payNumber;
     }
 
-    public void setPayNumber(Integer payNumber) {
+    public void setPayNumber(String payNumber) {
         this.payNumber = payNumber;
     }
 
@@ -120,7 +128,7 @@ public class Reserve {
         this.flag = flag;
     }
 
-    public Reserve(Integer id, Integer lid, Integer depositMoney, Integer autoCancel, String arriveTime, Integer leaveMessage, Integer reverseOrderStartTime, Integer payNumber, Double discount, Integer orderStatus, String reserveNumber, Integer flag) {
+    public Reserve(Integer id, Integer lid, Integer depositMoney, Integer autoCancel, String arriveTime, String leaveMessage, String reverseOrderStartTime, String payNumber, Double discount, Integer orderStatus, String reserveNumber, Integer flag) {
         this.id = id;
         this.lid = lid;
         this.depositMoney = depositMoney;
@@ -137,14 +145,4 @@ public class Reserve {
 
     public Reserve() {
     }
-
-    private String arriveTime;
-    private Integer leaveMessage;
-    private Integer reverseOrderStartTime;
-    private Integer payNumber;
-    private Double discount;
-    private Integer orderStatus;
-    private String reserveNumber;
-    private Integer flag;
-
 }

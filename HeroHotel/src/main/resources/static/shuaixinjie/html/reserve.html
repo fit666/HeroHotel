@@ -17,26 +17,26 @@
             <a href="javascript:void(0)" onclick="closeBox()">退出</a>
         </div>
         <div class="content">
-            <form action="/addreserve" method="post">
+            <form action="/addReserve" method="post">
             <ul>
-                <li>姓名&nbsp<input type="text" name=""></li>
-                <li>电话&nbsp<input type="text"></li>
+                <li>姓名&nbsp<input type="text" name="uname"></li>
+                <li>电话&nbsp<input type="text" name="tel"></li>
                 <li>留言&nbsp</li>
-                <li><textarea style="width:260px;height:50px;"></textarea></li>
+                <li><textarea style="width:260px;height:50px;" name="message"></textarea></li>
                 <p></p>
-                <li>房型&nbsp<input type="text"></li>
-                <li>入住时间&nbsp<input type="date"></li>
-                <li>退房时间&nbsp<input type="date"></li>
+                <li>房型&nbsp<input type="text" name="roomTypeId"></li>
+                <li>入住时间&nbsp<input type="date" name="liveTime"></li>
+                <li>退房时间&nbsp<input type="date" name="leaveTime"></li>
                 <p></p>
-                <li>取消时间&nbsp<input type="date"></li>
-                <li>押金&nbsp<input type="text"></li>
-                <li>是否自动取消预定&nbsp<input type="radio" name="sex" id="" />是
-                                         <input type="radio" name="sex" id="" />否
+                <li>取消时间&nbsp<input type="datetime-local" name="cancelTime"></li>
+                <li>押金&nbsp<input type="text" name="depositMoney"></li>
+                <li>是否自动取消预定&nbsp<input type="radio" name="autoCancel" value="1" />是
+                                         <input type="radio" name="autoCancel" value="0" />否
                 </li>
                 <p></p>
                 <li style="text-align: center"><input type="reset" value="重置"></li>
                 <p></p>
-                <li style="text-align: center"><input type="button"  value="确认"></li>
+                <li style="text-align: center"><input type="submit"  value="确认"></li>
 
             </form>
             </ul>
