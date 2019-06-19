@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.hero.hotel.controller","com.hero.hotel.service","com.hreo.hotel.config"})
+@ComponentScan({"com.hero.hotel.controller","com.hero.hotel.service", "com.hero.hotel.config"})
 @MapperScan("com.hero.hotel.dao")
 @ServletComponentScan("com.hero.hotel.filter")
 public class HeroHotelApplication {
