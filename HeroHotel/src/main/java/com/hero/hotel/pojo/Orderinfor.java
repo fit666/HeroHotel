@@ -9,6 +9,7 @@ public class Orderinfor {
         return "Orderinfor{" +
                 "id=" + id +
                 ", orderId=" + orderId +
+                ", uid=" + uid +
                 ", roomid=" + roomid +
                 ", truePayMoney=" + truePayMoney +
                 ", discount=" + discount +
@@ -16,6 +17,9 @@ public class Orderinfor {
                 ", leaveTime='" + leaveTime + '\'' +
                 ", flag=" + flag +
                 '}';
+    }
+
+    public Orderinfor() {
     }
 
     public Integer getId() {
@@ -32,6 +36,14 @@ public class Orderinfor {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     public Integer getRoomid() {
@@ -82,12 +94,10 @@ public class Orderinfor {
         this.flag = flag;
     }
 
-    public Orderinfor() {
-    }
-
-    public Orderinfor(Integer id, Integer orderId, Integer roomid, Double truePayMoney, Double discount, String liveTime, String leaveTime, Integer flag) {
+    public Orderinfor(Integer id, Integer orderId, Integer uid, Integer roomid, Double truePayMoney, Double discount, String liveTime, String leaveTime, Integer flag) {
         this.id = id;
         this.orderId = orderId;
+        this.uid = uid;
         this.roomid = roomid;
         this.truePayMoney = truePayMoney;
         this.discount = discount;
@@ -96,12 +106,12 @@ public class Orderinfor {
         this.flag = flag;
     }
 
+    private Integer uid;
     private Integer roomid;
     private Double truePayMoney;
     private Double discount;
     private String liveTime;
     private String leaveTime;
     private Integer flag;
-
 
 }

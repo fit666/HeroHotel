@@ -2,7 +2,6 @@ package com.hero.hotel.pojo;
 
 public class Orders {
     private Integer id;
-    private Integer uid;
     private Double allMoney;
     private Integer depositMoney;
     private Integer rid;
@@ -12,12 +11,14 @@ public class Orders {
     private String payTime;
     private Integer payState;
     private Double reduceMoney;
+    private String returnMoneyTime;
+    private String orderNumber;
+    private Integer flag;
 
     @Override
     public String toString() {
         return "Orders{" +
                 "id=" + id +
-                ", uid=" + uid +
                 ", allMoney=" + allMoney +
                 ", depositMoney=" + depositMoney +
                 ", rid=" + rid +
@@ -27,6 +28,9 @@ public class Orders {
                 ", payTime='" + payTime + '\'' +
                 ", payState=" + payState +
                 ", reduceMoney=" + reduceMoney +
+                ", returnMoneyTime='" + returnMoneyTime + '\'' +
+                ", orderNumber='" + orderNumber + '\'' +
+                ", flag=" + flag +
                 '}';
     }
 
@@ -36,14 +40,6 @@ public class Orders {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
     }
 
     public Double getAllMoney() {
@@ -118,12 +114,35 @@ public class Orders {
         this.reduceMoney = reduceMoney;
     }
 
+    public String getReturnMoneyTime() {
+        return returnMoneyTime;
+    }
+
+    public void setReturnMoneyTime(String returnMoneyTime) {
+        this.returnMoneyTime = returnMoneyTime;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
+
     public Orders() {
     }
 
-    public Orders(Integer id, Integer uid, Double allMoney, Integer depositMoney, Integer rid, String payMethod, String payNumber, String orderStartTime, String payTime, Integer payState, Double reduceMoney) {
+    public Orders(Integer id, Double allMoney, Integer depositMoney, Integer rid, String payMethod, String payNumber, String orderStartTime, String payTime, Integer payState, Double reduceMoney, String returnMoneyTime, String orderNumber, Integer flag) {
         this.id = id;
-        this.uid = uid;
         this.allMoney = allMoney;
         this.depositMoney = depositMoney;
         this.rid = rid;
@@ -133,5 +152,8 @@ public class Orders {
         this.payTime = payTime;
         this.payState = payState;
         this.reduceMoney = reduceMoney;
+        this.returnMoneyTime = returnMoneyTime;
+        this.orderNumber = orderNumber;
+        this.flag = flag;
     }
 }

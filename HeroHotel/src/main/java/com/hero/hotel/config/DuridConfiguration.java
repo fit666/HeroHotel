@@ -1,4 +1,4 @@
-package com.hreo.hotel.config;
+package com.hero.hotel.config;
 
 import java.sql.SQLException;
 
