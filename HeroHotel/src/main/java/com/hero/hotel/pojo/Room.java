@@ -5,7 +5,7 @@ public class Room {
     private Integer roomTypeId;
     private Integer clean;
     private Integer repair;
-
+    
     @Override
     public String toString() {
         return "Room{" +
