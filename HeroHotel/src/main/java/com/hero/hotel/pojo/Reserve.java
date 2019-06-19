@@ -2,29 +2,15 @@ package com.hero.hotel.pojo;
 
 public class Reserve {
     private Integer id;
-    private Integer user_id;
     private Integer lid;
-    private Integer uid;
-    private Integer roomTypeId;
     private Integer depositMoney;
     private Integer autoCancel;
-    private String arriveTime;
-    private Integer leaveMessage;
-    private Integer reverseOrderStartTime;
-    private Integer payNumber;
-    private Double discount;
-    private Integer orderStatus;
-    private String reserveNumber;
-    private Integer flag;
 
     @Override
     public String toString() {
         return "Reserve{" +
                 "id=" + id +
-                ", user_id=" + user_id +
                 ", lid=" + lid +
-                ", uid=" + uid +
-                ", roomTypeId=" + roomTypeId +
                 ", depositMoney=" + depositMoney +
                 ", autoCancel=" + autoCancel +
                 ", arriveTime='" + arriveTime + '\'' +
@@ -46,36 +32,12 @@ public class Reserve {
         this.id = id;
     }
 
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
-
     public Integer getLid() {
         return lid;
     }
 
     public void setLid(Integer lid) {
         this.lid = lid;
-    }
-
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    public Integer getRoomTypeId() {
-        return roomTypeId;
-    }
-
-    public void setRoomTypeId(Integer roomTypeId) {
-        this.roomTypeId = roomTypeId;
     }
 
     public Integer getDepositMoney() {
@@ -158,15 +120,9 @@ public class Reserve {
         this.flag = flag;
     }
 
-    public Reserve() {
-    }
-
-    public Reserve(Integer id, Integer user_id, Integer lid, Integer uid, Integer roomTypeId, Integer depositMoney, Integer autoCancel, String arriveTime, Integer leaveMessage, Integer reverseOrderStartTime, Integer payNumber, Double discount, Integer orderStatus, String reserveNumber, Integer flag) {
+    public Reserve(Integer id, Integer lid, Integer depositMoney, Integer autoCancel, String arriveTime, Integer leaveMessage, Integer reverseOrderStartTime, Integer payNumber, Double discount, Integer orderStatus, String reserveNumber, Integer flag) {
         this.id = id;
-        this.user_id = user_id;
         this.lid = lid;
-        this.uid = uid;
-        this.roomTypeId = roomTypeId;
         this.depositMoney = depositMoney;
         this.autoCancel = autoCancel;
         this.arriveTime = arriveTime;
@@ -178,4 +134,17 @@ public class Reserve {
         this.reserveNumber = reserveNumber;
         this.flag = flag;
     }
+
+    public Reserve() {
+    }
+
+    private String arriveTime;
+    private Integer leaveMessage;
+    private Integer reverseOrderStartTime;
+    private Integer payNumber;
+    private Double discount;
+    private Integer orderStatus;
+    private String reserveNumber;
+    private Integer flag;
+
 }

@@ -2,6 +2,7 @@ package com.hero.hotel.pojo;
 
 public class ReverseInfor {
     private Integer id;
+    private Integer uid;
     private Integer reverseId;
     private Integer roomTypeId;
     private Integer orderNumber;
@@ -13,10 +14,10 @@ public class ReverseInfor {
     private Integer flag;
 
     @Override
-    public String
-    toString() {
+    public String toString() {
         return "ReverseInfor{" +
                 "id=" + id +
+                ", uid=" + uid +
                 ", reverseId=" + reverseId +
                 ", roomTypeId=" + roomTypeId +
                 ", orderNumber=" + orderNumber +
@@ -35,6 +36,14 @@ public class ReverseInfor {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     public Integer getReverseId() {
@@ -109,11 +118,9 @@ public class ReverseInfor {
         this.flag = flag;
     }
 
-    public ReverseInfor() {
-    }
-
-    public ReverseInfor(Integer id, Integer reverseId, Integer roomTypeId, Integer orderNumber, Double truePayMoney, Double discount, String liveTime, String leaveTime, Integer cancelTime, Integer flag) {
+    public ReverseInfor(Integer id, Integer uid, Integer reverseId, Integer roomTypeId, Integer orderNumber, Double truePayMoney, Double discount, String liveTime, String leaveTime, Integer cancelTime, Integer flag) {
         this.id = id;
+        this.uid = uid;
         this.reverseId = reverseId;
         this.roomTypeId = roomTypeId;
         this.orderNumber = orderNumber;
@@ -123,5 +130,8 @@ public class ReverseInfor {
         this.leaveTime = leaveTime;
         this.cancelTime = cancelTime;
         this.flag = flag;
+    }
+
+    public ReverseInfor() {
     }
 }
