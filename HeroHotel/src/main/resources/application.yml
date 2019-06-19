@@ -1,6 +1,3 @@
-mybatis:
-  config-location: classpath:mybatis/mybatis-config.xml
-  type-aliases-package: com.hero.hotel.pojo
 spring:
   thymeleaf:
     cache: false
