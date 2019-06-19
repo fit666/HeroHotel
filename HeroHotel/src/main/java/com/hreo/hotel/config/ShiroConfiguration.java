@@ -49,7 +49,7 @@ public class ShiroConfiguration {
 		map.put("/logout", "logout");
 		
 		//配置需要认证的资源
-		map.put("/**", "authc");
+		map.put("/**", "anon");
 		bean.setFilterChainDefinitionMap(map);
 		//配置登录页面
 		bean.setLoginUrl("/index.html");
