@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hero.hotel.dao.UserDao;
-import com.hero.hotel.pojo.User;
 import com.hero.hotel.service.UserService;
 
 @Service("userService")
