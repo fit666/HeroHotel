@@ -3,6 +3,12 @@ package com.hero.hotel.pojo;
 public class Orderinfor {
     private Integer id;
     private Integer orderId;
+    private Integer roomid;
+    private Double truePayMoney;
+    private Double discount;
+    private String liveTime;
+    private String leaveTime;
+    private Integer flag;
 
     @Override
     public String toString() {
@@ -95,13 +101,4 @@ public class Orderinfor {
         this.leaveTime = leaveTime;
         this.flag = flag;
     }
-
-    private Integer roomid;
-    private Double truePayMoney;
-    private Double discount;
-    private String liveTime;
-    private String leaveTime;
-    private Integer flag;
-
-
 }
