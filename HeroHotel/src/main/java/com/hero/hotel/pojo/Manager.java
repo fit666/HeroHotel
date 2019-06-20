@@ -7,8 +7,19 @@ public class Manager {
     private String createTime;
     private Integer roleId;
     private Integer flag;
+    private int rm;
+    
+    
 
-    @Override
+    public int getRm() {
+		return rm;
+	}
+
+	public void setRm(int rm) {
+		this.rm = rm;
+	}
+
+	@Override
     public String toString() {
         return "Manager{" +
                 "id=" + id +

@@ -4,33 +4,55 @@ public class ReverseInfor {
     private Integer id;
     private Integer uid;
     private Integer reverseId;
-    private Integer roomTypeId;
-    private Integer orderNumber;
+    private Integer roomid;
     private Double truePayMoney;
     private Double discount;
     private String liveTime;
     private String leaveTime;
     private Integer cancelTime;
+    private String today;
     private Integer flag;
+   
+  
+    public ReverseInfor(Integer id, Integer reverseId, Integer roomid, Double truePayMoney, Double discount,
+			String liveTime, String leaveTime, Integer cancelTime, String today, Integer flag) {
+		super();
+		this.id = id;
+		this.reverseId = reverseId;
+		this.roomid = roomid;
+		this.truePayMoney = truePayMoney;
+		this.discount = discount;
+		this.liveTime = liveTime;
+		this.leaveTime = leaveTime;
+		this.cancelTime = cancelTime;
+		this.today = today;
+		this.flag = flag;
+	}
+	public Integer getRoomid() {
+		return roomid;
+	}
 
-    @Override
-    public String toString() {
-        return "ReverseInfor{" +
-                "id=" + id +
-                ", uid=" + uid +
-                ", reverseId=" + reverseId +
-                ", roomTypeId=" + roomTypeId +
-                ", orderNumber=" + orderNumber +
-                ", truePayMoney=" + truePayMoney +
-                ", discount=" + discount +
-                ", liveTime='" + liveTime + '\'' +
-                ", leaveTime='" + leaveTime + '\'' +
-                ", cancelTime=" + cancelTime +
-                ", flag=" + flag +
-                '}';
-    }
 
-    public Integer getId() {
+
+	public void setRoomid(Integer roomid) {
+		this.roomid = roomid;
+	}
+
+
+
+	public String getToday() {
+		return today;
+	}
+
+
+
+	public void setToday(String today) {
+		this.today = today;
+	}
+
+
+
+	public Integer getId() {
         return id;
     }
 
@@ -54,21 +76,7 @@ public class ReverseInfor {
         this.reverseId = reverseId;
     }
 
-    public Integer getRoomTypeId() {
-        return roomTypeId;
-    }
-
-    public void setRoomTypeId(Integer roomTypeId) {
-        this.roomTypeId = roomTypeId;
-    }
-
-    public Integer getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(Integer orderNumber) {
-        this.orderNumber = orderNumber;
-    }
+   
 
     public Double getTruePayMoney() {
         return truePayMoney;
@@ -118,20 +126,16 @@ public class ReverseInfor {
         this.flag = flag;
     }
 
-    public ReverseInfor(Integer id, Integer uid, Integer reverseId, Integer roomTypeId, Integer orderNumber, Double truePayMoney, Double discount, String liveTime, String leaveTime, Integer cancelTime, Integer flag) {
-        this.id = id;
-        this.uid = uid;
-        this.reverseId = reverseId;
-        this.roomTypeId = roomTypeId;
-        this.orderNumber = orderNumber;
-        this.truePayMoney = truePayMoney;
-        this.discount = discount;
-        this.liveTime = liveTime;
-        this.leaveTime = leaveTime;
-        this.cancelTime = cancelTime;
-        this.flag = flag;
-    }
 
     public ReverseInfor() {
     }
+
+
+	@Override
+	public String toString() {
+		return "ReverseInfor [id=" + id + ", reverseId=" + reverseId + ", roomid=" + roomid + ", truePayMoney="
+				+ truePayMoney + ", discount=" + discount + ", liveTime=" + liveTime + ", leaveTime=" + leaveTime
+				+ ", cancelTime=" + cancelTime + ", today=" + today + ", flag=" + flag + "]";
+	}
+
 }
