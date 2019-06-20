@@ -49,12 +49,31 @@ public class ShiroConfiguration {
 			ManagerRealm managerRealm=new ManagerRealm();
 			return managerRealm;
 		}
+		@Bean 
+		public AtLeastOneSuccessfulStrategy atl(){
+			System.out.println("创建AtLeastOneSuccessfulStrategy");
+			AtLeastOneSuccessfulStrategy atlo=new AtLeastOneSuccessfulStrategy();
+			return atlo;
+		}
+		
+		//配置自定义认证器
+		@Bean 
+		public CustomizedModularRealmAuthenticator authenticator(AtLeastOneSuccessfulStrategy at){
+			System.out.println("配置自定义认证器");
+			CustomizedModularRealmAuthenticator cmra=new CustomizedModularRealmAuthenticator();
+			//配置认证策略
+			cmra.setAuthenticationStrategy(at);
+			return cmra;
+		}
+		
 		
 		//2创建安全管理器
 		@Bean
-		public SecurityManager securityManager(AccountRealm myRealm,ManagerRealm managerRealm) {
+		public SecurityManager securityManager(AccountRealm myRealm,ManagerRealm managerRealm,CustomizedModularRealmAuthenticator cmra) {
 			System.out.println("创建安全管理器");
 			DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager();
+			//配置自定义的authenticator
+			securityManager.setAuthenticator(cmra);
 			//将realm保存在集合
 			Collection<Realm> realms=new ArrayList<>();
 			realms.add(myRealm);
@@ -64,14 +83,7 @@ public class ShiroConfiguration {
 			return securityManager;
 		}
 
-		//配置自定义认证器
-		@Bean 
-		public CustomizedModularRealmAuthenticator authenticator(AtLeastOneSuccessfulStrategy at){
-			System.out.println("配置自定义认证器");
-			CustomizedModularRealmAuthenticator cmra=new CustomizedModularRealmAuthenticator();
-			cmra.setAuthenticationStrategy(at);
-			return cmra;
-		}
+		
 		
 	//3创建shiro过滤器
 	@Bean

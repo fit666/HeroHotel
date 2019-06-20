@@ -24,17 +24,18 @@ public class ManagerRealm extends AuthorizingRealm{
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		System.out.println("正在验证");
+		System.out.println("manager正在验证");
 		//获取账号
 		Integer account=Integer.parseInt((String)token.getPrincipal());
-				
+		System.out.println(account+"realm里的account");	
 		Manager manager=managerService.findManagerPwd(account);
+		System.out.println(manager+"managerRealm----------");
 				
 		if(manager==null){
 			return null;
 		}
 		SimpleAuthenticationInfo info=
-				new SimpleAuthenticationInfo(manager.getMacCount().toString(),manager.getPassword(),getName());
+				new SimpleAuthenticationInfo(manager.getMaccount().toString(),manager.getPassword(),getName());
 				
 		return info;
 	}

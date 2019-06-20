@@ -2,36 +2,45 @@ package com.hero.hotel.pojo;
 
 public class Manager {
     private Integer id;
-    private String macCount;
+    private String maccount;
     private String password;
     private String createTime;
     private Integer roleId;
     private Integer flag;
-    private int rm;
+    private Integer rm;
     
     
 
-    public int getRm() {
-		return rm;
-	}
-
-	public void setRm(int rm) {
-		this.rm = rm;
-	}
-
+   
 	@Override
     public String toString() {
         return "Manager{" +
                 "id=" + id +
-                ", macCount='" + macCount + '\'' +
+                ", maccount='" + maccount + '\'' +
                 ", password='" + password + '\'' +
                 ", createTime='" + createTime + '\'' +
                 ", roleId=" + roleId +
                 ", flag=" + flag +
                 '}';
     }
+	
+    public String getMaccount() {
+		return maccount;
+	}
 
-    public Integer getId() {
+	public void setMaccount(String maccount) {
+		this.maccount = maccount;
+	}
+
+	public Integer getRm() {
+		return rm;
+	}
+
+	public void setRm(Integer rm) {
+		this.rm = rm;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -39,13 +48,7 @@ public class Manager {
         this.id = id;
     }
 
-    public String getMacCount() {
-        return macCount;
-    }
-
-    public void setMacCount(String macCount) {
-        this.macCount = macCount;
-    }
+    
 
     public String getPassword() {
         return password;
@@ -82,12 +85,18 @@ public class Manager {
     public Manager() {
     }
 
-    public Manager(Integer id, String macCount, String password, String createTime, Integer roleId, Integer flag) {
-        this.id = id;
-        this.macCount = macCount;
-        this.password = password;
-        this.createTime = createTime;
-        this.roleId = roleId;
-        this.flag = flag;
-    }
+	public Manager(Integer id, String maccount, String password, String createTime, Integer roleId, Integer flag,
+			Integer rm) {
+		super();
+		this.id = id;
+		this.maccount = maccount;
+		this.password = password;
+		this.createTime = createTime;
+		this.roleId = roleId;
+		this.flag = flag;
+		this.rm = rm;
+	}
+    
 }
+
+   
