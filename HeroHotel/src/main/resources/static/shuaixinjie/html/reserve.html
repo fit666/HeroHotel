@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>预订单（个人）</title>
+    <link rel="stylesheet" href="../css/reserve.css">
+    <script src="../js/reserve.js"></script>
+
+</head>
+<body>
+    登录栏<br>
+    房型样式栏<br>
+    <input type="button" name="popBox" value="预定" onclick="popBox()">
+    <div id="popLayer"></div>
+    <div id="popBox">
+        <div class="close">
+            <a href="javascript:void(0)" onclick="closeBox()">退出</a>
+        </div>
+        <div class="content">
+            <form action="/addReserve" method="post">
+            <ul>
+                <li>姓名&nbsp<input type="text" name="uname"></li>
+                <li>电话&nbsp<input type="text" name="tel"></li>
+                <li>留言&nbsp</li>
+                <li><textarea style="width:260px;height:50px;" name="message"></textarea></li>
+                <p></p>
+                <li>房型&nbsp<input type="text" name="roomTypeId"></li>
+                <li>入住时间&nbsp<input type="date" name="liveTime"></li>
+                <li>退房时间&nbsp<input type="date" name="leaveTime"></li>
+                <p></p>
+                <li>取消时间&nbsp<input type="datetime-local" name="cancelTime"></li>
+                <li>押金&nbsp<input type="text" name="depositMoney"></li>
+                <li>是否自动取消预定&nbsp<input type="radio" name="autoCancel" value="1" />是
+                                         <input type="radio" name="autoCancel" value="0" />否
+                </li>
+                <p></p>
+                <li style="text-align: center"><input type="reset" value="重置"></li>
+                <p></p>
+                <li style="text-align: center"><input type="submit"  value="确认"></li>
+
+            </form>
+            </ul>
+        </div>
+    </div>
+
+
+</body>
+</html>

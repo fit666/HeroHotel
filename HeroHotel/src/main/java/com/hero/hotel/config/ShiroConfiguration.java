@@ -1,10 +1,8 @@
-package com.hreo.hotel.config;
+package com.hero.hotel.config;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.shiro.authc.credential.CredentialsMatcher;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -15,26 +13,11 @@ import com.hero.hotel.realm.MyRealm;
 
 @Configuration
 public class ShiroConfiguration {
-	//配置加密
-	@Bean
-	public CredentialsMatcher matcher() {
-		HashedCredentialsMatcher matcher=new HashedCredentialsMatcher();
-		//加密类型
-		matcher.setHashAlgorithmName("MD5");
-		//加密次数
-		matcher.setHashIterations(1024);
-		return matcher;
-	}
-	
-	
-	
 	//1创建自定义realm
 		@Bean
-		public MyRealm myrealm(CredentialsMatcher matcher) {
+		public MyRealm myrealm() {
 			System.out.println("创建myrealm");
 			MyRealm myRealm=new MyRealm();
-			//设置加密类型及次数
-			myRealm.setCredentialsMatcher(matcher);
 			return myRealm;
 		}
 		
