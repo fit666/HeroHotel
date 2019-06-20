@@ -21,4 +21,9 @@ public interface RoomDao {
 	@Select("select * from room where flag=2")
 	public List<Room> findZangRooms();
 
+	@Select("select roomid from orderinfor where today=#{time} and flag=0")
+	public List<Integer> findOrderInforRid(String time);
+	
+	
+
 }
