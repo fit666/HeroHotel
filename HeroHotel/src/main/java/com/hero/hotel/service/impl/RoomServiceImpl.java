@@ -19,8 +19,22 @@ public class RoomServiceImpl implements RoomService{
 	// 查询所有房间状态
 	@Override
 	public List<Room> findRoomAllStatus() {
-
 		return roomDao.findRoomAllStatus();
+	}
+
+	@Override
+	public List<Room> findOkRooms() {
+		return roomDao.findOkRooms();
+	}
+
+	@Override
+	public List<Room> findNoRooms() {
+		return roomDao.findNoRooms();
+	}
+
+	@Override
+	public List<Room> findZangRooms() {
+		return roomDao.findZangRooms();
 	}
 
 }

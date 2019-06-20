@@ -10,4 +10,10 @@ public interface RoomService {
 	
 	public List<Room> findRoomAllStatus();
 
+	public List<Room> findOkRooms();
+
+	public List<Room> findNoRooms();
+
+	public List<Room> findZangRooms();
+
 }

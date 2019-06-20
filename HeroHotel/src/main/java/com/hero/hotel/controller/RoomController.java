@@ -34,5 +34,38 @@ public class RoomController {
 		return modelAndView;
 
 	}
+	
+	
+	@GetMapping("/findOkRooms")
+	public  ModelAndView findOkRooms(){
+		List<Room> rooms = roomService.findOkRooms();
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("rooms",rooms);
+		modelAndView.setViewName("html/roomStatus.html");
+		System.out.println(rooms);
+		return modelAndView;
+	}
 
+	
+	@GetMapping("/findNoRooms")
+	public  ModelAndView findNoRooms(){
+		List<Room> rooms = roomService.findNoRooms();
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("rooms",rooms);
+		modelAndView.setViewName("html/roomStatus.html");
+		System.out.println(rooms);
+		return modelAndView;
+	}
+	
+	@GetMapping("/findZangRooms")
+	public  ModelAndView findZangRooms(){
+		List<Room> rooms = roomService.findZangRooms();
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("rooms",rooms);
+		modelAndView.setViewName("html/roomStatus.html");
+		System.out.println(rooms);
+		return modelAndView;
+	}
+	
+	
 }
