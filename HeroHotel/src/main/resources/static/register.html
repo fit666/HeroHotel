@@ -15,7 +15,7 @@
 
 <body>
 	<!--HEADER-->
-	<%@include file="head.jsp"%>
+	<% @include file="head.jsp"%>
 	<!--HEADER-->
 
 	<!--身-->
@@ -25,6 +25,7 @@
 			<div class="container_l">
 				<h1>新用户注册</h1>
 				<div class="form_list">
+					<form action="register" method="post" >
 					<ul>
 						<li class="clearfix">
 							<!-- <span class="s1">电子邮箱:</span>
@@ -38,31 +39,47 @@
 </span>
 <span class="s3"><i class="red">*</i> 用于接收密码、订单确认、会员登录。</span>
 </li> -->
+
 						<li class="clearfix"><span class="s1">昵称:</span> <span
-							class="s2"><input id="username" type="text"
-								class="valid_ipt" placeholder="请输入注册的用户名，长度在5~15个字符"
-								errortext="昵称格式不正确" emptytext="请填写昵称"
-								regexp="define:/^\D([\w]|[\u4E00-\u9FA5])+$/" length="4-20" />
-						</span></li>
+							class="s2"><input id="account" type="text"
+								class="valid_ipt" placeholder="账号为大写或小写字母开头，6-20位字母或数字组成"
+								 />
+						</span><span class="s3"><i class="red">⊙</i> 用于接收密码、订单确认、会员登录。</span></li>
+
 						<li class="clearfix"><span class="s1">密码:</span> <span
 							class="s2"><input id="pass" type="password"
 								class="valid_ipt" placeholder="请设置您的密码，长度在6~12个字符之间"
-								errortext="密码格式不正确" emptytext="请填写密码" regexp="all" length="6-16" />
-						</span></li>
+								 />
+						</span><span class="s3"><i class="red">⊙</i> 用于接收密码、订单确认、会员登录。</span></li>
 						<li class="clearfix"><span class="s1">确认密码:</span> <span
 							class="s2"><input id="ensure_pass" type="password"
 								class="valid_ipt" placeholder="再次确认密码，请与设置的密码保持一致"
-								errortext="请先输入正确的密码" emptytext="请再次填写密码" regexp="all"
-								length="6-16" other_valifun="ensure_pass(this.id)"
-								other_valifuntext="两次输入密码不一致" /> </span></li>
+								/> </span></li>
+						</span>
+						</li>
+					<li class="clearfix">	<span class="s1">手机号码:</span>
+						<span class="s2"><input type="text" class="valid_ipt"
+						placeholder="请输入手机号"	 /> </span>
+						<span class="s3"><i class="red">⊙</i> 用于接收密码、订单确认、会员登录。</span></li>
+				<li class="clearfix">	<span class="s1">验证码:</span>
+						<span class="s2"><input type="text" class="valid_ipt" placeholder="请输入验证码"
+							id="code" /> </span>
+						<span class="s3"><i class="red">⊙</i> 用于接收密码、订单确认、会员登录。</span></li>
+					
 					</ul>
+					
+					</form>
 					<div class="yes_rule">
 						<input id="yes_rule" name="" type="checkbox" value=""
 							checked="checked" /><label for="yes_rule">我已看过并同意黄山
 							&middot; 醉温泉会员《注册服务条款》</label>
 					</div>
 					<div class="btn_area">
-						<a href="javascript:show();" id="sub_btn" class="btn2" type="button">轻松注册</a>
+						<div class="ishave">
+					<p class="p1">
+						<span class="btn1">注册</span>
+					</p>
+				</div>
 					</div>
 				</div>
 			</div>
@@ -81,6 +98,6 @@
 	<div class="footer">Copyright &copy; 2014 黄山 &middot; 醉温泉 All
 		Rights Reserved. 版权所有&nbsp;&nbsp;&nbsp;&nbsp;皖ICP备11009137号</div>
 
-<script type="text/javascript" src="js/register.js"></script>
+	<script type="text/javascript" src="js/register.js"></script>
 </body>
 </html>

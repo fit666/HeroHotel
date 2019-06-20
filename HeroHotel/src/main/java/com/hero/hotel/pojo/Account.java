@@ -10,8 +10,20 @@ public class Account {
     private Integer uid;
     private Integer mid;
     private Integer flag;
+    
+    //前端输入的验证码
+    private String code;
+    
+    
+    public String getCode() {
+		return code;
+	}
 
-    public Account() {
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Account() {
     }
 
     public Account(Integer id, String account, String password, String tell, String registerTime, Double costAllMoney, Integer uid, Integer mid, Integer flag) {
