@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript" src="../js/public/jquery-2.1.1.min.js"></script>
+<style>
+#rooms {
+	border: #000000 1px solid;
+	height: 400px;
+}
+
+#rooms div {
+	border: #000000 1px solid;
+	width: 18%;
+	height: 150px;
+	margin-left: 1.5%;
+	margin-top: 2%;
+	float: left;
+}
+
+.room_green {
+	background-color: green;
+}
+
+.room_red {
+	background-color: red;
+}
+
+.room_blue {
+	background-color: blue;
+}
+
+.room_gray {
+	background-color: gray;
+}
+
+
+</style>
+
+
+
+
+</head>
+<body>
+	<div id="rooms"></div>
+	<script type="text/javascript" th:inline="javascript">
+			
+			function findRooms(){
+				
+				var rooms = [[${rooms}]];
+				
+				for(var i = 0 ; i < rooms.length; i++ ){
+					if(rooms[i].flag == 0){
+						var div = $("<div id=room_"+rooms[i].id+" class='room_green'></div>").text(rooms[i].id);
+					}/* else if(rooms[i].flag == 1){
+						var div = $("<div id=room_"+rooms[i].id+" class='room_red'></div>").text(rooms[i].id);
+					}
+					}else if(rooms[i].flag == 2){
+						var div = $("<div id=room_"+rooms[i].id+" class='room_blue'></div>").text(rooms[i].id);
+					}
+					}else if(rooms[i].flag == 3){
+						var div = $("<div id=room_"+rooms[i].id+" class='room_gray'></div>").text(rooms[i].id);
+					} */ else{
+						var div = $("<div id=room_"+rooms[i].id+" class='room_gray'></div>").text(rooms[i].id);
+					}
+					
+					
+					
+					
+					$("#rooms").append(div); 
+				}
+				
+			}
+			findRooms()
+			
+			
+</script>
+
+</body>
+</html>
