@@ -18,9 +18,10 @@ public class ManagerServiceImpl implements ManagerService{
 	 * 通过用户账号查找密码(non-Javadoc)
 	 * @see com.hero.hotel.service.ManagerService#findManagerPwd(java.lang.Integer)
 	 */
+
 	@Override
-	public Manager findManagerPwd(Integer account) {
-		
+	public Manager findManagerPwd(String account) {
+		// TODO Auto-generated method stub
 		return managerDao.findManagerPwd(account);
 	}
 

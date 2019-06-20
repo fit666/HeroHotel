@@ -30,7 +30,6 @@ public class ManagerController {
 		String codeVa = (String) session.getAttribute("codeValue");
 		if (codeVa.equals(codeValue)) {
 			Subject currentUser = SecurityUtils.getSubject();
-			System.out.println("============"+currentUser);
 			if (!currentUser.isAuthenticated()) {
 				CustomizedToken customizedToken = new CustomizedToken(manager.getMaccount(), manager.getPassword(),
 						MANAGER_LOGIN_TYPE);

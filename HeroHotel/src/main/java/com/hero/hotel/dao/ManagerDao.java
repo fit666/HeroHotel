@@ -6,6 +6,6 @@ import com.hero.hotel.pojo.Manager;
 
 public interface ManagerDao {
 	//根据账号查询密码
-	@Select("select * from manager where macCount=#{account} and flag=1")
-	public Manager findManagerPwd(Integer account);
+	@Select("select * from manager where maccount=#{account} and flag=0")
+	public Manager findManagerPwd(String account);
 }
