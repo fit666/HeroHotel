@@ -3,26 +3,26 @@ package com.hero.hotel.pojo;
 public class Orderinfor {
     private Integer id;
     private Integer orderId;
+    private Integer uid;
+    private Integer roomid;
+    private Double truePayMoney;
+    private Double discount;
+    private String liveTime;
+    private String leaveTime;
+    private String today; 
+    private Integer flag;
 
-    @Override
-    public String toString() {
-        return "Orderinfor{" +
-                "id=" + id +
-                ", orderId=" + orderId +
-                ", uid=" + uid +
-                ", roomid=" + roomid +
-                ", truePayMoney=" + truePayMoney +
-                ", discount=" + discount +
-                ", liveTime='" + liveTime + '\'' +
-                ", leaveTime='" + leaveTime + '\'' +
-                ", flag=" + flag +
-                '}';
-    }
+    public String getToday() {
+		return today;
+	}
 
-    public Orderinfor() {
-    }
 
-    public Integer getId() {
+	public void setToday(String today) {
+		this.today = today;
+	}
+
+
+	public Integer getId() {
         return id;
     }
 
@@ -93,7 +93,6 @@ public class Orderinfor {
     public void setFlag(Integer flag) {
         this.flag = flag;
     }
-
     public Orderinfor(Integer id, Integer orderId, Integer uid, Integer roomid, Double truePayMoney, Double discount, String liveTime, String leaveTime, Integer flag) {
         this.id = id;
         this.orderId = orderId;
@@ -105,13 +104,22 @@ public class Orderinfor {
         this.leaveTime = leaveTime;
         this.flag = flag;
     }
+    public Orderinfor() {
+    	
+    }
 
-    private Integer uid;
-    private Integer roomid;
-    private Double truePayMoney;
-    private Double discount;
-    private String liveTime;
-    private String leaveTime;
-    private Integer flag;
+	public Orderinfor(Integer id, Integer orderId, Integer roomid, Double truePayMoney, Double discount,
+			String liveTime, String leaveTime, String today, Integer flag) {
+		super();
+		this.id = id;
+		this.orderId = orderId;
+		this.roomid = roomid;
+		this.truePayMoney = truePayMoney;
+		this.discount = discount;
+		this.liveTime = liveTime;
+		this.leaveTime = leaveTime;
+		this.today = today;
+		this.flag = flag;
+	}
 
 }
