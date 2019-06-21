@@ -8,13 +8,5 @@ import com.hero.hotel.pojo.Account;
 @Controller
 public class UserController {
 	
-	//注册
 	
-	@RequestMapping("/register")
-	public String register(Account account) {
-		
-		
-		return null;
-	}
-
 }
