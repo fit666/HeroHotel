@@ -11,6 +11,7 @@ public class User {
     private String password;//密码
     private String tel;//手机号
     private String monetary;//消费金额
+    private String createtime;//注册时间
     private Integer rm;//记住我
 
     @Override

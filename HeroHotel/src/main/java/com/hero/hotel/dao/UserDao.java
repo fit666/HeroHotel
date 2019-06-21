@@ -13,7 +13,7 @@ import com.hero.hotel.pojo.User;
 public interface UserDao {
 	
 	//查询所有用户
-	@Select("select * from account")
+	@Select("select * from user")
 	@Results({
 		@Result(id=true,column="id",property="id"),
 		@Result(column="account",property="account"),
