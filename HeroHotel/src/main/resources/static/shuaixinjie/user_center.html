@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=0.95, user-scalable=no" />
+<title>黄山醉温泉 - 用户中心</title>
+<meta name="description" content="说明" />
+<meta name="keywords" content="关键字" />
+<link rel="stylesheet" href="css/user.css" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+</head>
+
+<body>
+	<!--头-->
+	<div class="top">
+		<div class="header clearfix">
+			<div class="header_l">
+				<a href="index.jsp"><img src="images/userlogo.png" /></a>
+				<h2>用户中心</h2>
+			</div>
+
+			<div class="header_r">
+				<div class="img_link" id="login_after">
+					欢迎您：<i>${sessionScope.USER.username}</i> <a href="room_order.jsp">[我的订单]</a> <a
+						href="index.jsp">[返回首页]</a> <a href="UserOutLoginServet">[退出登录]</a>
+				</div>
+			</div>
+
+			<div class="clears"></div>
+		</div>
+	</div>
+	<!--头-->
+
+	</div>
+	</div>
+	<div class="clears"></div>
+
+
+	<!--导航-->
+	<!--会员中心-->
+	<div class="member_center_wrap">
+		<div class="member_center">
+			<div class="member_center_l">
+				<div class="body_center_main_tree">
+					<ul>
+						<li><dl>
+								<dt>
+									<a href="#" class="cur">信息分类</a>
+								</dt>
+							</dl></li>
+						<li><dl>
+								<dt>
+									<a href="#">信息管理</a>
+								</dt>
+								<dd>
+									<a href="javascript:checkframe(6);">个人资料管理</a> <a href="javascript:checkframe(7);">实名认证</a>
+									<a href="javascript:checkframe(8);">修改密码</a>
+								</dd>
+							</dl></li>
+						<li><dl>
+								<dt>
+									<a href="#">在线支付订单管理</a>
+								</dt>
+								<dd>
+									<a href="javascript:checkframe(0);">酒店房间订单</a> <a href="javascript:checkframe(1);">酒店餐饮订单</a>
+								</dd>
+							</dl></li>
+						<li><dl>
+								<dt>
+									<a href="#">会员卡管理</a>
+								</dt>
+								<dd>
+									<a href="javascript:checkframe(2);">开通VIP</a> <a href="javascript:checkframe(3);">了解会员权益</a> 
+								</dd>
+							</dl></li>
+						<li><dl>
+								<dt>
+									<a href="#">瑞琪酒店社区</a>
+								</dt>
+								<dd>
+									<a href="#">会员公告</a> <a href="#">会员分享</a> <a href="#">会员建议</a> <a
+										href="#">会员投诉</a> <a href="#">公司会员手册</a> <a href="#">个人会员手册</a>
+								</dd>
+							</dl></li>
+
+					</ul>
+				</div>
+			</div>
+			<div class="member_center_r" id="textbody">
+				
+			</div>
+		</div>
+	</div>
+
+
+	<!---尾部-->
+	<div class="footer">
+		<div class="link">
+			<div class="copyright">Copyright &copy; 2014 黄山 &middot; 醉温泉
+				All Rights Reserved. 版权所有&nbsp;&nbsp;&nbsp;&nbsp;皖ICP备11009137号</div>
+		</div>
+
+	</div>
+<script type="text/javascript" src="js/user_center.js"></script>
+</body>
+</html>

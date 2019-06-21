@@ -3,11 +3,13 @@ package com.hero.hotel.controller;
 import com.hero.hotel.pojo.Reserve;
 import com.hero.hotel.service.Reserve_Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 public class Reserve_Controller {
@@ -21,6 +23,7 @@ public class Reserve_Controller {
         Integer depositMoney,Integer autoCancel
 
     ){
+
         //如果没有登录，首先提示用户先登录
         Integer lid=1;
         String payNumber="001";
@@ -36,4 +39,28 @@ public class Reserve_Controller {
         reserve_service.addReserve(reserve);
 
     }
+
+
+    //预订单查询（模糊查询，可以根据姓名和id查询）
+    @GetMapping(value = "/findreservebyname/{name}")
+    public ModelAndView findReserveByName(@PathVariable String name){
+        System.out.println("开始预订单查询，姓名为："+name);
+        ModelAndView modelAndView = new ModelAndView();
+        List<com.hero.hotel.pojo.sxj.Reserve> reserves=reserve_service.findReserveByName(name);
+        System.out.println(reserves);
+        modelAndView.addObject(reserves);
+        return modelAndView;
+
+    }
+
+    //获取住房的时间段liveTime & leaveTime
+    @GetMapping("/livetime/{livetime}/{leavetime}")
+    public ModelAndView liveTime(@PathVariable String livetime,@PathVariable String leavetime){
+        System.out.println(livetime);
+        System.out.println(leavetime);
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
+
+
 }
