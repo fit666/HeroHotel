@@ -9,7 +9,6 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.hero.hotel.realm.MyRealm;
 
 @Configuration
 public class ShiroConfiguration {
