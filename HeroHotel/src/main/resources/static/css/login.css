@@ -182,7 +182,7 @@ a:hover { color:#c00; }
 .form_list li .s3 .red{ color:#f00;}
 
 .valid_ipt{ width:250px; padding:0 4px; border:1px solid #c8c8c8; height:34px; line-height:34px;}
-.valid_ipt:focus{ background:#feffe3 url(../images/ipt_focus.gif) repeat-x;}
+.valid_ipt:focus{ background:#feffe3  repeat-x;}
 .err_ipt{ border:1px solid #ff9a9a; background:#feffe3 url(../images/ipt_focus.gif) repeat-x;}
 .valid_tarea textarea{ height:140px; line-height:21px;}
 .valid_sct{ margin:3px 0 0;}

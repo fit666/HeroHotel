@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=0.95, user-scalable=no" />
+<title>新用户登录</title>
+<meta name="description" content="说明" />
+<meta name="keywords" content="关键字" />
+<link rel="stylesheet" href="css/login.css" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+</head>
+
+<body>
+	<!--HEADER-->
+		<%@include file="head.jsp" %>
+	<!--HEADER-->
+
+	<!--身-->
+	<div class="container_wrap">
+		<div class="container">
+			<!--左-->
+			<div class="container_l">
+				<h1>用户登录</h1>
+				<div class="form_list">
+					<ul>
+						<li class="clearfix"><span class="s1">用户名:</span> <span
+							class="s2"><input type="text" class="valid_ipt"
+								id="username" focustext="昵称或邮箱" errortext="用户名不正确"
+								emptytext="请填写用户名" /> </span></li>
+						<li class="clearfix"><span class="s1">密 码:</span> <span
+							class="s2"><input type="password" class="valid_ipt"
+								id="password" focustext="请填写密码" errortext="密码不正确"
+								emptytext="请填写密码" regexp="all" length="6-16" /> </span></li>
+					</ul>
+					<div class="yes_rule">
+						<input id="rememberMe" name="" type="checkbox" value=""
+							checked="checked" /><label for="rememberMe">记住我(两周免登录)</label>
+					</div>
+					<div class="btn_area clearfix">
+						<button id="sub_btn" class="btn1" onclick="show()">登
+							录</button><a class="a1" href="#">忘记密码？</a>
+					</div>
+				</div>
+			</div>
+			<!--右-->
+			<div class="container_r">
+				<div class="register_right">
+					<h2>注册</h2>
+					<div class="user_ishave">
+						<p>还没有黄山 &middot; 醉温泉会员账号？</p>
+						<p class="p1">
+							<a href="register.jsp" class="btn2">轻松注册</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--尾部-->
+	<div class="footer">Copyright &copy; 2014 黄山 &middot; 醉温泉 All
+		Rights Reserved. 版权所有&nbsp;&nbsp;&nbsp;&nbsp;皖ICP备11009137号</div>
+<script type="text/javascript" src="js/login.js"></script>
+
+</body>
+</html>
