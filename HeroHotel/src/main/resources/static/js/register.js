@@ -1,6 +1,23 @@
 //获取验证码
 function getcode(){
-	alert(66);
+	var btell = $("#tell").val();
+	if(btell==""){
+		$("#message3").html("请填写手机号");
+	}else if(btell.length!=11){
+		$("#message3").html("手机号不合法");
+	}else{
+		$.ajax({
+			url:"/user/code",
+			type:"post",
+			data:{
+				tel:$("#tell").val()
+			},
+			success:function(data){
+				$("#message4").html(data);
+			}
+		})
+	}
+	
 }
 
 //注册
@@ -29,14 +46,13 @@ function register(){
 			data:{
 				account:$("#account").val(),
 				password: $("#pass").val(),
-				tell:$("#tell").val()
+				tel:$("#tell").val()
 			},
 		success:function(data){
 			alert(data);
 			if(data!="注册成功"){
 				$("#message4").html(data);
 			}else{
-				alert(77);
 				location.href="login.html";
 		}
 		}

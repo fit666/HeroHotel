@@ -2,10 +2,10 @@ package com.hero.hotel.service;
 
 
 
-import com.hero.hotel.pojo.Account;
+import com.hero.hotel.pojo.User;
 
 public interface UserService {
 	
-	public String register(Account account);
-	public String sendMessage(Account account);
+	public String register(User user);
+	public String sendMessage(User user);
 }

@@ -7,11 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hero.hotel.pojo.Account;
+import com.hero.hotel.pojo.User;
 import com.hero.hotel.service.UserService;
 
 @Controller
-@RequestMapping("/account")
+@RequestMapping("/user")
 public class UserController {
 	@Resource
 	private UserService accountService;
@@ -24,14 +24,23 @@ public class UserController {
 		this.accountService = accountService;
 	}
 
+	//登录
+	@RequestMapping("/login")
+	@ResponseBody
+	public String login() {
+		
+		
+		return null;
+	}
+	
 
 	// 注册
 	@RequestMapping("/register")
 	@ResponseBody
-	public String register(Account account) {
-		System.out.println(account);
+	public String register(User user) {
+		System.out.println(user);
 		String result = "注册失败";
-		result = accountService.register(account);
+		result = accountService.register(user);
 		return result;
 	}
 
@@ -39,10 +48,11 @@ public class UserController {
 	// 获取手机动态验证码
 	@RequestMapping("/code")
 	@ResponseBody
-	public String getCode(Account account) {
+	public String getCode(User user) {
 		String result="短信发送失败";
-		result=accountService.sendMessage(account);
+		result=accountService.sendMessage(user);
 		return result;
 	}
+
 
 }
