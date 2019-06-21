@@ -1,11 +1,13 @@
 package com.hero.hotel.pojo;
-
+/*
+ *	 房间表
+ */
 public class House {
-    private Integer id;
-    private Integer typeid;
+    private Integer id;//房间id
+    private Integer typeid;//房间类型id
     private Integer flag;
-    private String clean;
-    private Integer maintenance;
+    private String clean;//清洁状态
+    private Integer maintenance;//维修状态
 
     @Override
     public String toString() {

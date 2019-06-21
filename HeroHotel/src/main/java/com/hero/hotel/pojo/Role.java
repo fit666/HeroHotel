@@ -1,8 +1,10 @@
 package com.hero.hotel.pojo;
-
+/*
+ * 	角色表
+ */
 public class Role {
-    private Integer id;
-    private String rolename;
+    private Integer id;//角色id
+    private String rolename;//角色名
     private Integer flag;
 
     @Override

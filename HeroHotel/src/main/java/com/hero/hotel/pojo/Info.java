@@ -1,12 +1,14 @@
 package com.hero.hotel.pojo;
-
+/*
+ * 	信息表
+ */
 public class Info {
-    private Integer infoid;
+    private Integer infoid;//用户信息id
     private Integer flag;
-    private String tel;
-    private String uname;
-    private char sex;
-    private String idcard;
+    private String tel;//手机号
+    private String uname;//姓名
+    private char sex;//性别
+    private String idcard;//身份证号
 
     @Override
     public String toString() {
