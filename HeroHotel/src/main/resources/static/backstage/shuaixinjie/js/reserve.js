@@ -1,17 +1,26 @@
 
-/*点击弹出按钮*/
-function popBox() {
-    var popBox = document.getElementById("popBox");
-    var popLayer = document.getElementById("popLayer");
-    popBox.style.display = "block";
-    popLayer.style.display = "block";
-};
-
-/*点击关闭按钮*/
-function closeBox() {
-    var popBox = document.getElementById("popBox");
-    var popLayer = document.getElementById("popLayer");
-    popBox.style.display = "none";
-    popLayer.style.display = "none";
+function reserve(){
+	
+	 var arr=0;
+	  $("input[type='checkbox']:checked").each(function(){ 
+	      /* arr.push(this.value);*/
+		  arr=this.value;
+	  })
+	  var datajson = {
+		"arr":arr,		
+	};
+	 
+	$.ajax({
+		url:"reserve",
+		type:"post",
+		data:datajson,
+		datatype:"json",
+		success:function(data){
+			
+			alert("预定成功！");
+			
+		}
+		
+	})
+	
 }
-

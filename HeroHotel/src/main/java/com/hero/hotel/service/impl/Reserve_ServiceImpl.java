@@ -6,10 +6,10 @@ import com.hero.hotel.service.Reserve_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 @Service
+
 public class Reserve_ServiceImpl implements Reserve_Service {
     @Autowired
     private Reserve_Dao reserve_dao;
@@ -17,6 +17,12 @@ public class Reserve_ServiceImpl implements Reserve_Service {
     public void addReserve(Reserve reserve) {
         System.out.println(reserve);
         reserve_dao.addReserve(reserve);
+    }
+
+    @Override
+    public List<com.hero.hotel.pojo.sxj.Reserve> findReserveByName(String name) {
+
+        return reserve_dao.findReserveByName(name);
     }
 
 
