@@ -2,7 +2,7 @@ package com.hero.hotel.pojo;
 
 public class Members {
     private Integer id;
-    private Integer startMoney;
+    private Integer startmoney;
     private Integer flag;
     private String level;
     private Double discount;
@@ -11,7 +11,7 @@ public class Members {
     public String toString() {
         return "Members{" +
                 "id=" + id +
-                ", startMoney=" + startMoney +
+                ", startMoney=" + startmoney +
                 ", flag=" + flag +
                 ", level='" + level + '\'' +
                 ", discount=" + discount +
@@ -27,11 +27,11 @@ public class Members {
     }
 
     public Integer getStartMoney() {
-        return startMoney;
+        return startmoney;
     }
 
     public void setStartMoney(Integer startMoney) {
-        this.startMoney = startMoney;
+        this.startmoney = startMoney;
     }
 
     public Integer getFlag() {
@@ -63,7 +63,7 @@ public class Members {
 
     public Members(Integer id, Integer startMoney, Integer flag, String level, Double discount) {
         this.id = id;
-        this.startMoney = startMoney;
+        this.startmoney = startMoney;
         this.flag = flag;
         this.level = level;
         this.discount = discount;

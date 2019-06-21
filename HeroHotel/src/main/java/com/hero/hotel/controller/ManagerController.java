@@ -23,7 +23,6 @@ public class ManagerController {
 	 
     @RequestMapping("/login")
 	public ModelAndView login(Manager manager, String codeValue, HttpSession session) {
-		System.out.println(manager+"-----"+codeValue);
     	ModelAndView mav=new ModelAndView();
     	
     	// 获取session中的验证码值
