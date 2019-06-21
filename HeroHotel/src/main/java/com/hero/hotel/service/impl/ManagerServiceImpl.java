@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.hero.hotel.dao.ManagerDao;
-import com.hero.hotel.pojo.Manager;
+import com.hero.hotel.pojo.User;
 import com.hero.hotel.service.ManagerService;
 
 @Service("managerService")
@@ -20,7 +20,7 @@ public class ManagerServiceImpl implements ManagerService{
 	 */
 
 	@Override
-	public Manager findManagerPwd(String account) {
+	public User findManagerPwd(String account) {
 		// TODO Auto-generated method stub
 		return managerDao.findManagerPwd(account);
 	}

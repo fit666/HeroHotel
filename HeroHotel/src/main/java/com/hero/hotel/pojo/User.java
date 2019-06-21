@@ -11,6 +11,7 @@ public class User {
     private String password;//密码
     private String tel;//手机号
     private String monetary;//消费金额
+    private Integer rm;//记住我
 
     @Override
     public String toString() {
@@ -25,8 +26,16 @@ public class User {
                 ", monetary='" + monetary + '\'' +
                 '}';
     }
+    
+    public Integer getRm() {
+		return rm;
+	}
 
-    public Integer getId() {
+	public void setRm(Integer rm) {
+		this.rm = rm;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -103,5 +112,7 @@ public class User {
         this.tel = tel;
         this.monetary = monetary;
     }
+
+	
 
 }

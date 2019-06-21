@@ -7,9 +7,10 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
-import com.hero.hotel.pojo.Account;
+import com.hero.hotel.pojo.User;
 
-public interface AccountDao {
+
+public interface UserDao {
 	
 	//查询所有用户
 	@Select("select * from account")
@@ -26,6 +27,6 @@ public interface AccountDao {
 				one=@One(select="com.hero.hotel.dao.MembersDao.findById")
 		)
 	})
-	public List<Account> findAll();
+	public List<User> findAll();
 
 }
