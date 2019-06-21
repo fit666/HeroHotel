@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
 
 import com.hero.hotel.realm.ManagerRealm;
-import com.hero.hotel.realm.AccountRealm;
+import com.hero.hotel.realm.UserRealm;
 import com.hero.hotel.realm.CustomizedModularRealmAuthenticator;
 
 
@@ -37,10 +37,10 @@ public class ShiroConfiguration {
 	
 	//1创建自定义realm
 		@Bean
-		public AccountRealm accountrealm() {
+		public UserRealm accountrealm() {
 			System.out.println("创建myrealm");
 
-			AccountRealm accountRealm=new AccountRealm();
+			UserRealm accountRealm=new UserRealm();
 			return accountRealm;
 		}
 		@Bean
@@ -69,7 +69,7 @@ public class ShiroConfiguration {
 		
 		//2创建安全管理器
 		@Bean
-		public SecurityManager securityManager(AccountRealm myRealm,ManagerRealm managerRealm,CustomizedModularRealmAuthenticator cmra) {
+		public SecurityManager securityManager(UserRealm myRealm,ManagerRealm managerRealm,CustomizedModularRealmAuthenticator cmra) {
 			System.out.println("创建安全管理器");
 			DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager();
 			//配置自定义的authenticator

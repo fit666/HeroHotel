@@ -3,7 +3,7 @@ package com.woniu.hotel.enump;
 //普通用户登录，管理员登录
 
 public enum LoginType {
-	ACCOUNT("Account"),  MANAGER("Manager");
+	USER("User"),  MANAGER("Manager");
 	 
     private String type;
  
