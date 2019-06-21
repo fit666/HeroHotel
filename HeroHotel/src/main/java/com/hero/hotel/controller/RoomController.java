@@ -33,7 +33,7 @@ public class RoomController {
 		List<Room> rooms = roomService.findRoomAllStatus();
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("rooms", rooms);
-		modelAndView.setViewName("html/roomStatus.html");
+		modelAndView.setViewName("backstage-html/roomStatus.html");
 		System.out.println(rooms);
 		return modelAndView;
 
@@ -44,7 +44,7 @@ public class RoomController {
 		List<Room> rooms = roomService.findOkRooms();
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("rooms", rooms);
-		modelAndView.setViewName("html/roomStatus.html");
+		modelAndView.setViewName("backstage-html/roomStatus.html");
 		System.out.println(rooms);
 		return modelAndView;
 	}
@@ -54,7 +54,7 @@ public class RoomController {
 		List<Room> rooms = roomService.findNoRooms();
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("rooms", rooms);
-		modelAndView.setViewName("html/roomStatus.html");
+		modelAndView.setViewName("backstage-html/roomStatus.html");
 		System.out.println(rooms);
 		return modelAndView;
 	}
@@ -64,7 +64,7 @@ public class RoomController {
 		List<Room> rooms = roomService.findZangRooms();
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("rooms", rooms);
-		modelAndView.setViewName("html/roomStatus.html");
+		modelAndView.setViewName("backstage-html/roomStatus.html");
 		System.out.println(rooms);
 		return modelAndView;
 	}

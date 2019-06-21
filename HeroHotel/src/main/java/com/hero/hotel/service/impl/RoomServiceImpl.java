@@ -21,7 +21,7 @@ public class RoomServiceImpl implements RoomService {
 
 	@Resource
 	private RoomDao roomDao;
-	
+
 	@Resource
 	private OrderInforDao orderInforDao;
 
@@ -79,19 +79,22 @@ public class RoomServiceImpl implements RoomService {
 		// List<String> rids = roomDao.findOrderInforRid(time);
 		List<List> roomids1 = new ArrayList<List>();
 		for (int i = 0; i < times.size(); i++) {
-			 System.out.println(times.get(i)+"---------------");
+			System.out.println(times.get(i) + "---------------");
 			List<Integer> rids = orderInforDao.findOrderInforRid(times.get(i));
 
-			roomids1.add(rids);
+			if (rids != null) {
+				roomids1.add(rids);
+			}
+			
 		}
 
 		List<List> roomids2 = new ArrayList<List>();
-//		for (int i = 0; i < times.size(); i++) {
-//			// System.out.println(times.get(i)+"---------------");
-//			List<Integer> rids = orderInforDao.findOrderInforRid(times.get(i));
-//
-//			roomids2.add(rids);
-//		}
+		// for (int i = 0; i < times.size(); i++) {
+		// // System.out.println(times.get(i)+"---------------");
+		// List<Integer> rids = orderInforDao.findOrderInforRid(times.get(i));
+		//
+		// roomids2.add(rids);
+		// }
 		System.out.println(roomids1);
 
 		return null;
