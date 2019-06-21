@@ -3,7 +3,7 @@ package com.hero.hotel.pojo;
 import java.util.Date;
 
 public class Comment {
-    private Integer id;
+    private Integer id;    //id
     private Integer orderid;
     private Integer userid;
     private Integer flag;
