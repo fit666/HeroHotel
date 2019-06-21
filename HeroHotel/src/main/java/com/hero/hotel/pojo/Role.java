@@ -1,15 +1,15 @@
 package com.hero.hotel.pojo;
 
-public class Roles {
+public class Role {
     private Integer id;
-    private  String roleName;
+    private String rolename;
     private Integer flag;
 
     @Override
     public String toString() {
-        return "Roles{" +
+        return "Role{" +
                 "id=" + id +
-                ", roleName='" + roleName + '\'' +
+                ", rolename='" + rolename + '\'' +
                 ", flag=" + flag +
                 '}';
     }
@@ -22,12 +22,12 @@ public class Roles {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getRolename() {
+        return rolename;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
     }
 
     public Integer getFlag() {
@@ -38,12 +38,12 @@ public class Roles {
         this.flag = flag;
     }
 
-    public Roles() {
+    public Role(Integer id, String rolename, Integer flag) {
+        this.id = id;
+        this.rolename = rolename;
+        this.flag = flag;
     }
 
-    public Roles(Integer id, String roleName, Integer flag) {
-        this.id = id;
-        this.roleName = roleName;
-        this.flag = flag;
+    public Role() {
     }
 }

@@ -1,19 +1,19 @@
 package com.hero.hotel.pojo;
 
-public class Members {
+public class Vip {
     private Integer id;
-    private Integer startmoney;
+    private Integer vmoney;
     private Integer flag;
-    private String level;
+    private String vname;
     private Double discount;
 
     @Override
     public String toString() {
-        return "Members{" +
+        return "Vip{" +
                 "id=" + id +
-                ", startMoney=" + startmoney +
+                ", vmoney=" + vmoney +
                 ", flag=" + flag +
-                ", level='" + level + '\'' +
+                ", vname='" + vname + '\'' +
                 ", discount=" + discount +
                 '}';
     }
@@ -26,12 +26,12 @@ public class Members {
         this.id = id;
     }
 
-    public Integer getStartMoney() {
-        return startmoney;
+    public Integer getVmoney() {
+        return vmoney;
     }
 
-    public void setStartMoney(Integer startMoney) {
-        this.startmoney = startMoney;
+    public void setVmoney(Integer vmoney) {
+        this.vmoney = vmoney;
     }
 
     public Integer getFlag() {
@@ -42,12 +42,12 @@ public class Members {
         this.flag = flag;
     }
 
-    public String getLevel() {
-        return level;
+    public String getVname() {
+        return vname;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setVname(String vname) {
+        this.vname = vname;
     }
 
     public Double getDiscount() {
@@ -58,14 +58,14 @@ public class Members {
         this.discount = discount;
     }
 
-    public Members() {
+    public Vip() {
     }
 
-    public Members(Integer id, Integer startMoney, Integer flag, String level, Double discount) {
+    public Vip(Integer id, Integer vmoney, Integer flag, String vname, Double discount) {
         this.id = id;
-        this.startmoney = startMoney;
+        this.vmoney = vmoney;
         this.flag = flag;
-        this.level = level;
+        this.vname = vname;
         this.discount = discount;
     }
 }
