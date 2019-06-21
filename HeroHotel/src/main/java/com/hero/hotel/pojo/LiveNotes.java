@@ -1,12 +1,14 @@
 package com.hero.hotel.pojo;
-
+/*
+ *  	居住记录表
+ */
 public class LiveNotes {
-    private Integer id;
-    private Integer houseid;
-    private Integer typeid;
-    private Integer info;
+    private Integer id;//记录id
+    private Integer houseid;//房间id
+    private Integer typeid;//房间类型id
+    private Integer infoid;//个人信息id
     private Integer flag;
-    private String date;
+    private String date;//居住时间
 
     @Override
     public String toString() {
@@ -14,7 +16,7 @@ public class LiveNotes {
                 "id=" + id +
                 ", houseid=" + houseid +
                 ", typeid=" + typeid +
-                ", info=" + info +
+                ", infoid=" + infoid +
                 ", flag=" + flag +
                 ", date='" + date + '\'' +
                 '}';
@@ -44,12 +46,12 @@ public class LiveNotes {
         this.typeid = typeid;
     }
 
-    public Integer getInfo() {
-        return info;
+    public Integer getInfoid() {
+        return infoid;
     }
 
-    public void setInfo(Integer info) {
-        this.info = info;
+    public void setInfoid(Integer infoid) {
+        this.infoid = infoid;
     }
 
     public Integer getFlag() {
@@ -68,11 +70,11 @@ public class LiveNotes {
         this.date = date;
     }
 
-    public LiveNotes(Integer id, Integer houseid, Integer typeid, Integer info, Integer flag, String date) {
+    public LiveNotes(Integer id, Integer houseid, Integer typeid, Integer infoid, Integer flag, String date) {
         this.id = id;
         this.houseid = houseid;
         this.typeid = typeid;
-        this.info = info;
+        this.infoid = infoid;
         this.flag = flag;
         this.date = date;
     }

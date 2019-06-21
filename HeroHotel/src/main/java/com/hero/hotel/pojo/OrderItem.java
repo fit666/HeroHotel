@@ -2,16 +2,18 @@ package com.hero.hotel.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
-
+/*
+ * 	订单项表
+ */
 public class OrderItem {
-    private Integer id;
-    private Integer typeid;
-    private Integer orderid;
+    private Integer id;//订单项id
+    private Integer typeid;//房间类型id
+    private Integer orderid;//订单id
     private Integer flag;
-    private String quantity;
-    private Date starttime;
-    private String day;
-    private BigDecimal price;
+    private String quantity;//房间数量
+    private Date starttime;//入住时间
+    private String day;//居住天数
+    private BigDecimal price;//价格
 
     @Override
     public String toString() {

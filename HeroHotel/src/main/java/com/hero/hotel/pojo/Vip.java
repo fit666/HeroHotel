@@ -1,11 +1,13 @@
 package com.hero.hotel.pojo;
-
+/*
+ * 	会员表
+ */
 public class Vip {
-    private Integer id;
-    private Integer vmoney;
+    private Integer id;//会员id
+    private Integer vmoney;//最低消费
     private Integer flag;
-    private String vname;
-    private Double discount;
+    private String vname;//会员等级名称
+    private Double discount;//折扣
 
     @Override
     public String toString() {

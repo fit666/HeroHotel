@@ -1,12 +1,16 @@
 package com.hero.hotel.pojo;
-
+/*
+ * 	 用户表
+ */
 public class User {
-    private Integer id;
-    private Integer roleid;
-    private Integer infoid;
+    private Integer id;//用户id
+    private Integer roleid;//角色id
+    private Integer infoid;//个人信息id
     private Integer flag;
-    private String account;
-    private String password;
+    private String account;//账号
+    private String password;//密码
+    private String tel;//手机号
+    private String monetary;//消费金额
 
     @Override
     public String toString() {
@@ -100,6 +104,4 @@ public class User {
         this.monetary = monetary;
     }
 
-    private String tel;
-    private String monetary;
 }
