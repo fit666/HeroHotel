@@ -7,7 +7,7 @@ import com.hero.hotel.pojo.Vip;
 
 
 public interface VipDao {
-	//根据id查找vip信息
-	@Select("select * from members where id=#{mid}")
+	//根据累计消费查找vip信息
+	@Select("select MIN(id),vname,discount from t_vip WHERE vmoney>#{mid}")
 	public Vip findById(Integer mid);
 }

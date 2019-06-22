@@ -13,18 +13,18 @@ import com.hero.hotel.pojo.User;
 public interface UserDao {
 	
 	//查询所有用户
-	@Select("select * from user")
+	@Select("select * from t_user")
 	@Results({
 		@Result(id=true,column="id",property="id"),
 		@Result(column="account",property="account"),
-		@Result(column="tell",property="tell"),
-		@Result(column="registerTime",property="registerTime"),
-		@Result(column="costAllMoney",property="costAllMoney"),
-		@Result(column="uid",property="userInfor",
+		@Result(column="tel",property="tel"),
+		@Result(column="createtime",property="createtime"),
+		@Result(column="monetary",property="monetary"),
+		@Result(column="infoid",property="info",
 				one=@One(select="com.hero.hotel.dao.UserInforDao.findById")
 		),
-		@Result(column="mid",property="vip",
-				one=@One(select="com.hero.hotel.dao.MembersDao.findById")
+		@Result(column="monetary",property="vip",
+				one=@One(select="com.hero.hotel.dao.VipDao.findById")
 		)
 	})
 	public List<User> findAll();

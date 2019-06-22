@@ -11,6 +11,7 @@ import com.hero.hotel.pojo.User;
 import com.hero.hotel.service.UserService;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
@@ -20,10 +21,13 @@ public class UserController {
 	 */
 	@RequestMapping("/findAllVip")
 	public ModelAndView findAllVip(){
+		System.out.println("----------------------");
 		ModelAndView mav=new ModelAndView();
 		List<User> vips=userService.findAllVip();
 		mav.addObject("allVips", vips);
-		mav.setViewName("/vip-list.html");
+		System.out.println(vips);
+		mav.setViewName("/backstage-html/vip-list.html");
+		
 		return mav;
 	}
 
