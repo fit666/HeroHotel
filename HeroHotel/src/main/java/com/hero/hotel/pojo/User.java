@@ -15,6 +15,7 @@ public class User {
     private Integer rm;//记住我
     private Info info;//个人信息
     private Vip vip;//vip等级
+    private String code;//手机验证码
     
     @Override
 	public String toString() {
@@ -26,6 +27,26 @@ public class User {
     public Integer getRm() {
 		return rm;
 	}
+  
+    
+
+    public String getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	
 
 	public void setRm(Integer rm) {
 		this.rm = rm;
@@ -91,13 +112,7 @@ public class User {
         return monetary;
     }
     
-    public String getCreatetime() {
-		return createtime;
-	}
-
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
+   
 
 	public Info getInfo() {
 		return info;
