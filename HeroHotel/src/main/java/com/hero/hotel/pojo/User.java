@@ -10,27 +10,43 @@ public class User {
     private String account;//账号
     private String password;//密码
     private String tel;//手机号
-    private String monetary;//消费金额
+    private int monetary;//消费金额
     private String createtime;//注册时间
     private Integer rm;//记住我
-
+    private Info info;//个人信息
+    private Vip vip;//vip等级
+    private String code;//手机验证码
+    
     @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", roleid=" + roleid +
-                ", infoid=" + infoid +
-                ", flag=" + flag +
-                ", account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                ", tel='" + tel + '\'' +
-                ", monetary='" + monetary + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "User [id=" + id + ", roleid=" + roleid + ", infoid=" + infoid + ", flag=" + flag + ", account="
+				+ account + ", password=" + password + ", tel=" + tel + ", monetary=" + monetary + ", createtime="
+				+ createtime + ", rm=" + rm + ", info=" + info + ", vip=" + vip + "]";
+	}
     
     public Integer getRm() {
 		return rm;
 	}
+  
+    
+
+    public String getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	
 
 	public void setRm(Integer rm) {
 		this.rm = rm;
@@ -92,28 +108,36 @@ public class User {
         this.tel = tel;
     }
 
-    public String getMonetary() {
+    public int getMonetary() {
         return monetary;
     }
+    
+   
 
-    public void setMonetary(String monetary) {
+	public Info getInfo() {
+		return info;
+	}
+
+	public void setInfo(Info info) {
+		this.info = info;
+	}
+
+	public Vip getVip() {
+		return vip;
+	}
+
+	public void setVip(Vip vip) {
+		this.vip = vip;
+	}
+
+	public void setMonetary(int monetary) {
         this.monetary = monetary;
     }
 
     public User() {
     }
 
-    public User(Integer id, Integer roleid, Integer infoid, Integer flag, String account, String password, String tel, String monetary) {
-        this.id = id;
-        this.roleid = roleid;
-        this.infoid = infoid;
-        this.flag = flag;
-        this.account = account;
-        this.password = password;
-        this.tel = tel;
-        this.monetary = monetary;
-    }
-
+    
 	
 
 }

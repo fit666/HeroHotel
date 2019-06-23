@@ -4,7 +4,7 @@ package com.hero.hotel.pojo;
  */
 public class Vip {
     private Integer id;//会员id
-    private Integer vmoney;//最低消费
+    private int vmoney;//最低消费
     private Integer flag;
     private String vname;//会员等级名称
     private Double discount;//折扣

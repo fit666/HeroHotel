@@ -26,7 +26,10 @@
 		<input type="text" class="input-text" style="width:250px" placeholder="输入vip名称" id="" name="">
 		<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="admin_add('添加管理员','admin-add.html','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
+	
+	 <span class="r" >共有数据：<strong ><span id="allVipsSize"></span></strong> 条</span> </div>
+	 <div class="mt-20">
 	<table class="table table-border table-bordered table-bg" width="835">
 		<thead>
 			<tr>
@@ -47,48 +50,19 @@
 		</thead>
 		<tbody>
 			<tr class="text-c" th:each="vipa,status:${allVips}">
-				<td th:text="${vipa.account}"></td>
-				<td th:text="${vipa.userInfor.uname}"></td>
-				<td th:text="${vipa.userInfor.sex}"></td>
-				<td th:text="${vipa.tell}"></td>
-				<td th:text="${vipa.costallmoney}"></td>
-				<td th:text="${vipa.vip.level}"></td>
-				<td th:text="${vip.registerTime}"></td>
-				<td class="td-status"><span class="label radius">已停用</span></td>
-				<td class="td-manage">
-					<a style="text-decoration:none" onClick="admin_start(this,'10001')" href="javascript:;" title="启用">
-						<i class="Hui-iconfont">&#xe615;</i>
-					</a>
-					<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','2','800','500')" class="ml-5" style="text-decoration:none">
-						<i class="Hui-iconfont">&#xe6df;</i>
-					</a>
-					<a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none">
-						<i class="Hui-iconfont">&#xe6e2;</i>
-					</a>
-				</td>
-			</tr>
-			<tr class="text-c">
 				<td><input type="checkbox" value="1" name=""></td>
-				<td>1</td>
-				<td>admin</td>
-				<td>13000000000</td>
-				<td>admin@mail.com</td>
-				<td>超级管理员</td>
-				<td>超级管理员</td>
-				<td>2014-6-11 11:11:42</td>
-				<td class="td-status"><span class="label label-success radius">已启用</span></td>
-				<td class="td-manage"><a style="text-decoration:none" onClick="admin_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','1','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-			</tr>
-			<tr class="text-c">
-				<td><input type="checkbox" value="2" name=""></td>
-				<td>2</td>
-				<td>zhangsan</td>
-				<td>13000000000</td>
-				<td>admin@mail.com</td>
-				<td>栏目编辑</td>
-				<td>超级管理员</td>
-				<td>2014-6-11 11:11:42</td>
-				<td class="td-status"><span class="label radius">已停用</span></td>
+				<td th:text="${vipa.account}"></td>
+				<td th:text="${vipa.info.uname}"></td>
+				<td th:text="${vipa.info.sex}"></td>
+				<td th:text="${vipa.tel}"></td>
+				<td th:text="${vipa.monetary}"></td>
+				<td th:text="${vipa.vip.vname}"></td>
+				<td th:text="${vipa.createtime}"></td>
+				<td class="td-status">
+					<span class="label radius" th:if="${vipa.flag}==0">已停用</span>
+					<span class="label label-success radius" th:if="${vipa.flag}==1">已启用</span>
+				</td>
+				
 				<td class="td-manage">
 					<a style="text-decoration:none" onClick="admin_start(this,'10001')" href="javascript:;" title="启用">
 						<i class="Hui-iconfont">&#xe615;</i>
@@ -103,14 +77,31 @@
 			</tr>
 		</tbody>
 	</table>
+	<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">显示1到1，共1条</div>
+	<div class="dataTables_paginate paging_simple numbers" id="DataTables_Table_0_paginate">
+		<a class="paginate_button previous disabled" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" id="DataTables_Table_0_previous">上一页</a>
+		<span>
+			<a class="paginate_button current" aria-controls="DataTables_Tables_0" data-dt-idx="1" tabindex="0">1</a>	
+		</span>
+		<a class="paginate_button next disabled" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" id="DataTables_Table_0_next">下一页</a>
+		
+	</div>
+</div>
 </div>
 <script type="text/javascript" src="/backstage/lib/jquery/1.9.1/jquery.min.js"></script>  
 <script type="text/javascript" src="/backstage/lib/layer/1.9.3/layer.js"></script> 
 <script type="text/javascript" src="/backstage/lib/laypage/1.2/laypage.js"></script> 
 <script type="text/javascript" src="/backstage/lib/My97DatePicker/WdatePicker.js"></script> 
+<script type="text/javascript" src="/backstage/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/backstage/js/H-ui.js"></script> 
 <script type="text/javascript" src="/backstage/js/H-ui.admin.js"></script> 
-<script type="text/javascript">
+<script type="text/javascript"  th:inline="javascript">
+
+
+var size = [[${allVips}]];
+
+ $("#allVipsSize").append(size.length);
+
 /*
 	参数解释：
 	title	标题
