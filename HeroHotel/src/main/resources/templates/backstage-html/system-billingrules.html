@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -11,16 +11,18 @@
 <link href="/backstage/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
 <link href="/backstage/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/backstage/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+<!-- <link rel="stylesheet" href="/backstage/layui/layui.css" media="all" /> -->
 
 <title>栏目管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 栏目管理 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 计费管理<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20 text-c">
 	<div class="text-c">
 	</div>
 	
 	<div class="mt-20">
+	<form action="/system/updateSet" method="post" class="layui-form" name="form1" onsubmit="return SubmitLogin()">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
 				<tr class="text-c">
@@ -33,21 +35,48 @@
 			</thead>
 			<tbody>
 				<tr class="text-c">
-					<td>2</td>
-					<td>2</td>
-					<td class="text-l">&nbsp;&nbsp;├&nbsp;二级栏目</td>
-					<td></td>
-					<td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('栏目编辑','system-category-add.html','2','700','480')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="article_category_del(this,'2')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-				</tr>
-				<tr class="text-c">
-					<td>3</td>
-					<td>3</td>
-					<td class="text-l">&nbsp;&nbsp;├&nbsp;二级栏目</td>
-					<td></td>
-					<td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('栏目编辑','system-category-add.html','3','700','480')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="system-category_del(this,'3')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+					<td >
+						<span th:text="${set.alldiscountrate}" id="allDiscounRate1"></span>
+						<span id="allDiscounRate2" style="display:none;"  class="layui-form-item" ><input type="number" value="" name="alldiscountrate"  step="0.01" max="1" min="0" id="alldiscountrate"/></span>
+					</td>
+					<td>
+						<span id="findvipmessagebyname1">
+							<span class="label label-success radius" th:if="${set.findvipmessagebyname}==1">yes</span>
+							&nbsp;&nbsp;<span class="label radius" th:if="${set.findvipmessagebyname}==0">no</span>
+						</span>
+						<span id="findvipmessagebyname2" style="display:none">
+							<span class="label label-success radius" ><input type="radio" name="findvipmessagebyname" value="1" checked/>yes</span>
+							&nbsp;&nbsp;<span class="label radius" ><input type="radio" name="findvipmessagebyname" value="0"/>no</span>
+						</span>
+					</td>
+					<td >
+						<span id="findvipmessagebyid1">
+							<span class="label label-success radius" th:if="${set.findvipmessagebyid}==1">yes</span>
+							&nbsp;&nbsp;<span class="label radius" th:if="${set.findvipmessagebyid}==0">no</span>
+						</span>
+						<span id="findvipmessagebyid2" style="display:none">
+							<span class="label label-success radius" ><input type="radio" name="findvipmessagebyid" value="1"checked/>yes</span>
+							&nbsp;&nbsp;<span class="label radius"><input type="radio" name="findvipmessagebyid" value="0"/>no</span>
+						</span>
+					</td>
+					<td>
+						<span id="moneytoint1">
+							<span class="label label-success radius" th:if="${set.moneytoint==1}">yes</span>
+							&nbsp;&nbsp;<span class="label radius" th:if="${set.moneytoint==0}">no</span>
+						</span>
+						<span id="moneytoint2" style="display:none">
+							<span class="label label-success radius" ><input type="radio" name="moneytoint" value="1"/>yes</span>
+							&nbsp;&nbsp;<span class="label radius" ><input type="radio" name="moneytoint" value="0" checked/>no</span>
+						</span>
+					</td>
+					<td class="f-14">
+						<span id="editthis" style="display:block"><a title="编辑" href="javascript:;" onclick="system_edit()" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a></span>
+						<span id="saveChange" style="display:none"><input type="button" value="保存修改" onclick="SubmitLogin()"/> </span>
+					</td>
 				</tr>
 			</tbody>
 		</table>
+	</form>
 	</div>
 </div>
 <script type="text/javascript" src="/backstage/lib/jquery/1.9.1/jquery.min.js"></script> 
@@ -55,30 +84,41 @@
 <script type="text/javascript" src="/backstage/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="/backstage/js/H-ui.js"></script> 
 <script type="text/javascript" src="/backstage/js/H-ui.admin.js"></script> 
-<script type="text/javascript">
-$('.table-sort').dataTable({
-	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-	"bStateSave": true,//状态保存
-	"aoColumnDefs": [
-	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-	  {"orderable":false,"aTargets":[0,4]}// 制定列不参与排序
-	]
-});
-/*系统-栏目-添加*/
-function system_category_add(title,url,w,h){
-	layer_show(title,url,w,h);
+<!-- <script type="text/javascript" src="/backstage/js/layui.min.js"></script> -->
+
+<script type="text/javascript" th:inline="javascript">
+
+
+/*系统-编辑*/
+function system_edit(){
+	$("#editthis").css('display','none');
+	$("#saveChange").css('display','block');
+	
+	$("#findvipmessagebyname1").css('display','none');
+	$("#findvipmessagebyname2").css('display','block');
+	
+	$("#allDiscounRate1").css('display','none');
+	$("#allDiscounRate2").css('display','block');
+	
+	$("#findvipmessagebyid1").css('display','none');
+	$("#findvipmessagebyid2").css('display','block');
+	
+	$("#moneytoint1").css('display','none');
+	$("#moneytoint2").css('display','block');
 }
-/*系统-栏目-编辑*/
-function system_category_edit(title,url,id,w,h){
-	layer_show(title,url,w,h);
+
+function SubmitLogin() {
+    //判断用户名是否为空
+    if (!form1.alldiscountrate.value) {
+        alert("全场打折率不能为空");
+        form1.user.focus();
+        return;
+    }else{
+    	form1.submit();
+    }
+   
 }
-/*系统-栏目-删除*/
-function system_category_del(obj,id){
-	layer.confirm('确认要删除吗？',function(index){
-		$(obj).parents("tr").remove();
-		layer.msg('已删除!',{icon:1,time:1000});
-	});
-}
+
+
 </script>
-</body>
-</html>
+</body></html>

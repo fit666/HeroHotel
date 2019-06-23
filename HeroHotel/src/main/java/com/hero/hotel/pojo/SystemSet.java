@@ -5,10 +5,9 @@ public class SystemSet {
 	private Integer findvipmessagebyname;//是否根据姓名查找vip信息
 	private Integer findvipmessagebyid;//是否能根据id查找vip信息
 	private Integer moneytoint;//应收金额是否自动取整
-	private Integer alldiscountrate;//全场打折比率
-	
+	private double alldiscountrate;//全场打折比率
 	public SystemSet(Integer id, Integer findvipmessagebyname, Integer findvipmessagebyid, Integer moneytoint,
-			Integer alldiscountrate) {
+			double alldiscountrate) {
 		super();
 		this.id = id;
 		this.findvipmessagebyname = findvipmessagebyname;
@@ -43,10 +42,10 @@ public class SystemSet {
 	public void setMoneytoint(Integer moneytoint) {
 		this.moneytoint = moneytoint;
 	}
-	public Integer getAlldiscountrate() {
+	public double getAlldiscountrate() {
 		return alldiscountrate;
 	}
-	public void setAlldiscountrate(Integer alldiscountrate) {
+	public void setAlldiscountrate(double alldiscountrate) {
 		this.alldiscountrate = alldiscountrate;
 	}
 	@Override
