@@ -8,11 +8,10 @@
 <script src="../js/echarts.min.js"></script>
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
 <style>
-
 #all {
 	text-align: center;
 	width: 100%;
-	margin:0 auto
+	margin: 0 auto
 }
 
 #head {
@@ -36,36 +35,35 @@
 		</div>
 		<div id="head">
 
-			<a 	href="../chart/findMoneyDay"><button type="button" class="btn btn-success" >日</button></a>
+			<a href="../chart/findMoneyDay"><button type="button"
+					class="btn btn-success">日</button></a>
 			<button type="button" class="btn btn-success">月</button>
-			
 
-			<br> <br> 
+
+			<br> <br>
 			<form action="../chart/findMoney" method="get">
-				<label for="name">开始时间</label> <input type="date" name="startTime"> <label
-					for="name">结束时间</label> <input type="date" name="endTime"> <input
-					type="submit" value="查询">
+				<label for="name">开始时间</label> <input type="date" name="startTime">
+				<label for="name">结束时间</label> <input type="date" name="endTime">
+				<input type="submit" value="查询">
 			</form>
 
 		</div>
 
-
-
 		<div id="chart">这是统计图</div>
-
-
-
 
 
 	</div>
 
-
-
-
-	<script type="text/javascript">
+	<script type="text/javascript" th:inline="javascript">
+	/* dayOutMoney":null,"dayInMoney":357.00,"day":"2019-06-22"} */
+		var map = [[${map}]];
+		alert(JSON.stringify(map));
+	
 		// 基于准备好的dom，初始化echarts实例
 		var myChart = echarts.init(document.getElementById('chart'));
-
+		 
+	
+		
 		option = {
 			title : {
 				text : '英雄酒店收支查询',
@@ -99,8 +97,7 @@
 			calculable : true,
 			xAxis : [ {
 				type : 'category',
-				data : [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月',
-						'10月', '11月', '12月' ]
+				data : []
 			} ],
 			yAxis : [ {
 				type : 'value'
@@ -109,8 +106,7 @@
 					{
 						name : '收入',
 						type : 'bar',
-						data : [ 2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2,
-								32.6, 20.0, 6.4, 3.3 ],
+						data : [],
 						markPoint : {
 							data : [ {
 								type : 'max',
@@ -130,9 +126,8 @@
 					{
 						name : '支出',
 						type : 'bar',
-						data : [ 2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2,
-								48.7, 18.8, 6.0, 2.3 ],
-						markPoint : {
+						data : [],
+						/* markPoint : {
 							data : [ {
 								name : '年最高',
 								value : 182.2,
@@ -144,7 +139,7 @@
 								xAxis : 11,
 								yAxis : 3
 							} ]
-						},
+						}, */
 						markLine : {
 							data : [ {
 								type : 'average',

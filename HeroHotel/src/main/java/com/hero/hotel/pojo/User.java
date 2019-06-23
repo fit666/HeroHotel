@@ -15,8 +15,9 @@ public class User {
     private Integer rm;//记住我
     private Info info;//个人信息
     private Vip vip;//vip等级
+    private String code;//手机验证码
 	public User(Integer id, Integer roleid, Integer infoid, Integer flag, String account, String password, String tel,
-			double monetary, String createtime, Integer rm, Info info, Vip vip) {
+			double monetary, String createtime, Integer rm, Info info, Vip vip, String code) {
 		super();
 		this.id = id;
 		this.roleid = roleid;
@@ -30,6 +31,7 @@ public class User {
 		this.rm = rm;
 		this.info = info;
 		this.vip = vip;
+		this.code = code;
 	}
 	public User() {
 		super();
@@ -106,15 +108,19 @@ public class User {
 	public void setVip(Vip vip) {
 		this.vip = vip;
 	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", roleid=" + roleid + ", infoid=" + infoid + ", flag=" + flag + ", account="
 				+ account + ", password=" + password + ", tel=" + tel + ", monetary=" + monetary + ", createtime="
-				+ createtime + ", rm=" + rm + ", info=" + info + ", vip=" + vip + "]";
+				+ createtime + ", rm=" + rm + ", info=" + info + ", vip=" + vip + ", code=" + code + "]";
 	}
     
-  
-  
-	
+    
 
 }
