@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hero.hotel.pojo.User;
 import com.hero.hotel.service.UserService;
+import com.hero.hotel.service.impl.UserServiceImpl;
 
 @Controller
 @RequestMapping("/user")
@@ -21,7 +22,6 @@ public class UserController {
 	 */
 	@RequestMapping("/findAllVip")
 	public ModelAndView findAllVip(){
-		System.out.println("----------------------");
 		ModelAndView mav=new ModelAndView();
 		List<User> vips=userService.findAllVip();
 		mav.addObject("allVips", vips);
@@ -30,5 +30,4 @@ public class UserController {
 		
 		return mav;
 	}
-
 }

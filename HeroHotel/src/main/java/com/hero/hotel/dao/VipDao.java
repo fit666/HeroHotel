@@ -8,6 +8,6 @@ import com.hero.hotel.pojo.Vip;
 
 public interface VipDao {
 	//根据累计消费查找vip信息
-	@Select("select MIN(id),vname,discount from t_vip WHERE vmoney>#{mid}")
-	public Vip findById(Integer mid);
+	@Select("SELECT * FROM t_vip WHERE id = (select MAX(id) from t_vip where id =(select MAX(id) from t_vip WHERE vmoney<#{monetary}) or id= (select MIN(id) from t_vip WHERE vmoney>#{monetary}))")
+	public Vip findById(double monetary);
 }

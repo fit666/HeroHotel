@@ -21,7 +21,7 @@ public interface UserDao {
 		@Result(column="createtime",property="createtime"),
 		@Result(column="monetary",property="monetary"),
 		@Result(column="infoid",property="info",
-				one=@One(select="com.hero.hotel.dao.UserInforDao.findById")
+				one=@One(select="com.hero.hotel.dao.InforDao.findById")
 		),
 		@Result(column="monetary",property="vip",
 				one=@One(select="com.hero.hotel.dao.VipDao.findById")
