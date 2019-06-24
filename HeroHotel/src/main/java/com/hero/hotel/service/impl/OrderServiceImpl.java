@@ -1,5 +1,6 @@
 package com.hero.hotel.service.impl;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -127,4 +128,25 @@ public class OrderServiceImpl implements OrderService{
 		model.addObject(order2);
 		return model;		
 	}
+=======
+import org.springframework.stereotype.Service;
+
+import com.hero.hotel.dao.OrderDao;
+import com.hero.hotel.service.OrderService;
+
+@Service("orderService")
+public class OrderServiceImpl implements OrderService {
+
+	private OrderDao orderDao;
+	
+	@Override
+	public Boolean settleAccounts(String houseid) {
+
+		Boolean flag = orderDao.settleAccounts(houseid);
+		
+		
+		return null;
+	}
+
+>>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 }

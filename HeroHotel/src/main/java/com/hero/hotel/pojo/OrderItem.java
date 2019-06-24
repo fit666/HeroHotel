@@ -13,7 +13,7 @@ public class OrderItem {
     private Integer quantity;//房间数量
     //房间数量类型修改为intteger,入住时间类型修改为string
     private String starttime;//入住时间
-    //居住天数类型修改为
+    //居住天数类型修改为Integer
     private Integer day;//居住天数
     //添加属性离开时间
     private String endtime;

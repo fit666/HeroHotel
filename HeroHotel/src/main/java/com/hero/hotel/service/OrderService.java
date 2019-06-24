@@ -1,5 +1,6 @@
 package com.hero.hotel.service;
 
+<<<<<<< HEAD
 
 
 
@@ -54,4 +55,11 @@ public interface OrderService {
 	
 	//修改订单信息
 	public ModelAndView updateOrder(Info info,Order order,OrderItem orderItem);
+=======
+public interface OrderService {
+
+	public Boolean settleAccounts(String houseid);
+
+	
+>>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 }
