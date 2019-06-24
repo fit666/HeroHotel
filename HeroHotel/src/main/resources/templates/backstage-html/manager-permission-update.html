@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -16,19 +16,22 @@
 </head>
 <body>
 <div class="pd-20">
-	<form action="" method="post" class="form form-horizontal" id="form-user-character-add">
+	<form action="/permission/changePermission" method="post" class="form form-horizontal" id="form-user-character-add">
 		<div class="row cl">
 			<label class="form-label col-2"><span class="c-red">*</span>角色名称：</label>
 			<div class="formControls col-10">
-				<input type="text" class="input-text" value="" placeholder="" id="user-name" name="user-name" datatype="*4-16" nullmsg="用户账户不能为空">
+				<select  name="id">
+					<option th:each="role,status:${roles}" th:if="${role.id}!=1" th:text="${role.rolename}" th:value="${role.id}"></option>
+				</select>
+				<!-- <input type="text" class="input-text" value="" placeholder="" id="user-name" name="user-name" datatype="*4-16" nullmsg="用户账户不能为空"> -->
 			</div>
 		</div>
-		<div class="row cl">
+		<!-- <div class="row cl">
 			<label class="form-label col-2">备注：</label>
 			<div class="formControls col-10">
 				<input type="text" class="input-text" value="" placeholder="" id="" name="">
 			</div>
-		</div>
+		</div> -->
 		<div class="row cl">
 			<label class="form-label col-2">网站角色：</label>
 			<div class="formControls col-10">
@@ -43,7 +46,7 @@
 						
 							<dd >
 								<label class="" th:each="permission,status:${permissions}" th:if="${permission.rid}==2">
-									<input type="checkbox" th:value="${permission.id}" name="user-Character-0-0-0" id="user-Character-0-0-0" th:text="${permission.pname}">
+									<input type="checkbox" th:value="${permission.id}" name="pids" id="user-Character-0-0-0" th:text="${permission.pname}">
 									</label>
 							</dd>
 						</dl>
@@ -60,7 +63,7 @@
 							
 							<dd >
 								<label class="" th:each="permission,status:${permissions}" th:if="${permission.rid}==3">
-									<input type="checkbox" th:value="${permission.id}" name="user-Character-1-0-0" id="user-Character-1-0-0"  th:text="${permission.pname}">
+									<input type="checkbox" th:value="${permission.id}" name="pids" id="user-Character-1-0-0"  th:text="${permission.pname}">
 									</label>
 							</dd>
 						</dl>

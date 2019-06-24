@@ -200,5 +200,14 @@ public class UserServiceImpl implements UserService {
 		result = "验证码通过";
 		return result;
 	}
+	/*
+	 * 获取所有管理员信息(non-Javadoc)
+	 * @see com.hero.hotel.service.UserService#findAllManagers()
+	 */
+	@Override
+	public List<User> findAllManagers() {
+		
+		return userDao.findAllManagers();
+	}
 
 }

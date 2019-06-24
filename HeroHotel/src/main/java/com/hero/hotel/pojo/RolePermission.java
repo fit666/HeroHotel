@@ -1,32 +1,15 @@
 package com.hero.hotel.pojo;
 
 public class RolePermission {
-	private Integer id;
-	private String pname;//权限名
 	private Integer rid;//角色id
-	private int flag;
-	
-	public RolePermission(Integer id, String pname, Integer rid, int flag) {
+	private Integer pid;//权限id
+	public RolePermission(Integer rid, Integer pid) {
 		super();
-		this.id = id;
-		this.pname = pname;
 		this.rid = rid;
-		this.flag = flag;
+		this.pid = pid;
 	}
 	public RolePermission() {
 		super();
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getPname() {
-		return pname;
-	}
-	public void setPname(String pname) {
-		this.pname = pname;
 	}
 	public Integer getRid() {
 		return rid;
@@ -34,16 +17,17 @@ public class RolePermission {
 	public void setRid(Integer rid) {
 		this.rid = rid;
 	}
-	public int getFlag() {
-		return flag;
+	public Integer getPid() {
+		return pid;
 	}
-	public void setFlag(int flag) {
-		this.flag = flag;
+	public void setPid(Integer pid) {
+		this.pid = pid;
 	}
 	@Override
 	public String toString() {
-		return "RolePermission [id=" + id + ", pname=" + pname + ", rid=" + rid + ", flag=" + flag + "]";
+		return "RolePermission [rid=" + rid + ", pid=" + pid + "]";
 	}
+	
 	
 	
 }

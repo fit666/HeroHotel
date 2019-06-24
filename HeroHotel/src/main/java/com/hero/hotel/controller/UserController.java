@@ -55,5 +55,17 @@ public class UserController {
 
 		return "";
 	}
+	/*
+	 * 获取所有管理员
+	 */
+	@RequestMapping("/findAllManagers")
+	public ModelAndView findAllManagers(){
+		ModelAndView mav=new ModelAndView();
+		List<User> managers=userService.findAllManagers();
+		mav.addObject("managers",managers);
+		mav.setViewName("/backstage-html/manager-list.html");
+		System.out.println(managers);
+		return mav;
+	}
 
 }
