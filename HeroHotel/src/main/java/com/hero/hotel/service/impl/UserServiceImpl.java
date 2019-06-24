@@ -81,9 +81,9 @@ public class UserServiceImpl implements UserService {
 		}
 		// 给账号密码加密
 		user.setPassword(new SimpleHash("MD5", user.getPassword(), null, 1024).toString());
-		// 生成创建时间
-		String createTime = new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new Date());
-		user.setCreatetime(createTime);// 将信息插入到数据库
+		/*// 生成创建时间
+		String createTime = new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new Date());*/
+		user.setCreatetime(new Date());// 将信息插入到数据库
 		boolean b = userDao.insertAccount(user);
 		if (b) {
 			result = "注册成功";
@@ -200,14 +200,6 @@ public class UserServiceImpl implements UserService {
 		result = "验证码通过";
 		return result;
 	}
-	/*
-	 * 获取所有管理员信息(non-Javadoc)
-	 * @see com.hero.hotel.service.UserService#findAllManagers()
-	 */
-	@Override
-	public List<User> findAllManagers() {
-		
-		return userDao.findAllManagers();
-	}
+	
 
 }

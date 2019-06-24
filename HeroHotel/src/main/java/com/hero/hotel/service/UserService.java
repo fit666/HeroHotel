@@ -12,8 +12,7 @@ public interface UserService {
 	public String register(User user);
 	//发送短信验证码
 	public String sendMessage(User user);
-	//获取所有管理员信息
-	List<User> findAllManagers();
+
 
 }
 

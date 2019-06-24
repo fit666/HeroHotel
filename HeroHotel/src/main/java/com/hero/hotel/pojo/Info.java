@@ -7,7 +7,7 @@ public class Info {
     private Integer flag;
     private String tel;//手机号
     private String uname;//姓名
-    private char sex;//性别
+    private String sex;//性别
     private String idcard;//身份证号
 
     @Override
@@ -54,12 +54,12 @@ public class Info {
         this.uname = uname;
     }
 
-    public char getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(char sex) {
-        this.sex = sex;
+    public void setSex(String sex2) {
+        this.sex = sex2;
     }
 
     public String getIdcard() {
@@ -73,7 +73,7 @@ public class Info {
     public Info() {
     }
 
-    public Info(Integer infoid, Integer flag, String tel, String uname, char sex, String idcard) {
+    public Info(Integer infoid, Integer flag, String tel, String uname, String sex, String idcard) {
         this.infoid = infoid;
         this.flag = flag;
         this.tel = tel;

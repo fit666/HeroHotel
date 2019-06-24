@@ -14,7 +14,7 @@ import com.hero.hotel.pojo.User;
 public interface UserDao {
 	
 	//查询所有用户
-	@Select("select * from t_user where roleid=4")
+	@Select("select * from t_user where roleid=1")
 	@Results({
 		@Result(id=true,column="id",property="id"),
 		@Result(column="account",property="account"),
@@ -22,7 +22,7 @@ public interface UserDao {
 		@Result(column="createtime",property="createtime"),
 		@Result(column="monetary",property="monetary"),
 		@Result(column="infoid",property="info",
-				one=@One(select="com.hero.hotel.dao.InforDao.findById")
+				one=@One(select="com.hero.hotel.dao.InfoDao.findById")
 		),
 		@Result(column="monetary",property="vip",
 				one=@One(select="com.hero.hotel.dao.VipDao.findById")
@@ -38,21 +38,6 @@ public interface UserDao {
 	@Insert("insert into t_user(account,password,tel,createtime) values(#{account},#{password},#{tel},#{createtime})")
 	public boolean insertAccount(User user);
 	
-	//获取所有管理员信息
-	@Select("select * from t_user where roleid!=4 ")
-	@Results({
-		@Result(id=true,column="id",property="id"),
-		@Result(column="account",property="account"),
-		@Result(column="tel",property="tel"),
-		@Result(column="createtime",property="createtime"),
-		@Result(column="monetary",property="monetary"),
-		@Result(column="infoid",property="info",
-				one=@One(select="com.hero.hotel.dao.InforDao.findById")
-		),
-		@Result(column="roleid",property="role",
-				one=@One(select="com.hero.hotel.dao.RoleDao.findRoleById")
-		)
-	})
-	public List<User> findAllManagers();
+	
 
 }
