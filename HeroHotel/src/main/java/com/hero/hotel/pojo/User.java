@@ -1,4 +1,7 @@
 package com.hero.hotel.pojo;
+
+import java.util.Date;
+
 /*
  * 	 用户表
  */
@@ -11,13 +14,24 @@ public class User {
     private String password;//密码
     private String tel;//手机号
     private int monetary;//消费金额
-    private String createtime;//注册时间
+    private Date createtime;//注册时间
     private Integer rm;//记住我
     private Info info;//个人信息
     private Vip vip;//vip等级
     private String code;//手机验证码
+    private String codeValue;//图形验证码
     
-    @Override
+    
+    
+    public String getCodeValue() {
+		return codeValue;
+	}
+
+	public void setCodeValue(String codeValue) {
+		this.codeValue = codeValue;
+	}
+
+	@Override
 	public String toString() {
 		return "User [id=" + id + ", roleid=" + roleid + ", infoid=" + infoid + ", flag=" + flag + ", account="
 				+ account + ", password=" + password + ", tel=" + tel + ", monetary=" + monetary + ", createtime="
@@ -30,11 +44,13 @@ public class User {
   
     
 
-    public String getCreatetime() {
+    
+
+	public Date getCreatetime() {
 		return createtime;
 	}
 
-	public void setCreatetime(String createtime) {
+	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
 

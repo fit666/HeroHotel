@@ -1,47 +1,100 @@
-function show() {
-
-	var username = $("#username").val();
-	var password = $("#password").val();
-	if(username==null||password==null||username==""||password==""){
-		alert("用户名和密码均不能为空");
-		return;
+//账号登录
+function login(){
+	// 数据校验
+	// 前端格式判断
+	var rm=$("#rememberMe").is(':checked'); 
+	var i=0;
+	if(rm){
+		i=1;
 	}
-	var dataJson = {
-		"username" : username,
-		"password" : password
-	};
-	/* alert(username+password); */
-	$.ajax({
-		url : "login",
-		data : dataJson,
-		type : "post",
-		dateType : "text",
-		success : function(data) {
-			if (data == -1) {
-				alert("用户名不存在！");
-			} else if (data == 0) {
-				Toast("登陆成功", 3000);
-				location.href = "index.jsp";
-			} else {
-				alert("密码错误！");
-			}
+	var baccount = $("#account").val();
+	var pwd = $("#pass").val();
+	var code = $("#codeValue").val();
+	if(baccount==""||pwd==""||code==""){
+		alert("请完善信息");
+	}else if(baccount.length<6||baccount.length>20){
+		$("#message1").html("账号不合法");
+	}else if(pwd.length<6||pwd.length>12){
+		$("#message2").html("密码不合法");
+		
+	}else {
+		$.ajax({
+			url:"/user/login",
+			type:"post",
+			data:{
+				account:$("#account").val(),
+				password: $("#pass").val(),
+				codeValue:$("#codeValue").val(),
+				rm:i
+			},
+		success:function(data){
+			alert(data);
+			if(data!="登录成功"){
+				$("#message4").html(data);
+			}else{
+				location.href="index.html";
 		}
+		}
+		})
+	}
+}
 
-	});
+// 手机登录
+function login2(){
+	// 数据校验
+	// 前端格式判断
+	var rm=$("#rememberMe").is(':checked'); 
+	var i=0;
+	if(rm){
+		i=1;
+	}
+	var baccount = $("#tell").val();
+	var code = $("#code").val();
+	if(baccount==""||code==""){
+		alert("请完善信息");
+	}else if(baccount.length!=11){
+		$("#message1").html("手机号不合法");
+	}else {
+		$.ajax({
+			url:"/user/loginTel",
+			type:"post",
+			data:{
+				tel:$("#tell").val(),
+				code:$("#code").val()
+				rm:i;
+			},
+		success:function(data){
+			alert(data);
+			if(data!="登录成功"){
+				$("#message4").html(data);
+			}else{
+				location.href="index.html";
+		}
+		}
+		})
+	}
 }
-function Toast(msg, duration) {
-	duration = isNaN(duration) ? 3000 : duration;
-	var m = document.createElement('div');
-	m.innerHTML = msg;
-	m.style.cssText = "width: 10%;min-width: 150px;opacity: 0.7;height: 30px;color: rgb(255, 255, 255);line-height: 30px;text-align: center;border-radius: 5px;position: fixed;top: 50%;left: 50%;z-index: 999999;background: rgb(0, 0, 0);font-size: 12px;";
-	document.body.appendChild(m);
-	setTimeout(function() {
-		var d = 0.5;
-		m.style.webkitTransition = '-webkit-transform ' + d
-				+ 's ease-in, opacity ' + d + 's ease-in';
-		m.style.opacity = '0';
-		setTimeout(function() {
-			document.body.removeChild(m)
-		}, d * 1000);
-	}, duration);
+
+//发送验证码
+//获取验证码
+function getcode(){
+	var btell = $("#tell").val();
+	if(btell==""){
+		$("#message3").html("请填写手机号");
+	}else if(btell.length!=11){
+		$("#message3").html("手机号不合法");
+	}else{
+		$.ajax({
+			url:"/user/code",
+			type:"post",
+			data:{
+				tel:$("#tell").val()
+			},
+			success:function(data){
+				$("#message4").html(data);
+			}
+		})
+	}
+	
 }
+

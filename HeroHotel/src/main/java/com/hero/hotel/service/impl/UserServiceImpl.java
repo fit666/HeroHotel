@@ -8,26 +8,34 @@ import org.springframework.stereotype.Service;
 
 import com.hero.hotel.dao.UserDao;
 import com.hero.hotel.pojo.User;
+import com.hero.hotel.realm.CustomizedToken;
 import com.hero.hotel.service.UserService;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.subject.Subject;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hero.hotel.utils.JuHeDemo;
 import com.hero.hotel.utils.RegexUtil;
+import com.woniu.hotel.enump.LoginType;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-	// 手机验证码变量
-	String tpl_value = "";
+
 	@Resource
 	private UserDao userDao;
+	private static final String USER_LOGIN_TYPE = LoginType.USER.toString();
+
 	public UserDao getUserDao() {
 		return userDao;
 	}
@@ -36,14 +44,114 @@ public class UserServiceImpl implements UserService {
 		this.userDao = userDao;
 	}
 
-	//查找所有vip
+	// 查找所有vip
 	public List<User> findAllVip() {
 		return userDao.findAll();
 	}
 	
+	// 账号密码登录（图形验证码）
+		@Override
+		public String login(User user, HttpSession session) {
+			String result = "登录失败";
+			// System.out.println("前端传过来的user："+user+codeValue);
+			// 账号校验
+			result = checkAccount(user);
+			if (!result.equals("账号通过")) {
+				return result;
+			}
+			// 密码校验
+			result = passWordCheck(user);
+			if (!result.equals("密码通过")) {
+				return result;
+			}
+			// 验证码校验
+			if(user.getCodeValue()==null||user.getCodeValue()=="") {
+				result="请输入验证码";
+				return result;
+			}
+			//检测账号是否存在
+			User realuser=userDao.findAccountByAccount(user);
+			if(realuser.getAccount()==null) {
+				result="该账号不存在";
+				return result;
+			}
+			
+			// 获取session中的验证码值
+			String codeVa = (String) session.getAttribute("codeValue");
+			if (codeVa.equals(user.getCodeValue())) {
+				Subject currentUser = SecurityUtils.getSubject();
+				if (!currentUser.isAuthenticated()) {
+					CustomizedToken customizedToken = new CustomizedToken(user.getAccount(), user.getPassword(),
+							USER_LOGIN_TYPE);
+					// 记住我
+					if (user.getRm() == 1) {
+						customizedToken.setRememberMe(true);
+					}
+					try {
+						currentUser.login(customizedToken);
+						result = "登录成功";
+						return result;
+					} catch (IncorrectCredentialsException ice) {
+						System.out.println("用户名/密码不匹配！");
+					} catch (LockedAccountException lae) {
+						System.out.println("账户已被冻结！");
+					} catch (AuthenticationException ae) {
+						System.out.println(ae.getMessage());
+					}
+				}
+			} else {
+				result="验证码输入错误";
+				return result;
+			}
+			return result;
+		}
+	// 手机号和动态码登录
+	@Override
+	public String loginTel(User user, HttpSession session) {
+		String result="登陆失败";
+		System.out.println("前端传过来的user：" + user);
+		// 手机号校验
+				result = tellCheck(user);
+				if (!result.equals("手机号通过")) {
+					return result;
+				}
+				//检测手机号是否存在
+				User realuser=userDao.findUserByTel(user);
+				if(realuser.getAccount()==null) {
+					result="该手机号不存在";
+					return result;
+				}
+		// 获取session中的验证码
+		Object otpl_value = session.getAttribute("tpl_value");
+		if (otpl_value == null) {
+			result="验证码失效，请重新获取";
+			return result;
+		}
+
+			Subject currentUser = SecurityUtils.getSubject();
+			if (!currentUser.isAuthenticated()) {
+				CustomizedToken customizedToken = new CustomizedToken(user.getTel(), user.getCode(), USER_LOGIN_TYPE);
+				// 记住我
+				if (user.getRm() == 1) {
+					customizedToken.setRememberMe(true);
+				}
+				try {
+					currentUser.login(customizedToken);
+					result="登录成功";
+					return result;
+				} catch (IncorrectCredentialsException ice) {
+					System.out.println("用户名/密码不匹配！");
+				} catch (LockedAccountException lae) {
+					System.out.println("账户已被冻结！");
+				} catch (AuthenticationException ae) {
+					System.out.println(ae.getMessage());
+				}
+			}
+		return result;
+	}
 	// 注册
 	@Override
-	public String register(User user) {
+	public String register(User user, HttpSession session) {
 		String result = "注册失败";
 		// 账号校验
 		result = checkAccount(user);
@@ -64,12 +172,19 @@ public class UserServiceImpl implements UserService {
 			// result = "手机号未通过";
 			return result;
 		}
-		// 手机短信验证
 
+		// 手机短信验证
 		if (user.getCode() == null) {
 			result = "请输入验证码";
 			return result;
 		}
+		// 获取session中的验证码
+		Object otpl_value = session.getAttribute("tpl_value");
+		if (otpl_value == null) {
+			result = "验证码失效，请重新发送";
+			return result;
+		}
+		String tpl_value = (String) otpl_value;
 		String code = user.getCode();
 		if (!code.equals(tpl_value)) {
 			result = "验证码不正确，请核对";
@@ -86,7 +201,9 @@ public class UserServiceImpl implements UserService {
 		// 给账号密码加密
 		user.setPassword(new SimpleHash("MD5", user.getPassword(), null, 1024).toString());
 		// 生成创建时间
-		String createTime = new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new Date());
+		// String createTime = new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new
+		// Date());
+		Date createTime = new Date();
 		user.setCreatetime(createTime);// 将信息插入到数据库
 		boolean b = userDao.insertAccount(user);
 		if (b) {
@@ -97,16 +214,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	// 给手机发送短信（注册或登录时使用）
-	public String sendMessage(User user) {
+	public String sendMessage(User user, HttpSession session) {
 		String result = "短信发送失败";
 		String mobile = user.getTel();// 获取手机号
 		int tpl_id = 166892;// 短信模板
 		// 获取随机动态码
-		tpl_value = "";
+		String tpl_value = "";
 		for (int i = 0; i < 6; i++) {
 			int k = (int) (Math.random() * 10);
 			tpl_value += k;
 		}
+		// 将动态码放入session中
+		session.setAttribute("tpl_value", tpl_value);
 		boolean b1 = JuHeDemo.mobileQuery(mobile, tpl_id, tpl_value);
 		// System.out.println(b1);
 		if (tpl_value.length() == 6 && b1) {
@@ -121,7 +240,7 @@ public class UserServiceImpl implements UserService {
 
 	// 账号验证
 	public String checkAccount(User user) {
-		String result = "注册失败";
+		String result = "账号校验失败";
 		// 非空判断
 		if (user == null) {
 			return result;
@@ -144,7 +263,7 @@ public class UserServiceImpl implements UserService {
 
 	// 密码验证
 	public String passWordCheck(User user) {
-		String result = "注册失败";
+		String result = "密码校验失败";
 		// 非空判断
 		if (user == null) {
 			return result;
@@ -166,7 +285,7 @@ public class UserServiceImpl implements UserService {
 
 	// 手机验证
 	public String tellCheck(User user) {
-		String result = "注册失败";
+		String result = "手机号校验失败";
 		// 非空判断
 		if (user == null) {
 			return result;
@@ -184,25 +303,4 @@ public class UserServiceImpl implements UserService {
 		result = "手机号通过";
 		return result;
 	}
-
-	// 图形 验证码验证(账号登录时使用)
-	public String codeCheck(User user, HttpSession session) {
-		String result = "注册失败";
-		// 验证码非空判断
-		// 获取code
-		Object ocode = session.getAttribute("code");
-		if (ocode == null) {
-			result = "请输入验证码";
-			return result;
-		}
-		// 判断
-		String code = (String) ocode;
-		if (!user.getCode().equals(code)) {
-			result = "验证码错误";
-			return result;
-		}
-		result = "验证码通过";
-		return result;
-	}
-
 }

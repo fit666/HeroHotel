@@ -31,11 +31,14 @@ public interface UserDao {
 	public List<User> findAll();
 	
 	//查询数据库用户名（注册时使用）
-	@Select("select * from t_user where account=#{account}")
+	@Select("select * from t_user where account=#{account} and flag=0")
 	public User findAccountByAccount(User user);
 	
 	//插入注册的信息到数据库（注册时使用）
 	@Insert("insert into t_user(account,password,tel,createtime) values(#{account},#{password},#{tel},#{createtime})")
 	public boolean insertAccount(User user);
 
+	//查询账户通过手机号
+	@Select("select * from t_user where tel=#{tel} and flag=0")
+	public User findUserByTel(User user);
 }
