@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public class HouseType {
     private Integer typeid;//房间类型id
     private Integer flag;
-    private BigDecimal price;//价格
+    private Double price;//价格
     private String hname;//类型名字
     private String serve;//包含服务
     private String breakfast;//早餐
@@ -40,11 +40,11 @@ public class HouseType {
         this.flag = flag;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -72,7 +72,7 @@ public class HouseType {
         this.breakfast = breakfast;
     }
 
-    public HouseType(Integer typeid, Integer flag, BigDecimal price, String hname, String serve, String breakfast) {
+    public HouseType(Integer typeid, Integer flag, Double price, String hname, String serve, String breakfast) {
         this.typeid = typeid;
         this.flag = flag;
         this.price = price;

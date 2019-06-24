@@ -4,7 +4,12 @@ package com.hero.hotel.pojo;
  */
 public class Vip {
     private Integer id;//会员id
+<<<<<<< HEAD
+    //最低消费类型修改为double类型
+    private double vmoney;//最低消费
+=======
     private int vmoney;//最低消费
+>>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
     private Integer flag;
     private String vname;//会员等级名称
     private Double discount;//折扣
@@ -28,11 +33,11 @@ public class Vip {
         this.id = id;
     }
 
-    public Integer getVmoney() {
+    public double getVmoney() {
         return vmoney;
     }
 
-    public void setVmoney(Integer vmoney) {
+    public void setVmoney(double vmoney) {
         this.vmoney = vmoney;
     }
 
@@ -63,7 +68,7 @@ public class Vip {
     public Vip() {
     }
 
-    public Vip(Integer id, Integer vmoney, Integer flag, String vname, Double discount) {
+    public Vip(Integer id, double vmoney, Integer flag, String vname, Double discount) {
         this.id = id;
         this.vmoney = vmoney;
         this.flag = flag;

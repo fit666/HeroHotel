@@ -1,16 +1,14 @@
 package com.hero.hotel.pojo;
 
 import java.util.Date;
-/*
- * 	评论表
- */
+
 public class Comment {
-    private Integer id;    //评论id
-    private Integer orderid;//订单id
-    private Integer userid;//用户id
+    private Integer id;    //id
+    private Integer orderid;
+    private Integer userid;
     private Integer flag;
-    private Date createtime;//创建时间
-    private String message;//评论信息
+    private Date createtime;
+    private String message;
 
     @Override
     public String toString() {
