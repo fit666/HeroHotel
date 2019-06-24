@@ -22,6 +22,10 @@ public interface OrderDao {
 	@Select("select sum(total) from t_order where date_format(createtime,'%Y-%m')=date_format(#{Monthtime},'%Y-%m') AND flag = 2")
 	public Double findMoneyMonthOut(String Monthtime);
 
+	//  修改订单  结账处理
+	
+	public Boolean settleAccounts(String houseid);
+
 	
 	
 }
