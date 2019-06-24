@@ -44,7 +44,9 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		//获取token中的账号
 		String account=(String) token.getPrincipal();
+		System.out.println("account:"+account);
 		System.out.println("正在认证");
+		System.out.println("realm:"+this.getName());
 		//判断账号是手机号还是用户名，账号为字母开头，手机号为11位纯数字
 		if(account.matches(RegexUtil.REGEX_MOBILE)) {
 			//手机登录
@@ -52,7 +54,7 @@ public class UserRealm extends AuthorizingRealm {
 			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
 			        .getRequestAttributes()).getRequest();
 			String tpl_value=(String) request.getSession().getAttribute("tpl_value");
-			
+			System.out.println("tpl_value:"+tpl_value);
 			SimpleAuthenticationInfo info=
 		new SimpleAuthenticationInfo(account,tpl_value,getName());
 			return info;
@@ -60,6 +62,7 @@ public class UserRealm extends AuthorizingRealm {
 		}else {
 			//账号密码登录
 			//从数据库中查找密码
+			System.out.println("账号密码验证");
 			User u=new User();
 			u.setAccount(account);
 			User user=userDao.findAccountByAccount(u);

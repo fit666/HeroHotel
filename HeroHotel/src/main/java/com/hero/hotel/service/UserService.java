@@ -17,7 +17,7 @@ public interface UserService {
 	//发送短信验证码
 	public String sendMessage(User user,HttpSession session);
 	//账号密码登录
-	public String login(User user, HttpSession session);
+	public String login(User user,HttpSession session);
 	//手机验证码登录
 	public String loginTel(User user,HttpSession session);
 

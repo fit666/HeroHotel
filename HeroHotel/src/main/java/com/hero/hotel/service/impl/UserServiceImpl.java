@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 	
 	// 账号密码登录（图形验证码）
 		@Override
-		public String login(User user, HttpSession session) {
+		public String login(User user,HttpSession session) {
 			String result = "登录失败";
 			// System.out.println("前端传过来的user："+user+codeValue);
 			// 账号校验
@@ -64,23 +64,16 @@ public class UserServiceImpl implements UserService {
 			if (!result.equals("密码通过")) {
 				return result;
 			}
-			// 验证码校验
-			if(user.getCodeValue()==null||user.getCodeValue()=="") {
-				result="请输入验证码";
-				return result;
-			}
+			
 			//检测账号是否存在
 			User realuser=userDao.findAccountByAccount(user);
-			if(realuser.getAccount()==null) {
+			if(realuser==null) {
 				result="该账号不存在";
 				return result;
 			}
-			
-			// 获取session中的验证码值
-			String codeVa = (String) session.getAttribute("codeValue");
-			if (codeVa.equals(user.getCodeValue())) {
 				Subject currentUser = SecurityUtils.getSubject();
 				if (!currentUser.isAuthenticated()) {
+					System.out.println("进入");
 					CustomizedToken customizedToken = new CustomizedToken(user.getAccount(), user.getPassword(),
 							USER_LOGIN_TYPE);
 					// 记住我
@@ -88,8 +81,12 @@ public class UserServiceImpl implements UserService {
 						customizedToken.setRememberMe(true);
 					}
 					try {
+						System.out.println("try");
 						currentUser.login(customizedToken);
 						result = "登录成功";
+						System.out.println(result);
+						//将用户所有信息存入session
+						session.setAttribute("user", realuser);
 						return result;
 					} catch (IncorrectCredentialsException ice) {
 						System.out.println("用户名/密码不匹配！");
@@ -99,10 +96,6 @@ public class UserServiceImpl implements UserService {
 						System.out.println(ae.getMessage());
 					}
 				}
-			} else {
-				result="验证码输入错误";
-				return result;
-			}
 			return result;
 		}
 	// 手机号和动态码登录
@@ -117,7 +110,7 @@ public class UserServiceImpl implements UserService {
 				}
 				//检测手机号是否存在
 				User realuser=userDao.findUserByTel(user);
-				if(realuser.getAccount()==null) {
+				if(realuser==null) {
 					result="该手机号不存在";
 					return result;
 				}
@@ -138,6 +131,8 @@ public class UserServiceImpl implements UserService {
 				try {
 					currentUser.login(customizedToken);
 					result="登录成功";
+					//将用户所有信息存入session
+					session.setAttribute("user", realuser);
 					return result;
 				} catch (IncorrectCredentialsException ice) {
 					System.out.println("用户名/密码不匹配！");
@@ -194,7 +189,7 @@ public class UserServiceImpl implements UserService {
 		// 数据库操作
 		// 从数据库检测该账号是否可用
 		User realuser = userDao.findAccountByAccount(user);
-		if (realuser.getAccount() != null) {
+		if (realuser!= null) {
 			result = "账号已存在";
 			return result;
 		}
@@ -205,6 +200,8 @@ public class UserServiceImpl implements UserService {
 		// Date());
 		Date createTime = new Date();
 		user.setCreatetime(createTime);// 将信息插入到数据库
+		//默认角色为1，普通用户
+		user.setRoleid(1);
 		boolean b = userDao.insertAccount(user);
 		if (b) {
 			result = "注册成功";

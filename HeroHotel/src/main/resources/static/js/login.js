@@ -9,14 +9,12 @@ function login(){
 	}
 	var baccount = $("#account").val();
 	var pwd = $("#pass").val();
-	var code = $("#codeValue").val();
-	if(baccount==""||pwd==""||code==""){
+	if(baccount==""||pwd==""){
 		alert("请完善信息");
 	}else if(baccount.length<6||baccount.length>20){
 		$("#message1").html("账号不合法");
 	}else if(pwd.length<6||pwd.length>12){
 		$("#message2").html("密码不合法");
-		
 	}else {
 		$.ajax({
 			url:"/user/login",
@@ -24,11 +22,9 @@ function login(){
 			data:{
 				account:$("#account").val(),
 				password: $("#pass").val(),
-				codeValue:$("#codeValue").val(),
 				rm:i
 			},
 		success:function(data){
-			alert(data);
 			if(data!="登录成功"){
 				$("#message4").html(data);
 			}else{
@@ -60,8 +56,8 @@ function login2(){
 			type:"post",
 			data:{
 				tel:$("#tell").val(),
-				code:$("#code").val()
-				rm:i;
+				code:$("#code").val(),
+				rm:i
 			},
 		success:function(data){
 			alert(data);

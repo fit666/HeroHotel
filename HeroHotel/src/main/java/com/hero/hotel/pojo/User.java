@@ -19,17 +19,7 @@ public class User {
     private Info info;//个人信息
     private Vip vip;//vip等级
     private String code;//手机验证码
-    private String codeValue;//图形验证码
-    
-    
-    
-    public String getCodeValue() {
-		return codeValue;
-	}
-
-	public void setCodeValue(String codeValue) {
-		this.codeValue = codeValue;
-	}
+  
 
 	@Override
 	public String toString() {

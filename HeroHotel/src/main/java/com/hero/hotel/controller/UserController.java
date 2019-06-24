@@ -24,10 +24,6 @@ import com.woniu.hotel.enump.LoginType;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	
-	
-	
-	
 	public UserService getUserService() {
 		return userService;
 	}
@@ -52,15 +48,18 @@ public class UserController {
 
 	
 	 //账号密码登录（图形验证码）
+	
     @RequestMapping("/login")
-	public String login(User user, HttpSession session) {
+    @ResponseBody
+	public String login(User user,HttpSession session) {
     	String result="登录失败";
-		result=userService.login(user, session);
+		result=userService.login(user,session);
     	return result;
 	}
     
   //手机号动态码登录
     @RequestMapping("/loginTel")
+    @ResponseBody
 	public String loginTel(User user,HttpSession session) {
     	String result="登录失败";
     	result=userService.loginTel(user, session);
