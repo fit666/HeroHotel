@@ -45,59 +45,59 @@ public class HouseServiceImpl implements HouseService {
 		return houseDao.findZangRooms();
 	}
 
-	 @Override
-	 public List<Map> findRoomTypeNum(String time1, String time2) {
-	
-	 long day = 0;
-	 java.text.SimpleDateFormat format = new
-	 java.text.SimpleDateFormat("yyyy-MM-dd");
-	 java.util.Date beginDate = null;
-	 java.util.Date endDate;
-	 try {
-	 beginDate = format.parse(time1);
-	 endDate = format.parse(time2);
-	 day = (endDate.getTime() - beginDate.getTime()) / (24 * 60 * 60 * 1000);
-	 System.out.println("相隔的天数=" + day);
-	 } catch (Exception e) {
-	 // TODO 自动生成 catch 块
-	 e.printStackTrace();
-	 }
-	 Calendar c = Calendar.getInstance();
-	
-	 List<String> times = new ArrayList<String>();
-	 for (int i = 0; i < day; i++) {
-	
-	 c.setTime(beginDate);
-	 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// 设置你想要的格式
-	 c.add(Calendar.DAY_OF_MONTH, i);// 今天+1天
-	 String dateStr = df.format(c.getTime());
-	 times.add(dateStr);
-	
-	 System.out.println(dateStr);
-	 }
-	
-	 // List<String> rids = roomDao.findOrderInforRid(time);
-	 List<List> roomids1 = new ArrayList<List>();
-	 for (int i = 0; i < times.size(); i++) {
-	 System.out.println(times.get(i) + "---------------");
-	 List<Integer> rids = orderInforDao.findOrderInforRid(times.get(i));
-	
-	 if (rids != null) {
-	 roomids1.add(rids);
-	 }
-	
-	 }
-	
-	 List<List> roomids2 = new ArrayList<List>();
-	 for (int i = 0; i < times.size(); i++) {
-	 // System.out.println(times.get(i)+"---------------");
-	 List<Integer> rids = orderInforDao.findOrderInforRid(times.get(i));
-	
-	 roomids2.add(rids);
-	 }
-	 System.out.println(roomids1);
-	
-	 return null;
-	 }
+//	 @Override
+//	 public List<Map> findRoomTypeNum(String time1, String time2) {
+//	
+//	 long day = 0;
+//	 java.text.SimpleDateFormat format = new
+//	 java.text.SimpleDateFormat("yyyy-MM-dd");
+//	 java.util.Date beginDate = null;
+//	 java.util.Date endDate;
+//	 try {
+//	 beginDate = format.parse(time1);
+//	 endDate = format.parse(time2);
+//	 day = (endDate.getTime() - beginDate.getTime()) / (24 * 60 * 60 * 1000);
+//	 System.out.println("相隔的天数=" + day);
+//	 } catch (Exception e) {
+//	 // TODO 自动生成 catch 块
+//	 e.printStackTrace();
+//	 }
+//	 Calendar c = Calendar.getInstance();
+//	
+//	 List<String> times = new ArrayList<String>();
+//	 for (int i = 0; i < day; i++) {
+//	
+//	 c.setTime(beginDate);
+//	 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// 设置你想要的格式
+//	 c.add(Calendar.DAY_OF_MONTH, i);// 今天+1天
+//	 String dateStr = df.format(c.getTime());
+//	 times.add(dateStr);
+//	
+//	 System.out.println(dateStr);
+//	 }
+//	
+//	 // List<String> rids = roomDao.findOrderInforRid(time);
+//	 List<List> roomids1 = new ArrayList<List>();
+//	 for (int i = 0; i < times.size(); i++) {
+//	 System.out.println(times.get(i) + "---------------");
+//	 List<Integer> rids = orderInforDao.findOrderInforRid(times.get(i));
+//	
+//	 if (rids != null) {
+//	 roomids1.add(rids);
+//	 }
+//	
+//	 }
+//	
+//	 List<List> roomids2 = new ArrayList<List>();
+//	 for (int i = 0; i < times.size(); i++) {
+//	 // System.out.println(times.get(i)+"---------------");
+//	 List<Integer> rids = orderInforDao.findOrderInforRid(times.get(i));
+//	
+//	 roomids2.add(rids);
+//	 }
+//	 System.out.println(roomids1);
+//	
+//	 return null;
+//	 }
 
 }

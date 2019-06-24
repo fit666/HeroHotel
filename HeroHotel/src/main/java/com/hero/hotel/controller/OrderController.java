@@ -1,6 +1,5 @@
 package com.hero.hotel.controller;
 
-<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,7 +52,7 @@ public class OrderController {
 		//总价
 		//查询房间单价
 		HouseType houseType = orderService.findPriceByTypeid(orderItem.getTypeid());
-
+		
 		total = houseType.getPrice()*orderItem.getQuantity()*vip.getDiscount()*day;
 		order.setTotal(total);//存入总价
 		//获取订单生成时间
@@ -69,7 +68,7 @@ public class OrderController {
 		//插入个人信息表
 		orderService.addInfo(info);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
+		
 		//插入房间记录表
 		/*
 		 * 查询可用的房间
@@ -77,10 +76,10 @@ public class OrderController {
 		//查询所有房间id
 		LiveNotes liveNotes = new LiveNotes();
 		liveNotes.setTypeid(orderItem.getTypeid());
-
+		
 		List<String> allDay = new ArrayList<>();
 		while(date1.getTime()!=date2.getTime()){
-
+			
 			allDay.add(sdf.format(date1));
 			date1=new Date(date1.getTime()+24*60*60*1000);
 		}
@@ -89,7 +88,7 @@ public class OrderController {
 		//将日期转换为字符串
 		for (int i = 0; i < allDay.size(); i++) {
 			liveNotes.setDate(allDay.get(i));
-			//查询已经入住的房间id
+			//查询已经入住的房间id			
 			List<Integer> liveRoomIds = orderService.findAllliveRoomsByTypeid(liveNotes);
 			roomIds.removeAll(liveRoomIds);
 		}
@@ -120,7 +119,7 @@ public class OrderController {
 		model.setViewName("backstage-html/add-oder.html");
 		return model;
 	}
-
+	
 	//查找某位客人的所有订单记录
 	@RequestMapping("/findorder")
 	public ModelAndView findOrder(Info info) {
@@ -130,7 +129,7 @@ public class OrderController {
 		System.out.println(model);
 		return model;
 	}
-
+	
 	//修改订单信息
 	@RequestMapping("/updateorder")
 	public ModelAndView updateOder(Info info,Order order,OrderItem orderItem) {
@@ -139,7 +138,7 @@ public class OrderController {
 		model.setViewName("backstage-html/findOrder.html");
 		return model;
 	}
-
+	
 	//删除订单
 	@RequestMapping("/deleteorder")
 	public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order,Info info) {
@@ -147,7 +146,7 @@ public class OrderController {
 		model = orderService.deleteOrder(liveNotes, orderItem, order, info);
 		model.setViewName("backstage-html/findOrder.html");
 		return model;
-
+		
 	}
 =======
 import org.springframework.stereotype.Controller;
@@ -161,15 +160,17 @@ import com.hero.hotel.service.OrderService;
 public class OrderController {
 
 	private OrderService orderService;
-
+	
 	// 结账
 	@RequestMapping("/settle accounts")
 	public ModelAndView settleAccounts(String houseid) {
-
+		
 		Boolean flag = orderService.settleAccounts(houseid);
-
-
+		
+		
 		return null;
 
 	}
 
+>>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
+}

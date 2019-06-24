@@ -1,6 +1,6 @@
 package com.hero.hotel.service.impl;
 
-<<<<<<< HEAD
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -94,8 +94,11 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public ModelAndView findAllOrder(Info info) {
 		ModelAndView model = new ModelAndView();
+		
 		Info info1 = orderDao.findInfo(info);
-		User user = orderDao.findUser(info1.getInfoid());		
+		System.out.println("*****"+info1);
+		User user = orderDao.findUser(info1.getInfoid());
+		System.out.println("*******"+user);
 		Order order = orderDao.findOder(user.getId());
 		model.addObject("uname", info1.getUname());
 		model.addObject(order);
@@ -128,16 +131,8 @@ public class OrderServiceImpl implements OrderService{
 		model.addObject(order2);
 		return model;		
 	}
-=======
-import org.springframework.stereotype.Service;
 
-import com.hero.hotel.dao.OrderDao;
-import com.hero.hotel.service.OrderService;
 
-@Service("orderService")
-public class OrderServiceImpl implements OrderService {
-
-	private OrderDao orderDao;
 	
 	@Override
 	public Boolean settleAccounts(String houseid) {
@@ -148,5 +143,4 @@ public class OrderServiceImpl implements OrderService {
 		return null;
 	}
 
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 }
