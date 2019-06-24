@@ -13,6 +13,7 @@ public class User {
     private String account;//账号
     private String password;//密码
     private String tel;//手机号
+    //消费金额类型修改为double
     private double monetary;//消费金额
     private Date createtime;//注册时间
     private Integer rm;//记住我
@@ -20,26 +21,10 @@ public class User {
     private Vip vip;//vip等级
     private String code;//手机验证码
     private Role role;//管理员角色
-	public User(Integer id, Integer roleid, Integer infoid, Integer flag, String account, String password, String tel,
-			double monetary, Date createtime, Integer rm, Info info, Vip vip, String code, Role role) {
-		super();
-		this.id = id;
-		this.roleid = roleid;
-		this.infoid = infoid;
-		this.flag = flag;
-		this.account = account;
-		this.password = password;
-		this.tel = tel;
-		this.monetary = monetary;
-		this.createtime = createtime;
-		this.rm = rm;
-		this.info = info;
-		this.vip = vip;
-		this.code = code;
-		this.role = role;
-	}
-	public User() {
-		super();
+
+	
+    public User() {
+		
 	}
 	public Integer getId() {
 		return id;
@@ -119,6 +104,7 @@ public class User {
 	public void setCode(String code) {
 		this.code = code;
 	}
+
 	public Role getRole() {
 		return role;
 	}
@@ -133,5 +119,5 @@ public class User {
 				+ "]";
 	}
 	
-
+    
 }

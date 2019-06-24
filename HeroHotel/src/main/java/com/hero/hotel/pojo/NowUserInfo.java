@@ -13,6 +13,7 @@ public class NowUserInfo {
 	private String date;// 居住时间
 	private Integer flag;
 
+	
 	public Integer getId() {
 		return id;
 	}
