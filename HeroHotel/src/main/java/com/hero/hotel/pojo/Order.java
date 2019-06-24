@@ -2,16 +2,23 @@ package com.hero.hotel.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
-
+import java.util.List;
+/*
+ * 	订单表
+ */
 public class Order {
-    private Integer orderid;
-    private Integer userid;
+    private Integer orderid;//订单id
+    private Integer userid;//用户id
     private Integer flag;
-    private Date createtime;
-    private Date updatetime;
-    private String ordernumber;
-    private String payway;
-    private BigDecimal total;
+    //修改创建时间和修改时间类型为String类型
+    private String createtime;//创建时间
+    private String updatetime;//修改时间
+    private String ordernumber;//订单号
+    private String payway;//支付号
+    //总价类型修改为double
+    private double total;//总价
+    //订单项
+    private List<OrderItem> oderItems;
 
     @Override
     public String toString() {
@@ -27,7 +34,15 @@ public class Order {
                 '}';
     }
 
-    public Integer getOrderid() {
+    public List<OrderItem> getOderItems() {
+		return oderItems;
+	}
+
+	public void setOderItems(List<OrderItem> oderItems) {
+		this.oderItems = oderItems;
+	}
+
+	public Integer getOrderid() {
         return orderid;
     }
 
@@ -51,19 +66,19 @@ public class Order {
         this.flag = flag;
     }
 
-    public Date getCreatetime() {
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
 
-    public Date getUpdatetime() {
+    public String getUpdatetime() {
         return updatetime;
     }
 
-    public void setUpdatetime(Date updatetime) {
+    public void setUpdatetime(String updatetime) {
         this.updatetime = updatetime;
     }
 
@@ -83,25 +98,29 @@ public class Order {
         this.payway = payway;
     }
 
-    public BigDecimal getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(BigDecimal total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
-    public Order(Integer orderid, Integer userid, Integer flag, Date createtime, Date updatetime, String ordernumber, String payway, BigDecimal total) {
-        this.orderid = orderid;
-        this.userid = userid;
-        this.flag = flag;
-        this.createtime = createtime;
-        this.updatetime = updatetime;
-        this.ordernumber = ordernumber;
-        this.payway = payway;
-        this.total = total;
-    }
+    
+    public Order(Integer orderid, Integer userid, Integer flag, String createtime, String updatetime,
+			String ordernumber, String payway, double total, List<OrderItem> oderItems) {
+		super();
+		this.orderid = orderid;
+		this.userid = userid;
+		this.flag = flag;
+		this.createtime = createtime;
+		this.updatetime = updatetime;
+		this.ordernumber = ordernumber;
+		this.payway = payway;
+		this.total = total;
+		this.oderItems = oderItems;
+	}
 
-    public Order() {
+	public Order() {
     }
 }

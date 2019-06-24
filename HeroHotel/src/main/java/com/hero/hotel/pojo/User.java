@@ -1,12 +1,19 @@
 package com.hero.hotel.pojo;
-
+/*
+ * 	 用户表
+ */
 public class User {
-    private Integer id;
-    private Integer roleid;
-    private Integer infoid;
+    private Integer id;//用户id
+    private Integer roleid;//角色id
+    private Integer infoid;//个人信息id
     private Integer flag;
-    private String account;
-    private String password;
+    private String account;//账号
+    private String password;//密码
+    private String tel;//手机号
+    //消费金额类型修改为double
+    private double monetary;//消费金额
+    private String createtime;//注册时间
+    private Integer rm;//记住我
 
     @Override
     public String toString() {
@@ -21,8 +28,24 @@ public class User {
                 ", monetary='" + monetary + '\'' +
                 '}';
     }
+    
+    public String getCreatetime() {
+		return createtime;
+	}
 
-    public Integer getId() {
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
+
+	public Integer getRm() {
+		return rm;
+	}
+
+	public void setRm(Integer rm) {
+		this.rm = rm;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -78,18 +101,18 @@ public class User {
         this.tel = tel;
     }
 
-    public String getMonetary() {
+    public double getMonetary() {
         return monetary;
     }
 
-    public void setMonetary(String monetary) {
+    public void setMonetary(double monetary) {
         this.monetary = monetary;
     }
 
     public User() {
     }
 
-    public User(Integer id, Integer roleid, Integer infoid, Integer flag, String account, String password, String tel, String monetary) {
+    public User(Integer id, Integer roleid, Integer infoid, Integer flag, String account, String password, String tel, double monetary) {
         this.id = id;
         this.roleid = roleid;
         this.infoid = infoid;
@@ -100,6 +123,6 @@ public class User {
         this.monetary = monetary;
     }
 
-    private String tel;
-    private String monetary;
+	
+
 }

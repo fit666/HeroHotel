@@ -1,21 +1,23 @@
 package com.hero.hotel.pojo;
 
 import java.math.BigDecimal;
-
+/*
+ * 	房间类型表
+ */
 public class HouseType {
-    private Integer typeid;
+    private Integer typeid;//房间类型id
     private Integer flag;
-    private BigDecimal prive;
-    private String hname;
-    private String serve;
-    private String breakfast;
+    private Double price;//价格
+    private String hname;//类型名字
+    private String serve;//包含服务
+    private String breakfast;//早餐
 
     @Override
     public String toString() {
         return "HouseType{" +
                 "typeid=" + typeid +
                 ", flag=" + flag +
-                ", prive=" + prive +
+                ", prive=" + price +
                 ", hname='" + hname + '\'' +
                 ", serve='" + serve + '\'' +
                 ", breakfast='" + breakfast + '\'' +
@@ -38,12 +40,12 @@ public class HouseType {
         this.flag = flag;
     }
 
-    public BigDecimal getPrive() {
-        return prive;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPrive(BigDecimal prive) {
-        this.prive = prive;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getHname() {
@@ -70,10 +72,10 @@ public class HouseType {
         this.breakfast = breakfast;
     }
 
-    public HouseType(Integer typeid, Integer flag, BigDecimal prive, String hname, String serve, String breakfast) {
+    public HouseType(Integer typeid, Integer flag, Double price, String hname, String serve, String breakfast) {
         this.typeid = typeid;
         this.flag = flag;
-        this.prive = prive;
+        this.price = price;
         this.hname = hname;
         this.serve = serve;
         this.breakfast = breakfast;

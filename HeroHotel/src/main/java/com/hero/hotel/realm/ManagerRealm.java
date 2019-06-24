@@ -9,7 +9,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.hero.hotel.pojo.Manager;
+
+import com.hero.hotel.pojo.User;
 import com.hero.hotel.service.ManagerService;
 
 public class ManagerRealm extends AuthorizingRealm{
@@ -26,13 +27,13 @@ public class ManagerRealm extends AuthorizingRealm{
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		//获取账号
 		String account=(String)token.getPrincipal();
-		Manager manager=managerService.findManagerPwd(account);
+		User manager=managerService.findManagerPwd(account);
 		System.out.println(manager);
 		if(manager==null){
 			return null;
 		}
 		SimpleAuthenticationInfo info=
-				new SimpleAuthenticationInfo(manager.getMaccount(),manager.getPassword(),getName());
+				new SimpleAuthenticationInfo(manager.getAccount(),manager.getPassword(),getName());
 				
 		return info;
 	}

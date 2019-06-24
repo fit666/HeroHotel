@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hero.hotel.pojo.Manager;
+import com.hero.hotel.pojo.User;
 import com.hero.hotel.realm.CustomizedToken;
 import com.woniu.hotel.enump.LoginType;
 
@@ -22,18 +22,18 @@ public class ManagerController {
 	private static final String MANAGER_LOGIN_TYPE = LoginType.MANAGER.toString();
 	 
     @RequestMapping("/login")
-	public ModelAndView login(Manager manager, String codeValue, HttpSession session) {
+	public ModelAndView login(User user, String codeValue, HttpSession session) {
     	ModelAndView mav=new ModelAndView();
-    	
+    	System.out.println("前端传过来的user："+user+codeValue);
     	// 获取session中的验证码值
 		String codeVa = (String) session.getAttribute("codeValue");
 		if (codeVa.equals(codeValue)) {
 			Subject currentUser = SecurityUtils.getSubject();
 			if (!currentUser.isAuthenticated()) {
-				CustomizedToken customizedToken = new CustomizedToken(manager.getMaccount(), manager.getPassword(),
+				CustomizedToken customizedToken = new CustomizedToken(user.getAccount(),user.getPassword(),
 						MANAGER_LOGIN_TYPE);
 				// 记住我
-				if (manager.getRm() == 1) {
+				if (user.getRm() == 1) {
 					customizedToken.setRememberMe(true);
 				}
 
