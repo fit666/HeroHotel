@@ -5,5 +5,4 @@ public interface OrderService {
 	public Boolean settleAccounts(String houseid);
 
 	
-	
 }

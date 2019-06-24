@@ -19,7 +19,6 @@ public class OrderController {
 		Boolean flag = orderService.settleAccounts(houseid);
 		
 		
-		
 		return null;
 
 	}
