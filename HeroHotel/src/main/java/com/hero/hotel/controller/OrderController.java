@@ -1,6 +1,5 @@
 package com.hero.hotel.controller;
 
-<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -149,18 +148,9 @@ public class OrderController {
 		return model;
 		
 	}
-=======
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.hero.hotel.service.OrderService;
 
-@Controller()
-@RequestMapping("/order")
-public class OrderController {
 
-	private OrderService orderService;
 	
 	// 结账
 	@RequestMapping("/settle accounts")
@@ -173,5 +163,4 @@ public class OrderController {
 
 	}
 
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 }

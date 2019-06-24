@@ -1,6 +1,5 @@
 package com.hero.hotel.dao;
 
-<<<<<<< HEAD
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
@@ -17,6 +16,7 @@ import com.hero.hotel.pojo.Order;
 import com.hero.hotel.pojo.OrderItem;
 import com.hero.hotel.pojo.User;
 import com.hero.hotel.pojo.Vip;
+import java.util.Date;
 
 /*
  * 订单的添加、修改、删除
@@ -128,13 +128,8 @@ public interface OrderDao {
 	@Update("update t_OrderItem set starttime=#{starttime},endtime=#{endtime},day={day},typeid=#{typeid}"
 			+ " where orderid=#{orderid} and flag = 1")
 	public void updateOrderItem(OrderItem orderItem);
-=======
-import java.math.BigDecimal;
-import java.util.Date;
 
-import org.apache.ibatis.annotations.Select;
 
-public interface OrderDao {
 	// 1 表示 已入住订单 收入 日
 	@Select("select sum(total) from t_order where TO_DAYS(createtime) = TO_DAYS(#{daytime}) AND flag = 1")
 	public Double findMoneyDayIn(Date daytime);
@@ -157,5 +152,4 @@ public interface OrderDao {
 
 	
 	
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 }
