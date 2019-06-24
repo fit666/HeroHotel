@@ -16,6 +16,7 @@
 ================================================== -->
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/responsive.css" />
+<link rel="stylesheet" href="css/bookroom.css" />
 
 <!-- Java Script
 ================================================== -->
@@ -137,11 +138,11 @@
 							</div>
 							<div class="field half">
 								<label for="flight-depart">入住时间:</label>
-								<input type="text" id="flight-depart" class="input-text input-cal" placeholder="2012-10-01" autocomplete="off" />
+								<input type="date" id="flight-depart"  placeholder="2012-10-01" autocomplete="off" />
 							</div>
 							<div class="field half even">
 								<label for="flight-return">离开时间:</label>
-								<input type="text" id="flight-return" class="input-text input-cal" placeholder="2012-10-01" autocomplete="off" />
+								<input type="date" id="flight-return"  placeholder="2012-10-01" autocomplete="off" />
 							</div>
 							<div class="field half">
 								<label for="flight-class">住房类型:</label>
@@ -155,13 +156,15 @@
 								</select>
 							</div>
 							<div class="field half even">
-								<label for="flight-person">预定类型:</label>
-								<select id="flight-person">
-									<option>--请选择--</option>
-									<option value="0">客房</option>
-									<option value="1">会议厅</option>
-									<option value="2">餐厅</option>
-								</select>
+<!--								<label for="flight-person">预定类型:</label>-->
+<!--								<select id="flight-person">-->
+<!--									<option>&#45;&#45;请选择&#45;&#45;</option>-->
+<!--									<option value="0">客房</option>-->
+<!--									<option value="1">会议厅</option>-->
+<!--									<option value="2">餐厅</option>-->
+<!--								</select>-->
+								<label >&nbsp;</label>
+								<span onclick="checkhouse()"><input type="button" value="查询" style="background-color: red"></span>
 							</div>
 							<button class="submit" onclick="book()">预定</button>
 							<br class="clear" />
@@ -242,7 +245,66 @@
 			
 			
 			
-			<div class="hr"><hr /></div>			
+			<div class="hr">
+				<table style="border: red 1px solid;width: 900px;font-size: 20px;font-family: 微软雅黑">
+					<tr style="border: red 1px solid;height: 50px;" >
+						<td ">类型</td>
+						<td>描述</td>
+						<td>查看详情</td>
+						<td>价格</td>
+						<td>可否预定</td>
+					</tr>
+					<tr style="border: red 1px solid;height: 50px">
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+						<td>8</td>
+						<td>8</td>
+					</tr>
+					<tr style="border: red 1px solid;height: 50px">
+						<td>11</td>
+						<td>22</td>
+						<td>33</td>
+						<td>44</td>
+						<td>44</td>
+					</tr>
+					<tr>
+						<td colspan="5" style="text-align: center">
+							<div align="center" style="margin: 50 auto">
+								<button onclick="openwindow()">填写个人信息</button>
+							</div>
+							<!-- 弹窗隐藏区域 -->
+							<div id="myModal" class="modal">
+								<!-- 弹窗内容 -->
+								<div class="modal-content">
+									<div class="modal-header">
+										<span class="close">&times;</span>
+										<h2>填写个人信息</h2>
+									</div>
+									<div class="modal-body">
+										<p>请填写真实有效的个人信息</p>
+										姓名： <input type="text" name=""><br>
+										电话： <input type="password" name=""><br>
+										性别： <select>
+												<option>男</option>
+												<option>女</option>
+												</select>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<br>
+										身份证号： <input type="text" name="">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+									</div>
+									<div class="modal-footer">
+										<button class="ok">确定</button>&nbsp;<button class="no">取消</button>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
 			
 			
 
@@ -261,6 +323,32 @@
 		var url="https://www.baidu.com/s?wd="+question;
 		open(url)
 	}
+
+	function checkhouse() {
+		var livetime = new Date($("#flight-depart").val().replace(/-/g, '/'));
+		var leavetime = new Date($("#flight-return").val().replace(/-/g, '/'));
+		var oneday=60*60*24*1000
+		var days=(leavetime-livetime)/oneday
+		if (days<=0){
+			alert("请填写正确的日期格式~")
+		}
+		else {
+			$.ajax({
+				url:"../findHouseByDays",
+				type:"post",
+				data:{
+					"livetime":livetime,
+					"leavetime":leavetime,
+					"days":days
+				},
+				success:function(){
+					alert("返回住房数据~")
+				}
+
+			})
+		}
+	}
+
 </script>
 
 </body>
