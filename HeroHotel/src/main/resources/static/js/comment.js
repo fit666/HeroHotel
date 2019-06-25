@@ -54,20 +54,7 @@ function total(){
 show(1);
 total();
 
-//添加评论
-function addComment(){
-	 $.ajax({
-			url:"/comment/addComment",
-			type:"post",
-			data:{
-				message:$("#text").val(),
-				name:$("#name").val()
-			},
-		 success:function(data){
-			alert(66);
-		 }
-	 })
-}
+
 
 
 

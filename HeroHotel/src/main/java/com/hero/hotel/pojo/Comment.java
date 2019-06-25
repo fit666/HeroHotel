@@ -34,19 +34,15 @@ public class Comment {
 		this.total = total;
 	}
 
-	@Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", orderid=" + orderid +
-                ", userid=" + userid +
-                ", flag=" + flag +
-                ", createtime=" + createtime +
-                ", message='" + message + '\'' +
-                '}';
-    }
+	
 
-    public Integer getId() {
+    @Override
+	public String toString() {
+		return "Comment [id=" + id + ", orderid=" + orderid + ", userid=" + userid + ", flag=" + flag + ", createtime="
+				+ createtime + ", message=" + message + ", total=" + total + ", name=" + name + "]";
+	}
+
+	public Integer getId() {
         return id;
     }
 
