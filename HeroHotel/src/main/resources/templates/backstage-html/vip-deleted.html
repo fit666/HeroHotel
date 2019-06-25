@@ -36,15 +36,15 @@
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="80">账号</th>
-				<th width="50">真实姓名</th>
-				<th width="40">性别</th>
+				<th width="110">真实姓名</th>
+				<th width="50">性别</th>
 				<th width="90">手机</th>
-				<th width="100">身份证号</th>
-				<th width="70">累计消费</th>
+				<th width="100">身份证号</th> 
+				<th width="100">累计消费</th>
 				<th width="50">会员等级</th>
 				<th width="130">加入时间</th>
-				<th width="100">是否有效</th>
-				<th width="100">操作</th>
+				<!-- <th width="100">是否有效</th>
+				<th width="100">操作</th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -58,12 +58,12 @@
 				<td th:text="${vipa.monetary}"></td>
 				<td th:text="${vipa.vip.vname}"></td>
 				<td th:text="${vipa.createtime}"></td>
-				<td class="td-status">
+				<!-- <td class="td-status">
 					<span class="label radius" th:if="${vipa.flag}==2">已停用</span>
 					<span class="label label-success radius" th:if="${vipa.flag}==1">已启用</span>
-				</td>
+				</td> -->
 				
-				<td class="td-manage">
+				<!-- <td class="td-manage">
 					<span th:if="${vipa.flag}==2">
 						<a style="text-decoration:none" th:onclick="vip_start(this,'10001',[[${vipa.id}]])" href="javascript:;" title="启用">
 							<i class="Hui-iconfont">&#xe615;</i>
@@ -74,13 +74,13 @@
 							<i class="Hui-iconfont">&#xe631;</i>
 						</a>
 					</span>
-					<!-- <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','2','800','500')" class="ml-5" style="text-decoration:none">
+					 <a title="查看" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','2','800','500')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
-					</a> -->
+					</a>
 					<a title="删除" href="javascript:;" th:onclick="vip_del(this,'1',[[${vipa.id}]])" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a>
-				</td>
+				</td> -->
 			</tr>
 		</tbody>
 	</table>
@@ -108,7 +108,7 @@ $(function(){
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-		  {"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
+		  {"orderable":false,"aTargets":[0,1,2,4,5]}// 制定列不参与排序
 		]
 	});
 	$('.table-sort tbody').on( 'click', 'tr', function () {

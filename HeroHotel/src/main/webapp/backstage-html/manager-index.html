@@ -37,7 +37,7 @@
 		<li>超级管理员</li>
 		<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
-				<li><a href="#">个人信息</a></li>
+				<li><a href="member-list.html">个人信息</a></li>
 				<li><a href="#">切换账户</a></li>
 				<li><a href="#">退出</a></li>
 			</ul>
@@ -116,13 +116,11 @@
 			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="findAllVip" href="javascript:;">会员列表</a></li>
-					<li><a _href="member-del.html" href="javascript:;">删除的会员</a></li>
-					<li><a _href="member-level.html" href="javascript:;">等级管理</a></li>
+					<li><a _href="/user/findAllVip">会员列表</a></li>
+					<!-- <li><a _href="member-list.html">会员列表</a></li> -->
+					<li><a _href="/user/findAllDeletedVips" href="javascript:;">删除的会员</a></li>
+					<li><a _href="vip-grade-manage.html" href="javascript:;">等级管理</a></li>
 					<li><a _href="member-scoreoperation.html" href="javascript:;">积分管理</a></li>
-					<li><a _href="member-record-browse.html" href="javascript:void(0)">浏览记录</a></li>
-					<li><a _href="member-record-download.html" href="javascript:void(0)">下载记录</a></li>
-					<li><a _href="member-record-share.html" href="javascript:void(0)">分享记录</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -130,9 +128,9 @@
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="admin-role.html" href="javascript:void(0)">角色管理</a></li>
-					<li><a _href="admin-permission.html" href="javascript:void(0)">权限管理</a></li>
-					<li><a _href="admin-list.html" href="javascript:void(0)">管理员列表</a></li>
+					<li><a _href="/manager/findAllManagers" href="javascript:void(0)">管理员列表</a></li>
+					<li><a _href="/manager/getAllRoles" href="javascript:void(0)">添加管理员</a></li>
+					<li><a _href="/role/findAll" href="javascript:void(0)">角色管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -141,9 +139,9 @@
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 日常查询<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="../room/findRoomAll" href="javascript:void(0)">当前房间查询</a></li>
-					<li><a _href="../userInfor/findUserInfo" href="javascript:void(0)">当前宾客信息</a></li>
-					<li><a _href="../chart/findMoneyDay" href="javascript:void(0)">财务查询</a></li>
+					<li><a _href="room/findRoomAll" href="javascript:void(0)">当前房间查询</a></li>
+					<li><a _href="admin-permission.html" href="javascript:void(0)">当前宾客信息</a></li>
+					<li><a _href="admin-list.html" href="javascript:void(0)">管理员列表</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -166,13 +164,14 @@
 			<dd>
 				<ul>
 					<li><a _href="system-base.html" href="javascript:void(0)">系统设置</a></li>
-					<li><a _href="system-category.html" href="javascript:void(0)">栏目管理</a></li>
+					<li><a _href="/system/findBillingReuls" href="javascript:void(0)">计费管理</a></li>
 					<li><a _href="system-data.html" href="javascript:void(0)">数据字典</a></li>
 					<li><a _href="system-shielding.html" href="javascript:void(0)">屏蔽词</a></li>
 					<li><a _href="system-log.html" href="javascript:void(0)">系统日志</a></li>
 				</ul>
 			</dd>
 		</dl>
+<<<<<<< HEAD
 		<dl id="menu-system">
 			<dt><i class="Hui-iconfont">&#xe62e;</i> 预定管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
@@ -183,6 +182,8 @@
 				</ul>
 			</dd>
 		</dl>
+=======
+>>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 	</div>
 </aside>
 <div class="dislpayArrow"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>

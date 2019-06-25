@@ -9,20 +9,38 @@ public class Comment {
     private Integer flag;
     private Date createtime;
     private String message;
+    private Integer total;//总条数
+    private String name;//昵称
+    
+    
+    
+    
+
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
+	
 
     @Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", orderid=" + orderid +
-                ", userid=" + userid +
-                ", flag=" + flag +
-                ", createtime=" + createtime +
-                ", message='" + message + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "Comment [id=" + id + ", orderid=" + orderid + ", userid=" + userid + ", flag=" + flag + ", createtime="
+				+ createtime + ", message=" + message + ", total=" + total + ", name=" + name + "]";
+	}
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
