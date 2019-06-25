@@ -21,11 +21,6 @@ public class User {
     private Vip vip;//vip等级
     private String code;//手机验证码
     private Role role;//管理员角色
-
-	
-    public User() {
-		
-	}
 	public Integer getId() {
 		return id;
 	}
@@ -104,20 +99,49 @@ public class User {
 	public void setCode(String code) {
 		this.code = code;
 	}
-
 	public Role getRole() {
 		return role;
 	}
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	public User(Integer id, Integer roleid, Integer infoid, Integer flag, String account, String password, String tel,
+			double monetary, Date createtime, Integer rm, Info info, Vip vip, String code, Role role) {
+		super();
+		this.id = id;
+		this.roleid = roleid;
+		this.infoid = infoid;
+		this.flag = flag;
+		this.account = account;
+		this.password = password;
+		this.tel = tel;
+		this.monetary = monetary;
+		this.createtime = createtime;
+		this.rm = rm;
+		this.info = info;
+		this.vip = vip;
+		this.code = code;
+		this.role = role;
+	}
+	public User() {
+		super();
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", roleid=" + roleid + ", infoid=" + infoid + ", flag=" + flag + ", account="
 				+ account + ", password=" + password + ", tel=" + tel + ", monetary=" + monetary + ", createtime="
 				+ createtime + ", rm=" + rm + ", info=" + info + ", vip=" + vip + ", code=" + code + ", role=" + role
-				+ "]";
+				+ ", getId()=" + getId() + ", getRoleid()=" + getRoleid() + ", getInfoid()=" + getInfoid()
+				+ ", getFlag()=" + getFlag() + ", getAccount()=" + getAccount() + ", getPassword()=" + getPassword()
+				+ ", getTel()=" + getTel() + ", getMonetary()=" + getMonetary() + ", getCreatetime()=" + getCreatetime()
+				+ ", getRm()=" + getRm() + ", getInfo()=" + getInfo() + ", getVip()=" + getVip() + ", getCode()="
+				+ getCode() + ", getRole()=" + getRole() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+
 	
-    
+		
+  
+
+	
 }

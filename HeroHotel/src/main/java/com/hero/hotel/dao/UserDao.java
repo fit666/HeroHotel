@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.hero.hotel.pojo.User;
+import com.hero.hotel.pojo.Vip;
 
 
 public interface UserDao {
@@ -31,12 +32,12 @@ public interface UserDao {
 	})
 	public List<User> findAll();
 	
-	//查询数据库用户名（注册时使用）
-	@Select("select * from t_user where account=#{account}")
+	//查询数据库用户名（注册或登录时使用）
+	@Select("select * from t_user where account=#{account} and flag=1")
 	public User findAccountByAccount(User user);
 	
 	//插入注册的信息到数据库（注册时使用）
-	@Insert("insert into t_user(account,password,tel,createtime) values(#{account},#{password},#{tel},#{createtime})")
+	@Insert("insert into t_user(account,password,tel,createtime,roleid) values(#{account},#{password},#{tel},#{createtime},#{roleid})")
 	public boolean insertAccount(User user);
 	//停用vip账号
 	@Update("update t_user set flag=2 where id=#{id}")
@@ -66,4 +67,11 @@ public interface UserDao {
 	
 	
 
+	//查询账户通过手机号
+	@Select("select * from t_user where tel=#{tel} and flag=1")
+	public User findUserByTel(User user);
+	
+	//查vip信息
+	@Select("select * from t_vip where id=#{id} and flag=1 ")
+	public Vip findVipByID(Integer id);
 }
