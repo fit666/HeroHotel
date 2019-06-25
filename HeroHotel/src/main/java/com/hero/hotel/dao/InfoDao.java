@@ -19,4 +19,5 @@ public interface InfoDao {
 	//获取新插入的个人信息的id
 	@Select("select infoid from t_info where uname=#{uname} and sex=#{sex} and tel=#{tel} and idcard=#{idcard} and flag=1")
 	public Integer findInfoidByInfo(Info info);
+
 }

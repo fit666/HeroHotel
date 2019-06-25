@@ -98,15 +98,22 @@ public class ManagerServiceImpl implements ManagerService{
 	 */
 	@Override
 	public boolean addManager(User manager,Info info) {
-		boolean b1=infoDao.addInfo(info);
-		if(b1){
-			//获取新插入的个人信息的id
-			Integer infoid=infoDao.findInfoidByInfo(info);
-			manager.setInfoid(infoid);
-			//插入新的管理员账号信息
-			boolean b2=managerDao.addManager(manager);
-			if(b2){
-				return true;
+		//判断个人信息是否已经存在
+		Integer infoid=infoDao.findInfoidByInfo(info);
+		if(infoid!=0){
+			return false;
+		}else{
+			//插入管理员的个人信息
+			boolean b1=infoDao.addInfo(info);
+			if(b1){
+				//获取新插入的个人信息的id
+				infoid=infoDao.findInfoidByInfo(info);
+				manager.setInfoid(infoid);
+				//插入新的管理员账号信息
+				boolean b2=managerDao.addManager(manager);
+				if(b2){
+					return true;
+				}
 			}
 		}
 		return false;
