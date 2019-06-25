@@ -9,6 +9,7 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +56,10 @@ public class UserRealm extends AuthorizingRealm {
 			        .getRequestAttributes()).getRequest();
 			String tpl_value=(String) request.getSession().getAttribute("tpl_value");
 			System.out.println("tpl_value:"+tpl_value);
+			//将验证码加密与realm保持一致
+			String code= new SimpleHash("MD5",tpl_value,null,1024).toString();
 			SimpleAuthenticationInfo info=
-		new SimpleAuthenticationInfo(account,tpl_value,getName());
+		new SimpleAuthenticationInfo(account,code,getName());
 			return info;
 			
 		}else {

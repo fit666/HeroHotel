@@ -85,7 +85,6 @@ public class UserServiceImpl implements UserService {
 						System.out.println("try");
 						currentUser.login(customizedToken);
 						result = "登录成功";
-						System.out.println(result);
 						//将用户所有信息存入session
 						//查找用户对应的vip
 						int monetary=Integer.parseInt(realuser.getMonetary()) ;
@@ -107,6 +106,7 @@ public class UserServiceImpl implements UserService {
 							realuser.setVip(vip);
 						}
 						session.setAttribute("user", realuser);
+						System.out.println(result);
 						return result;
 					} catch (IncorrectCredentialsException ice) {
 						System.out.println("用户名/密码不匹配！");
@@ -149,6 +149,7 @@ public class UserServiceImpl implements UserService {
 					customizedToken.setRememberMe(true);
 				}
 				try {
+					System.out.println("try");
 					currentUser.login(customizedToken);
 					result="登录成功";
 					//将用户所有信息存入session
@@ -172,6 +173,7 @@ public class UserServiceImpl implements UserService {
 						realuser.setVip(vip);
 					}
 					session.setAttribute("user", realuser);
+					System.out.println(result);
 					return result;
 				} catch (IncorrectCredentialsException ice) {
 					System.out.println("用户名/密码不匹配！");
