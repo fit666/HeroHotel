@@ -1,4 +1,7 @@
 package com.hero.hotel.pojo;
+
+import java.util.Date;
+
 /*
  * 	 用户表
  */
@@ -12,35 +15,14 @@ public class User {
     private String tel;//手机号
     //消费金额类型修改为double
     private double monetary;//消费金额
-    private String createtime;//注册时间
+    private Date createtime;//注册时间
     private Integer rm;//记住我
     private Info info;//个人信息
     private Vip vip;//vip等级
     private String code;//手机验证码
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", roleid=" + roleid + ", infoid=" + infoid + ", flag=" + flag + ", account="
-				+ account + ", password=" + password + ", tel=" + tel + ", monetary=" + monetary + ", createtime="
-				+ createtime + ", rm=" + rm + ", info=" + info + ", vip=" + vip + ", code=" + code + "]";
-	}
-	public User(Integer id, Integer roleid, Integer infoid, Integer flag, String account, String password, String tel,
-			double monetary, String createtime, Integer rm, Info info, Vip vip, String code) {
-		super();
-		this.id = id;
-		this.roleid = roleid;
-		this.infoid = infoid;
-		this.flag = flag;
-		this.account = account;
-		this.password = password;
-		this.tel = tel;
-		this.monetary = monetary;
-		this.createtime = createtime;
-		this.rm = rm;
-		this.info = info;
-		this.vip = vip;
-		this.code = code;
-	}
-    
+    private Role role;//管理员角色
+
+	
     public User() {
 		
 	}
@@ -92,10 +74,10 @@ public class User {
 	public void setMonetary(double monetary) {
 		this.monetary = monetary;
 	}
-	public String getCreatetime() {
+	public Date getCreatetime() {
 		return createtime;
 	}
-	public void setCreatetime(String createtime) {
+	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
 	public Integer getRm() {
@@ -123,5 +105,19 @@ public class User {
 		this.code = code;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", roleid=" + roleid + ", infoid=" + infoid + ", flag=" + flag + ", account="
+				+ account + ", password=" + password + ", tel=" + tel + ", monetary=" + monetary + ", createtime="
+				+ createtime + ", rm=" + rm + ", info=" + info + ", vip=" + vip + ", code=" + code + ", role=" + role
+				+ "]";
+	}
+	
     
 }

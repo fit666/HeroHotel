@@ -147,9 +147,20 @@ public interface OrderDao {
 	public Double findMoneyMonthOut(String Monthtime);
 
 	//  修改订单  结账处理
-	
+	@Update("UPDATE t_orderitem SET falg = 2 WHERE  houseid= #{houseid} AND  flag = 1")
 	public Boolean settleAccounts(String houseid);
 
+	
+	// 查询订单里的订单项 有没有  没有结账的id
+	@Select("SELECT id FROM t_orderitem WHERE orderid = (SELECT orderid FROM t_orderitem WHERE houseid = #{houseid} ) AND  flag = 1")
+	public List<Integer> isNoSettle(String houseid);
+	
+	
+	// order表改成  完成状态
+	
+	@Update("UPDATE t_order SET flag = 2 WHERE orderid = (SELECT orderid FROM t_orderitem WHERE houseid = #{houseid} )  AND  flag = 1")
+	public Boolean changeOrderFlag(String houseid);
+	
 	
 	
 }

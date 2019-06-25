@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
 	//查找所有vip
 	public List<User> findAllVip() {
 
-		System.out.println(userDao.findAll());
 		return userDao.findAll();
 	}
 	
@@ -81,9 +80,9 @@ public class UserServiceImpl implements UserService {
 		}
 		// 给账号密码加密
 		user.setPassword(new SimpleHash("MD5", user.getPassword(), null, 1024).toString());
-		// 生成创建时间
-		String createTime = new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new Date());
-		user.setCreatetime(createTime);// 将信息插入到数据库
+		/*// 生成创建时间
+		String createTime = new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new Date());*/
+		user.setCreatetime(new Date());// 将信息插入到数据库
 		boolean b = userDao.insertAccount(user);
 		if (b) {
 			result = "注册成功";
@@ -200,5 +199,51 @@ public class UserServiceImpl implements UserService {
 		result = "验证码通过";
 		return result;
 	}
+	/*
+	 * 停用vip账号(non-Javadoc)
+	 * @see com.hero.hotel.service.UserService#vipStop(java.lang.Integer)
+	 */
+	@Override
+	public String vipStop(Integer id) {
+		boolean boo=userDao.vipStop(id);
+		if(boo){
+			return "success";
+		}
+		return "defeat";
+	}
+	/*
+	 * 启用被通用的用户账号(non-Javadoc)
+	 * @see com.hero.hotel.service.UserService#vipStart(java.lang.Integer)
+	 */
+	@Override
+	public String vipStart(Integer id) {
+		boolean boo=userDao.vipStart(id);
+		if(boo){
+			return "success";
+		}
+		return "defeat";
+	}
+	/*
+	 * 删除用户账号(non-Javadoc)
+	 * @see com.hero.hotel.service.UserService#userDelete(java.lang.Integer)
+	 */
+	@Override
+	public String userDelete(Integer id) {
+		boolean boo=userDao.userDelete(id);
+		if(boo){
+			return "success";
+		}
+		return "defeat";
+	}
+	/*
+	 * 获取所有已删除的会员(non-Javadoc)
+	 * @see com.hero.hotel.service.UserService#findAllDeletedVips()
+	 */
+	@Override
+	public List<User> findAllDeletedVips() {
+		
+		return userDao.findAllDeletedVips();
+	}
+	
 
 }

@@ -31,53 +31,49 @@
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr>
-				<th scope="col" colspan="10" >会员列表</th>
+				<th scope="col" colspan="10" >管理员列表</th>
 			</tr>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="80">账号</th>
-				<th width="50">真实姓名</th>
-				<th width="40">性别</th>
+				<th width="110">姓名</th>
+				<th width="50">性别</th>
 				<th width="90">手机</th>
-				<th width="100">身份证号</th>
-				<th width="70">累计消费</th>
-				<th width="50">会员等级</th>
+				<th width="50">角色</th>
 				<th width="130">加入时间</th>
 				<th width="100">是否有效</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="text-c" th:if="${allVips}!=null" th:each="vipa,status:${allVips}">
+			<tr class="text-c" th:if="${managers}!=null" th:each="manager,status:${managers}">
 				<td><input type="checkbox" value="1" name=""></td>
-				<td th:text="${vipa.account}"></td>
-				<td th:text="${vipa.info.uname}"></td>
-				<td th:text="${vipa.info.sex}"></td>
-				<td th:text="${vipa.tel}"></td>
-				<td th:text="${vipa.info.idcard}"></td>
-				<td th:text="${vipa.monetary}"></td>
-				<td th:text="${vipa.vip.vname}"></td>
-				<td th:text="${vipa.createtime}"></td>
+				<td th:text="${manager.account}"></td>
+				<td th:text="${manager.info.uname}"></td>
+				<td th:text="${manager.info.sex}"></td>
+				<td th:text="${manager.tel}"></td>
+				<td th:text="${manager.role.rolename}"></td>
+				<td th:text="${manager.createtime}"></td>
 				<td class="td-status">
-					<span class="label radius" th:if="${vipa.flag}==2">已停用</span>
-					<span class="label label-success radius" th:if="${vipa.flag}==1">已启用</span>
+					<span class="label radius" th:if="${manager.flag}==2">已停用</span>
+					<span class="label label-success radius" th:if="${manager.flag}==1">已启用</span>
 				</td>
 				
 				<td class="td-manage">
-					<span th:if="${vipa.flag}==2">
-						<a style="text-decoration:none" th:onclick="vip_start(this,'10001',[[${vipa.id}]])" href="javascript:;" title="启用">
+					<span th:if="${manager.flag}==2">
+						<a style="text-decoration:none" th:onclick="manager_start(this,'10001',[[${manager.id}]]);" href="javascript:;" title="启用">
 							<i class="Hui-iconfont">&#xe615;</i>
 						</a>
 					</span>
-					<span  th:if="${vipa.flag}==1">
-						<a style="text-decoration:none" th:onclick="vip_stop(this,'10001',[[${vipa.id}]])" href="javascript:;" title="停用">
+					<span  th:if="${manager.flag}==1">
+						<a style="text-decoration:none" th:onclick="manager_stop(this,'10001',[[${manager.id}]]);" href="javascript:;" title="停用">
 							<i class="Hui-iconfont">&#xe631;</i>
 						</a>
 					</span>
-					<!-- <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','2','800','500')" class="ml-5" style="text-decoration:none">
+					<a title="编辑" href="javascript:;" th:onclick="manager_edit('管理员信息修改','/backstage-html/manager-edit.html','2','800','500',[[${manager.id}]])" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
-					</a> -->
-					<a title="删除" href="javascript:;" th:onclick="vip_del(this,'1',[[${vipa.id}]])" class="ml-5" style="text-decoration:none">
+					</a>
+					<a title="删除" href="javascript:;" th:onclick="manager_del(this,'1',[[${manager.id}]])" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a>
 				</td>
@@ -94,9 +90,10 @@
 <script type="text/javascript" src="/backstage/js/H-ui.js"></script> 
 <script type="text/javascript" src="/backstage/js/H-ui.admin.js"></script> 
 <script type="text/javascript" th:inline="javascript">
+
 //vip总数
-var size = [[${allVips}]];
-$("#allVipsSize").html("共有数据：<strong >"+size.length+"</strong> 条");
+var size = [[${managers}]];
+$("#allVipsSize").html("共有数据：<strong >"+size.length+"</strong> 条"); 
 
 $(function(){
 	$('.table-sort').dataTable({
@@ -108,7 +105,7 @@ $(function(){
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-		  {"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
+		  {"orderable":false,"aTargets":[0,2,4,8]}// 制定列不参与排序
 		]
 	});
 	$('.table-sort tbody').on( 'click', 'tr', function () {
@@ -126,77 +123,79 @@ function member_add(title,url,w,h){
 	layer_show(title,url,w,h);
 }
 /*用户-查看*/
-function member_show(title,url,id,w,h){
+function manager_show(title,url,id,w,h){
 	layer_show(title,url,w,h);
 }
 /*用户-停用*/
-function vip_stop(obj,id,vid){
+function manager_stop(obj,id,mid){
 	layer.confirm('确认要停用吗？',function(index){
 		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
 		$.ajax({
-			url:"/user/vipStop",
+			url:"/manager/unable",
 			type:"post",
 			data:{
-				id:vid
+				id:mid
 			},
 			success:function(data){
-				if(data=="success"){
-					$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
-					$(obj).remove();
-					layer.msg('已停用!',{icon: 5,time:1000});
+				if(data!="success"){
+					return;
 				}
 			}
 		})
-		
+		$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+		$(obj).remove();
+		layer.msg('已停用!',{icon: 5,time:1000});
 	});
 }
 
 /*用户-启用*/
-function vip_start(obj,id,vid){
+function manager_start(obj,id,mid){
 	layer.confirm('确认要启用吗？',function(index){
 		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
 		$.ajax({
-			url:"/user/vipStart",
+			url:"/manager/enable",
 			type:"post",
 			data:{
-				id:vid
+				id:mid
 			},
 			success:function(data){
-				if(data=="success"){
-					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-					$(obj).remove();
-					layer.msg('已启用!',{icon: 6,time:1000});
+				if(data!="success"){
+					return;
 				}
 			}
 		})
 		
+		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+		$(obj).remove();
+		layer.msg('已启用!',{icon: 6,time:1000});
 	});
+	
 }
 /*用户-编辑*/
-function member_edit(title,url,id,w,h){
-	layer_show(title,url,w,h);
+function manager_edit(title,url,id,w,h,mid){
+	layer_show(title,url+"?id="+mid,w,h);
 }
 /*密码-修改*/
 function change_password(title,url,id,w,h){
 	layer_show(title,url,w,h);	
 }
 /*用户-删除*/
-function vip_del(obj,id,vid){
+function manager_del(obj,id,mid){
 	layer.confirm('确认要删除吗？',function(index){
+		$(obj).parents("tr").remove();
+		layer.msg('已删除!',{icon:1,time:1000});
 		$.ajax({
-			url:"/user/userDelete",
+			url:"/manager/deleteManager",
 			type:"post",
 			data:{
-				id:vid
+				id:mid
 			},
 			success:function(data){
-				if(data=="success"){
-					$(obj).parents("tr").remove();
-					layer.msg('已删除!',{icon:1,time:1000});
+				if(data!="success"){
+					return;
 				}
 			}
 		})
-		
 	});
 }
 </script> 

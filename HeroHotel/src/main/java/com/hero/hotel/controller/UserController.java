@@ -55,5 +55,39 @@ public class UserController {
 
 		return "";
 	}
-
+	/*
+	 * 停用用户账号
+	 */
+	@RequestMapping("/vipStop")
+	@ResponseBody
+	public String vipStop(Integer id){
+		return userService.vipStop(id);
+	}
+	/*
+	 * 启用用户账号
+	 */
+	@RequestMapping("/vipStart")
+	@ResponseBody
+	public String vipStart(Integer id){
+		return userService.vipStart(id);
+	}
+	/*
+	 * 删除会员
+	 */
+	@RequestMapping("/userDelete")
+	@ResponseBody
+	public String userDelete(Integer id){
+		return userService.userDelete(id);
+	}
+	/*
+	 * 获取所有已删除的会员
+	 */
+	@RequestMapping("/findAllDeletedVips")
+	public ModelAndView findAllDeletedVips(){
+		ModelAndView mav=new ModelAndView();
+		List<User> vips=userService.findAllDeletedVips();
+		mav.addObject("allVips", vips);
+		mav.setViewName("/backstage-html/vip-deleted.html");
+		return mav;
+	}
 }
