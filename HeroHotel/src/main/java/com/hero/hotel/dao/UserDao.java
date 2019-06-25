@@ -74,4 +74,11 @@ public interface UserDao {
 	//查vip信息
 	@Select("select * from t_vip where id=#{id} and flag=1 ")
 	public Vip findVipByID(Integer id);
+	
+	//查找用户和手机号是否存在(忘记密码使用)
+	@Select("select * from t_user where account=#{account} and tel=#{tel} and flag=1 ")
+	public User findUserByAccountTel(User user);
+	
+	@Update("update t_user set password=#{password} where account=#{account} and tel=#{tel} and flag=1 ")
+	public Boolean updatePass(User user);
 }

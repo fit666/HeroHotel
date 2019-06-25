@@ -10,6 +10,7 @@
 <meta name="keywords" content="关键字" />
 <link rel="stylesheet" href="css/login.css" type="text/css" />
 <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jq-slideVerify.js"></script>
 
 </head>
 
@@ -19,6 +20,7 @@
 	<!--HEADER-->
 
 	<!--身-->
+	<input type="hidden"  value="0" id="flag" >
 	<div class="container_wrap">
 		<div class="container">
 			<!--左-->
@@ -45,9 +47,16 @@
 								id="codeValue"  /> </span>
 								<span  class="s3" id="message3" ></span>
 								</li> -->
+								
 								<!-- 提示消息 -->
+								<li class="clearfix"><span class="s1">&nbsp;</span> 
+							<span class="s2">
+							<div class="verify-wrap" id="verify-wrap2"></div>
+							</span> 
+									</li>
 							<li class="clearfix"><span class="s1">&nbsp;</span> 
-							<span class="s2" style="color: red" id="message4" ></span> 
+							<span class="s2" style="color: red" id="message4" >
+							</span> 
 									</li>
 					</ul>
 					<div class="yes_rule">
@@ -80,7 +89,30 @@
 		Rights Reserved. 版权所有&nbsp;&nbsp;&nbsp;&nbsp;皖ICP备11009137号</div>
 	<script type="text/javascript" src="js/login.js"></script>
 	<script type="text/javascript">
-	
+		$(function(){
+				
+			/* var i=slideVerify2.slideFinishState; */
+			
+			var SlideVerifyPlug = window.slideVerifyPlug;
+			
+			var slideVerify2 = new SlideVerifyPlug('#verify-wrap2',{
+				wrapWidth:'250',
+	            initText:'请按住滑块',
+	            sucessText:'验证通过',
+	            getSucessState:function(res){
+	           		//当验证完成的时候 会 返回 res 值 true，只留了这个应该够用了 
+	           		
+	           		$("#flag").val("1");
+	           	}
+			});
+			$("#resetBtn2").on('click',function(){
+				 slideVerify2.resetVerify(); 
+			})
+			$("#getState2").on('click',function(){
+				alert(slideVerify2.slideFinishState);
+				
+			})
+		})
 	</script>
 
 </body>

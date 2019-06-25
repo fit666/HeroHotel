@@ -7,12 +7,14 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hero.hotel.dao.CommentDao;
 import com.hero.hotel.pojo.Comment;
 import com.hero.hotel.pojo.User;
 import com.hero.hotel.service.CommentService;
 @Service
+@Transactional
 public class CommentServiceImpl implements CommentService {
 	@Resource
 	private CommentDao commentDao;
@@ -37,6 +39,8 @@ public class CommentServiceImpl implements CommentService {
 		
 		return commentDao.findAllNumber();
 	}
+	
+	
 	//添加评论
 	@Override
 	public Boolean addComment(Comment comment, HttpSession session) {
