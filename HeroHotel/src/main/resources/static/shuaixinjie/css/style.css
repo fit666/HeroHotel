@@ -201,6 +201,7 @@ br.clear{ clear:both; height:1px; overflow:hidden; }
 	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/uploads/1280x800/moscow.jpg', sizingMethod='scale')";
 }
 
+
 img.left{ margin:0 10px 10px 0; }
 
 /*sidebar*/
@@ -490,3 +491,8 @@ img.left{ margin:0 10px 10px 0; }
 .sprite-stars.star4{ background-position:0 -151px; }
 .sprite-stars.star45{ background-position:0 -176px; }
 .sprite-stars.star5{ background-position:0 -195px; }
+.infor #slider-wrap{ 
+	background: url(../images/uploads/1280x800/moscow.jpg) no-repeat center top; background-size:cover; 
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/uploads/1280x800/moscow.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/uploads/1280x800/moscow.jpg', sizingMethod='scale')";
+}

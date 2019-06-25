@@ -922,3 +922,9 @@ table.m9 .tr1 td{ padding:0 8px; text-align:center; height:36px; line-height:36p
 .sp_jes{clear:both;padding-top:20px;}
 .sp_jes h3{font-size:16px; color:#666; font-family:\5FAE\8F6F\96C5\9ED1; border-bottom:1px solid #ddd;height:30px; line-height:30px; padding-left:10px;}
 .sp_xxxx{padding-left:10px;line-height:1.8em;padding-top:20px; padding-bottom:20px; color:#666;}
+.textbox{
+	padding:10px;
+	margin:20px;
+	width:600px;
+	heigt:800px;
+}

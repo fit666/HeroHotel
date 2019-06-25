@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+.textbox{
+	text-align:center;
+	width:600px;
+	heigt:800px;
+	border:1px red solid;
+}
