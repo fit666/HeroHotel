@@ -20,7 +20,6 @@ public class SystemSetController {
 	public ModelAndView findBillingReuls(){
 		ModelAndView mav=new ModelAndView();
 		SystemSet set=systemsetService.findRules();
-		System.out.println(set);
 		mav.addObject("set", set);
 		mav.setViewName("/backstage-html/system-billingrules.html");
 		return mav;
@@ -48,7 +47,6 @@ public class SystemSetController {
 				result="修改失败";
 			}
 		}
-		System.out.println(result);
 		mav.addObject("result", result);
 		mav.setViewName("/backstage-html/system-billingrules2.html");
 		return mav;
