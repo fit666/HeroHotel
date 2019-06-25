@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import com.hero.hotel.pojo.User;
+import com.hero.hotel.pojo.Vip;
 
 
 public interface UserDao {
@@ -41,4 +42,8 @@ public interface UserDao {
 	//查询账户通过手机号
 	@Select("select * from t_user where tel=#{tel} and flag=1")
 	public User findUserByTel(User user);
+	
+	//查vip信息
+	@Select("select * from t_vip where id=#{id} and flag=1 ")
+	public Vip findVipByID(Integer id);
 }

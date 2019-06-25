@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.hero.hotel.dao.UserDao;
 import com.hero.hotel.pojo.User;
+import com.hero.hotel.pojo.Vip;
 import com.hero.hotel.realm.CustomizedToken;
 import com.hero.hotel.service.UserService;
 
@@ -86,6 +87,25 @@ public class UserServiceImpl implements UserService {
 						result = "登录成功";
 						System.out.println(result);
 						//将用户所有信息存入session
+						//查找用户对应的vip
+						int monetary=Integer.parseInt(realuser.getMonetary()) ;
+						if(monetary<=0) {
+							int i=1;
+							Vip vip=userDao.findVipByID(i);
+							realuser.setVip(vip);
+						}else if (monetary<1000){
+							int i=2;
+							Vip vip=userDao.findVipByID(i);
+							realuser.setVip(vip);
+						}else if (monetary<2500){
+							int i=3;
+							Vip vip=userDao.findVipByID(i);
+							realuser.setVip(vip);
+						}else if (monetary<5000){
+							int i=4;
+							Vip vip=userDao.findVipByID(i);
+							realuser.setVip(vip);
+						}
 						session.setAttribute("user", realuser);
 						return result;
 					} catch (IncorrectCredentialsException ice) {
@@ -132,6 +152,25 @@ public class UserServiceImpl implements UserService {
 					currentUser.login(customizedToken);
 					result="登录成功";
 					//将用户所有信息存入session
+					//查找用户对应的vip
+					int monetary=Integer.parseInt(realuser.getMonetary()) ;
+					if(monetary<=0) {
+						int i=1;
+						Vip vip=userDao.findVipByID(i);
+						realuser.setVip(vip);
+					}else if (monetary<1000){
+						int i=2;
+						Vip vip=userDao.findVipByID(i);
+						realuser.setVip(vip);
+					}else if (monetary<2500){
+						int i=3;
+						Vip vip=userDao.findVipByID(i);
+						realuser.setVip(vip);
+					}else if (monetary<5000){
+						int i=4;
+						Vip vip=userDao.findVipByID(i);
+						realuser.setVip(vip);
+					}
 					session.setAttribute("user", realuser);
 					return result;
 				} catch (IncorrectCredentialsException ice) {

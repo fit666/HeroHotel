@@ -13,7 +13,7 @@ public class User {
     private String account;//账号
     private String password;//密码
     private String tel;//手机号
-    private int monetary;//消费金额
+    private String monetary;//消费金额
     private Date createtime;//注册时间
     private Integer rm;//记住我
     private Info info;//个人信息
@@ -35,6 +35,14 @@ public class User {
     
 
     
+
+	public String getMonetary() {
+		return monetary;
+	}
+
+	public void setMonetary(String monetary) {
+		this.monetary = monetary;
+	}
 
 	public Date getCreatetime() {
 		return createtime;
@@ -114,10 +122,7 @@ public class User {
         this.tel = tel;
     }
 
-    public int getMonetary() {
-        return monetary;
-    }
-    
+   
    
 
 	public Info getInfo() {
@@ -136,9 +141,7 @@ public class User {
 		this.vip = vip;
 	}
 
-	public void setMonetary(int monetary) {
-        this.monetary = monetary;
-    }
+	
 
     public User() {
     }

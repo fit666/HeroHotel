@@ -11,8 +11,30 @@ public class Comment {
     private Integer flag;
     private Date createtime;//创建时间
     private String message;//评论信息
+    private Integer total;//总条数
+    private String name;//昵称
+    
+    
+    
+    
 
-    @Override
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
+	@Override
     public String toString() {
         return "Comment{" +
                 "id=" + id +
