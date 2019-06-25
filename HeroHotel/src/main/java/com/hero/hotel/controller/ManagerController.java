@@ -218,6 +218,13 @@ public class ManagerController {
 			List<User> managers=managerService.findAllManagers();
 			mav.addObject("managers",managers);
 			mav.setViewName("/backstage-html/manager-list.html");
+		}else{
+			mav.addObject("result","添加失败，请检查信息是否已经添加");
+			mav.addObject("manager", manager);
+			mav.addObject("info", info);
+			List<Role> roles=roleService.findAllRoles();
+			mav.addObject("roles",roles);
+			mav.setViewName("/backstage-html/manager-add2.html");
 		}
 		return mav;
 	}
