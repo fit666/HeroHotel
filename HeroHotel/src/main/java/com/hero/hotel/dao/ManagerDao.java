@@ -18,7 +18,7 @@ public interface ManagerDao {
 	public User findManagerPwd(String account);
 
 	// 获取所有管理员信息
-	@Select("select * from t_user where roleid!=4 and flag!=0")
+	@Select("select * from t_user where roleid!=1 and flag!=0")
 	@Results({ @Result(id = true, column = "id", property = "id"), @Result(column = "account", property = "account"),
 			@Result(column = "tel", property = "tel"), @Result(column = "createtime", property = "createtime"),
 			@Result(column = "monetary", property = "monetary"),
