@@ -37,10 +37,12 @@ public class ShiroConfiguration {
 	
 	//1创建自定义realm
 		@Bean
-		public UserRealm accountrealm() {
+		public UserRealm accountrealm(CredentialsMatcher matcher) {
 			System.out.println("创建myrealm");
 
 			UserRealm accountRealm=new UserRealm();
+			//设置加密及次数
+			accountRealm.setCredentialsMatcher(matcher);
 			return accountRealm;
 		}
 		@Bean
@@ -97,6 +99,9 @@ public class ShiroConfiguration {
 		Map<String,String> map=new LinkedHashMap<String,String>();
 		//配置无需认证的资源
 		map.put("/index.html","anon");
+		map.put("/login.html", "anon");
+		map.put("/static/**", "anon");
+		map.put("/login.html", "anon");
 		map.put("/register", "anon");
 		map.put("/login", "anon");
 		map.put("/druid/**", "anon");
@@ -104,14 +109,16 @@ public class ShiroConfiguration {
 		map.put("/logout", "logout");
 		
 		//配置需要认证的资源
-		map.put("/**", "anon");
+//		map.put("/**", "authc");
 		bean.setFilterChainDefinitionMap(map);
 		//配置登录页面
-		bean.setLoginUrl("/index.html");
-		//配置登录成功后的页面
-		bean.setSuccessUrl("/main.html");
+		bean.setLoginUrl("/login.html");
+		
+		/*//配置登录成功后的页面
+		bean.setSuccessUrl("/main.html");*/
+		
 		//配置未授权的	页面
-		bean.setUnauthorizedUrl("/index.html");
+		bean.setUnauthorizedUrl("/login.html");
 		
 		return bean;
 	}

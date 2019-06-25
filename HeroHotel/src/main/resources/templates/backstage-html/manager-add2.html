@@ -20,7 +20,7 @@
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>管理员姓名：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text" value="" placeholder="" id="user-name" name="name" datatype="s2-16" nullmsg="用户名不能为空" errormsg="请输入2-16位中文汉字">
+				<input type="text" class="input-text" value="" th:value="${info.uname}"placeholder="" id="user-name" name="name" datatype="s2-16" nullmsg="用户名不能为空" errormsg="请输入2-16位中文汉字">
 			</div>
 			<div class="col-4"> </div>
 		</div>
@@ -42,13 +42,23 @@
 		</div>
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>性别：</label>
-			<div class="formControls col-5 skin-minimal">
+			<div class="formControls col-5 skin-minimal" th:if="${info.sex}=='男'">
 				<div class="radio-box">
-					<input type="radio" id="sex-1" name="sex" datatype="*" value="男" nullmsg="请选择性别！">
+					<input type="radio" id="sex-1" name="sex" datatype="*" value="男" checked nullmsg="请选择性别！">
 					<label for="sex-1">男</label>
 				</div>
 				<div class="radio-box">
 					<input type="radio" id="sex-2" name="sex" value="女">
+					<label for="sex-2">女</label>
+				</div>
+			</div>
+			<div class="formControls col-5 skin-minimal" th:if="${info.sex}=='女'">
+				<div class="radio-box">
+					<input type="radio" id="sex-1" name="sex" datatype="*" value="男" checked nullmsg="请选择性别！">
+					<label for="sex-1">男</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-2" name="sex" value="女" checked>
 					<label for="sex-2">女</label>
 				</div>
 			</div>
@@ -57,14 +67,14 @@
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>手机：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text" value="" placeholder="" id="user-tel" name="tel"  datatype="m" nullmsg="手机不能为空">
+				<input type="text" class="input-text" value="" placeholder="" id="user-tel" name="tel" th:value="${info.tel}" datatype="m" nullmsg="手机不能为空">
 			</div>
 			<div class="col-4"> </div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>身份证号：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text" placeholder="" name="idcard" id="email"  onblur="javascript:validId(this)"  maxlength="20" nullmsg="请输入身份证号！">
+				<input type="text" class="input-text" placeholder="" name="idcard" id="email" th:value="${info.idcard}" onblur="javascript:validId(this)"  maxlength="20" nullmsg="请输入身份证号！">
 				<span id="idCardMsg" style="color:red;"></span> 
 			</div>
 			<div class="col-4"> </div>
@@ -99,7 +109,9 @@
 <script type="text/javascript" src="/backstage/lib/layer/1.9.3/layer.js"></script> 
 <script type="text/javascript" src="/backstage/js/H-ui.js"></script> 
 <script type="text/javascript" src="/backstage/js/H-ui.admin.js"></script> 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+alert([[${result}]])
+
 $(function(){
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
