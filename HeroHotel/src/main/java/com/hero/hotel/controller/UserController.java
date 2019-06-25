@@ -48,4 +48,14 @@ public class UserController {
 		}
 		return result;
 	}
+	@RequestMapping("/isLogin")
+	@ResponseBody
+	public String isLogin(HttpServletRequest request) {
+		String result="失败";
+		Object obj =request.getSession().getAttribute("user");
+		if(obj!=null) {
+			result="成功";
+		}
+		return result;
+	}
 }

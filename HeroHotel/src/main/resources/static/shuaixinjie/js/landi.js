@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+$(function(){
+	$.ajax({
+		url:"../user/isLogin",
+		type:"post",
+		data:{},
+		success:function(data){
+			if(data=="失败"){
+				$("#infobox").show();
+				$("#loginbox").hide();
+			}else{
+				$("#loginbox").show();
+				$("#infobox").hide();
+			}
+		}
+	})
+})
