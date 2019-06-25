@@ -46,7 +46,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="text-c" th:each="manager,status:${managers}">
+			<tr class="text-c" th:if="${managers}!=null" th:each="manager,status:${managers}">
 				<td><input type="checkbox" value="1" name=""></td>
 				<td th:text="${manager.account}"></td>
 				<td th:text="${manager.info.uname}"></td>
