@@ -17,24 +17,28 @@ public class Order {
     private String payway;//支付号
     //总价类型修改为double
     private double total;//总价
+    //添加字段个人信息id
+    private Integer infoid;
     //订单项
     private List<OrderItem> oderItems;
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderid=" + orderid +
-                ", userid=" + userid +
-                ", flag=" + flag +
-                ", createtime=" + createtime +
-                ", updatetime=" + updatetime +
-                ", ordernumber='" + ordernumber + '\'' +
-                ", payway='" + payway + '\'' +
-                ", total=" + total +
-                '}';
-    }
 
-    public List<OrderItem> getOderItems() {
+    @Override
+	public String toString() {
+		return "Order [orderid=" + orderid + ", userid=" + userid + ", flag=" + flag + ", createtime=" + createtime
+				+ ", updatetime=" + updatetime + ", ordernumber=" + ordernumber + ", payway=" + payway + ", total="
+				+ total + ", infoid=" + infoid + ", oderItems=" + oderItems + "]";
+	}
+
+	public Integer getInfoid() {
+		return infoid;
+	}
+
+	public void setInfoid(Integer infoid) {
+		this.infoid = infoid;
+	}
+
+	public List<OrderItem> getOderItems() {
 		return oderItems;
 	}
 
@@ -107,8 +111,8 @@ public class Order {
     }
 
     
-    public Order(Integer orderid, Integer userid, Integer flag, String createtime, String updatetime,
-			String ordernumber, String payway, double total, List<OrderItem> oderItems) {
+	public Order(Integer orderid, Integer userid, Integer flag, String createtime, String updatetime,
+			String ordernumber, String payway, double total, Integer infoid, List<OrderItem> oderItems) {
 		super();
 		this.orderid = orderid;
 		this.userid = userid;
@@ -118,6 +122,7 @@ public class Order {
 		this.ordernumber = ordernumber;
 		this.payway = payway;
 		this.total = total;
+		this.infoid = infoid;
 		this.oderItems = oderItems;
 	}
 

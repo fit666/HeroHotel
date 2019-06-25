@@ -2,6 +2,9 @@ package com.hero.hotel.pojo;
 /*
  * 	信息表
  */
+
+import java.util.List;
+
 public class Info {
     private Integer infoid;//用户信息id
     private Integer flag;
@@ -9,20 +12,24 @@ public class Info {
     private String uname;//姓名
     private String sex;//性别
     private String idcard;//身份证号
+    private List<Order> orders;
+    
 
     @Override
-    public String toString() {
-        return "Info{" +
-                "infoid=" + infoid +
-                ", flag=" + flag +
-                ", tel='" + tel + '\'' +
-                ", uname='" + uname + '\'' +
-                ", sex=" + sex +
-                ", idcard='" + idcard + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "Info [infoid=" + infoid + ", flag=" + flag + ", tel=" + tel + ", uname=" + uname + ", sex=" + sex
+				+ ", idcard=" + idcard + ", orders=" + orders + "]";
+	}
 
-    public Integer getInfoid() {
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public Integer getInfoid() {
         return infoid;
     }
 
@@ -73,12 +80,16 @@ public class Info {
     public Info() {
     }
 
-    public Info(Integer infoid, Integer flag, String tel, String uname, String sex, String idcard) {
-        this.infoid = infoid;
-        this.flag = flag;
-        this.tel = tel;
-        this.uname = uname;
-        this.sex = sex;
-        this.idcard = idcard;
-    }
+	public Info(Integer infoid, Integer flag, String tel, String uname, String sex, String idcard, List<Order> orders) {
+		super();
+		this.infoid = infoid;
+		this.flag = flag;
+		this.tel = tel;
+		this.uname = uname;
+		this.sex = sex;
+		this.idcard = idcard;
+		this.orders = orders;
+	}
+
+    
 }

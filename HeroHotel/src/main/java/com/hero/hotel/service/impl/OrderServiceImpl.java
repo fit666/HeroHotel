@@ -78,10 +78,10 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	
-	//查询
+	//查询所有
 	@Override
-	public Order findAllOrderItemByUserid(Integer id) {
-		return orderDao.findAllOrderItemByUserid(id);
+	public List<Info> findAllOrders() {
+		return orderDao.findAllInfo();
 	}
 	
 	/*
@@ -92,45 +92,47 @@ public class OrderServiceImpl implements OrderService{
 	 * 4.根据订单id获取所有的订单项id
 	 */
 	@Override
-	public ModelAndView findAllOrder(Info info) {
-		ModelAndView model = new ModelAndView();
+	public List<Info> findOrder(Info info) {
 		
-		Info info1 = orderDao.findInfo(info);
-		System.out.println("*****"+info1);
-		User user = orderDao.findUser(info1.getInfoid());
-		System.out.println("*******"+user);
-		Order order = orderDao.findOder(user.getId());
-		model.addObject("uname", info1.getUname());
-		model.addObject(order);
+		return orderDao.findInfo(info);
+	}
+	//查询需要修改的订单信息
+	@Override
+	public ModelAndView findUpdateOrder(Integer id) {
+		ModelAndView model = new ModelAndView();
+		OrderItem orderItem = orderDao.findOrderItem(id);
+		Order order = orderDao.findOrder(orderItem.getOrderid());
+		Info info = orderDao.findOneInfo(order.getInfoid());
+		model.addObject("info", info);
+		model.addObject("order", order);
+		model.addObject("orderItem", orderItem);
 		return model;
 	}
-	
 	//修改订单信息
 	@Override
 	public ModelAndView updateOrder(Info info, Order order, OrderItem orderItem) {
 		ModelAndView model = new ModelAndView();
-		orderDao.updateInfo(info);
+		System.out.println(info);
+		Boolean result = orderDao.updateInfo(info);
+		System.out.println(result);
 		orderDao.updateOrderItem(orderItem);
-		User user = orderDao.findUser(info.getInfoid());		
-		Order order2 = orderDao.findOder(user.getId());
-		model.addObject("uname", info.getUname());
-		model.addObject(order2);
+		orderDao.updateOrder(order);
 		return model;
 	}
 	
 	//删除订单
-	@Override
-	public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order,Info info) {
+	//@Override
+	/*public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order,Info info) {
 		ModelAndView model = new ModelAndView();
 		orderDao.updateLiveNotesFlag(liveNotes);
 		orderDao.updateOrderItemFlag(orderItem);
 		orderDao.updateOrderFlag(order);
-		User user = orderDao.findUser(info.getInfoid());		
+		User user = orderDao.findUser(info);		
 		Order order2 = orderDao.findOder(user.getId());
 		model.addObject("uname", info.getUname());
 		model.addObject(order2);
 		return model;		
-	}
+	}*/
 
 
 	
@@ -140,6 +142,11 @@ public class OrderServiceImpl implements OrderService{
 		Boolean flag = orderDao.settleAccounts(houseid);
 		
 		
+		return null;
+	}
+	@Override
+	public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order, Info info) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
