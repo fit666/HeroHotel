@@ -41,149 +41,157 @@ public class UserServiceImpl implements UserService {
 		return userDao;
 	}
 
-
-	//查找所有vip
+	// 查找所有vip
 	// 查找所有vip
 	public List<User> findAllVip() {
 
 		return userDao.findAll();
 	}
-	
-	// 账号密码登录（图形验证码）
-		@Override
-		public String login(User user,HttpSession session) {
-			String result = "登录失败";
-			// System.out.println("前端传过来的user："+user+codeValue);
-			// 账号校验
-			result = checkAccount(user);
-			if (!result.equals("账号通过")) {
-				return result;
-			}
-			// 密码校验
-			result = passWordCheck(user);
-			if (!result.equals("密码通过")) {
-				return result;
-			}
-			
-			//检测账号是否存在
-			User realuser=userDao.findAccountByAccount(user);
-			if(realuser==null) {
-				result="该账号不存在";
-				return result;
-			}
-				Subject currentUser = SecurityUtils.getSubject();
-				if (!currentUser.isAuthenticated()) {
-					System.out.println("进入");
-					CustomizedToken customizedToken = new CustomizedToken(user.getAccount(), user.getPassword(),
-							USER_LOGIN_TYPE);
-					// 记住我
-					if (user.getRm() == 1) {
-						customizedToken.setRememberMe(true);
-					}
-					try {
-						System.out.println("try");
-						currentUser.login(customizedToken);
-						result = "登录成功";
-						//将用户所有信息存入session
-						//查找用户对应的vip
-						Double monetary=realuser.getMonetary() ;
-						if(monetary<=0.0) {
-							int i=1;
-							Vip vip=userDao.findVipByID(i);
-							realuser.setVip(vip);
-						}else if (monetary<1000.0){
-							int i=2;
-							Vip vip=userDao.findVipByID(i);
-							realuser.setVip(vip);
-						}else if (monetary<2500.0){
-							int i=3;
-							Vip vip=userDao.findVipByID(i);
-							realuser.setVip(vip);
-						}else if (monetary<5000.0){
-							int i=4;
-							Vip vip=userDao.findVipByID(i);
-							realuser.setVip(vip);
-						}
-						session.setAttribute("user", realuser);
-						System.out.println(result);
-						return result;
-					} catch (IncorrectCredentialsException ice) {
-						System.out.println("用户名/密码不匹配！");
-					} catch (LockedAccountException lae) {
-						System.out.println("账户已被冻结！");
-					} catch (AuthenticationException ae) {
-						System.out.println(ae.getMessage());
-					}
-				}
+
+	// 账号密码登录
+	@Override
+	public String login(User user, HttpSession session) {
+		String result = "登录失败";
+		// System.out.println("前端传过来的user："+user+codeValue);
+		// 账号校验
+		result = checkAccount(user);
+		if (!result.equals("账号通过")) {
 			return result;
 		}
-	// 手机号和动态码登录
-	@Override
-	public String loginTel(User user, HttpSession session) {
-		String result="登陆失败";
-		System.out.println("前端传过来的user：" + user);
-		// 手机号校验
-				result = tellCheck(user);
-				if (!result.equals("手机号通过")) {
-					return result;
-				}
-				//检测手机号是否存在
-				User realuser=userDao.findUserByTel(user);
-				if(realuser==null) {
-					result="该手机号不存在";
-					return result;
-				}
-		// 获取session中的验证码
-		Object otpl_value = session.getAttribute("tpl_value");
-		if (otpl_value == null) {
-			result="验证码失效，请重新获取";
+		// 密码校验
+		result = passWordCheck(user);
+		if (!result.equals("密码通过")) {
 			return result;
 		}
 
-			Subject currentUser = SecurityUtils.getSubject();
-			if (!currentUser.isAuthenticated()) {
-				CustomizedToken customizedToken = new CustomizedToken(user.getTel(), user.getCode(), USER_LOGIN_TYPE);
-				// 记住我
-				if (user.getRm() == 1) {
-					customizedToken.setRememberMe(true);
-				}
-				try {
-					System.out.println("try");
-					currentUser.login(customizedToken);
-					result="登录成功";
-					//将用户所有信息存入session
-					//查找用户对应的vip
-					Double monetary=realuser.getMonetary() ;
-					if(monetary<=0.0) {
-						int i=1;
-						Vip vip=userDao.findVipByID(i);
-						realuser.setVip(vip);
-					}else if (monetary<1000.0){
-						int i=2;
-						Vip vip=userDao.findVipByID(i);
-						realuser.setVip(vip);
-					}else if (monetary<2500.0){
-						int i=3;
-						Vip vip=userDao.findVipByID(i);
-						realuser.setVip(vip);
-					}else if (monetary<5000.0){
-						int i=4;
-						Vip vip=userDao.findVipByID(i);
-						realuser.setVip(vip);
-					}
-					session.setAttribute("user", realuser);
-					System.out.println(result);
-					return result;
-				} catch (IncorrectCredentialsException ice) {
-					System.out.println("用户名/密码不匹配！");
-				} catch (LockedAccountException lae) {
-					System.out.println("账户已被冻结！");
-				} catch (AuthenticationException ae) {
-					System.out.println(ae.getMessage());
-				}
+		// 检测账号是否存在
+		User realuser = userDao.findAccountByAccount(user);
+		if (realuser == null) {
+			result = "该账号不存在";
+			return result;
+		}
+		Subject currentUser = SecurityUtils.getSubject();
+		if (!currentUser.isAuthenticated()) {
+			System.out.println("进入");
+			CustomizedToken customizedToken = new CustomizedToken(user.getAccount(), user.getPassword(),
+					USER_LOGIN_TYPE);
+			// 记住我
+			if (user.getRm() == 1) {
+				customizedToken.setRememberMe(true);
 			}
+			try {
+				System.out.println("try");
+				currentUser.login(customizedToken);
+				result = "登录成功";
+				// 将用户所有信息存入session
+				// 查找用户对应的vip
+				Double monetary = realuser.getMonetary();
+				if (monetary <= 0.0) {
+					int i = 1;
+					Vip vip = userDao.findVipByID(i);
+					realuser.setVip(vip);
+				} else if (monetary < 1000.0) {
+					int i = 2;
+					Vip vip = userDao.findVipByID(i);
+					realuser.setVip(vip);
+				} else if (monetary < 2500.0) {
+					int i = 3;
+					Vip vip = userDao.findVipByID(i);
+					realuser.setVip(vip);
+				} else if (monetary < 5000.0) {
+					int i = 4;
+					Vip vip = userDao.findVipByID(i);
+					realuser.setVip(vip);
+				}
+				session.setAttribute("user", realuser);
+				User user22 = (User) session.getAttribute("user");
+				System.out.println("session中的：" + user22);
+				System.out.println(result);
+				return result;
+			} catch (IncorrectCredentialsException ice) {
+				System.out.println("用户名/密码不匹配！");
+			} catch (LockedAccountException lae) {
+				System.out.println("账户已被冻结！");
+			} catch (AuthenticationException ae) {
+				System.out.println(ae.getMessage());
+			}
+		}
 		return result;
 	}
+
+	// 手机号和动态码登录
+	@Override
+	public String loginTel(User user, HttpSession session) {
+		String result = "登陆失败";
+		System.out.println("前端传过来的user：" + user);
+		// 手机号校验
+		result = tellCheck(user);
+		if (!result.equals("手机号通过")) {
+			return result;
+		}
+		// 验证码非空校验
+		if (user.getCode() == null) {
+			result = "请输入短信验证码";
+			return result;
+		}
+		// 检测手机号是否存在
+		User realuser = userDao.findUserByTel(user);
+		if (realuser == null) {
+			result = "该手机号不存在";
+			return result;
+		}
+		// 获取session中的验证码
+		Object otpl_value = session.getAttribute("tpl_value");
+		if (otpl_value == null) {
+			result = "验证码失效，请重新获取";
+			return result;
+		}
+
+		Subject currentUser = SecurityUtils.getSubject();
+		if (!currentUser.isAuthenticated()) {
+			CustomizedToken customizedToken = new CustomizedToken(user.getTel(), user.getCode(), USER_LOGIN_TYPE);
+			// 记住我
+			if (user.getRm() == 1) {
+				customizedToken.setRememberMe(true);
+			}
+			try {
+				System.out.println("try");
+				currentUser.login(customizedToken);
+				result = "登录成功";
+				// 将用户所有信息存入session
+				// 查找用户对应的vip
+				Double monetary = realuser.getMonetary();
+				if (monetary <= 0.0) {
+					int i = 1;
+					Vip vip = userDao.findVipByID(i);
+					realuser.setVip(vip);
+				} else if (monetary < 1000.0) {
+					int i = 2;
+					Vip vip = userDao.findVipByID(i);
+					realuser.setVip(vip);
+				} else if (monetary < 2500.0) {
+					int i = 3;
+					Vip vip = userDao.findVipByID(i);
+					realuser.setVip(vip);
+				} else if (monetary < 5000.0) {
+					int i = 4;
+					Vip vip = userDao.findVipByID(i);
+					realuser.setVip(vip);
+				}
+				session.setAttribute("user", realuser);
+				System.out.println(result);
+				return result;
+			} catch (IncorrectCredentialsException ice) {
+				System.out.println("用户名/密码不匹配！");
+			} catch (LockedAccountException lae) {
+				System.out.println("账户已被冻结！");
+			} catch (AuthenticationException ae) {
+				System.out.println(ae.getMessage());
+			}
+		}
+		return result;
+	}
+
 	// 注册
 	@Override
 	public String register(User user, HttpSession session) {
@@ -229,21 +237,23 @@ public class UserServiceImpl implements UserService {
 		// 数据库操作
 		// 从数据库检测该账号是否可用
 		User realuser = userDao.findAccountByAccount(user);
-		if (realuser!= null) {
+		if (realuser != null) {
 			result = "账号已存在";
 			return result;
 		}
 		// 给账号密码加密
 		user.setPassword(new SimpleHash("MD5", user.getPassword(), null, 1024).toString());
-		/*// 生成创建时间
-		String createTime = new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new Date());*/
+		/*
+		 * // 生成创建时间 String createTime = new
+		 * SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new Date());
+		 */
 		user.setCreatetime(new Date());// 将信息插入到数据库
 		// 生成创建时间
 		// String createTime = new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new
 		// Date());
 		Date createTime = new Date();
 		user.setCreatetime(createTime);// 将信息插入到数据库
-		//默认角色为1，普通用户
+		// 默认角色为1，普通用户
 		user.setRoleid(1);
 		boolean b = userDao.insertAccount(user);
 		if (b) {
@@ -363,54 +373,115 @@ public class UserServiceImpl implements UserService {
 		result = "验证码通过";
 		return result;
 	}
+
 	/*
 	 * 停用vip账号(non-Javadoc)
+	 * 
 	 * @see com.hero.hotel.service.UserService#vipStop(java.lang.Integer)
 	 */
 	@Override
 	public String vipStop(Integer id) {
-		boolean boo=userDao.vipStop(id);
-		if(boo){
+		boolean boo = userDao.vipStop(id);
+		if (boo) {
 			return "success";
 		}
 		return "defeat";
 	}
+
 	/*
 	 * 启用被通用的用户账号(non-Javadoc)
+	 * 
 	 * @see com.hero.hotel.service.UserService#vipStart(java.lang.Integer)
 	 */
 	@Override
 	public String vipStart(Integer id) {
-		boolean boo=userDao.vipStart(id);
-		if(boo){
+		boolean boo = userDao.vipStart(id);
+		if (boo) {
 			return "success";
 		}
 		return "defeat";
 	}
+
 	/*
 	 * 删除用户账号(non-Javadoc)
+	 * 
 	 * @see com.hero.hotel.service.UserService#userDelete(java.lang.Integer)
 	 */
 	@Override
 	public String userDelete(Integer id) {
-		boolean boo=userDao.userDelete(id);
-		if(boo){
+		boolean boo = userDao.userDelete(id);
+		if (boo) {
 			return "success";
 		}
 		return "defeat";
 	}
+
 	/*
 	 * 获取所有已删除的会员(non-Javadoc)
+	 * 
 	 * @see com.hero.hotel.service.UserService#findAllDeletedVips()
 	 */
 	@Override
 	public List<User> findAllDeletedVips() {
-		
+
 		return userDao.findAllDeletedVips();
 	}
 
+	/**
+	 * 忘记密码，根据账号，手机验证码判断，然后修改密码
+	 */
+	@Override
+	public String forgetPass(User user, HttpSession session) {
+		String result = "提交失败";
+		// 数据格式校验
+		// 校核账号
+		// 账号校验
+		result = checkAccount(user);
+		if (!result.equals("账号通过")) {
+			// result = "账号未通过";
+			return result;
+		}
+		// 手机号校验
+		result = tellCheck(user);
+		if (!result.equals("手机号通过")) {
+			// result = "手机号未通过";
+			return result;
+		}
+		// 验证码非空校验
+		if (user.getCode() == null) {
+			result = "请输入短信验证码";
+			return result;
+		}
 
-	
-	
+		// 判断用户名和手机号是否存在
+		User realuser = userDao.findUserByAccountTel(user);
+		if (realuser == null) {
+			result = "该用户不存在,请核对账号和手机号";
+			return result;
+		}
+		// 判断
+		// 获取session中的验证码
+		Object otpl_value = session.getAttribute("tpl_value");
+		if (otpl_value == null) {
+			result = "验证码失效，请重新获取";
+			return result;
+		}
+		String tpl_value = (String) otpl_value;
+		String code = user.getCode();
+		if (!code.equals(tpl_value)) {
+			result = "验证码不正确，请核对";
+			return result;
+		}
+
+		//将插入的密码加密
+		user.setPassword(new SimpleHash("MD5",user.getPassword(),null,1024).toString());
+		//修改密码
+		Boolean b=userDao.updatePass(user);
+		if(b) {
+			result = "修改成功";
+			return result;
+		}
+		return result;
+	}
 
 }

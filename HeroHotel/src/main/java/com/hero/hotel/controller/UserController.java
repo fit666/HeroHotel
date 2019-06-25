@@ -75,6 +75,18 @@ public class UserController {
 		result = userService.sendMessage(user,session);
 		return result;
 	}
+	/**
+	 * 忘记密码
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/forget")
+	@ResponseBody
+	public String forgetPass(User user,HttpSession session) {
+		String result="修改失败";
+		result=userService.forgetPass(user,session);
+		return result;
+	}
 
 	/*
 	 * 停用用户账号

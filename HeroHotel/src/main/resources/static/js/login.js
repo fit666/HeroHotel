@@ -12,10 +12,12 @@ function login(){
 	if(baccount==""||pwd==""){
 		alert("请完善信息");
 	}else if(baccount.length<6||baccount.length>20){
-		$("#message1").html("账号不合法");
+		$("#message4").html("账号不合法");
 	}else if(pwd.length<6||pwd.length>12){
-		$("#message2").html("密码不合法");
-	}else {
+		$("#message4").html("密码不合法");
+	}else if($("#flag").val()!=1) {
+		$("#message4").html("请滑动滑块");
+	}else{
 		$.ajax({
 			url:"/user/login",
 			type:"post",
