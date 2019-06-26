@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hero.hotel.dao.HouseDao;
+import com.hero.hotel.dao.LiveNotesDao;
 import com.hero.hotel.dao.OrderDao;
 import com.hero.hotel.pojo.HouseType;
 import com.hero.hotel.pojo.Info;
@@ -23,9 +24,12 @@ import com.hero.hotel.service.OrderService;
 public class OrderServiceImpl implements OrderService {
 	@Resource
 	private OrderDao orderDao;
-	
+
 	@Resource
 	private HouseDao houseDao;
+
+	@Resource
+	private LiveNotesDao liveNotesDao;
 
 	// 订单表插入数据
 	@Override
@@ -141,17 +145,40 @@ public class OrderServiceImpl implements OrderService {
 		return model;
 	}
 
+	// 结账
 	@Override
-	public Boolean settleAccounts(String houseid) {
-		Boolean flag = false;
-		orderDao.settleAccounts(houseid);
-		houseDao.changeHouseTypeByHouseid(houseid);
-		List<Integer> ids = orderDao.isNoSettle(houseid);
-		if (ids.size() == 0) {
-			flag = orderDao.changeOrderFlag(houseid);
-		}
+	public Boolean settleAccounts(Integer orderItemid, Integer houseid) {
+		
+		return OutAndCance(orderItemid,houseid,2);
+	}
 
+	// 取消房间
+	@Override
+	public Boolean canceOrder(Integer orderItemid, Integer houseid) {
+		
+		return OutAndCance(orderItemid,houseid,1);
+	}
+
+	// 取消、退房
+	
+	public Boolean OutAndCance(Integer orderItemid, Integer houseid,Integer type){
+		Boolean flag = false;
+		// 2表示 完结
+		flag = orderDao.settleAccounts(2, 1, orderItemid);
+		// 1 表示 可住
+		flag = houseDao.changeHouseTypeByHouseid(type, houseid);
+
+		liveNotesDao.changeType(2, orderItemid);
+
+		// 查询订单里的订单项 有没有 没有结账的id 1 表示是否有 订单项 未完结
+		List<Integer> ids = orderDao.isNoSettle(1, orderItemid);
+		// 判断 该订单 是否还有 未完成订单项
+		if (ids.size() == 0) {
+			flag = orderDao.changeOrderFlag(2, 1, orderItemid);
+		}
 		return flag;
 	}
+	
+	
 
 }

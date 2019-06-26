@@ -56,7 +56,8 @@ public interface OrderService {
 	public ModelAndView updateOrder(Info info,Order order,OrderItem orderItem);
 
 	// 结账
-	public Boolean settleAccounts(String houseid);
+	public Boolean settleAccounts(Integer orderItemid,Integer houseid);
 
-	
+	// 取消订单
+	public Boolean canceOrder(Integer orderItemid,Integer houseid);
 }

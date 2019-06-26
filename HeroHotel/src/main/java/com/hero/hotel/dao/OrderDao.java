@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -147,19 +148,19 @@ public interface OrderDao {
 	public Double findMoneyMonthOut(String Monthtime);
 
 	//  修改订单  结账处理
-	@Update("UPDATE t_orderitem SET falg = 2 WHERE  houseid= #{houseid} AND  flag = 1")
-	public Boolean settleAccounts(String houseid);
+	@Update("UPDATE t_orderitem SET falg = #{flag1} WHERE  id= #{orderItemid} AND  flag = #{flag2}")
+	public Boolean settleAccounts(@Param("flag1")Integer flag1,@Param("flag2")Integer flag2,@Param("orderItemid")Integer orderItemid);
 
 	
 	// 查询订单里的订单项 有没有  没有结账的id
-	@Select("SELECT id FROM t_orderitem WHERE orderid = (SELECT orderid FROM t_orderitem WHERE houseid = #{houseid} ) AND  flag = 1")
-	public List<Integer> isNoSettle(String houseid);
+	@Select("SELECT id FROM t_orderitem WHERE orderid = (SELECT orderid FROM t_orderitem WHERE id =  #{orderItemid} ) AND  flag = #{flag}")
+	public List<Integer> isNoSettle(@Param("flag")Integer flag,@Param("orderItemid")Integer orderItemid);
 	
 	
 	// order表改成  完成状态
 	
-	@Update("UPDATE t_order SET flag = 2 WHERE orderid = (SELECT orderid FROM t_orderitem WHERE houseid = #{houseid} )  AND  flag = 1")
-	public Boolean changeOrderFlag(String houseid);
+	@Update("UPDATE t_order SET flag = #{flag1} WHERE orderid = (SELECT orderid FROM t_orderitem WHERE id = #{orderItemid} )  AND  flag = #{flag2}")
+	public Boolean changeOrderFlag(@Param("flag1")Integer flag1,@Param("flag2")Integer flag2,@Param("orderItemid")Integer orderItemid);
 	
 	
 	

@@ -2,6 +2,7 @@ package com.hero.hotel.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -29,7 +30,8 @@ public interface HouseDao {
 	
 	
 	// 修改 房间状态 
-	@Update("UPDATE t_house SET flag = 2 WHERE houseid = #{houseid} ")
-	public Boolean changeHouseTypeByHouseid(String houseid);
+	@Update("UPDATE t_house SET flag = #{flag} WHERE houseid = #{houseid} ")
+	public Boolean changeHouseTypeByHouseid(@Param("flag")Integer flag,@Param("houseid")Integer houseid);
 
+	
 }
