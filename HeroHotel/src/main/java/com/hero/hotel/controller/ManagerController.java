@@ -213,7 +213,6 @@ public class ManagerController {
 		info.setTel(tel);
 		info.setUname(name);
 		boolean b1=managerService.addManager(manager,info);
-		System.out.println(b1+"===============");
 		if(b1){
 			List<User> managers=managerService.findAllManagers();
 			mav.addObject("managers",managers);

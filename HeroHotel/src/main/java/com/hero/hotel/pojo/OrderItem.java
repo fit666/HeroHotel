@@ -22,21 +22,15 @@ public class OrderItem {
     //添加字段房间id
     private Integer houseid;
     
+   
     @Override
-    public String toString() {
-        return "OrderItem{" +
-                "id=" + id +
-                ", typeid=" + typeid +
-                ", orderid=" + orderid +
-                ", flag=" + flag +
-                ", quantity='" + quantity + '\'' +
-                ", starttime=" + starttime +
-                ", day='" + day + '\'' +
-                ", price=" + price +
-                '}';
-    }
+	public String toString() {
+		return "OrderItem [id=" + id + ", typeid=" + typeid + ", orderid=" + orderid + ", flag=" + flag + ", quantity="
+				+ quantity + ", starttime=" + starttime + ", day=" + day + ", endtime=" + endtime + ", price=" + price
+				+ ", houseid=" + houseid + "]";
+	}
 
-    public Integer getHouseid() {
+	public Integer getHouseid() {
 		return houseid;
 	}
 
