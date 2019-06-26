@@ -115,7 +115,13 @@ public class OrderServiceImpl implements OrderService{
 		model.addObject("orderItem", orderItem);
 		return model;
 	}
-	//修改订单信息
+
+    @Override
+    public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order, Info info) {
+        return null;
+    }
+
+    //修改订单信息
 	@Override
 	public ModelAndView updateOrder(Info info, Order order, OrderItem orderItem) {
 		ModelAndView model = new ModelAndView();
@@ -234,17 +240,14 @@ public class OrderServiceImpl implements OrderService{
 				}
 			}
 
-		Boolean flag = orderDao.settleAccounts(houseid);
+
+	    }
 
 
-		return null;
-	}
-	@Override
-	public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order, Info info) {
-		// TODO Auto-generated method stub
-		return null;
-		}
+    }
 
-	}
-
+    @Override
+    public ModelAndView findAllOrder(Info info) {
+        return null;
+    }
 }

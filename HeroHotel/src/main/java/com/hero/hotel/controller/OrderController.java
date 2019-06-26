@@ -207,7 +207,7 @@ public class OrderController {
 		if(!tel.matches(RegexUtil.REGEX_MOBILE)){
 			result="手机号码格式不正确";
 		}
-		if(!idcard.matches(RegexUtil.REGEX_ID_CARD)){
+		else if(!idcard.matches(RegexUtil.REGEX_ID_CARD)){
 			result="身份证格式不正确";
 		}else {
 			orderService.orderSubmit(ordernumber,currenttime,name,sex,tel,idcard,
