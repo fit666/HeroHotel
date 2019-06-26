@@ -41,12 +41,13 @@ function register(){
 		$("#message3").html("手机号不合法");
 	}else {
 		$.ajax({
-			url:"/account/register",
+			url:"/user/register",
 			type:"post",
 			data:{
 				account:$("#account").val(),
 				password: $("#pass").val(),
-				tel:$("#tell").val()
+				tel:$("#tell").val(),
+				code:$("#code").val()
 			},
 		success:function(data){
 			alert(data);

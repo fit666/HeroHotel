@@ -30,24 +30,30 @@ public class OrderController {
 
 	// 添加订单(订单中支付编号在支付完成后插入订单中)
 	@RequestMapping("/addorder")
-	public ModelAndView addOrder(Info info, Order order, OrderItem orderItem,
-			@DateTimeFormat(pattern = "yyyy-MM-dd") Date date1, @DateTimeFormat(pattern = "yyyy-MM-dd") Date date2) {
-		// 入住时间
-		int day = (int) (date2.getTime() - date1.getTime()) / (24 * 60 * 60 * 1000);
-		// 计算总价:根据从前端获取的房间数量和房间价格，再从会员表中获取的折扣
-		// 从作用域中获取登录账号id
-		// 获取入住天数
-		int id = 1;// 还未获取
-		order.setUserid(id);// 存入账号id
+	public ModelAndView addOrder(Info info,Order order,OrderItem orderItem,@DateTimeFormat(pattern="yyyy-MM-dd") Date date1,@DateTimeFormat(pattern="yyyy-MM-dd") Date date2){
+		//入住时间
+		int day =(int)(date2.getTime()-date1.getTime())/(24*60*60*1000);
+		//计算总价:根据从前端获取的房间数量和房间价格，再从会员表中获取的折扣
+		//从作用域中获取登录账号id
+		//获取入住天数
+		int id = 1;//还未获取
+		//插入个人信息表
+		orderService.addInfo(info);
+		Info info2 = orderService.findId(info.getIdcard());
+		order.setInfoid(info2.getInfoid());//存入个人信息id
+		order.setUserid(id);
 		User user = orderService.findMonetaryByid(id);
 		// 从对象中获取对应的折扣
 		Vip vip = new Vip();
-		if (user.getMonetary() < 2000) {
-			vip.setDiscount(1.0);
-		} else if (user.getMonetary() >= 2000 && user.getMonetary() < 5000) {
-			vip.setDiscount(0.9);
-		} else {
-			vip.setDiscount(0.8);
+		vip.setDiscount(1.0);
+		if (user != null) {	
+			if (user.getMonetary()<2000) {
+				vip.setDiscount(1.0);
+			} else if (user.getMonetary()>=2000 && user.getMonetary() < 5000) {
+				vip.setDiscount(0.9);
+			} else {
+				vip.setDiscount(0.8);
+			}
 		}
 		double total = 0.0;
 		// 总价
@@ -65,9 +71,6 @@ public class OrderController {
 		String orderNumber = "" + System.currentTimeMillis() + id + new Random().nextInt(10);
 		order.setOrdernumber(orderNumber);// 存入订单编号
 		orderService.addOrder(order);
-		// 插入个人信息表
-		// 插入个人信息表
-		orderService.addInfo(info);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		// 插入房间记录表
@@ -79,8 +82,9 @@ public class OrderController {
 		liveNotes.setTypeid(orderItem.getTypeid());
 
 		List<String> allDay = new ArrayList<>();
-		while (date1.getTime() != date2.getTime()) {
-
+		//保留前端传入的入住时间
+		Date date3 = date1;
+		while(date1.getTime()!=date2.getTime()){
 			allDay.add(sdf.format(date1));
 			date1 = new Date(date1.getTime() + 24 * 60 * 60 * 1000);
 		}
@@ -100,23 +104,32 @@ public class OrderController {
 		}
 		// 查询个人信息id
 		Order order2 = orderService.findIdByOrderNumber(orderNumber);
-		Info info2 = orderService.findId(info.getIdcard());
-		// 将个人信息id加入入住信息
-		liveNotes.setInfoid(info2.getInfoid());
-		// 将可入住房间加入入住信息表
-		liveNotes.setHouseid(roomIds.get(0));
-		for (int i = 0; i < allDay.size(); i++) {
-			liveNotes.setDate(allDay.get(i));
-			orderService.addLiveNotes(liveNotes);
+		//将个人信息id加入入住信息
+		if (roomIds.size() >= orderItem.getQuantity()) {
+			
+			liveNotes.setInfoid(info2.getInfoid());
+			//将可入住房间加入入住信息表
+			int roomnumber=orderItem.getQuantity();
+			for (int i = 0; i < roomnumber; i++) {
+				//订单id
+				
+				
+				liveNotes.setHouseid(roomIds.get(i));
+				for (int j = 0; j < allDay.size(); j++) {
+					liveNotes.setDate(allDay.get(j));
+					orderService.addLiveNotes(liveNotes);
+					
+				}
+				orderItem.setPrice(houseType.getPrice());//插入价格
+				orderItem.setOrderid(order2.getOrderid());//存入订单id
+				orderItem.setStarttime(sdf.format(date3));//存入入住时间
+				orderItem.setEndtime(sdf.format(date2));
+				orderItem.setQuantity(1);
+				orderItem.setDay(day);//存入入住天数
+				orderItem.setHouseid(liveNotes.getHouseid());
+				orderService.addOrderItem(orderItem);
+			}
 		}
-		// 订单id
-		orderItem.setPrice(houseType.getPrice());// 插入价格
-		orderItem.setOrderid(order2.getOrderid());// 存入订单id
-		orderItem.setStarttime(orderTime);// 存入入住时间
-		orderItem.setEndtime(sdf.format(date2));
-		orderItem.setDay(day);// 存入入住天数
-		orderItem.setHouseid(liveNotes.getHouseid());
-		orderService.addOrderItem(orderItem);
 		model.setViewName("backstage-html/add-oder.html");
 		return model;
 	}
@@ -125,17 +138,45 @@ public class OrderController {
 	@RequestMapping("/findorder")
 	public ModelAndView findOrder(Info info) {
 		ModelAndView model = new ModelAndView();
-		model = orderService.findAllOrder(info);
+		List<Info> infos = orderService.findOrder(info);
+		model.addObject("infos", infos);
 		model.setViewName("backstage-html/findOrder.html");
 		System.out.println(model);
 		return model;
 	}
 
-	// 修改订单信息
-	@RequestMapping("/updateorder")
-	public ModelAndView updateOder(Info info, Order order, OrderItem orderItem) {
+	//查询所有订单记录
+	@RequestMapping("/findallorder")
+	public ModelAndView findAllOrder() {
 		ModelAndView model = new ModelAndView();
-		model = orderService.updateOrder(info, order, orderItem);
+		List<Info> infos= orderService.findAllOrders();
+		model.addObject("infos", infos);
+		model.setViewName("backstage-html/findOrder.html");
+		return model;
+	}
+	
+	//查询修改订单信息
+	@RequestMapping("/findupdate")
+	public ModelAndView findupdate(Integer id) {
+		ModelAndView model = new ModelAndView();
+		model = orderService.findUpdateOrder(id);
+		model.setViewName("backstage-html/updateorder.html");
+		return model;
+	}
+	//修改订单信息
+	@RequestMapping("/updateorder")
+	public ModelAndView updateOder(Info info,Order order,OrderItem orderItem,@DateTimeFormat(pattern="yyyy-MM-dd") Date date1,@DateTimeFormat(pattern="yyyy-MM-dd") Date date2) {
+		ModelAndView model = new ModelAndView();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String starttime = sdf.format(date1);
+		String endtime = sdf.format(date2);
+		orderItem.setStarttime(starttime);
+		orderItem.setEndtime(endtime);
+		String updatetime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());//获取当前修改订单时间
+		order.setUpdatetime(updatetime);
+		model = orderService.updateOrder(info,order, orderItem);
+		List<Info> infos= orderService.findAllOrders();
+		model.addObject("infos", infos);
 		model.setViewName("backstage-html/findOrder.html");
 		return model;
 	}

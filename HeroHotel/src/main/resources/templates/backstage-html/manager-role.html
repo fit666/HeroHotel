@@ -37,7 +37,9 @@
 				<td th:text="${role.id}">1</td>
 				<td th:text="${role.rolename}">超级管理员</td>
 				<td th:text="${role.describe}">拥有至高无上的权利</td>
-				<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('权限修改','/permission/findAllPermission','${role.id}')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+				<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('权限修改','/permission/findAllPermission','${role.id}')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+				 	<!-- <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a> -->
+				 </td>
 			</tr>
 		</tbody>
 	</table>
@@ -47,7 +49,7 @@
 <script type="text/javascript" src="/backstage/lib/My97DatePicker/WdatePicker.js"></script> 
 <script type="text/javascript" src="/backstage/js/H-ui.js"></script> 
 <script type="text/javascript" src="/backstage/js/H-ui.admin.js"></script> 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 /*管理员-角色-添加*/
 function admin_role_add(title,url,w,h){
 	layer_show(title,url,w,h);
@@ -55,6 +57,7 @@ function admin_role_add(title,url,w,h){
 /*管理员-角色-编辑*/
 function admin_role_edit(title,url,id,w,h){
 	layer_show(title,url,w,h);
+	
 }
 /*管理员-角色-删除*/
 function admin_role_del(obj,id){

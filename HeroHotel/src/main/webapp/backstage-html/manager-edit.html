@@ -11,8 +11,41 @@
 <link href="/backstage/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
 <link href="/backstage/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
 <link href="/backstage/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/backstage/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="/backstage/lib/icheck/jquery.icheck.min.js"></script> 
+<script type="text/javascript" src="/backstage/lib/Validform/5.3.2/Validform.min.js"></script> 
+<script type="text/javascript" src="/backstage/lib/layer/1.9.3/layer.js"></script> 
+<script type="text/javascript" src="/backstage/js/H-ui.js"></script> 
+<script type="text/javascript" src="/backstage/js/H-ui.admin.js"></script> 
+<script type="text/javascript">
 
-<title>添加管理员</title>
+var url = document.location.toString();//获取url地址
+var urlParmStr = url.slice(url.indexOf('?')+1);//获取问号后所有的字符串
+var arr = urlParmStr.split('&');//通过&符号将字符串分割转成数组
+var mid = arr[0].split("=")[1];//获取数组中第一个参数管理员的id
+//获取管理员的信息和角色
+function get(){
+	/* $.ajax({
+		url:"/manager/findManager",
+		type:"post",
+		data:{
+			id:mid
+		},
+		success:function(data){
+			alert(1)
+			var roles=data.roles;
+			alert(roles);
+			alert(2)
+			var manager=data.manager;
+			
+			alert(manager.info.tel);
+		}
+	})*/
+	location.href="/manager/findManager?id="+mid;
+} 
+get();
+</script>
+<title>修改管理员信息</title>
 </head>
 <body>
 <div class="pd-20">
@@ -24,7 +57,7 @@
 			</div>
 			<div class="col-4"> </div>
 		</div>
-		<div class="row cl">
+		<!-- <div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>初始密码：</label>
 			<div class="formControls col-5">
 				<input type="password" placeholder="密码" autocomplete="off" value="" class="input-text" datatype="*6-20" nullmsg="密码不能为空">
@@ -37,7 +70,7 @@
 				<input type="password" placeholder="确认新密码" autocomplete="off" class="input-text Validform_error" errormsg="您两次输入的新密码不一致！" datatype="*" nullmsg="请再输入一次新密码！" recheck="newpassword" id="newpassword2" name="newpassword2">
 			</div>
 			<div class="col-4"> </div>
-		</div>
+		</div> -->
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>性别：</label>
 			<div class="formControls col-5 skin-minimal">
@@ -59,32 +92,33 @@
 			</div>
 			<div class="col-4"> </div>
 		</div>
-		<div class="row cl">
+		<!-- <div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>邮箱：</label>
 			<div class="formControls col-5">
 				<input type="text" class="input-text" placeholder="@" name="email" id="email" datatype="e" nullmsg="请输入邮箱！">
 			</div>
 			<div class="col-4"> </div>
-		</div>
+		</div> -->
 		<div class="row cl">
 			<label class="form-label col-3">角色：</label>
 			<div class="formControls col-5"> <span class="select-box" style="width:150px;">
-				<select class="select" name="admin-role" size="1">
+				<select class="select" name="admin-role" size="1" id="roles">
 					<option value="0">超级管理员</option>
 					<option value="1">总编</option>
 					<option value="2">栏目主辑</option>
 					<option value="3">栏目编辑</option>
 				</select>
-				</span> </div>
+				</span> 
+			</div>
 		</div>
-		<div class="row cl">
+		<!-- <div class="row cl">
 			<label class="form-label col-3">备注：</label>
 			<div class="formControls col-5">
 				<textarea name="" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="textarealength(this,100)"></textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
 			</div>
 			<div class="col-4"> </div>
-		</div>
+		</div> -->
 		<div class="row cl">
 			<div class="col-9 col-offset-3">
 				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
@@ -92,12 +126,6 @@
 		</div>
 	</form>
 </div>
-<script type="text/javascript" src="/backstage/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="/backstage/lib/icheck/jquery.icheck.min.js"></script> 
-<script type="text/javascript" src="/backstage/lib/Validform/5.3.2/Validform.min.js"></script> 
-<script type="text/javascript" src="/backstage/lib/layer/1.9.3/layer.js"></script> 
-<script type="text/javascript" src="/backstage/js/H-ui.js"></script> 
-<script type="text/javascript" src="/backstage/js/H-ui.admin.js"></script> 
 <script type="text/javascript">
 $(function(){
 	$('.skin-minimal input').iCheck({

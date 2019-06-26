@@ -36,10 +36,11 @@
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="80">账号</th>
-				<th width="110">真实姓名</th>
-				<th width="50">性别</th>
+				<th width="50">真实姓名</th>
+				<th width="40">性别</th>
 				<th width="90">手机</th>
-				<th width="100">累计消费</th>
+				<th width="100">身份证号</th>
+				<th width="70">累计消费</th>
 				<th width="50">会员等级</th>
 				<th width="130">加入时间</th>
 				<th width="100">是否有效</th>
@@ -47,35 +48,36 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="text-c" th:each="vipa,status:${allVips}">
+			<tr class="text-c" th:if="${allVips}!=null" th:each="vipa,status:${allVips}">
 				<td><input type="checkbox" value="1" name=""></td>
 				<td th:text="${vipa.account}"></td>
 				<td th:text="${vipa.info.uname}"></td>
 				<td th:text="${vipa.info.sex}"></td>
 				<td th:text="${vipa.tel}"></td>
+				<td th:text="${vipa.info.idcard}"></td>
 				<td th:text="${vipa.monetary}"></td>
 				<td th:text="${vipa.vip.vname}"></td>
 				<td th:text="${vipa.createtime}"></td>
 				<td class="td-status">
-					<span class="label radius" th:if="${vipa.flag}==0">已停用</span>
+					<span class="label radius" th:if="${vipa.flag}==2">已停用</span>
 					<span class="label label-success radius" th:if="${vipa.flag}==1">已启用</span>
 				</td>
 				
 				<td class="td-manage">
-					<span th:if="${vipa.flag}==0">
-						<a style="text-decoration:none" onClick="admin_start(this,'10001')" href="javascript:;" title="启用">
+					<span th:if="${vipa.flag}==2">
+						<a style="text-decoration:none" th:onclick="vip_start(this,'10001',[[${vipa.id}]])" href="javascript:;" title="启用">
 							<i class="Hui-iconfont">&#xe615;</i>
 						</a>
 					</span>
 					<span  th:if="${vipa.flag}==1">
-						<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用">
+						<a style="text-decoration:none" th:onclick="vip_stop(this,'10001',[[${vipa.id}]])" href="javascript:;" title="停用">
 							<i class="Hui-iconfont">&#xe631;</i>
 						</a>
 					</span>
-					<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','2','800','500')" class="ml-5" style="text-decoration:none">
+					<!-- <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','2','800','500')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
-					</a>
-					<a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none">
+					</a> -->
+					<a title="删除" href="javascript:;" th:onclick="vip_del(this,'1',[[${vipa.id}]])" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a>
 				</td>
@@ -128,22 +130,46 @@ function member_show(title,url,id,w,h){
 	layer_show(title,url,w,h);
 }
 /*用户-停用*/
-function member_stop(obj,id){
+function vip_stop(obj,id,vid){
 	layer.confirm('确认要停用吗？',function(index){
 		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
-		$(obj).remove();
-		layer.msg('已停用!',{icon: 5,time:1000});
+		$.ajax({
+			url:"/user/vipStop",
+			type:"post",
+			data:{
+				id:vid
+			},
+			success:function(data){
+				if(data=="success"){
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+					$(obj).remove();
+					layer.msg('已停用!',{icon: 5,time:1000});
+				}
+			}
+		})
+		
 	});
 }
 
 /*用户-启用*/
-function member_start(obj,id){
+function vip_start(obj,id,vid){
 	layer.confirm('确认要启用吗？',function(index){
 		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-		$(obj).remove();
-		layer.msg('已启用!',{icon: 6,time:1000});
+		$.ajax({
+			url:"/user/vipStart",
+			type:"post",
+			data:{
+				id:vid
+			},
+			success:function(data){
+				if(data=="success"){
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+					$(obj).remove();
+					layer.msg('已启用!',{icon: 6,time:1000});
+				}
+			}
+		})
+		
 	});
 }
 /*用户-编辑*/
@@ -155,10 +181,22 @@ function change_password(title,url,id,w,h){
 	layer_show(title,url,w,h);	
 }
 /*用户-删除*/
-function member_del(obj,id){
+function vip_del(obj,id,vid){
 	layer.confirm('确认要删除吗？',function(index){
-		$(obj).parents("tr").remove();
-		layer.msg('已删除!',{icon:1,time:1000});
+		$.ajax({
+			url:"/user/userDelete",
+			type:"post",
+			data:{
+				id:vid
+			},
+			success:function(data){
+				if(data=="success"){
+					$(obj).parents("tr").remove();
+					layer.msg('已删除!',{icon:1,time:1000});
+				}
+			}
+		})
+		
 	});
 }
 </script> 

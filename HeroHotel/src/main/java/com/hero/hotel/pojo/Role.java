@@ -1,4 +1,7 @@
 package com.hero.hotel.pojo;
+
+import java.util.List;
+
 /*
  * 	角色表
  */
@@ -7,6 +10,7 @@ public class Role {
     private String rolename;//角色名
     private String describe;//角色权限描述
     private Integer flag;
+    private List<ThePermission> permission;//管理员的权限
 	
     public Role(Integer id, String rolename, String describe, Integer flag) {
 		super();
@@ -15,6 +19,17 @@ public class Role {
 		this.describe = describe;
 		this.flag = flag;
 	}
+    
+
+	public List<ThePermission> getPermission() {
+		return permission;
+	}
+
+
+	public void setPermission(List<ThePermission> permission) {
+		this.permission = permission;
+	}
+
 
 	public Role() {
 		super();
@@ -52,8 +67,12 @@ public class Role {
 		this.flag = flag;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", rolename=" + rolename + ", describe=" + describe + ", flag=" + flag + "]";
+		return "Role [id=" + id + ", rolename=" + rolename + ", describe=" + describe + ", flag=" + flag
+				+ ", permission=" + permission + "]";
 	}
+
+
 }
