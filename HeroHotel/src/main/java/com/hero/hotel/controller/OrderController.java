@@ -1,16 +1,18 @@
 package com.hero.hotel.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
+import com.hero.hotel.utils.RegexUtil;
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hero.hotel.pojo.HouseType;
@@ -52,7 +54,7 @@ public class OrderController {
 		//总价
 		//查询房间单价
 		HouseType houseType = orderService.findPriceByTypeid(orderItem.getTypeid());
-		
+
 		total = houseType.getPrice()*orderItem.getQuantity()*vip.getDiscount()*day;
 		order.setTotal(total);//存入总价
 		//获取订单生成时间
@@ -68,7 +70,7 @@ public class OrderController {
 		//插入个人信息表
 		orderService.addInfo(info);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		//插入房间记录表
 		/*
 		 * 查询可用的房间
@@ -76,10 +78,10 @@ public class OrderController {
 		//查询所有房间id
 		LiveNotes liveNotes = new LiveNotes();
 		liveNotes.setTypeid(orderItem.getTypeid());
-		
+
 		List<String> allDay = new ArrayList<>();
 		while(date1.getTime()!=date2.getTime()){
-			
+
 			allDay.add(sdf.format(date1));
 			date1=new Date(date1.getTime()+24*60*60*1000);
 		}
@@ -88,7 +90,7 @@ public class OrderController {
 		//将日期转换为字符串
 		for (int i = 0; i < allDay.size(); i++) {
 			liveNotes.setDate(allDay.get(i));
-			//查询已经入住的房间id			
+			//查询已经入住的房间id
 			List<Integer> liveRoomIds = orderService.findAllliveRoomsByTypeid(liveNotes);
 			roomIds.removeAll(liveRoomIds);
 		}
@@ -119,7 +121,7 @@ public class OrderController {
 		model.setViewName("backstage-html/add-oder.html");
 		return model;
 	}
-	
+
 	//查找某位客人的所有订单记录
 	@RequestMapping("/findorder")
 	public ModelAndView findOrder(Info info) {
@@ -129,7 +131,7 @@ public class OrderController {
 		System.out.println(model);
 		return model;
 	}
-	
+
 	//修改订单信息
 	@RequestMapping("/updateorder")
 	public ModelAndView updateOder(Info info,Order order,OrderItem orderItem) {
@@ -138,7 +140,7 @@ public class OrderController {
 		model.setViewName("backstage-html/findOrder.html");
 		return model;
 	}
-	
+
 	//删除订单
 	@RequestMapping("/deleteorder")
 	public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order,Info info) {
@@ -146,31 +148,75 @@ public class OrderController {
 		model = orderService.deleteOrder(liveNotes, orderItem, order, info);
 		model.setViewName("backstage-html/findOrder.html");
 		return model;
-		
-	}
-=======
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.hero.hotel.service.OrderService;
-
-@Controller()
-@RequestMapping("/order")
-public class OrderController {
-
-	private OrderService orderService;
-	
-	// 结账
-	@RequestMapping("/settle accounts")
-	public ModelAndView settleAccounts(String houseid) {
-		
-		Boolean flag = orderService.settleAccounts(houseid);
-		
-		
-		return null;
 
 	}
 
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
+
+
+
+
+
+	//根据时间段检索房间信息  code by sxj
+	@RequestMapping("/findHouseByDays")
+	@ResponseBody
+	public Integer[] findHouseByDays(Date livetime,Integer days,HttpSession session){
+
+		//获得 入住时间的时间戳
+		long times=livetime.getTime();
+		//用一个数组装下所有日期
+		List<String> todays=new ArrayList<>();
+		for (int i = 0; i < days; i++) {
+			long newTimes=times+1000*60*60*24*i;
+			String ymd = new SimpleDateFormat("yyyy-MM-dd").format(new Date(newTimes)).toString();
+			todays.add(ymd);
+		}
+
+		//用一个简单的数组装，下标是房间类型
+        Integer[] houseNumberAbleIive = new Integer[5];
+		houseNumberAbleIive[0]=0;
+        for (int i = 1; i < 5 ; i++) {  //i是房间类型
+            Integer houseNumber=orderService.findHouseNumberByTypeid(todays,i);
+            houseNumberAbleIive[i]=houseNumber;
+        }
+		//把这个数组装下的日期传进session，订单用
+		session.setAttribute("timeslot",todays);
+		return houseNumberAbleIive;
+	}
+	//提交用户的预订单，code by sxj
+	@RequestMapping("/createorder")
+	@ResponseBody
+	public String createOrder(String hn,String name,String tel,String sex,String idcard,HttpSession session){
+		List<Integer> housenumber= JSONArray.fromObject(hn);  //真的好厉害啊，那前端数组处理的很漂亮
+
+
+        //获得当前时间currenttime
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String currenttime=df.format(new Date()).toString();// new Date()为获取当前系统时间
+
+		//随机生成一个订单号id
+		Random random=new Random();
+		int rannum= (int)(random.nextDouble()*(99999-10000 + 1))+ 10000;
+		long date = new Date().getTime();
+		String ordernumber = String.valueOf(rannum) + "" + String.valueOf(date);
+
+		//从session直接拿出要用的时间段
+		List<String> todays=(List)session.getAttribute("timeslot");
+
+		//在service里面去一次性把所有业务处理了
+		String result = "";
+		if(!tel.matches(RegexUtil.REGEX_MOBILE)){
+			result="手机号码格式不正确";
+		}
+		if(!idcard.matches(RegexUtil.REGEX_ID_CARD)){
+			result="身份证格式不正确";
+		}else {
+			orderService.orderSubmit(ordernumber,currenttime,name,sex,tel,idcard,
+					todays,housenumber);
+			result="订单生产";
+		}
+
+
+		return result;
+	}
+
 }

@@ -6,33 +6,7 @@ window.onload = function() {
 	document.getElementById("flight-from").value = str;
 }
 
-function book() {
-	debugger;
-	var roomtype = $("#flight-class").val();
-	var type = $("#flight-person").val();
-	var starttime = $("#flight-depart").val();
-	var endtime = $("#flight-return").val();
-	var time = $("#flight-from").val();
 
-	var dataJson = {
-		"flight-class" : roomtype,
-		"flight-person" : type,
-		"flight-depart" : starttime,
-		"flight-return" : endtime,
-		"flight-from" : time
-	};
-
-	$.ajax({
-		url : "bookroom",
-		data : dataJson,
-		datatype : "text",
-		type : "post",
-		success : function(data) {
-			alert(data);
-
-		}
-	});
-}
 
 
 function openwindow(){
@@ -67,5 +41,74 @@ function openwindow(){
 	window.onclick = function(event) {
 		//点击窗口外内容，关闭窗口
 		if (event.target == modal) modal.style.display = "none";
+	}
+}
+
+function reduce1() {
+	var number=parseInt($("#single").html())
+	if(number==0){
+		alert("非法操作~")
+	}else {
+		$("#single").html(number-1)
+	}
+}
+function add1() {
+	var singlenumber=parseInt($("#singlenumber").html())
+	var number=parseInt($("#single").html())
+	if(singlenumber==number){
+		alert("非法操作~")
+	}else {
+		$("#single").html(number+1)
+	}double
+}
+function reduce2() {
+	var number=parseInt($("#double").html())
+	if(number==0){
+		alert("非法操作~")
+	}else {
+		$("#double").html(number-1)
+	}
+}
+function add2() {
+	var singlenumber=parseInt($("#doublenumber").html())
+	var number=parseInt($("#double").html())
+	if(singlenumber==number){
+		alert("非法操作~")
+	}else {
+		$("#double").html(number+1)
+	}
+}
+function reduce3() {
+	var number=parseInt($("#tri").html())
+	if(number==0){
+		alert("非法操作~")
+	}else {
+		$("#tri").html(number-1)
+	}
+}
+function add3() {
+	var singlenumber=parseInt($("#trinumber").html())
+	var number=parseInt($("#tri").html())
+	if(singlenumber==number){
+		alert("非法操作~")
+	}else {
+		$("#tri").html(number+1)
+	}
+}
+function reduce4() {
+	var number=parseInt($("#four").html())
+	if(number==0){
+		alert("非法操作~")
+	}else {
+		$("#four").html(number-1)
+	}
+}
+function add4() {
+	var singlenumber=parseInt($("#fournumber").html())
+	var number=parseInt($("#four").html())
+	if(singlenumber==number){
+		alert("非法操作~")
+	}else {
+		$("#four").html(number+1)
 	}
 }

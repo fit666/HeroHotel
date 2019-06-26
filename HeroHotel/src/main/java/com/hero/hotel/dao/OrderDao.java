@@ -160,7 +160,15 @@ public interface OrderDao {
 	
 	@Update("UPDATE t_order SET flag = 2 WHERE orderid = (SELECT orderid FROM t_orderitem WHERE houseid = #{houseid} )  AND  flag = 1")
 	public Boolean changeOrderFlag(String houseid);
-	
-	
-	
+
+	//添加订单的用户信息，code by sxj
+	@Insert("insert into t_info(tel,uname,sex,idcard) values(#{tel},#{name},#{sex},#{idcard})")
+	public void addInfoByOrder(String tel, String name, String sex, String idcard);
+
+	//添加订单，code by sxj
+	@Insert("insert into t_order(userid,createtime,ordernumber) values(#{userid},#{currenttime},#{ordernumber})")
+	public void addOrderInfo(Integer userid, String currenttime, String ordernumber);
+
+	@Select("select * from t_info where tel=#{tel}")
+	public Info findInfoByTel(String tel);
 }
