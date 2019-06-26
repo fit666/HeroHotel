@@ -203,15 +203,28 @@ public class ManagerController {
 		manager.setAccount(tel);
 		manager.setPassword(password);
 		manager.setTel(tel);
-		Date date=new Date();
-		manager.setCreatetime(date);
-		manager.setRoleid(roleid);
 		
 		Info info=new Info();
 		info.setIdcard(idcard);
 		info.setSex(sex);
 		info.setTel(tel);
 		info.setUname(name);
+		//判断管理员是否已经注册
+		User oldManager=managerService.findManagerPwd(tel);
+		if(oldManager!=null){
+			mav.addObject("result","添加失败，该手机号已经注册");
+			mav.addObject("manager", manager);
+			mav.addObject("info", info);
+			List<Role> roles=roleService.findAllRoles();
+			mav.addObject("roles",roles);
+			mav.setViewName("/backstage-html/manager-add2.html");
+			return mav;
+		}
+		Date date=new Date();
+		manager.setCreatetime(date);
+		manager.setRoleid(roleid);
+		
+		
 		boolean b1=managerService.addManager(manager,info);
 		if(b1){
 			List<User> managers=managerService.findAllManagers();
