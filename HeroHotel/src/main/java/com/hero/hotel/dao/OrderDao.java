@@ -28,8 +28,8 @@ public interface OrderDao {
 	 * 前端发送数据有：姓名，性别，电话，身份证，预定天数，预定到达时间，房间类型，押金，留言，到达取消时间是否自动取消预订
 	 */
 	//订单表插入数据
-	@Insert("insert into t_order(createtime,updatetime,ordernumber,total,userid,infoid) values(#{createtime},#{updatetime},#{ordernumber},"
-			+ "#{total},#{userid},#{infoid})")
+	@Insert("insert into t_order(createtime,updatetime,ordernumber,total,userid) values(#{createtime},#{updatetime},#{ordernumber},"
+			+ "#{total},#{userid})")
 	public void addOrder(Order order);
 	//查询订单id,根据订单编号查找
 	@Select("select * from t_order where orderNumber = #{orderNumber}")
@@ -56,7 +56,7 @@ public interface OrderDao {
 	//查找该类型的所有房间，查找当天入住日志表中该类房间已经入住的房间，
 	@Select("select id from t_house where typeid=#{typeid}")
 	public List<Integer> findAllRoomsByTypeid(Integer typeid);
-	@Select("select houseid from t_livenotes where typeid=#{typeid} and date=#{date} and flag=1")
+	@Select("select id from t_livenotes where typeid=#{typeid} and date is not null")
 	public List<Integer> findAllliveRoomsByTypeid(LiveNotes liveNotes);
 	
 	
@@ -64,7 +64,7 @@ public interface OrderDao {
 	//根据账号id获取消费金额，通过消费金额获取对应的会员折扣
 	@Select("select * from t_user where id=#{id}")
 	public User findMonetaryByid(Integer id);
-	@Select("select * from t_vip where vmoney=#{vmoney}")
+	@Select("select * from t_vip where vmoney=#{vmoney} and")
 	public Vip findDiscountByMonetary(double vmoney);
 	
 	/*
@@ -73,30 +73,24 @@ public interface OrderDao {
 	 * flag为2的表示已定已入住的的，3表示取消的订单）
 	 * 2点击删除按钮，后台将订单和订单项中的flag修改为3，之后再自动查询一次，显示给页面
 	 */
-	
-	
-	
-	/*
-	 * 查询所有订单
-	 */
-	@Select("select * from t_info")
-	@Results({
-		@Result(id=true,column="infoid",property="infoid"),
-		@Result(column="infoid",property="orders",many=@Many(select="findAllOrders"))
-	})
-	public List<Info> findAllInfo();
-	
-	@Select("select * from t_order")
+	@Select("select * from t_order where userid=#{userid}")
 	@Results({
 		@Result(id=true,column="orderid",property="orderid"),
 		@Result(column="orderid",property="oderItems",many=@Many(select="findAllOrderItem"))
 	})
-	public List<Order> findAllOrders();
-	
+	public Order findAllOrderItemByUserid(Integer id);
 	@Select("select * from t_orderitem where orderid=#{orderid}")
 	public List<OrderItem> findAllOrderItem(Integer orderid);
 	
-	
+	/*
+	 * 删除订单()
+	 */
+	@Update("update t_livenotes set flag=3 where houseid=#{houseid}")
+	public void updateLiveNotesFlag(LiveNotes liveNotes);
+	@Update("update t_order set flag=3 where ordernumber=#{ordernumber}")
+	public void updateOrderFlag(Order order);
+	@Update("update t_orderitem set flag=3 where orderid=#{orderid}")
+	public void updateOrderItemFlag(OrderItem orderItem);
 	
 	
 	/*
@@ -107,52 +101,21 @@ public interface OrderDao {
 	 * 4.根据订单id获取所有的订单项id
 	 * 5.根据个人信息id获取房间id
 	 */
-	@Select("select * from t_info where uname like CONCAT('%',#{uname},'%') or tel like #{tel}")
-	@Results({
-		@Result(id=true,column="infoid",property="infoid"),
-		@Result(column="infoid",property="orders",many=@Many(select="findOrders"))
-	})
-	public List<Info> findInfo(Info info);
-	
-	@Select("select * from t_order")
-	@Results({
-		@Result(id=true,column="orderid",property="orderid"),
-		@Result(column="orderid",property="oderItems",many=@Many(select="findItem"))
-	})
-	public List<Order> findOrders();
-	
-	@Select("select * from t_orderitem where orderid=#{orderid}")
-	public List<OrderItem> findItem(Integer orderid);
-	
-	
-	
-	/*@Select("select * from t_info where uname=#{uname} or infoid=#{infoid}")
-	public Info findInfo(Info info);*/
-	@Select("select * from t_user where infoid=#{infoid} or tel=#{tel}")
-	public User findUser(Info info);
-	@Select("select * from t_order where infoid=#{infoid}")
+	@Select("select * from t_info where uname=#{uname} or infoid=#{infoid}")
+	public Info findInfo(Info info);
+	@Select("select * from t_user where infoid=#{infoid}")
+	public User findUser(Integer infoid);
+	@Select("select * from t_order where userid=#{userid}")
 	@Results({
 		@Result(id=true,column="orderid",property="orderid"),
 		@Result(column="orderid",property="oderItems",many=@Many(select="findAllItemByUserid"))
 	})
-	public Order findOder(Integer infoid);
-	@Select("select * from t_orderitem where orderid=#{orderid} and flag=1")
+	public Order findOder(Integer userid);
+	@Select("select * from t_orderitem where orderid=#{orderid}")
 	public List<OrderItem> findAllItemByUserid(Integer orderid);
 	@Select("select * from t-liveinfo where infoid=#{infoid}")
 	public List<LiveNotes> findAllInforByinfoid(Integer infoid);
 	
-	
-	
-	
-	/*
-	 * 查询修改订单信息
-	 */
-	@Select("select * from t_orderitem where id=#{id}")
-	public OrderItem findOrderItem(Integer id);
-	@Select("select * from t_order where orderid=#{orderid}")
-	public Order findOrder(Integer orderid);
-	@Select("select * from t_info where infoid=#{infoid}")
-	public Info findOneInfo(Integer infoid);
 	/*
 	 * 修改订单：从前端传入个人信息id
 	 * 1.修改个人信息表
@@ -160,10 +123,11 @@ public interface OrderDao {
 	 * 3.修改订单项表
 	 */
 	@Update("update t_info set uname=#{uname},tel=#{tel} where infoid = #{infoid}")
-	public Boolean updateInfo(Info info);
-	@Update("update t_order set updatetime=#{updatetime} where flag = 1")
-	public void updateOrder(Order order);
-	@Update("update t_orderitem set starttime=#{starttime},endtime=#{endtime},day=#{day},typeid=#{typeid} where orderid=#{orderid} and flag = 1")
+	public void updateInfo(Info info);
+	/*@Update("")
+	public void updateOrder(Order order);*/
+	@Update("update t_OrderItem set starttime=#{starttime},endtime=#{endtime},day={day},typeid=#{typeid}"
+			+ " where orderid=#{orderid} and flag = 1")
 	public void updateOrderItem(OrderItem orderItem);
 
 
