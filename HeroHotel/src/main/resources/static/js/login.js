@@ -72,15 +72,36 @@ function login2(){
 		})
 	}
 }
+//倒计时  
+var countdown=20;  
+function settime(val) {
+	if(countdown==19){
+		getcode();
+	}
+    if (countdown == 0) {  
+        val.removeAttribute("disabled");  
+        val.value="获取验证码";  
+        countdown = 20;  
+        
+        return false;  
+    } else {  
+        val.setAttribute("disabled", true);  
+        val.value="重新发送(" + countdown + ")";  
+        countdown--;  
+    }  
+    setTimeout(function() {  
+        settime(val);  
+    },1000);  
+}  
 
 //发送验证码
 //获取验证码
 function getcode(){
 	var btell = $("#tell").val();
 	if(btell==""){
-		$("#message3").html("请填写手机号");
+		$("#message4").html("请填写手机号");
 	}else if(btell.length!=11){
-		$("#message3").html("手机号不合法");
+		$("#message4").html("手机号不合法");
 	}else{
 		$.ajax({
 			url:"/user/code",

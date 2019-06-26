@@ -108,13 +108,10 @@ public class UserServiceImpl implements UserService {
 				System.out.println("session中的：" + user22);
 				System.out.println(result);
 				return result;
-			} catch (IncorrectCredentialsException ice) {
-				System.out.println("用户名/密码不匹配！");
-			} catch (LockedAccountException lae) {
-				System.out.println("账户已被冻结！");
-			} catch (AuthenticationException ae) {
-				System.out.println(ae.getMessage());
-			}
+			} catch (Exception ice) {
+				result="用户名/密码不匹配！";
+				return result;
+			} 
 		}
 		return result;
 	}
@@ -181,12 +178,9 @@ public class UserServiceImpl implements UserService {
 				session.setAttribute("user", realuser);
 				System.out.println(result);
 				return result;
-			} catch (IncorrectCredentialsException ice) {
-				System.out.println("用户名/密码不匹配！");
-			} catch (LockedAccountException lae) {
-				System.out.println("账户已被冻结！");
-			} catch (AuthenticationException ae) {
-				System.out.println(ae.getMessage());
+			} catch (Exception ice) {
+				result="手机号/验证码不匹配！";
+				return result;
 			}
 		}
 		return result;
