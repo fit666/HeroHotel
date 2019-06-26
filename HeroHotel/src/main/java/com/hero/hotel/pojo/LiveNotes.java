@@ -1,84 +1,81 @@
 package com.hero.hotel.pojo;
+
 /*
  *  	居住记录表
  */
 public class LiveNotes {
-    private Integer id;//记录id
-    private Integer houseid;//房间id
-    private Integer typeid;//房间类型id
-    private Integer infoid;//个人信息id
-    private Integer flag;
-    private String date;//居住时间
+	private Integer id;// 记录id
+	private Integer houseid;// 房间id
+	private Integer typeid;// 房间类型id
+	private Integer infoid;// 个人信息id
+	private Integer orderItemid;// 订单项id
 
-    @Override
-    public String toString() {
-        return "LiveNotes{" +
-                "id=" + id +
-                ", houseid=" + houseid +
-                ", typeid=" + typeid +
-                ", infoid=" + infoid +
-                ", flag=" + flag +
-                ", date='" + date + '\'' +
-                '}';
-    }
+	private Integer flag;
+	private String date;// 居住时间
 
-    public Integer getId() {
-        return id;
-    }
+	@Override
+	public String toString() {
+		return "LiveNotes{" + "id=" + id + ", houseid=" + houseid + ", typeid=" + typeid + ", infoid=" + infoid
+				+ ", flag=" + flag + ", date='" + date + '\'' + '}';
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getHouseid() {
-        return houseid;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setHouseid(Integer houseid) {
-        this.houseid = houseid;
-    }
+	public Integer getHouseid() {
+		return houseid;
+	}
 
-    public Integer getTypeid() {
-        return typeid;
-    }
+	public void setHouseid(Integer houseid) {
+		this.houseid = houseid;
+	}
 
-    public void setTypeid(Integer typeid) {
-        this.typeid = typeid;
-    }
+	public Integer getTypeid() {
+		return typeid;
+	}
 
-    public Integer getInfoid() {
-        return infoid;
-    }
+	public void setTypeid(Integer typeid) {
+		this.typeid = typeid;
+	}
 
-    public void setInfoid(Integer infoid) {
-        this.infoid = infoid;
-    }
+	public Integer getInfoid() {
+		return infoid;
+	}
 
-    public Integer getFlag() {
-        return flag;
-    }
+	public void setInfoid(Integer infoid) {
+		this.infoid = infoid;
+	}
 
-    public void setFlag(Integer flag) {
-        this.flag = flag;
-    }
+	public Integer getFlag() {
+		return flag;
+	}
 
-    public String getDate() {
-        return date;
-    }
+	public void setFlag(Integer flag) {
+		this.flag = flag;
+	}
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+	public String getDate() {
+		return date;
+	}
 
-    public LiveNotes(Integer id, Integer houseid, Integer typeid, Integer infoid, Integer flag, String date) {
-        this.id = id;
-        this.houseid = houseid;
-        this.typeid = typeid;
-        this.infoid = infoid;
-        this.flag = flag;
-        this.date = date;
-    }
+	public void setDate(String date) {
+		this.date = date;
+	}
 
-    public LiveNotes() {
-    }
+	public LiveNotes(Integer id, Integer houseid, Integer typeid, Integer infoid, Integer flag, String date) {
+		this.id = id;
+		this.houseid = houseid;
+		this.typeid = typeid;
+		this.infoid = infoid;
+		this.flag = flag;
+		this.date = date;
+	}
+
+	public LiveNotes() {
+	}
 }

@@ -20,6 +20,29 @@ function getcode(){
 	
 }
 
+//倒计时  
+var countdown=20;  
+function settime(val) {
+	if(countdown==19){
+		getcode();
+	}
+    if (countdown == 0) {  
+        val.removeAttribute("disabled");  
+        val.value="获取验证码";  
+        countdown = 20;  
+        
+        return false;  
+    } else {  
+        val.setAttribute("disabled", true);  
+        val.value="重新发送(" + countdown + ")";  
+        countdown--;  
+    }  
+    setTimeout(function() {  
+        settime(val);  
+    },1000);  
+}  
+
+
 //注册
 function register(){
 	//前端格式判断

@@ -34,17 +34,17 @@ public class HouseServiceImpl implements HouseService {
 
 	@Override
 	public List<House> findOkRooms() {
-		return houseDao.findOkRooms();
+		return houseDao.findRooms(0);
 	}
 
 	@Override
 	public List<House> findNoRooms() {
-		return houseDao.findNoRooms();
+		return houseDao.findRooms(1);
 	}
 
 	@Override
 	public List<House> findZangRooms() {
-		return houseDao.findZangRooms();
+		return houseDao.findRooms(2);
 	}
 	/*
 	 * 下架房间(non-Javadoc)

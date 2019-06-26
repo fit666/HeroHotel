@@ -4,13 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
-    <title>默认样式信息窗体</title>
+    <title>酒店地图</title>
     <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=您申请的key值&plugin=AMap.Driving"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
     <style>
        
-        #container {
-            height: 500px;
-            width: 200px;
+        html,body,#container{
+        margin:50px auto 15px;
+            height:300px;
+            width: 500px;
         }
 
         .content-window-card {
@@ -84,23 +89,100 @@
             float: left;
             margin-right: 6px;
         }
+          #panel {
+            position: fixed;
+            background-color: white;
+            max-height: 90%;
+            overflow-y: auto;
+            top: 10px;
+            right: 10px;
+            width: 280px;
+        }
+        #panel .amap-call {
+            background-color: #009cf9;
+            border-top-left-radius: 4px;
+   	        border-top-right-radius: 4px;
+        }
+        #panel .amap-lib-driving {
+	        border-bottom-left-radius: 4px;
+   	        border-bottom-right-radius: 4px;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
-<div id="container"></div>
+<div id='container'></div>
 <div class="info">
-    点击地图上的点标记，打开所添加的自定义信息窗体
+    <h4 id='status'></h4><hr>
+    <p id='result'></p><hr>
 </div>
+<div id="panel"></div>
+ <div id="container"><input type="button" onclick="mm()" value="酒店位置" > </div>
+<!-- </div> -->
+<!-- <div class="info">
+    点击地图上的点标记，打开所添加的自定义信息窗体
+    <input type="button" onclick="back()" value=" 回到" >
+</div>  -->
 <script type="text/javascript"
-        src="https://webapi.amap.com/maps?v=1.4.15&key=您申请的key值"></script>
+        src="https://webapi.amap.com/maps?v=1.4.15&key=d8c2bbfa10fa624186f45cdb31fa3e30"></script>
 <script type="text/javascript">    //地图初始化时，在地图上添加一个marker标记,鼠标点击marker可弹出自定义的信息窗体
+var position = [104.063538, 30.573553]; //简写
 var map = new AMap.Map("container", {
     resizeEnable: true,
-    center: [104.063538, 30.573553],
-    zoom: 16
 });
-addMarker();
 
+function mm() {
+	 map.setZoomAndCenter(17, [104.063538, 30.573553]);
+}
+
+addMarker();
+//圆
+var circleMarker = new AMap.CircleMarker({
+    center: new AMap.LngLat(104.063538,30.573553),  // 圆心位置
+    radius: 30, // 圆半径
+    fillColor: 'red',   // 圆形填充颜色
+    strokeColor: '#fff', // 描边颜色
+    strokeWeight: 1, // 描边宽度
+});
+
+map.add(circleMarker);
+
+AMap.plugin('AMap.Geolocation', function() {
+    var geolocation = new AMap.Geolocation({
+        enableHighAccuracy: true,//是否使用高精度定位，默认:true
+        timeout: 10000,          //超过10秒后停止定位，默认：5s
+        buttonPosition:'RB',    //定位按钮的停靠位置
+        buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+        zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
+    });
+    map.addControl(geolocation);
+    geolocation.getCurrentPosition(function(status,result){
+        if(status=='complete'){
+            onComplete(result)
+        }else{
+            onError(result)
+        }
+    });
+});
+ //解析定位结果
+function onComplete(data) {
+    document.getElementById('status').innerHTML='定位成功'
+    var str = [];
+    str.push('您当前的位置');
+    str.push('定位结果：' + data.position);
+    str.push('定位类别：' + data.location_type);
+    
+    if(data.accuracy){
+         str.push('精度：' + data.accuracy + ' 米');
+    }//如为IP精确定位结果则没有精度信息
+    str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
+    document.getElementById('result').innerHTML = str.join('<br>');
+}
+//解析定位错误信息
+function onError(data) {
+    document.getElementById('status').innerHTML='定位失败'
+    document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
+}
 //添加marker标记
 function addMarker() {
     map.clearMap();
@@ -119,7 +201,7 @@ var title = 'HeroHotel<span style="font-size:11px;color:#F00;">欢迎你的到�
     content = [];
 content.push("<img src='http://tpc.googlesyndication.com/simgad/5843493769827749134'>地址：成都市天府新区孵化园5栋");
 content.push("电话：010-64733333");
-content.push("<a href='https://ditu.amap.com/detail/B000A8URXB?citycode=110105'>详细信息</a>");
+content.push("<a href='/shuaixinjie/bookroom.html'>我们的主页</a>");
 var infoWindow = new AMap.InfoWindow({
     isCustom: true,  //使用自定义窗体
     content: createInfoWindow(title, content.join("<br/>")),
