@@ -6,7 +6,7 @@ public class House {
     private Integer id;//房间id
     private Integer typeid;//房间类型id
     private Integer flag;
-    private String clean;//清洁状态
+    private Integer clean;//清洁状态
     private Integer maintenance;//维修状态
 
     @Override
@@ -44,11 +44,11 @@ public class House {
         this.flag = flag;
     }
 
-    public String getClean() {
+    public Integer getClean() {
         return clean;
     }
 
-    public void setClean(String clean) {
+    public void setClean(Integer clean) {
         this.clean = clean;
     }
 
@@ -60,7 +60,7 @@ public class House {
         this.maintenance = maintenance;
     }
 
-    public House(Integer id, Integer typeid, Integer flag, String clean, Integer maintenance) {
+    public House(Integer id, Integer typeid, Integer flag, Integer clean, Integer maintenance) {
         this.id = id;
         this.typeid = typeid;
         this.flag = flag;

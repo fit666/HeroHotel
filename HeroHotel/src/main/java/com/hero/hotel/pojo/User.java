@@ -10,12 +10,19 @@ public class User {
     private String account;//账号
     private String password;//密码
     private String tel;//手机号
+    //消费金额类型修改为double
     private double monetary;//消费金额
     private String createtime;//注册时间
     private Integer rm;//记住我
     private Info info;//个人信息
     private Vip vip;//vip等级
     private String code;//手机验证码
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", roleid=" + roleid + ", infoid=" + infoid + ", flag=" + flag + ", account="
+				+ account + ", password=" + password + ", tel=" + tel + ", monetary=" + monetary + ", createtime="
+				+ createtime + ", rm=" + rm + ", info=" + info + ", vip=" + vip + ", code=" + code + "]";
+	}
 	public User(Integer id, Integer roleid, Integer infoid, Integer flag, String account, String password, String tel,
 			double monetary, String createtime, Integer rm, Info info, Vip vip, String code) {
 		super();
@@ -33,8 +40,9 @@ public class User {
 		this.vip = vip;
 		this.code = code;
 	}
-	public User() {
-		super();
+    
+    public User() {
+		
 	}
 	public Integer getId() {
 		return id;
@@ -114,13 +122,6 @@ public class User {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", roleid=" + roleid + ", infoid=" + infoid + ", flag=" + flag + ", account="
-				+ account + ", password=" + password + ", tel=" + tel + ", monetary=" + monetary + ", createtime="
-				+ createtime + ", rm=" + rm + ", info=" + info + ", vip=" + vip + ", code=" + code + "]";
-	}
-    
-    
 
+    
 }
