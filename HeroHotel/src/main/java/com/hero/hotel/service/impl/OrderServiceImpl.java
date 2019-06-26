@@ -118,7 +118,8 @@ public class OrderServiceImpl implements OrderService {
 		return model;
 	}
 
-	// 修改订单信息
+
+    //修改订单信息
 	@Override
 	public ModelAndView updateOrder(Info info, Order order, OrderItem orderItem) {
 		ModelAndView model = new ModelAndView();
@@ -180,5 +181,86 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	
+
+	//根据某时间段查询住房情况
+	@Override
+	public Integer findHouseNumberByTypeid(List<String> todays, Integer typeid) {
+		//所有的住房信息
+		List<LiveNotes> houseByType = houseDao.findHouseByType(typeid);
+		//根据房间类型查找所有的房间id
+		List<Integer> houseidByType = houseDao.findHouseidByType(typeid);
+		//可用房间数量
+		Integer houseNumber=houseidByType.size();
+		for (int i = 0; i < houseidByType.size(); i++) {
+			for (int j = 0; j < houseByType.size(); j++) {
+				if(todays.contains(houseByType.get(j).getDate())&&houseidByType.get(i).equals(houseByType.get(j).getHouseid())){
+					houseNumber--;
+					break;
+				}
+
+			}
+		}
+		return houseNumber;
+	}
+	//code by sxj , 大佬别删我
+	@Override
+	public void orderSubmit(String ordernumber, String currenttime, String name, String sex, String tel, String idcard, List<String> todays, List<Integer> housenumber) {
+		//先放入用户信息，并返回一个用户id，先用手机号检索，如果有就不插入了，没有就插入
+		Integer infoid = 0;
+		Info userInfo=orderDao.findInfoByTel(tel);
+		System.out.println(userInfo);
+		if (userInfo==null){
+			orderDao.addInfoByOrder(tel,name,sex,idcard);
+			Info info = orderDao.findInfoByTel(tel);
+			infoid=info.getInfoid();
+		}else {
+			infoid=userInfo.getInfoid();
+		}
+
+		Integer userid=1;  //这里先假设一个
+		//放入订单信息
+		orderDao.addOrderInfo(userid,currenttime,ordernumber);
+		//存入livenotes信息，这里需要一个infoid，来自info
+
+		//存放一个订单项信息，需要一个订单id，
+
+
+
+		//存放订单信息
+		for (int typeid = 1; typeid <= 4 ; typeid++) {
+			//所有的住房信息
+			List<LiveNotes> houseByType = houseDao.findHouseByType(typeid);
+			//根据房间类型查找所有的房间id
+			List<Integer> houseidByType = houseDao.findHouseidByType(typeid);
+			for (int i = 0; i < houseidByType.size(); i++) {
+                System.out.println("执行2");
+			    if(housenumber.get(typeid).equals(0)){
+			        break;
+                }
+				for (int j = 0; j < houseByType.size(); j++) {
+                    System.out.println("执行3");
+					if(todays.contains(houseByType.get(j).getDate())&&houseidByType.get(i).equals(houseByType.get(j).getHouseid())){
+						houseidByType.remove(i);
+						break;
+					}
+				}
+				for (int j = 0; j < houseidByType.size(); j++) {
+					if(housenumber.get(typeid).equals(0)){
+						break;
+					}
+					for (int k = 0; k < todays.size(); k++) {
+						System.out.println("执行1");
+						houseDao.addDay(houseidByType.get(j),typeid,todays.get(k),infoid);
+
+					}
+					housenumber.set(typeid,housenumber.get(typeid)-1);
+				}
+			}
+
+
+	    }
+
+
+    }
 
 }

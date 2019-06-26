@@ -60,4 +60,10 @@ public interface OrderService {
 
 	// 取消订单
 	public Boolean canceOrder(Integer orderItemid,Integer houseid);
+
+
+	public Integer findHouseNumberByTypeid(List<String> todays,Integer typeid);
+
+    public void orderSubmit(String id, String currenttime, String name, String sex, String tel, String idcard, List<String> todays, List<Integer> housenumber);
+
 }

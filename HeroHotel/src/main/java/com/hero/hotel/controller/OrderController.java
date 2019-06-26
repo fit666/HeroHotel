@@ -157,11 +157,13 @@ public class OrderController {
 		return null;
 	}
 
+
 	// 取消订单   要跳 那些页面 你来定
 	@RequestMapping("/canceOrder")
 	public ModelAndView canceOrder(Integer orderItemid, Integer houseid) {
 		Boolean flag = orderService.settleAccounts(orderItemid, houseid);
 		return null;
+
 	}
 
 }
