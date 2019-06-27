@@ -70,6 +70,16 @@ public class HouseController {
 		System.out.println(houses);
 		return modelAndView;
 	}
+	@GetMapping("/findAepairRooms")
+	public ModelAndView findAepairRooms() {
+		List<House> houses = houseService.findRepairRooms();
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("rooms", houses);
+		modelAndView.setViewName("backstage-html/roomStatus.html");
+		System.out.println(houses);
+		return modelAndView;
+	}
+
 	/*
 	 * 下架房间
 	 */
@@ -102,6 +112,18 @@ public class HouseController {
 		mav.addObject("allHouses", allHouses);
 		mav.setViewName("/backstage-html/house-list2.html");
 		return mav;
+	}
+
+	@GetMapping("/addRepair")
+	@ResponseBody
+	public ModelAndView addRepairRoom(Integer houseid) {
+		Boolean flag = houseService.addRepairRoom(houseid);
+		List<House> houses = houseService.findRoomAllStatus();
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("rooms", houses);
+		modelAndView.setViewName("backstage-html/roomStatus.html");
+		System.out.println(houses);
+		return modelAndView;
 	}
 	
 	

@@ -22,7 +22,6 @@ import com.hero.hotel.pojo.User;
 import com.hero.hotel.pojo.Vip;
 import com.hero.hotel.service.OrderService;
 
-
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -46,7 +45,7 @@ public class OrderController {
 		//从对象中获取对应的折扣
 		Vip vip = new Vip();
 		vip.setDiscount(1.0);
-		if (user != null) {	
+		if (user != null) {
 			if (user.getMonetary()<2000) {
 				vip.setDiscount(1.0);
 			} else if (user.getMonetary()>=2000 && user.getMonetary() < 5000) {
@@ -70,9 +69,9 @@ public class OrderController {
 		String orderNumber = "" + System.currentTimeMillis()+id+new Random().nextInt(10);
 		order.setOrdernumber(orderNumber);//存入订单编号
 		orderService.addOrder(order);
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		//插入房间记录表
 		/*
 		 * 查询可用的房间
@@ -80,12 +79,12 @@ public class OrderController {
 		//查询所有房间id
 		LiveNotes liveNotes = new LiveNotes();
 		liveNotes.setTypeid(orderItem.getTypeid());
-		
+
 		List<String> allDay = new ArrayList<>();
 		//保留前端传入的入住时间
 		Date date3 = date1;
 		while(date1.getTime()!=date2.getTime()){
-			
+
 			allDay.add(sdf.format(date1));
 			date1=new Date(date1.getTime()+24*60*60*1000);
 		}
@@ -94,7 +93,7 @@ public class OrderController {
 		//将日期转换为字符串
 		for (int i = 0; i < allDay.size(); i++) {
 			liveNotes.setDate(allDay.get(i));
-			//查询已经入住的房间id			
+			//查询已经入住的房间id
 			List<Integer> liveRoomIds = orderService.findAllliveRoomsByTypeid(liveNotes);
 			roomIds.removeAll(liveRoomIds);
 		}
@@ -105,10 +104,10 @@ public class OrderController {
 		}
 		//查询个人信息id
 		Order order2 = orderService.findIdByOrderNumber(orderNumber);
-		
+
 		//将个人信息id加入入住信息
 		if (roomIds.size() >= orderItem.getQuantity()) {
-			
+
 			liveNotes.setInfoid(info2.getInfoid());
 			//将可入住房间加入入住信息表
 			int roomnumber=orderItem.getQuantity();
@@ -125,20 +124,20 @@ public class OrderController {
 				//订单根据订单id获取所有订单项id
 				List<Integer> orderItemids =orderService.findOrderItemByOrderid(order2.getOrderid());
 				System.out.println(roomIds.get(i)+"1111");
-				
-					liveNotes.setOrderItemid(orderItemids.get(i));
-					for (int k = 0; k < allDay.size(); k++) {
-						liveNotes.setDate(allDay.get(k));
-						orderService.addLiveNotes(liveNotes);
-						
-					}
+
+				liveNotes.setOrderItemid(orderItemids.get(i));
+				for (int k = 0; k < allDay.size(); k++) {
+					liveNotes.setDate(allDay.get(k));
+					orderService.addLiveNotes(liveNotes);
+
 				}
-				
-			}	
+			}
+
+		}
 		model.setViewName("backstage-html/add-oder.html");
 		return model;
 	}
-	
+
 	//查找某位客人的所有订单记录
 	@RequestMapping("/findorder")
 	public ModelAndView findOrder(Info info) {
@@ -149,7 +148,7 @@ public class OrderController {
 		return model;
 	}
 
-	
+
 	//查询所有订单记录
 	@RequestMapping("/findallorder")
 	public ModelAndView findAllOrder() {
@@ -159,7 +158,7 @@ public class OrderController {
 		model.setViewName("backstage-html/findOrder.html");
 		return model;
 	}
-	
+
 	//查询修改订单信息
 	@RequestMapping("/findupdate")
 	public ModelAndView findupdate(Integer id) {
@@ -185,7 +184,7 @@ public class OrderController {
 		model.setViewName("backstage-html/findOrder.html");
 		return model;
 	}
-	
+
 
 
 	// 结账  要跳 那些页面 你来定
@@ -195,7 +194,7 @@ public class OrderController {
 		/*
 		 * lining
 		 */
-		ModelAndView model = new ModelAndView();		
+		ModelAndView model = new ModelAndView();
 		if (flag) {
 			List<Info> infos= orderService.findAllOrders();
 			model.addObject("infos", infos);
@@ -209,7 +208,7 @@ public class OrderController {
 	@RequestMapping("/canceOrder")
 	public ModelAndView canceOrder(Integer id, Integer houseid) {
 		Boolean flag = orderService.settleAccounts(id, houseid);
-		ModelAndView model = new ModelAndView();		
+		ModelAndView model = new ModelAndView();
 		if (flag) {
 			List<Info> infos= orderService.findAllOrders();
 			model.addObject("infos", infos);
