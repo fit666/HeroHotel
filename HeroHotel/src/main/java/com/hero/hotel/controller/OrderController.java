@@ -28,6 +28,7 @@ public class OrderController {
 	@Resource
 	private OrderService orderService;
 
+
 	// 添加订单(订单中支付编号在支付完成后插入订单中)
 	@RequestMapping("/addorder")
 	public ModelAndView addOrder(Info info, Order order, OrderItem orderItem,
