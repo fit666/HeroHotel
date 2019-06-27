@@ -31,7 +31,12 @@ public class OrderServiceImpl implements OrderService{
 	public void addOrderItem(OrderItem orderItem) {
 		orderDao.addOrderItem(orderItem);
 	}
-	//个人信息表插入数据
+	//查询订单id,根据订单编号查找
+	@Override
+	public List<Integer> findOrderItemByOrderid(Integer orderid) {		
+		return orderDao.findOrderItemByOrderid(orderid);
+	}
+
 	@Override
 	public void addInfo(Info info) {
 		orderDao.addInfo(info);
@@ -76,6 +81,7 @@ public class OrderServiceImpl implements OrderService{
 	public List<Integer> findAllliveRoomsByTypeid(LiveNotes liveNotes) {
 		return orderDao.findAllliveRoomsByTypeid(liveNotes);
 	}
+
 	
 	
 	//查询所有
@@ -108,31 +114,20 @@ public class OrderServiceImpl implements OrderService{
 		model.addObject("orderItem", orderItem);
 		return model;
 	}
-	//修改订单信息
+
+
+
+	// 修改订单信息
 	@Override
 	public ModelAndView updateOrder(Info info, Order order, OrderItem orderItem) {
 		ModelAndView model = new ModelAndView();
 		System.out.println(info);
 		Boolean result = orderDao.updateInfo(info);
-		System.out.println(result);
 		orderDao.updateOrderItem(orderItem);
 		orderDao.updateOrder(order);
 		return model;
 	}
-	
-	//删除订单
-	//@Override
-	/*public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order,Info info) {
-		ModelAndView model = new ModelAndView();
-		orderDao.updateLiveNotesFlag(liveNotes);
-		orderDao.updateOrderItemFlag(orderItem);
-		orderDao.updateOrderFlag(order);
-		User user = orderDao.findUser(info);		
-		Order order2 = orderDao.findOder(user.getId());
-		model.addObject("uname", info.getUname());
-		model.addObject(order2);
-		return model;		
-	}*/
+
 
 
 	
@@ -142,11 +137,6 @@ public class OrderServiceImpl implements OrderService{
 		Boolean flag = orderDao.settleAccounts(houseid);
 		
 		
-		return null;
-	}
-	@Override
-	public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order, Info info) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

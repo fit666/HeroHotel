@@ -13,13 +13,14 @@
 <title>添加用户</title>
 </head>
 <body>
-${param.tel}
 <div class="pd-20">
   <form action="/order/updateorder" method="post" class="form form-horizontal" id="form-member-add">
+  <input type="hidden" name="orderid" th:value="${orderItem.orderid}"/>
+  <input type="hidden" name="infoid" th:value="${info.infoid}"/>
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>姓名：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" th: placeholder="" id="uname" name="uname" datatype="*2-16" nullmsg="用户名不能为空">
+        <input type="text" class="input-text" th:value="${info.uname}" placeholder="" id="uname" name="uname" datatype="*2-16" nullmsg="用户名不能为空">
       </div>
       <div class="col-4"> </div>
     </div>
@@ -34,28 +35,28 @@ ${param.tel}
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>身份证：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" name="idcard" id="idcard"  nullmsg="身份证">
+        <input type="text" class="input-text" th:value="${info.idcard}" name="idcard" id="idcard"  nullmsg="身份证">
       </div>
       <div class="col-4"> </div>
     </div>
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>入住时间：</label>
 			<div class="formControls col-5">
-				<input type="date" class="input-text" name="date1" id="livedate" nullmsg="入住时间">
+				<input type="date" class="input-text" th:value="${orderItem.starttime}" name="date1" id="livedate" nullmsg="入住时间">
 			</div>
 			<div class="col-4"> </div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>离开时间：</label>
 			<div class="formControls col-5">
-				<input type="date" class="input-text" name="date2" id="leavedate"  nullmsg="离开时间">
+				<input type="date" class="input-text" th:value="${orderItem.endtime}" name="date2" id="leavedate"  nullmsg="离开时间">
 			</div>
 			<div class="col-4"> </div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>居住天数：</label>
 			<div class="formControls col-5">
-				<input type="date" class="input-text" name="day" id="leavedate"  nullmsg="居住天数">
+				<input type="text" class="input-text" th:value="${orderItem.day}" name="day" id="day"  nullmsg="居住天数">
 			</div>
 			<div class="col-4"> </div>
 		</div>
@@ -69,6 +70,20 @@ ${param.tel}
           <option value="3">大床房</option>
         </select>
         </span> </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>押金：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" th:value="${order.deposit}" id="deposit" name="deposit">
+      </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>留言：</label>
+      <div class="formControls col-5">
+        <textarea cols="50" rows="10" class="input-text" th:value="${order.message}" name="message">如有需要，请留言</textarea>
+      </div>
       <div class="col-4"> </div>
     </div>
       <div class="col-9 col-offset-3">

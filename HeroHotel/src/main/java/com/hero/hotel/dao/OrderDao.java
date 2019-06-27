@@ -27,8 +27,9 @@ public interface OrderDao {
 	 * 前端发送数据有：姓名，性别，电话，身份证，预定天数，预定到达时间，房间类型，押金，留言，到达取消时间是否自动取消预订
 	 */
 	//订单表插入数据
-	@Insert("insert into t_order(createtime,updatetime,ordernumber,total,userid,infoid) values(#{createtime},#{updatetime},#{ordernumber},"
-			+ "#{total},#{userid},#{infoid})")
+	@Insert("insert into t_order(createtime,updatetime,ordernumber,total,userid,infoid,deposit,message) values"
+			+ "(#{createtime},#{updatetime},#{ordernumber},"
+			+ "#{total},#{userid},#{infoid},#{deposit},#{message})")
 	public void addOrder(Order order);
 	//查询订单id,根据订单编号查找
 	@Select("select * from t_order where orderNumber = #{orderNumber}")
@@ -37,6 +38,9 @@ public interface OrderDao {
 	@Insert("insert into t_orderitem(typeid,orderid,quantity,starttime,day,price,endtime,houseid) values(#{typeid},"
 			+ "#{orderid},#{quantity},#{starttime},#{day},#{price},#{endtime},#{houseid})")
 	public void addOrderItem(OrderItem orderItem);
+	@Select("select id from t_orderitem where orderid=#{orderid}")
+	//根据订单id查询所有订单项id
+	public List<Integer> findOrderItemByOrderid(Integer orderid);
 	//个人信息表插入数据
 	@Insert("insert into t_info(tel,uname,sex,idcard) values(#{tel},#{uname},#{sex},#{idcard})")
 	public void addInfo(Info info);
@@ -44,7 +48,7 @@ public interface OrderDao {
 	@Select("select * from t_info where idcard = #{idcard}")
 	public Info findId(String idcard);
 	//入住日志表插入数据
-	@Insert("insert into t_livenotes(houseid,typeid,infoid,date) values(#{houseid},#{typeid},#{infoid},#{date})")
+	@Insert("insert into t_livenotes(houseid,typeid,infoid,date,orderItemid) values(#{houseid},#{typeid},#{infoid},#{date},#{orderItemid})")
 	public void addLiveNotes(LiveNotes liveNotes);
 	//查找房间价格
 	@Select("select * from t_housetype where typeid=#{typeid}")
@@ -65,13 +69,6 @@ public interface OrderDao {
 	public User findMonetaryByid(Integer id);
 	@Select("select * from t_vip where vmoney=#{vmoney}")
 	public Vip findDiscountByMonetary(double vmoney);
-	
-	/*
-	 * 删除订单
-	 * 1.进入订单页面，自动先查询该用户的所有订单和订单项，1的为可删，2则为不可删（flag为1的表示可以已定但还未入住的，
-	 * flag为2的表示已定已入住的的，3表示取消的订单）
-	 * 2点击删除按钮，后台将订单和订单项中的flag修改为3，之后再自动查询一次，显示给页面
-	 */
 	
 	
 	
@@ -106,7 +103,7 @@ public interface OrderDao {
 	 * 4.根据订单id获取所有的订单项id
 	 * 5.根据个人信息id获取房间id
 	 */
-	@Select("select * from t_info where uname like CONCAT('%',#{uname},'%') or tel like #{tel}")
+	@Select("select * from t_info where uname like CONCAT('%',#{uname},'%') or tel like CONCAT('%',#{tel},'%')")
 	@Results({
 		@Result(id=true,column="infoid",property="infoid"),
 		@Result(column="infoid",property="orders",many=@Many(select="findOrders"))
@@ -127,7 +124,7 @@ public interface OrderDao {
 	
 	/*@Select("select * from t_info where uname=#{uname} or infoid=#{infoid}")
 	public Info findInfo(Info info);*/
-	@Select("select * from t_user where infoid=#{infoid} or tel=#{tel}")
+	/*@Select("select * from t_user where infoid=#{infoid} or tel=#{tel}")
 	public User findUser(Info info);
 	@Select("select * from t_order where infoid=#{infoid}")
 	@Results({
@@ -138,7 +135,7 @@ public interface OrderDao {
 	@Select("select * from t_orderitem where orderid=#{orderid} and flag=1")
 	public List<OrderItem> findAllItemByUserid(Integer orderid);
 	@Select("select * from t-liveinfo where infoid=#{infoid}")
-	public List<LiveNotes> findAllInforByinfoid(Integer infoid);
+	public List<LiveNotes> findAllInforByinfoid(Integer infoid);*/
 	
 	
 	
