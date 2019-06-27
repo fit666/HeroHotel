@@ -16,6 +16,7 @@
 ================================================== -->
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/responsive.css" />
+<link rel="stylesheet" href="css/bookroom.css" />
 
 <!-- Java Script
 ================================================== -->
@@ -129,41 +130,43 @@
 								<label for="flight-from">当前日期:</label>
 								<!--  <input type="text" id="flight-from" class="input-text" placeholder="您的位置" autocomplete="off" />  -->
 				
-								<input type="text" name="shijian" id="flight-from" class="input-text" value="" style=" display:block" readonly="true"> 
+								<input type="text"  id="flight-from" class="input-text" value="" style=" display:block" readonly="true">
 							</div>
 							<div class="field">
-								<label for="flight-to">我们的位置:</label>
+								<label for="flight-to" >我们的位置:</label>
 								<input type="text" id="flight-to" class="input-text" placeholder="蔻丁科技-瞎扯淡大酒店" autocomplete="off" />
 							</div>
 							<div class="field half">
 								<label for="flight-depart">入住时间:</label>
-								<input type="text" id="flight-depart" class="input-text input-cal" placeholder="2012-10-01" autocomplete="off" />
+								<input type="date" id="flight-depart"  placeholder="2012-10-01" autocomplete="off" />
 							</div>
 							<div class="field half even">
 								<label for="flight-return">离开时间:</label>
-								<input type="text" id="flight-return" class="input-text input-cal" placeholder="2012-10-01" autocomplete="off" />
+								<input type="date" id="flight-return"  placeholder="2012-10-01" autocomplete="off" onchange="checkhouse()"/>
 							</div>
 							<div class="field half">
 								<label for="flight-class">住房类型:</label>
-								<select id="flight-class">
-								<option>--请选择--</option>
-									<option value="0">单人间</option>
-									<option value="1">双人间</option>
-									<option value="2">家庭套间</option>
-									<option value="3">商务套间</option>
-									<option value="4">总统套间</option>
+								<select id="roomtype">
+									<option value="1">单人间</option>
+									<option value="2">双人间</option>
+									<option value="3">家庭套间</option>
+									<option value="4">商务套间</option>
+									<option value="5">总统套间</option>
 								</select>
 							</div>
 							<div class="field half even">
-								<label for="flight-person">预定类型:</label>
-								<select id="flight-person">
-									<option>--请选择--</option>
-									<option value="0">客房</option>
-									<option value="1">会议厅</option>
-									<option value="2">餐厅</option>
-								</select>
+<!--								<label for="flight-person">预定类型:</label>-->
+<!--								<select id="flight-person">-->
+<!--									<option>&#45;&#45;请选择&#45;&#45;</option>-->
+<!--									<option value="0">客房</option>-->
+<!--									<option value="1">会议厅</option>-->
+<!--									<option value="2">餐厅</option>-->
+<!--								</select>-->
+								<label >&nbsp;</label>
+<!--								<span onclick="checkhouse()"><input type="button" value="查询" style="background-color: red"></span>-->
 							</div>
-							<button class="submit" onclick="book()">预定</button>
+<!--							<button  onclick="book()">我要预定</button>-->
+							<input type="button" onclick="book()" value="预定">
 							<br class="clear" />
 						</form>
 					</div>
@@ -242,7 +245,97 @@
 			
 			
 			
-			<div class="hr"><hr /></div>			
+			<div class="hr">
+				<table style="border: red 1px solid;width: 900px;font-size: 20px; font-family: 微软雅黑">
+					<tr style="border: red 1px solid;height: 30px;" >
+						<td>类型</td>
+						<td>描述</td>
+						<td>查看详情</td>
+						<td>价格</td>
+						<td>房间数量</td>
+						<td>预定</td>
+					</tr>
+					<tr style="border: red 1px solid;height: 60px">
+						<td><img src="images/tu2.jpg" style="height: 80px;"></td>
+						<td>单人间</td>
+						<td><input type="button" value="查看"></td>
+						<td>150元</td>
+						<td>剩余<span id="singlenumber">*</span>间</td>
+						<td><input type="button" value="-" onclick="reduce1()">
+							<span id="single">0</span>
+							<input type="button" value="+" onclick="add1()">
+						</td>
+					</tr>
+					<tr style="border: red 1px solid;height: 60px">
+						<td><img src="images/tu3.jpg" style="height: 80px;"></td>
+						<td>双人间</td>
+						<td><input type="button" value="查看"></td>
+						<td>200元</td>
+						<td>剩余<span id="doublenumber">*</span>间</td>
+						<td><input type="button" value="-" onclick="reduce2()">
+							<span id="double">0</span>
+							<input type="button" value="+" onclick="add2()">
+						</td>
+					</tr>
+					<tr style="border: red 1px solid;height: 60px">
+						<td><img src="images/tu1.jpg" style="height: 80px;"></td>
+						<td>小套房</td>
+						<td><input type="button" value="查看"></td>
+						<td>500元</td>
+						<td>剩余<span id="trinumber">*</span>间</td>
+						<td><input type="button" value="-" onclick="reduce3()">
+							<span id="tri">0</span>
+							<input type="button" value="+" onclick="add3()">
+						</td>
+					</tr>
+					<tr style="border: red 1px solid;height: 60px">
+						<td><img src="images/tu1.jpg" style="height: 80px;"></td>
+						<td>大套房</td>
+						<td><input type="button" value="查看"></td>
+						<td>500元</td>
+						<td>剩余<span id="fournumber">*</span>间</td>
+						<td><input type="button" value="-" onclick="reduce4()">
+							<span id="four">0</span>
+							<input type="button" value="+" onclick="add4()">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="5" style="text-align: center">
+							<div align="center" style="margin: 50 auto">
+								<button onclick="openwindow()">填写个人信息</button>
+							</div>
+							<!-- 弹窗隐藏区域 -->
+							<div id="myModal" class="modal">
+								<!-- 弹窗内容 -->
+								<div class="modal-content">
+									<div class="modal-header">
+										<span class="close">&times;</span>
+										<h2>填写个人信息</h2>
+									</div>
+									<div class="modal-body">
+										<p>请填写真实有效的个人信息</p>
+										姓名： <input type="text" id="name"><br>
+										电话： <input type="text" id="tel"><br>
+										性别： <select id="sex2">
+												<option value="男">男</option>
+												<option value="女">女</option>
+												</select>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<br>
+										身份证号： <input type="text" id="idcard">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+									</div>
+									<div class="modal-footer">
+										<button class="ok">确定</button>&nbsp;<button class="no">取消</button>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
 			
 			
 
@@ -261,6 +354,74 @@
 		var url="https://www.baidu.com/s?wd="+question;
 		open(url)
 	}
+
+	function checkhouse() {
+		var roomtype=$("#roomtype").val()
+		var livetime = new Date($("#flight-depart").val().replace(/-/g, '/'));
+		var leavetime = new Date($("#flight-return").val().replace(/-/g, '/'));
+		var oneday=60*60*24*1000
+		var days=(leavetime-livetime)/oneday
+		if (days<=0){
+			alert("请填写正确的日期格式~")
+		}
+
+
+		else {
+			$.ajax({
+				url:"../order/findHouseByDays",
+				type:"post",
+				data:{
+					"roomtype":roomtype,
+					"livetime":livetime,
+					"leavetime":leavetime,
+					"days":days
+				},
+				success:function(data){
+					alert(data[1])
+					$("#singlenumber").html(data[1])
+					$("#doublenumber").html(data[2])
+					$("#trinumber").html(data[3])
+					$("#fournumber").html(data[4])
+				}
+
+			})
+		}
+	}
+
+	function book() {
+		var housenumber=[];   //数组下标对应房间类型，数组值代表预定房间数量
+		for (var i = 0; i <= 4; i++) {
+			housenumber[i]=0;
+		}
+		housenumber[1]=parseInt($("#single").html())
+		housenumber[2]=parseInt($("#double").html())
+		housenumber[3]=parseInt($("#tri").html())
+		housenumber[4]=parseInt($("#four").html())
+		var hn=JSON.stringify(housenumber)   //前端数组转化为字符串
+
+		var name=$("#name").val()
+		var tel=$("#tel").val()
+		var sex=$("#sex2").val()
+		var idcard=$("#idcard").val()
+
+		$.ajax({
+			url: "../order/createorder",
+			type:"post",
+			data : {
+				"hn":hn,
+				"name":name,
+				"tel":tel,
+				"sex":sex,
+				"idcard":idcard
+
+			},
+			success: function(result) {
+				alert(result);
+
+			}
+		});
+	}
+
 </script>
 
 </body>

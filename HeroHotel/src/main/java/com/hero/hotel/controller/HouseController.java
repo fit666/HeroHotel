@@ -4,13 +4,17 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hero.hotel.pojo.House;
+import com.hero.hotel.pojo.HouseType;
 import com.hero.hotel.service.HouseService;
+import com.hero.hotel.service.HouseTypeService;
 
 @Controller
 @RequestMapping("/room")
@@ -18,7 +22,8 @@ public class HouseController {
 
 	@Resource
 	private HouseService houseService;
-	
+	@Autowired
+	private HouseTypeService houseTypeService;
 	
 
 	// 查询所有房间状态
@@ -65,7 +70,41 @@ public class HouseController {
 		System.out.println(houses);
 		return modelAndView;
 	}
-
+	/*
+	 * 下架房间
+	 */
+	@RequestMapping("/room-stop")
+	@ResponseBody
+	public String roomStop(Integer id){
+		String result=houseService.stopRoom(id);
+		return result;
+	}
+	
+	/*
+	 * 上架房间
+	 */
+	@RequestMapping("/room-start")
+	@ResponseBody
+	public String roomStart(Integer id){
+		String result=houseService.startRoom(id);
+		return result;
+	}
+	/*
+	 * 增加房间
+	 */
+	@RequestMapping("/addRoom")
+	public ModelAndView addRoom(Integer typeid,Integer number){
+		ModelAndView mav=new ModelAndView();
+		String result=houseService.addRoom(typeid,number);
+		mav.addObject("result",result);
+		//查询所有的房间
+		List<HouseType> allHouses=houseTypeService.findAllHouses();
+		mav.addObject("allHouses", allHouses);
+		mav.setViewName("/backstage-html/house-list2.html");
+		return mav;
+	}
+	
+	
 	// @GetMapping("/findRoomTypeNum")
 	// @ResponseBody
 	// public List<Map> findRoomTypeNum(String time1, String time2) {

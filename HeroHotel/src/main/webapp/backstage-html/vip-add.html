@@ -12,73 +12,35 @@
 <link href="/backstage/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
 <link href="/backstage/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
 
-<title>添加管理员</title>
+<title>添加会员等级</title>
 </head>
 <body>
 <div class="pd-20">
-	<form action="/manager/addManager" method="post" class="form form-horizontal" id="form-admin-add">
+	<form action="/vip/addVip" method="post" class="form form-horizontal" id="form-admin-add">
 		<div class="row cl">
-			<label class="form-label col-3"><span class="c-red">*</span>管理员姓名：</label>
+			<label class="form-label col-3"><span class="c-red">*</span>等级名：</label>
+			<div class="formControls col-5" style="width:150px;">
+				<input type="text" class="input-text" value="" placeholder="" id="user-name" name="vname" datatype="s2-16" nullmsg="等级名不能为空" errormsg="请输入2-16位中文汉字">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		
+		
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>最低消费</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text" value="" placeholder="" id="user-name" name="name" datatype="s2-16" nullmsg="用户名不能为空" errormsg="请输入2-16位中文汉字">
+				<input type="number" class="input-text" value="" placeholder="" id="user-tel" name="vmoney" min="1" datatype="n" nullmsg="请输入消费下限" errormsg="请输入正确的数字">
 			</div>
 			<div class="col-4"> </div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-3"><span class="c-red">*</span>初始密码：</label>
+			<label class="form-label col-3"><span class="c-red">*</span>打折率：</label>
 			<div class="formControls col-5">
-				<input type="password" placeholder="密码" autocomplete="off"  class="input-text" datatype="*6-20" nullmsg="密码不能为空" name="password">
-				
+				<input type="number" class="input-text" value="" placeholder=""  name="discount"max="1" min="0" step="0.01"  nullmsg="请输入打折率" errormsg="请输入数字">
 			</div>
 			<div class="col-4"> </div>
 		</div>
-		<div class="row cl">
-			<label class="form-label col-3"><span class="c-red">*</span>确认密码：</label>
-			<div class="formControls col-5">
-				<input type="password" placeholder="确认新密码" autocomplete="off" class="input-text Validform_error" errormsg="您两次输入的新密码不一致！" datatype="*" nullmsg="请再输入一次新密码！" recheck="password" id="newpassword2" name="newpassword2">
-
-			</div>
-			<div class="col-4"> </div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-3"><span class="c-red">*</span>性别：</label>
-			<div class="formControls col-5 skin-minimal">
-				<div class="radio-box">
-					<input type="radio" id="sex-1" name="sex" datatype="*" value="男" nullmsg="请选择性别！">
-					<label for="sex-1">男</label>
-				</div>
-				<div class="radio-box">
-					<input type="radio" id="sex-2" name="sex" value="女">
-					<label for="sex-2">女</label>
-				</div>
-			</div>
-			<div class="col-4"> </div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-3"><span class="c-red">*</span>手机：</label>
-			<div class="formControls col-5">
-				<input type="text" class="input-text" value="" placeholder="" id="user-tel" name="tel"  datatype="m" nullmsg="手机不能为空">
-			</div>
-			<div class="col-4"> </div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-3"><span class="c-red">*</span>身份证号：</label>
-			<div class="formControls col-5">
-				<input type="text" class="input-text" placeholder="" name="idcard" id="email"  onblur="javascript:validId(this)"  maxlength="20" nullmsg="请输入身份证号！">
-				<span id="idCardMsg" style="color:red;"></span> 
-			</div>
-			<div class="col-4"> </div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-3">角色：</label>
-			<div class="formControls col-5"> <span class="select-box" style="width:150px;">
-				<select class="select" name="roleid" size="1">
-					<option value="0" th:each="role,status:${roles}" th:text="${role.rolename}" th:value="${role.id}">超级管理员</option>
-					
-				</select>
-				</span> </div>
-		</div>
-
+		
 		<div class="row cl">
 			<div class="col-9 col-offset-3">
 				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">

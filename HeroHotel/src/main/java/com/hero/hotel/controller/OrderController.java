@@ -147,7 +147,6 @@ public class OrderController {
 		List<Info> infos = orderService.findOrder(info);
 		model.addObject("infos", infos);
 		model.setViewName("backstage-html/findOrder.html");
-		System.out.println(model);
 		return model;
 	}
 
@@ -191,14 +190,29 @@ public class OrderController {
 
 
 
-	
-	// 结账
-	@RequestMapping("/settle accounts")
-	public ModelAndView settleAccounts(String houseid) {
-		
-		Boolean flag = orderService.settleAccounts(houseid);
-		
-		
+
+	// 删除订单
+	@RequestMapping("/deleteorder")
+	public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order, Info info) {
+		ModelAndView model = new ModelAndView();
+		model = orderService.deleteOrder(liveNotes, orderItem, order, info);
+		model.setViewName("backstage-html/findOrder.html");
+		return model;
+
+	}
+
+	// 结账  要跳 那些页面 你来定
+	@RequestMapping("/settleAccounts")
+	public ModelAndView settleAccounts(Integer orderItemid, Integer houseid) {
+		Boolean flag = orderService.settleAccounts(orderItemid, houseid);
+		return null;
+	}
+
+
+	// 取消订单   要跳 那些页面 你来定
+	@RequestMapping("/canceOrder")
+	public ModelAndView canceOrder(Integer orderItemid, Integer houseid) {
+		Boolean flag = orderService.settleAccounts(orderItemid, houseid);
 		return null;
 
 	}
