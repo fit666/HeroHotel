@@ -59,8 +59,7 @@ public class OrderController {
 		//总价
 		//查询房间单价
 		HouseType houseType = orderService.findPriceByTypeid(orderItem.getTypeid());
-		
-		total = houseType.getPrice()*orderItem.getQuantity()*vip.getDiscount()*day;
+		total = houseType.getPrice()*orderItem.getQuantity()*vip.getDiscount()*day+order.getDeposit();
 		order.setTotal(total);//存入总价
 		//获取订单生成时间
 		Date date = new Date();
@@ -114,15 +113,7 @@ public class OrderController {
 			//将可入住房间加入入住信息表
 			int roomnumber=orderItem.getQuantity();
 			for (int i = 0; i < roomnumber; i++) {
-				//订单id
-				
-				
 				liveNotes.setHouseid(roomIds.get(i));
-				for (int j = 0; j < allDay.size(); j++) {
-					liveNotes.setDate(allDay.get(j));
-					orderService.addLiveNotes(liveNotes);
-					
-				}
 				orderItem.setPrice(houseType.getPrice());//插入价格
 				orderItem.setOrderid(order2.getOrderid());//存入订单id
 				orderItem.setStarttime(sdf.format(date3));//存入入住时间
@@ -131,9 +122,19 @@ public class OrderController {
 				orderItem.setDay(day);//存入入住天数
 				orderItem.setHouseid(liveNotes.getHouseid());
 				orderService.addOrderItem(orderItem);
-			}
-			
-		}
+				//订单根据订单id获取所有订单项id
+				List<Integer> orderItemids =orderService.findOrderItemByOrderid(order2.getOrderid());
+				System.out.println(roomIds.get(i)+"1111");
+				
+					liveNotes.setOrderItemid(orderItemids.get(i));
+					for (int k = 0; k < allDay.size(); k++) {
+						liveNotes.setDate(allDay.get(k));
+						orderService.addLiveNotes(liveNotes);
+						
+					}
+				}
+				
+			}	
 		model.setViewName("backstage-html/add-oder.html");
 		return model;
 	}
@@ -141,6 +142,7 @@ public class OrderController {
 	//查找某位客人的所有订单记录
 	@RequestMapping("/findorder")
 	public ModelAndView findOrder(Info info) {
+		System.out.println("6666"+info);
 		ModelAndView model = new ModelAndView();
 		List<Info> infos = orderService.findOrder(info);
 		model.addObject("infos", infos);
@@ -186,15 +188,6 @@ public class OrderController {
 		return model;
 	}
 	
-	//删除订单
-	@RequestMapping("/deleteorder")
-	public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order,Info info) {
-		ModelAndView model = new ModelAndView();
-		model = orderService.deleteOrder(liveNotes, orderItem, order, info);
-		model.setViewName("backstage-html/findOrder.html");
-		return model;
-		
-	}
 
 
 

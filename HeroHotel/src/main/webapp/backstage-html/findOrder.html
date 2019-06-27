@@ -16,17 +16,22 @@
 		}
 	});
 }); */
-
+function changed(){
+	 var send =$("#change").val();
+	 var reg= /^1[3456789]\d{0,9}$/;
+	 if(!(reg.test(send))){
+		 $("#change").attr("name","uname");
+	 } else {
+		 $("#change").attr("name","tel");
+	 }
+}
 </script>
 </head>
 <body>
 <form action="/order/findorder" method="post">
-查询:<input type="text" name="uname"/>
-<!-- <datalist id="select" style="display: none;">
-     <option value="uname">名字查询</option>
-     <option value="tel">电话查询</option>
- </datalist> -->
-<input type="submit" value="查询">
+查询:<input type="text" name="uname" id="change"/>
+
+<input type="submit" onclick="changed()" value="查询">
 </form>
 	<div class="main-style">
 		<div class="right-style">
@@ -42,6 +47,8 @@
 						<th>离开时间</th>
 						<th>房间类型</th>
 						<th>房间号</th>
+						<th>押金</th>
+						<th>留言</th>
 						<th>订单编号</th>
 						<th>取消订单</th>
 						<th>修改订单</th>
@@ -61,12 +68,13 @@
 						<td th:if="${orderitem.typeid==3}">家庭房</td>
 						<td th:if="${orderitem.typeid==4}">套房</td>
 						<td th:text="${orderitem.houseid}"></td>
+						<td th:text="${order.deposit}"></td>
+						<td th:text="${order.message}"></td>
 						<td th:text="${order.ordernumber}"></td>
-						<td >
-							
+						<td >取消订单</td>
+						<td >							
 							<a th:href="@{/order/findupdate(id=${orderitem.id})}">修改</a>
 						</td>
-						<td></td>
 						<td></td>
 					</tr>
 					</span>

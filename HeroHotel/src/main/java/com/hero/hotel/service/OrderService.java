@@ -5,7 +5,7 @@ package com.hero.hotel.service;
 
 import java.util.List;
 
-
+import org.apache.ibatis.annotations.Select;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hero.hotel.pojo.HouseType;
@@ -32,6 +32,8 @@ public interface OrderService {
 	public Vip findDiscountByMonetary(double vmoney);
 	//查询订单id,根据订单编号查找
 	public Order findIdByOrderNumber(String orderNumber);
+	//根据订单id查询所有订单项
+	public List<Integer> findOrderItemByOrderid(Integer orderid);
 	//查找房间价格
 	public HouseType findPriceByTypeid(Integer typeid);
 	//查找该类型的所有房间，查找当天入住日志表中该类房间已经入住的房间，		
@@ -50,8 +52,6 @@ public interface OrderService {
 	//查询需要修改的订单信息
 	public ModelAndView findUpdateOrder(Integer id);
 	
-	//删除订单
-	public ModelAndView deleteOrder(LiveNotes liveNotes,OrderItem orderItem,Order order,Info info);
 	
 	//查询某个角色的所有订单
 	public List<Info> findOrder(Info info);
