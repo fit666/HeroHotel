@@ -105,14 +105,15 @@ public class OrderServiceImpl implements OrderService {
 	
 	//查询所有
 	@Override
-	public Order findAllOrderItemByUserid(Integer id) {
-		return orderDao.findAllOrderItemByUserid(id);
+	public List<Info> findAllOrders() {
+		return orderDao.findAllInfo();
 	}
 
 	/*
-	 * 查询所有订单
+	 * 查询某个角色所有订单
 	 */
 	@Override
+
 	public List<Info> findOrder(Info info) {
 		
 		return orderDao.findInfo(info);
@@ -120,62 +121,30 @@ public class OrderServiceImpl implements OrderService {
 	//查询需要修改的订单信息
 	@Override
 	public ModelAndView findUpdateOrder(Integer id) {
-
-	@Override
-	public ModelAndView findAllOrder(Info info) {
 		ModelAndView model = new ModelAndView();
-
-		Info info1 = orderDao.findInfo(info);
-		User user = orderDao.findUser(info1.getInfoid());
-
-		Order order = orderDao.findOder(user.getId());
-		model.addObject("uname", info1.getUname());
-		model.addObject(order);
+		OrderItem orderItem = orderDao.findOrderItem(id);
+		Order order = orderDao.findOrder(orderItem.getOrderid());
+		Info info = orderDao.findOneInfo(order.getInfoid());
+		model.addObject("info", info);
+		model.addObject("order", order);
+		model.addObject("orderItem", orderItem);
 		return model;
 	}
-
-
-
-
-
 
     //修改订单信息
 	@Override
 	public ModelAndView updateOrder(Info info, Order order, OrderItem orderItem) {
 		ModelAndView model = new ModelAndView();
-<<<<<<< HEAD
 		System.out.println(info);
 		Boolean result = orderDao.updateInfo(info);
+		System.out.println(result);
 		orderDao.updateOrderItem(orderItem);
+
 		orderDao.updateOrder(order);
-=======
-		orderDao.updateInfo(info);
-		orderDao.updateOrderItem(orderItem);
-		User user = orderDao.findUser(info.getInfoid());
-		Order order2 = orderDao.findOder(user.getId());
-		model.addObject("uname", info.getUname());
-		model.addObject(order2);
-
 		return model;
 	}
-<<<<<<< HEAD
 
-=======
 
-	// 删除订单
-	@Override
-	public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order, Info info) {
-		ModelAndView model = new ModelAndView();
-		orderDao.updateLiveNotesFlag(liveNotes);
-		orderDao.updateOrderItemFlag(orderItem);
-		orderDao.updateOrderFlag(order);
-		User user = orderDao.findUser(info.getInfoid());
-		Order order2 = orderDao.findOder(user.getId());
-		model.addObject("uname", info.getUname());
-		model.addObject(order2);
-		return model;
-	}
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 
 	// 结账
 	@Override
@@ -210,9 +179,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return flag;
 	}
-<<<<<<< HEAD
 
-=======
 	
 	
 
@@ -296,6 +263,4 @@ public class OrderServiceImpl implements OrderService {
 
 
     }
-
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 }

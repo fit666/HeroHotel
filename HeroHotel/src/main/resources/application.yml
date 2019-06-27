@@ -3,11 +3,7 @@ spring:
     cache: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-<<<<<<< HEAD
     url: jdbc:mysql://localhost:3306/hotel?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
-=======
-    url: jdbc:mysql://localhost:3306/herohotel?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
     username: root
     password: 123456
 ####druid连接池配置########

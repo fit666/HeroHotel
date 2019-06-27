@@ -71,11 +71,15 @@ function changed(){
 						<td th:text="${order.deposit}"></td>
 						<td th:text="${order.message}"></td>
 						<td th:text="${order.ordernumber}"></td>
-						<td >取消订单</td>
+						<td >
+							<a th:href="@{/order/canceOrder(id=${orderitem.id},houseid=${orderitem.houseid})}">取消订单</a>
+						</td>
 						<td >							
 							<a th:href="@{/order/findupdate(id=${orderitem.id})}">修改</a>
 						</td>
-						<td></td>
+						<td >
+							<a th:href="@{/order/canceOrder(id=${orderitem.id},houseid=${orderitem.houseid})}">退房</a>
+						</td>
 					</tr>
 					</span>
 					</span>

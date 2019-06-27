@@ -142,7 +142,6 @@ public class OrderController {
 	//查找某位客人的所有订单记录
 	@RequestMapping("/findorder")
 	public ModelAndView findOrder(Info info) {
-		System.out.println("6666"+info);
 		ModelAndView model = new ModelAndView();
 		List<Info> infos = orderService.findOrder(info);
 		model.addObject("infos", infos);
@@ -189,31 +188,34 @@ public class OrderController {
 	
 
 
-
-
-	// 删除订单
-	@RequestMapping("/deleteorder")
-	public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order, Info info) {
-		ModelAndView model = new ModelAndView();
-		model = orderService.deleteOrder(liveNotes, orderItem, order, info);
-		model.setViewName("backstage-html/findOrder.html");
-		return model;
-
-	}
-
 	// 结账  要跳 那些页面 你来定
 	@RequestMapping("/settleAccounts")
-	public ModelAndView settleAccounts(Integer orderItemid, Integer houseid) {
-		Boolean flag = orderService.settleAccounts(orderItemid, houseid);
-		return null;
+	public ModelAndView settleAccounts(Integer id, Integer houseid) {
+		Boolean flag = orderService.settleAccounts(id, houseid);
+		/*
+		 * lining
+		 */
+		ModelAndView model = new ModelAndView();		
+		if (flag) {
+			List<Info> infos= orderService.findAllOrders();
+			model.addObject("infos", infos);
+			model.setViewName("backstage-html/findOrder.html");
+		}
+		return model;
 	}
 
 
 	// 取消订单   要跳 那些页面 你来定
 	@RequestMapping("/canceOrder")
-	public ModelAndView canceOrder(Integer orderItemid, Integer houseid) {
-		Boolean flag = orderService.settleAccounts(orderItemid, houseid);
-		return null;
+	public ModelAndView canceOrder(Integer id, Integer houseid) {
+		Boolean flag = orderService.settleAccounts(id, houseid);
+		ModelAndView model = new ModelAndView();		
+		if (flag) {
+			List<Info> infos= orderService.findAllOrders();
+			model.addObject("infos", infos);
+			model.setViewName("backstage-html/findOrder.html");
+		}
+		return model;
 
 	}
 

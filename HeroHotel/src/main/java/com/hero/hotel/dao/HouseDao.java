@@ -26,7 +26,7 @@ public interface HouseDao {
 	public List<Integer> findOrderInforRid(String time);
 
 	// 修改 房间状态
-	@Update("UPDATE t_house SET flag = #{flag} WHERE houseid = #{houseid} ")
+	@Update("UPDATE t_house SET flag = #{flag} WHERE id = #{houseid} ")
 	public Boolean changeHouseTypeByHouseid(@Param("flag") Integer flag, @Param("houseid") Integer houseid);
 
 	@Select("select * from livenotes where typeid=#{typeid}")

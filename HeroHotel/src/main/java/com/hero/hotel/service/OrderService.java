@@ -39,19 +39,18 @@ public interface OrderService {
 	//查找该类型的所有房间，查找当天入住日志表中该类房间已经入住的房间，		
 	public List<Integer> findAllRoomsByTypeid(Integer typeid);
 	public List<Integer> findAllliveRoomsByTypeid(LiveNotes liveNotes);
-	/*
-	 * 删除订单
-	 * 1.进入订单页面，自动先查询该用户的所有订单和订单项，1的为可删，2则为不可删（flag为1的表示可以已定但还未入住的，
-	 * flag为2的表示已定已入住的的，3表示取消的订单）
-	 * 2点击删除按钮，后台将订单和订单项中的flag修改为3，之后再自动查询一次，显示给页面
-	 */
-	public Order findAllOrderItemByUserid(Integer id);
+	  
 	
 	
+	//查询所有订单记录
+	public List<Info> findAllOrders();
 	
 	//查询某个角色的所有订单
-	public ModelAndView findAllOrder(Info info);
+	public List<Info> findOrder(Info info);
 	
+	//查询需要修改的订单信息
+	public ModelAndView findUpdateOrder(Integer id);
+
 	//修改订单信息
 	public ModelAndView updateOrder(Info info,Order order,OrderItem orderItem);
 

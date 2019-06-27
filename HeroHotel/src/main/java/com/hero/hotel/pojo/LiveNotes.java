@@ -8,27 +8,17 @@ public class LiveNotes {
 	private Integer houseid;// 房间id
 	private Integer typeid;// 房间类型id
 	private Integer infoid;// 个人信息id
-<<<<<<< HEAD
 	private Integer flag;
 	private String date;// 居住时间
 	// 添加字段订单项id
-	private Integer orderItemid;
-=======
 	private Integer orderItemid;// 订单项id
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 
-<<<<<<< HEAD
 	@Override
 	public String toString() {
 		return "LiveNotes [id=" + id + ", houseid=" + houseid + ", typeid=" + typeid + ", infoid=" + infoid + ", flag="
 				+ flag + ", date=" + date + ", orderItemid=" + orderItemid + "]";
 	}
-=======
-	private Integer flag;
-	private String date;// 居住时间
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 
-<<<<<<< HEAD
 	public LiveNotes(Integer id, Integer houseid, Integer typeid, Integer infoid, Integer flag, String date,
 			Integer orderItemid) {
 		super();
@@ -39,120 +29,52 @@ public class LiveNotes {
 		this.flag = flag;
 		this.date = date;
 		this.orderItemid = orderItemid;
-=======
-	@Override
-	public String toString() {
-		return "LiveNotes{" + "id=" + id + ", houseid=" + houseid + ", typeid=" + typeid + ", infoid=" + infoid
-				+ ", flag=" + flag + ", date='" + date + '\'' + '}';
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 	}
 
-<<<<<<< HEAD
 	public LiveNotes() {
-=======
+
+	}
+
 	public Integer getId() {
 		return id;
 	}
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 
-<<<<<<< HEAD
-=======
 	public void setId(Integer id) {
 		this.id = id;
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 	}
 
-<<<<<<< HEAD
-	public Integer getId() {
-		return id;
-=======
 	public Integer getHouseid() {
 		return houseid;
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 	}
 
-<<<<<<< HEAD
-	public void setId(Integer id) {
-		this.id = id;
-=======
 	public void setHouseid(Integer houseid) {
 		this.houseid = houseid;
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 	}
 
-<<<<<<< HEAD
-	public Integer getHouseid() {
-		return houseid;
-=======
 	public Integer getTypeid() {
 		return typeid;
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 	}
 
-<<<<<<< HEAD
-	public void setHouseid(Integer houseid) {
-		this.houseid = houseid;
-=======
 	public void setTypeid(Integer typeid) {
 		this.typeid = typeid;
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 	}
 
-<<<<<<< HEAD
-	public Integer getTypeid() {
-		return typeid;
-=======
 	public Integer getInfoid() {
 		return infoid;
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 	}
 
-<<<<<<< HEAD
-	public void setTypeid(Integer typeid) {
-		this.typeid = typeid;
-=======
 	public void setInfoid(Integer infoid) {
 		this.infoid = infoid;
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 	}
 
-<<<<<<< HEAD
-	public Integer getInfoid() {
-		return infoid;
-=======
 	public Integer getFlag() {
 		return flag;
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 	}
 
-<<<<<<< HEAD
-	public void setInfoid(Integer infoid) {
-		this.infoid = infoid;
-=======
 	public void setFlag(Integer flag) {
 		this.flag = flag;
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 	}
 
-<<<<<<< HEAD
-	public Integer getFlag() {
-		return flag;
-=======
-	public String getDate() {
-		return date;
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
-	}
-
-<<<<<<< HEAD
-	public void setFlag(Integer flag) {
-		this.flag = flag;
-=======
-	public void setDate(String date) {
-		this.date = date;
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
-	}
-
-<<<<<<< HEAD
 	public String getDate() {
 		return date;
 	}
@@ -169,17 +91,4 @@ public class LiveNotes {
 		this.orderItemid = orderItemid;
 	}
 
-=======
-	public LiveNotes(Integer id, Integer houseid, Integer typeid, Integer infoid, Integer flag, String date) {
-		this.id = id;
-		this.houseid = houseid;
-		this.typeid = typeid;
-		this.infoid = infoid;
-		this.flag = flag;
-		this.date = date;
-	}
-
-	public LiveNotes() {
-	}
->>>>>>> branch 'master' of https://github.com/fit666/HeroHotel.git
 }
