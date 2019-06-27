@@ -19,19 +19,7 @@
 <meta name="description"
 	content="H-ui.admin v2.3，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 
-<script type="/backstage/text/javascript" src="/backstage/js/jquery.js"></script>
-<script>
-	$(document.body).ready(function () {
-	    //首次获取验证码
-	    $("#imgVerify").attr("src","/code/getCode?"+Math.random());
-	});
-	
-	//获取验证码
-	function getVerify(){
-	    var src1=document.getElementById('imgVerify')
-	    src1.src = "/code/getCode?"+Math.random();
-	}
-</script>
+
 
 </head>
 <body>
@@ -39,24 +27,24 @@
 	<div class="header"></div>
 	<div class="loginWraper">
 		<div id="loginform" class="loginBox">
-			<form class="form form-horizontal" action="/manager/login" method="post">
+			<form class="form form-horizontal" action="" method="">
 				<div class="row cl">
 					<label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 					<div class="formControls col-8">
-						<input id="" name="account" type="text" placeholder="账户"
+						<input id="account" name="account" type="text" placeholder="账户"
 							class="input-text size-L">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-3"><i class="Hui-iconfont">&#xe60e;</i></label>
 					<div class="formControls col-8">
-						<input id="" name="password" type="password" placeholder="密码"
+						<input id="password" name="password" type="password" placeholder="密码"
 							class="input-text size-L">
 					</div>
 				</div>
 				<div class="row cl">
 					<div class="formControls col-8 col-offset-3">
-						<input class="input-text size-L" type="text" placeholder="验证码" name="codeValue"
+						<input class="input-text size-L" type="text" placeholder="验证码" name="codeValue" id="codeValue"
 							onblur="if(this.value==''){this.value='验证码:'}"
 							onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:"
 							style="width: 150px;"> <img id="imgVerify"
@@ -73,7 +61,7 @@
 				</div>
 				<div class="row">
 					<div class="formControls col-8 col-offset-3">
-						<input name="" type="submit" class="btn btn-success radius size-L"
+						<input name="" type="button" onclick="login()"class="btn btn-success radius size-L"
 							value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"> <input
 							name="" type="reset" class="btn btn-default radius size-L"
 							value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
@@ -82,10 +70,46 @@
 			</form>
 		</div>
 	</div>
-	<div class="footer">Copyright HeroHotle by H-ui.admin.v2.3</div>
-	<script type="text/javascript" src="/backstage/lib/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/backstage/js/H-ui.js"></script>
-	<script>
+<div class="footer">Copyright HeroHotle by H-ui.admin.v2.3</div>
+<script type="text/javascript" src="/backstage/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/backstage/js/H-ui.js"></script>
+<script type="/backstage/text/javascript" src="/backstage/js/jquery.js"></script>
+<script>
+	$(document.body).ready(function () {
+	    //首次获取验证码
+	    $("#imgVerify").attr("src","/code/getCode?"+Math.random());
+	});
+	
+	//获取验证码
+	function getVerify(){
+	    var src1=document.getElementById('imgVerify')
+	    src1.src = "/code/getCode?"+Math.random();
+	}
+
+function login(){
+	$.ajax({
+		url:"/manager/login",
+		type:"post",
+		data:{
+			"account":$("#account").val(),
+			"password":$("#password").val(),
+			"rm":$("input[type='checkbox']:checked").val(),
+			codeValue:$("#codeValue").val()
+		},
+		success:function(data){
+			if(data!="success"){
+				alert(data);
+			}else{
+				location.href="/backstage-html/manager-index.html"
+			}
+		}
+	})
+	
+}
+
+
+
+
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
