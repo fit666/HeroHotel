@@ -46,6 +46,12 @@ public class HouseServiceImpl implements HouseService {
 	public List<House> findZangRooms() {
 		return houseDao.findRooms(2);
 	}
+
+	@Override
+	public List<House> findRepairRooms() {
+		return houseDao.findRooms(3);
+	}
+
 	/*
 	 * 下架房间(non-Javadoc)
 	 * @see com.hero.hotel.service.HouseService#stopRoom(java.lang.Integer)
@@ -85,7 +91,14 @@ public class HouseServiceImpl implements HouseService {
 		}
 		return result;
 	}
-	
+
+	@Override
+	public Boolean addRepairRoom(Integer Houseid) {
+		//  通过房间id修改 房间状态为 维修  3
+		Boolean  flag = houseDao.changeHouseTypeByHouseid(3, Houseid);
+		return flag;
+	}
+
 
 //	 @Override
 //	 public List<Map> findRoomTypeNum(String time1, String time2) {
