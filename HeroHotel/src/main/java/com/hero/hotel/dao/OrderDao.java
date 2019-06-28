@@ -201,10 +201,45 @@ public interface OrderDao {
 	@Insert("insert into t_info(tel,uname,sex,idcard) values(#{tel},#{name},#{sex},#{idcard})")
 	public void addInfoByOrder(String tel, String name, String sex, String idcard);
 
-	//添加订单，code by sxj
-	@Insert("insert into t_order(userid,createtime,ordernumber) values(#{userid},#{currenttime},#{ordernumber})")
-	public void addOrderInfo(Integer userid, String currenttime, String ordernumber);
 
 	@Select("select * from t_info where tel=#{tel}")
 	public Info findInfoByTel(String tel);
+
+
+	//添加订单，code by sxj
+	@Insert("insert into t_order(createtime,ordernumber,message,infoid,payway,total,userid) values(#{currenttime},#{ordernumber},#{message},#{infoid},#{payway},#{total},#{userid})")
+	public void addOrderInfo(String currenttime, String ordernumber, String message, Integer infoid, String payway, Double total, Integer userid);
+
+	//返回订单id
+	@Select("select orderid from t_order where ordernumber=#{ordernumber}")
+	public Integer findOrderidByOrdernumebr(String ordernumber);
+
+	//添加订单项
+    @Insert("insert into t_orderitem(houseid,starttime,endtime,typeid,day,orderid,quantity,price) values(#{integer},#{starttime},#{endtime},#{typeid},#{day},#{orderid},1,80)")
+    void addOrderitem(Integer integer, String starttime, String endtime, int typeid, int day, Integer orderid);
+
+
+
+
+    //检索订单（包含订单项）
+    @Select("select * from t_order where userid=#{userid}")
+	@Results({
+			@Result(id=true,column = "orderid",property = "orderid"),
+			@Result(id=true,column = "userid",property = "userid"),
+			@Result(column = "message",property = "message"),
+			@Result(column = "infoid",property = "infoid"),
+			@Result(column = "updatetime",property = "updatetime"),
+			@Result(column = "ordernumber",property = "ordernumber"),
+			@Result(column = "payway",property = "payway"),
+			@Result(column = "payway",property = "payway"),
+			@Result(column = "total",property = "total"),
+			@Result(column = "flag",property = "flag"),
+			@Result(column = "orderid",property = "oderItems",
+					many = @Many(select = "com.hero.hotel.dao.OrderDao.findOrderItemByOrderid")
+			)
+	})
+	public Order findOrderByUserid(Integer userid);
+
+    @Select("select * from t_orderitem where orderid=#{orderid}")
+	public List<OrderItem> findOrderItemByOrderid(Integer orderid);
 }

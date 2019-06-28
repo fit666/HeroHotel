@@ -1,5 +1,6 @@
 package com.hero.hotel.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -7,7 +8,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import com.hero.hotel.utils.RegexUtil;
-import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -185,9 +185,8 @@ public class OrderController {
 	//提交用户的预订单，code by sxj
 	@RequestMapping("/createorder")
 	@ResponseBody
-	public String createOrder(String hn,String name,String tel,String sex,String idcard,HttpSession session){
+	public String createOrder(String message,String hn,String name,String tel,String sex,String idcard,HttpSession session) throws ParseException {
 		List<Integer> housenumber= JSONArray.fromObject(hn);  //真的好厉害啊，那前端数组处理的很漂亮
-
 
         //获得当前时间currenttime
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -201,22 +200,36 @@ public class OrderController {
 
 		//从session直接拿出要用的时间段
 		List<String> todays=(List)session.getAttribute("timeslot");
-
+//		User user = (User) session.getAttribute("user");
+//		Integer id = user.getId();
+//		System.out.println(id);
+//		Vip vip = (Vip) user.getVip();
+//		System.out.println(vip);
 		//在service里面去一次性把所有业务处理了
+		Integer id = 1;  //从session获得一个id
+		Double discount = 0.5;   //从session获得会员等级得到折扣
+
+		System.out.println(name);
+		System.out.println(message);
 		String result = "";
 		if(!tel.matches(RegexUtil.REGEX_MOBILE)){
 			result="手机号码格式不正确";
 		}
 		else if(!idcard.matches(RegexUtil.REGEX_ID_CARD)){
 			result="身份证格式不正确";
-		}else {
+		}else if(name.equals("")){
+			result="请输入姓名";
+		}else if(housenumber.get(1).equals(0)&&housenumber.get(2).equals(0)&&housenumber.get(3).equals(0)&&housenumber.get(4).equals(0)){
+			result="请添加住房信息";
+		}
+
+		else {
 			orderService.orderSubmit(ordernumber,currenttime,name,sex,tel,idcard,
-					todays,housenumber);
+					todays,housenumber,id,discount,message);
 			result="订单生产";
 		}
 
-
-		return result;
+ 		return result;
 	}
 
 }

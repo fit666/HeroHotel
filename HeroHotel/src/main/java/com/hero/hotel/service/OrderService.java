@@ -3,9 +3,11 @@ package com.hero.hotel.service;
 
 
 
+import java.text.ParseException;
 import java.util.List;
 
 
+import com.hero.hotel.dao.OrderDao;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hero.hotel.pojo.HouseType;
@@ -66,7 +68,9 @@ public interface OrderService {
 
 	public Integer findHouseNumberByTypeid(List<String> todays,Integer typeid);
 
-    public void orderSubmit(String id, String currenttime, String name, String sex, String tel, String idcard, List<String> todays, List<Integer> housenumber);
+    public void orderSubmit(String id, String currenttime, String name, String sex, String tel, String idcard, List<String> todays, List<Integer> housenumber,Integer uid,Double discount,String message) throws ParseException;
 
 	ModelAndView findAllOrder(Info info);
+
+	public Order findOrderByUserid(Integer userid);
 }

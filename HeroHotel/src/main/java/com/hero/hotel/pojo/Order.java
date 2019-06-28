@@ -19,34 +19,28 @@ public class Order {
     private double total;//总价
     //添加字段个人信息id
     private Integer infoid;
+    private String message;  // 留言
     //订单项
     private List<OrderItem> oderItems;
 
-
     @Override
-	public String toString() {
-		return "Order [orderid=" + orderid + ", userid=" + userid + ", flag=" + flag + ", createtime=" + createtime
-				+ ", updatetime=" + updatetime + ", ordernumber=" + ordernumber + ", payway=" + payway + ", total="
-				+ total + ", infoid=" + infoid + ", oderItems=" + oderItems + "]";
-	}
+    public String toString() {
+        return "Order{" +
+                "orderid=" + orderid +
+                ", userid=" + userid +
+                ", flag=" + flag +
+                ", createtime='" + createtime + '\'' +
+                ", updatetime='" + updatetime + '\'' +
+                ", ordernumber='" + ordernumber + '\'' +
+                ", payway='" + payway + '\'' +
+                ", total=" + total +
+                ", infoid=" + infoid +
+                ", message='" + message + '\'' +
+                ", oderItems=" + oderItems +
+                '}';
+    }
 
-	public Integer getInfoid() {
-		return infoid;
-	}
-
-	public void setInfoid(Integer infoid) {
-		this.infoid = infoid;
-	}
-
-	public List<OrderItem> getOderItems() {
-		return oderItems;
-	}
-
-	public void setOderItems(List<OrderItem> oderItems) {
-		this.oderItems = oderItems;
-	}
-
-	public Integer getOrderid() {
+    public Integer getOrderid() {
         return orderid;
     }
 
@@ -110,22 +104,49 @@ public class Order {
         this.total = total;
     }
 
-    
-	public Order(Integer orderid, Integer userid, Integer flag, String createtime, String updatetime,
-			String ordernumber, String payway, double total, Integer infoid, List<OrderItem> oderItems) {
-		super();
-		this.orderid = orderid;
-		this.userid = userid;
-		this.flag = flag;
-		this.createtime = createtime;
-		this.updatetime = updatetime;
-		this.ordernumber = ordernumber;
-		this.payway = payway;
-		this.total = total;
-		this.infoid = infoid;
-		this.oderItems = oderItems;
-	}
-
-	public Order() {
+    public Integer getInfoid() {
+        return infoid;
     }
+
+    public void setInfoid(Integer infoid) {
+        this.infoid = infoid;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<OrderItem> getOderItems() {
+        return oderItems;
+    }
+
+    public void setOderItems(List<OrderItem> oderItems) {
+        this.oderItems = oderItems;
+    }
+
+    public Order() {
+    }
+
+    public Order(Integer orderid, Integer userid, Integer flag, String createtime, String updatetime, String ordernumber, String payway, double total, Integer infoid, String message, List<OrderItem> oderItems) {
+        this.orderid = orderid;
+        this.userid = userid;
+        this.flag = flag;
+        this.createtime = createtime;
+        this.updatetime = updatetime;
+        this.ordernumber = ordernumber;
+        this.payway = payway;
+        this.total = total;
+        this.infoid = infoid;
+        this.message = message;
+        this.oderItems = oderItems;
+    }
+
+
+
+
+
 }

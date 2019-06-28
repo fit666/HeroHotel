@@ -1,6 +1,9 @@
 package com.hero.hotel.service.impl;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -187,7 +190,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 	//code by sxj , 大佬别删我
 	@Override
-	public void orderSubmit(String ordernumber, String currenttime, String name, String sex, String tel, String idcard, List<String> todays, List<Integer> housenumber) {
+	public void orderSubmit(String ordernumber, String currenttime, String name, String sex, String tel, String idcard, List<String> todays, List<Integer> housenumber,Integer userid,Double discount,String message) throws ParseException {
 		//先放入用户信息，并返回一个用户id，先用手机号检索，如果有就不插入了，没有就插入
 		Integer infoid = 0;
 		Info userInfo=orderDao.findInfoByTel(tel);
@@ -199,17 +202,29 @@ public class OrderServiceImpl implements OrderService{
 		}else {
 			infoid=userInfo.getInfoid();
 		}
+		//放入订单信息,返回一个orderid
+		Integer orderid = 0;
+        Double total=666.0;
+        String payway="online";
+		orderDao.addOrderInfo(currenttime,ordernumber,message,infoid,payway,total,userid);
+		orderid = orderDao.findOrderidByOrdernumebr(ordernumber);
+		System.out.println(orderid);
 
-		Integer userid=1;  //这里先假设一个
-		//放入订单信息
-		orderDao.addOrderInfo(userid,currenttime,ordernumber);
+
+
+		//为订单项做准备
+		String starttime=todays.get(0);
+		int day = todays.size();
+		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = f.parse(starttime);
+		long time = d.getTime()+1000*60*60*24*day;
+		Date d2 = new Date(time);
+		String endtime = f.format(d2);
+
+		System.out.println("aaaaaaaaaaaaaaa");
+
 		//存入livenotes信息，这里需要一个infoid，来自info
 
-		//存放一个订单项信息，需要一个订单id，
-
-
-
-		//存放订单信息
 		for (int typeid = 1; typeid <= 4 ; typeid++) {
 			//所有的住房信息
 			List<LiveNotes> houseByType = houseDao.findHouseByType(typeid);
@@ -221,7 +236,6 @@ public class OrderServiceImpl implements OrderService{
 			        break;
                 }
 				for (int j = 0; j < houseByType.size(); j++) {
-                    System.out.println("执行3");
 					if(todays.contains(houseByType.get(j).getDate())&&houseidByType.get(i).equals(houseByType.get(j).getHouseid())){
 						houseidByType.remove(i);
 						break;
@@ -232,8 +246,10 @@ public class OrderServiceImpl implements OrderService{
 						break;
 					}
 					for (int k = 0; k < todays.size(); k++) {
-						System.out.println("执行1");
 						houseDao.addDay(houseidByType.get(j),typeid,todays.get(k),infoid);
+
+
+						orderDao.addOrderitem(houseidByType.get(j),starttime,endtime,typeid,day,orderid);
 
 					}
 					housenumber.set(typeid,housenumber.get(typeid)-1);
@@ -243,6 +259,9 @@ public class OrderServiceImpl implements OrderService{
 
 	    }
 
+		//最后还有一个订单项表要插入，硬核直接插入
+
+
 
     }
 
@@ -250,4 +269,9 @@ public class OrderServiceImpl implements OrderService{
     public ModelAndView findAllOrder(Info info) {
         return null;
     }
+
+	@Override
+	public Order findOrderByUserid(Integer userid) {
+		return orderDao.findOrderByUserid(userid);
+	}
 }
