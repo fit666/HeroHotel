@@ -30,6 +30,14 @@ spring:
     filters: stat,wall,log4j
 #通过connectProperties属性来打开mergeSql功能;慢SQL记录
     connectionProperties: 'druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000'
-    
-    
+
+#配置静态资源前后缀
+#spring.thymeleaf.prefix=classpath:/templates/
+#spring.thymeleaf.suffix=.html
+#设置单个文件最大内存
+#multipart.maxFileSize=50Mb
+#设置所有文件最大内存
+#multipart.maxRequestSize=50Mb
+# 自定义文件上传路径
+#web.upload-path=D:/image/  
 

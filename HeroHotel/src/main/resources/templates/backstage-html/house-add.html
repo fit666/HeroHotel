@@ -76,7 +76,13 @@
 			</div>
 			<div class="col-4"> </div>
 		</div>
-	
+	<div class="row cl">
+			<div class="col-10 col-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
+				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
 		<div class="row cl">
 			<label class="form-label col-2">图片上传：</label>
 			<div class="formControls col-10">
@@ -84,9 +90,12 @@
 					<div class="queueList">
 						<div id="dndArea" class="placeholder">
 							<div id="filePicker-2">
-								
+								<form action="/fileUpload" enctype="multipart/form-data" method="post">
+									<input type="file" name="imgurl"><br>
+									<input type="submit"  class="btn btn-primary radius"   value="上传">
+								</form>
 							</div>
-							<p>或将照片拖到这里，单次最多可选3张</p>
+						<!-- 	<p>或将照片拖到这里，单次最多可选3张</p> -->
 						</div>
 					</div>
 					<div class="statusBar" style="display:none;">
@@ -101,13 +110,7 @@
 			</div>
 		</div>
 	
-		<div class="row cl">
-			<div class="col-10 col-offset-2">
-				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
-				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
-			</div>
-		</div>
-	</form>
+		
 </div>
 </div>
 <script type="text/javascript" src="/backstage/lib/jquery/1.9.1/jquery.min.js"></script> 
@@ -122,7 +125,7 @@
 <script type="text/javascript" src="/backstage/js/H-ui.js"></script> 
 <script type="text/javascript" src="/backstage/js/H-ui.admin.js"></script> 
 <script type="text/javascript">
- $(function(){
+/* $(function(){
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',
@@ -757,7 +760,7 @@
 
         };
         /*获取服务器返回的数据*/
-       uploader.on( 'all', function( type ) {
+    /*   uploader.on( 'all', function( type ) {
             var stats;
             switch( type ) {
                 case 'uploadFinished':
@@ -809,7 +812,7 @@
 
  $(function(){
 	var ue = UE.getEditor('editor');
-}); 
+}); */
 </script>
 </body>
 </html>
