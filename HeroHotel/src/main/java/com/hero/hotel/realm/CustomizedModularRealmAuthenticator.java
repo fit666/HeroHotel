@@ -27,12 +27,10 @@ public class CustomizedModularRealmAuthenticator extends ModularRealmAuthenticat
         String loginType = customizedToken.getLoginType();
         // 所有Realm
         Collection<Realm> realms = getRealms();
-        System.out.println("所有realm"+realms);
         // 登录类型对应的所有Realm
         Collection<Realm> typeRealms = new ArrayList<>();
         for (Realm realm : realms) {
             if (realm.getName().contains(loginType))
-            	System.out.println("登录对应的realm"+realm.getName());
                 typeRealms.add(realm);
         }
  

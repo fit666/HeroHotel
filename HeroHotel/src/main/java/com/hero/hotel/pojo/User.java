@@ -1,5 +1,6 @@
 package com.hero.hotel.pojo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /*
@@ -13,8 +14,7 @@ public class User {
     private String account;//账号
     private String password;//密码
     private String tel;//手机号
-    //消费金额类型修改为double
-    private double monetary;//消费金额
+    private BigDecimal monetary;//消费金额
     private Date createtime;//注册时间
     private Integer rm;//记住我
     private Info info;//个人信息
@@ -63,12 +63,7 @@ public class User {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public double getMonetary() {
-		return monetary;
-	}
-	public void setMonetary(double monetary) {
-		this.monetary = monetary;
-	}
+	
 	public Date getCreatetime() {
 		return createtime;
 	}
@@ -106,7 +101,7 @@ public class User {
 		this.role = role;
 	}
 	public User(Integer id, Integer roleid, Integer infoid, Integer flag, String account, String password, String tel,
-			double monetary, Date createtime, Integer rm, Info info, Vip vip, String code, Role role) {
+			BigDecimal monetary, Date createtime, Integer rm, Info info, Vip vip, String code, Role role) {
 		super();
 		this.id = id;
 		this.roleid = roleid;
@@ -126,18 +121,20 @@ public class User {
 	public User() {
 		super();
 	}
+	public BigDecimal getMonetary() {
+		return monetary;
+	}
+	public void setMonetary(BigDecimal monetary) {
+		this.monetary = monetary;
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", roleid=" + roleid + ", infoid=" + infoid + ", flag=" + flag + ", account="
 				+ account + ", password=" + password + ", tel=" + tel + ", monetary=" + monetary + ", createtime="
 				+ createtime + ", rm=" + rm + ", info=" + info + ", vip=" + vip + ", code=" + code + ", role=" + role
-				+ ", getId()=" + getId() + ", getRoleid()=" + getRoleid() + ", getInfoid()=" + getInfoid()
-				+ ", getFlag()=" + getFlag() + ", getAccount()=" + getAccount() + ", getPassword()=" + getPassword()
-				+ ", getTel()=" + getTel() + ", getMonetary()=" + getMonetary() + ", getCreatetime()=" + getCreatetime()
-				+ ", getRm()=" + getRm() + ", getInfo()=" + getInfo() + ", getVip()=" + getVip() + ", getCode()="
-				+ getCode() + ", getRole()=" + getRole() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+				+ "]";
 	}
+	
 
 	
 		

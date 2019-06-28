@@ -71,14 +71,14 @@ public class ShiroConfiguration {
 		
 		//2创建安全管理器
 		@Bean
-		public SecurityManager securityManager(UserRealm myRealm,ManagerRealm managerRealm,CustomizedModularRealmAuthenticator cmra) {
+		public SecurityManager securityManager(UserRealm userRealm,ManagerRealm managerRealm,CustomizedModularRealmAuthenticator cmra) {
 			System.out.println("创建安全管理器");
 			DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager();
 			//配置自定义的authenticator
 			securityManager.setAuthenticator(cmra);
 			//将realm保存在集合
 			Collection<Realm> realms=new ArrayList<>();
-			realms.add(myRealm);
+			realms.add(userRealm);
 			realms.add(managerRealm);
 			//在安全管理器中添加realm
 			securityManager.setRealms(realms);

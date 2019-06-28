@@ -10,12 +10,14 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hero.hotel.dao.HouseDao;
 import com.hero.hotel.pojo.House;
 import com.hero.hotel.service.HouseService;
 
 @Service("houseService")
+@Transactional
 public class HouseServiceImpl implements HouseService {
 
 	@Resource
@@ -32,18 +34,71 @@ public class HouseServiceImpl implements HouseService {
 
 	@Override
 	public List<House> findOkRooms() {
-		return houseDao.findOkRooms();
+		return houseDao.findRooms(0);
 	}
 
 	@Override
 	public List<House> findNoRooms() {
-		return houseDao.findNoRooms();
+		return houseDao.findRooms(1);
 	}
 
 	@Override
 	public List<House> findZangRooms() {
-		return houseDao.findZangRooms();
+		return houseDao.findRooms(2);
 	}
+
+	@Override
+	public List<House> findRepairRooms() {
+		return houseDao.findRooms(3);
+	}
+
+	/*
+	 * 下架房间(non-Javadoc)
+	 * @see com.hero.hotel.service.HouseService#stopRoom(java.lang.Integer)
+	 */
+	@Override
+	public String stopRoom(Integer id) {
+		boolean r=houseDao.stopRoom(id);
+		if(r){
+			return "success";
+		}
+		return "失败，请联系工作人员";
+	}
+	/*
+	 * 上架房间(non-Javadoc)
+	 * @see com.hero.hotel.service.HouseService#startRoom(java.lang.Integer)
+	 */
+	@Override
+	public String startRoom(Integer id) {
+		boolean r=houseDao.stertRoom(id);
+		if(r){
+			return "success";
+		}
+		return "失败，请联系相关工作人员";
+	}
+	/*
+	 * 根据房间类型增加房间(non-Javadoc)
+	 * @see com.hero.hotel.service.HouseService#addRoom(java.lang.Integer, java.lang.Integer)
+	 */
+	@Override
+	public String addRoom(Integer typeid, Integer number) {
+		String result="添加成功";
+		for(int i=0;i<number;i++){
+			boolean b=houseDao.addRoom(typeid);
+			if(!b){
+				result="添加失败，请联系相关工作人员";
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public Boolean addRepairRoom(Integer Houseid) {
+		//  通过房间id修改 房间状态为 维修  3
+		Boolean  flag = houseDao.changeHouseTypeByHouseid(3, Houseid);
+		return flag;
+	}
+
 
 //	 @Override
 //	 public List<Map> findRoomTypeNum(String time1, String time2) {

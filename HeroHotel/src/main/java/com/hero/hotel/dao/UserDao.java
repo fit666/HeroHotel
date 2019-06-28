@@ -81,4 +81,12 @@ public interface UserDao {
 	
 	@Update("update t_user set password=#{password} where account=#{account} and tel=#{tel} and flag=1 ")
 	public Boolean updatePass(User user);
+	
+	//查找用户名查找角色
+		@Select("select t_role.rolename from t_user inner join t_role on t_user.roleid=t_role.id where t_user.account=#{account} and t_user.flag=1 ")
+		public String findRoleByAccount(String account);
+		//根据手机号查找角色
+		@Select("select t_role.rolename from t_user inner join t_role on t_user.roleid=t_role.id where t_user.tel=#{tel} and t_user.flag=1 ")
+		public String findRoleByTel(String tel);
+		
 }
