@@ -73,4 +73,6 @@ public interface OrderService {
 	ModelAndView findAllOrder(Info info);
 
 	public Order findOrderByUserid(Integer userid);
+
+    public List<Integer> findFlagById(Integer id);
 }

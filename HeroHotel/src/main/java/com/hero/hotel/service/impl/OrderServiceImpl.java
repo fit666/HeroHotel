@@ -196,15 +196,23 @@ public class OrderServiceImpl implements OrderService{
 		Info userInfo=orderDao.findInfoByTel(tel);
 		System.out.println(userInfo);
 		if (userInfo==null){
-			orderDao.addInfoByOrder(tel,name,sex,idcard);
+			orderDao.addInfoByOrder(tel,name,sex,idcard,userid);
 			Info info = orderDao.findInfoByTel(tel);
 			infoid=info.getInfoid();
 		}else {
 			infoid=userInfo.getInfoid();
 		}
+		System.out.println("打个桩");
 		//放入订单信息,返回一个orderid
 		Integer orderid = 0;
-        Double total=666.0;
+		//计算总价格
+        Double total=0.0;
+		for (int i = 1; i <4 ; i++) {
+			HouseType houseType=orderDao.findPriceByTypeid(i);
+			total += housenumber.get(i) * houseType.getPrice();
+		}
+		System.out.println(total);
+
         String payway="online";
 		orderDao.addOrderInfo(currenttime,ordernumber,message,infoid,payway,total,userid);
 		orderid = orderDao.findOrderidByOrdernumebr(ordernumber);
@@ -248,8 +256,9 @@ public class OrderServiceImpl implements OrderService{
 					for (int k = 0; k < todays.size(); k++) {
 						houseDao.addDay(houseidByType.get(j),typeid,todays.get(k),infoid);
 
+						HouseType houseType=orderDao.findPriceByTypeid(typeid);
 
-						orderDao.addOrderitem(houseidByType.get(j),starttime,endtime,typeid,day,orderid);
+						orderDao.addOrderitem(houseidByType.get(j),starttime,endtime,typeid,day,orderid,houseType.getPrice());
 
 					}
 					housenumber.set(typeid,housenumber.get(typeid)-1);
@@ -273,5 +282,10 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Order findOrderByUserid(Integer userid) {
 		return orderDao.findOrderByUserid(userid);
+	}
+
+	@Override
+	public List<Integer> findFlagById(Integer id) {
+		return orderDao.findFlagById(id);
 	}
 }

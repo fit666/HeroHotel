@@ -200,27 +200,49 @@ public class OrderController {
 
 		//从session直接拿出要用的时间段
 		List<String> todays=(List)session.getAttribute("timeslot");
-//		User user = (User) session.getAttribute("user");
-//		Integer id = user.getId();
-//		System.out.println(id);
-//		Vip vip = (Vip) user.getVip();
-//		System.out.println(vip);
-		//在service里面去一次性把所有业务处理了
-		Integer id = 1;  //从session获得一个id
-		Double discount = 0.5;   //从session获得会员等级得到折扣
 
-		System.out.println(name);
-		System.out.println(message);
+
 		String result = "";
+		User user = (User) session.getAttribute("user");
+		if (user==null){
+			result="请先登录";
+			return result;
+		}
+		Integer id = user.getId();
+		System.out.println("用户的id:"+id);
+		Vip vip = (Vip) user.getVip();
+		System.out.println(vip.getDiscount());
+
+		//如果这个用户已经有订单了，需要先将这个订单处理了
+		List<Integer> flags = orderService.findFlagById(id);
+		System.out.println(flags);
+		for (int i = 0; i < flags.size(); i++) {
+			if(flags.get(i).equals(2)){
+				result="你还有订单未处理";
+				return result;
+			}
+		}
+
+		//在service里面去一次性把所有业务处理了
+		//Integer id = 1;  //从session获得一个id
+
+
+		Double discount = vip.getDiscount();   //从session获得会员等级得到折扣
+
+
 		if(!tel.matches(RegexUtil.REGEX_MOBILE)){
 			result="手机号码格式不正确";
+			return result;
 		}
 		else if(!idcard.matches(RegexUtil.REGEX_ID_CARD)){
 			result="身份证格式不正确";
+			return result;
 		}else if(name.equals("")){
 			result="请输入姓名";
+			return result;
 		}else if(housenumber.get(1).equals(0)&&housenumber.get(2).equals(0)&&housenumber.get(3).equals(0)&&housenumber.get(4).equals(0)){
 			result="请添加住房信息";
+			return result;
 		}
 
 		else {
@@ -231,5 +253,7 @@ public class OrderController {
 
  		return result;
 	}
+
+
 
 }

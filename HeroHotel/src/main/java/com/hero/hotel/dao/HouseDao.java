@@ -28,11 +28,11 @@ public interface HouseDao {
 	@Select("select roomid from orderinfor where today=#{time} and flag=0")
 	public List<Integer> findOrderInforRid(String time);
 
-	@Select("select * from livenotes where typeid=#{typeid}")
+	@Select("select * from t_livenotes where typeid=#{typeid}")
 	List<LiveNotes> findHouseByType(Integer typeid);
-	@Select("select id from house where typeid=#{typeid}")
+	@Select("select id from t_house where typeid=#{typeid}")
 	List<Integer> findHouseidByType(Integer typeid);
 
-	@Insert("insert into livenotes(houseid,typeid,date,infoid,flag) values(#{houseid},#{typeid},#{s},#{infoid},1)")
+	@Insert("insert into t_livenotes(houseid,typeid,date,infoid,flag) values(#{houseid},#{typeid},#{s},#{infoid},1)")
     public void addDay(Integer houseid, int typeid, String s, Integer infoid);
 }

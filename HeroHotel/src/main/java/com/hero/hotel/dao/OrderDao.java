@@ -198,8 +198,8 @@ public interface OrderDao {
 	public Boolean changeOrderFlag(String houseid);
 
 	//添加订单的用户信息，code by sxj
-	@Insert("insert into t_info(tel,uname,sex,idcard) values(#{tel},#{name},#{sex},#{idcard})")
-	public void addInfoByOrder(String tel, String name, String sex, String idcard);
+	@Insert("insert into t_info(tel,uname,sex,idcard,userid) values(#{tel},#{name},#{sex},#{idcard},#{userid})")
+	public void addInfoByOrder(String tel, String name, String sex, String idcard,Integer userid);
 
 
 	@Select("select * from t_info where tel=#{tel}")
@@ -207,7 +207,7 @@ public interface OrderDao {
 
 
 	//添加订单，code by sxj
-	@Insert("insert into t_order(createtime,ordernumber,message,infoid,payway,total,userid) values(#{currenttime},#{ordernumber},#{message},#{infoid},#{payway},#{total},#{userid})")
+	@Insert("insert into t_order(createtime,ordernumber,message,infoid,payway,total,userid,flag) values(#{currenttime},#{ordernumber},#{message},#{infoid},#{payway},#{total},#{userid},2)")
 	public void addOrderInfo(String currenttime, String ordernumber, String message, Integer infoid, String payway, Double total, Integer userid);
 
 	//返回订单id
@@ -215,14 +215,14 @@ public interface OrderDao {
 	public Integer findOrderidByOrdernumebr(String ordernumber);
 
 	//添加订单项
-    @Insert("insert into t_orderitem(houseid,starttime,endtime,typeid,day,orderid,quantity,price) values(#{integer},#{starttime},#{endtime},#{typeid},#{day},#{orderid},1,80)")
-    void addOrderitem(Integer integer, String starttime, String endtime, int typeid, int day, Integer orderid);
+    @Insert("insert into t_orderitem(houseid,starttime,endtime,typeid,day,orderid,quantity,price) values(#{integer},#{starttime},#{endtime},#{typeid},#{day},#{orderid},1,#{price})")
+    void addOrderitem(Integer integer, String starttime, String endtime, int typeid, int day, Integer orderid,Double price);
 
 
 
 
     //检索订单（包含订单项）
-    @Select("select * from t_order where userid=#{userid}")
+    @Select("select * from t_order where userid=#{userid} and flag=2")
 	@Results({
 			@Result(id=true,column = "orderid",property = "orderid"),
 			@Result(id=true,column = "userid",property = "userid"),
@@ -242,4 +242,7 @@ public interface OrderDao {
 
     @Select("select * from t_orderitem where orderid=#{orderid}")
 	public List<OrderItem> findOrderItemByOrderid(Integer orderid);
+
+    @Select("select flag from t_order where userid=#{id}")
+	public List<Integer> findFlagById(Integer id);
 }

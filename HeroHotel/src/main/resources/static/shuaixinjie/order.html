@@ -72,32 +72,32 @@
     <td>预订间数</td>
     <td>价格名称</td>
     </tr>
-          <tr class="tr4">
+          <tr class="tr4" id="tr1">
             <td><a href="#">单人间</a></td>
             <td id="livet1">2014-01-16</td>
             <td id="leave1">2014-01-17</td>
-            <td id="onen">1</td>
+            <td id="onen">0</td>
             <td><span id="price1"></span>元</td>
             </tr>
-            <tr class="tr4">
+            <tr class="tr4" id="tr2">
                 <td><a href="#">双人间</a></td>
                 <td id="livet2">2014-01-16</td>
                 <td id="leavet2">2014-01-17</td>
-                <td id="twon">1</td>
+                <td id="twon">0</td>
                 <td id><span id="price2"></span>元</td>
             </tr>
-            <tr class="tr4">
+            <tr class="tr4" id="tr3">
                 <td><a href="#">大套房</a></td>
                 <td id="livet3">2014-01-16</td>
                 <td id="leavet3">2014-01-17</td>
-                <td id="threen">1</td>
+                <td id="threen">0</td>
                 <td><span id="price3"></span>元</td>
             </tr>
-            <tr class="tr4">
+            <tr class="tr4" id="tr4">
                 <td><a href="#">小套房</a></td>
                 <td id="livet4">2014-01-16</td>
                 <td id="leavet4">2014-01-17</td>
-                <td id="fourn">1</td>
+                <td id="fourn">0</td>
                 <td><span id="price4"></span>元</td>
             </tr>
 </table>
@@ -132,7 +132,7 @@
 	<div class="gr_btn1">
 
 
-        <a href="B预订3.html">打印订单</a>
+        <a onclick="deleteorder()">删除订单</a>
 
 
         <a >
@@ -164,7 +164,7 @@
 
 
 
-        <a href="B预订1.html">立即支付</a>
+        <a onclick="payorder()">立即支付</a>
 
 
     </div>
@@ -204,7 +204,7 @@ Copyright &copy; 2003-2014  黄山 &middot; 醉温泉&nbsp;&nbsp;All rights rese
             type:"post",
             success:function(data){
                 $("#ordernumber").html(data.ordernumber)
-                if(data.flag==0){
+                if(data.flag==2){
                     $("#ispay").html("未支付")
                 }else if(data.flag==1){
                     $("#ispay").html("已支付")
@@ -255,6 +255,21 @@ Copyright &copy; 2003-2014  黄山 &middot; 醉温泉&nbsp;&nbsp;All rights rese
                         priceT4+=orderitems[i].price;
                     }
                 }
+                //房间数为0的就不显示
+                if(houseT_one==0){
+                    $("#tr1").hide()
+                }
+                if(houseT_two==0){
+                    $("#tr2").hide()
+                }
+                if(houseT_three==0){
+                    $("#tr3").hide()
+                }
+                if(houseT_four==0){
+                    $("#tr4").hide()
+                }
+
+
                 $("#onen").html(houseT_one);
                 $("#twon").html(houseT_two);
                 $("#threen").html(houseT_three);
@@ -333,6 +348,15 @@ Copyright &copy; 2003-2014  黄山 &middot; 醉温泉&nbsp;&nbsp;All rights rese
             if (event.target == modal) modal.style.display = "none";
         }
     }
+
+    function deleteorder() {
+        alert("删除订单")
+    }
+
+    function payorder() {
+        alert("支付")
+    }
+
 </script>
 <style>
     /* 弹窗 (background) */

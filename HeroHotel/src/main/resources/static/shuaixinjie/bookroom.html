@@ -259,7 +259,7 @@
 						<td><img src="images/tu2.jpg" style="height: 80px;"></td>
 						<td>单人间</td>
 						<td><input type="button" value="查看"></td>
-						<td>150元</td>
+						<td id="price1">150元</td>
 						<td>剩余<span id="singlenumber">*</span>间</td>
 						<td><input type="button" value="-" onclick="reduce1()">
 							<span id="single">0</span>
@@ -270,7 +270,7 @@
 						<td><img src="images/tu3.jpg" style="height: 80px;"></td>
 						<td>双人间</td>
 						<td><input type="button" value="查看"></td>
-						<td>200元</td>
+						<td id="price2">200元</td>
 						<td>剩余<span id="doublenumber">*</span>间</td>
 						<td><input type="button" value="-" onclick="reduce2()">
 							<span id="double">0</span>
@@ -281,7 +281,7 @@
 						<td><img src="images/tu1.jpg" style="height: 80px;"></td>
 						<td>小套房</td>
 						<td><input type="button" value="查看"></td>
-						<td>500元</td>
+						<td id="price3">500元</td>
 						<td>剩余<span id="trinumber">*</span>间</td>
 						<td><input type="button" value="-" onclick="reduce3()">
 							<span id="tri">0</span>
@@ -292,7 +292,7 @@
 						<td><img src="images/tu1.jpg" style="height: 80px;"></td>
 						<td>大套房</td>
 						<td><input type="button" value="查看"></td>
-						<td>500元</td>
+						<td id="price4">500元</td>
 						<td>剩余<span id="fournumber">*</span>间</td>
 						<td><input type="button" value="-" onclick="reduce4()">
 							<span id="four">0</span>
@@ -421,7 +421,11 @@
 			success: function(result) {
 				if(result=="订单生产"){
 					location.href="order.html"
-				}else {
+				}else if(result=="你还有订单未处理"){
+					alert(result)
+					location.href="order.html"
+				}
+				else {
 					alert(result)
 				}
 			}
