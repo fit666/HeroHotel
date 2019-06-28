@@ -1,16 +1,16 @@
 package com.hero.hotel.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import com.hero.hotel.pojo.User;
+import com.hero.hotel.pojo.Vip;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
-import com.hero.hotel.pojo.User;
-import com.hero.hotel.pojo.Vip;
 
 
 public interface UserDao {
@@ -81,4 +81,8 @@ public interface UserDao {
 	
 	@Update("update t_user set password=#{password} where account=#{account} and tel=#{tel} and flag=1 ")
 	public Boolean updatePass(User user);
+
+	//查找vip
+	@Select("select max(id) from t_vip where vmoney<=#{money} and flag=1")
+	public Integer findVipId(BigDecimal money);
 }

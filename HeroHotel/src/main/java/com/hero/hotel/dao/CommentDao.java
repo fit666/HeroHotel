@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import org.apache.ibatis.annotations.Update;
+
 import com.hero.hotel.pojo.Comment;
 
 public interface CommentDao {
@@ -20,4 +22,13 @@ public interface CommentDao {
 	//添加评论
 	@Insert("insert into t_comment(orderid,createtime,massage,userid,name) values(#{orderid},#{createtime},#{massage},#{name}) ")
 	public Boolean addComment(Comment comment);
+
+	// 查询不同的状态的  评论    1  0
+	//@Select("select id,orderid,date_format(createtime,'%Y-%m-%d %h:%i:%s') AS createtime,message,userid from t_comment where flag=#{flag}")
+	@Select("select * from t_comment where flag=#{flag}")
+	public List<Comment> findAllNow(@Param("flag") Integer flag);
+
+	// 修改为  删除状态
+	@Update("UPDATE t_comment SET flag = 2 WHERE id = #{id}")
+	Boolean deleteCommentByid(Integer id);
 }

@@ -2,12 +2,11 @@ package com.hero.hotel.dao;
 
 import java.util.List;
 
+import com.hero.hotel.pojo.HouseType;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Many;
-
-import com.hero.hotel.pojo.HouseType;
 
 public interface HouseTypeDao {
 	//查询所有房间信息

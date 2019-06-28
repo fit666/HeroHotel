@@ -1,12 +1,10 @@
 package com.hero.hotel.service;
 
+import com.hero.hotel.pojo.User;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-
-import org.springframework.web.servlet.ModelAndView;
-
-import com.hero.hotel.pojo.User;
 
 
 public interface UserService {
@@ -17,7 +15,7 @@ public interface UserService {
 	
 	//停用账号
 	String vipStop(Integer id);
-	//停用用户账号
+	//&#x505c;&#x7528;&#x7528;&#x6237;&#x8d26;&#x53f7;
 	String vipStart(Integer id);
 	//删除会员账号
 	String userDelete(Integer id);

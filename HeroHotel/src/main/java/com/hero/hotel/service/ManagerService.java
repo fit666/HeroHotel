@@ -1,9 +1,11 @@
 package com.hero.hotel.service;
 
-import java.util.List;
-
 import com.hero.hotel.pojo.Info;
 import com.hero.hotel.pojo.User;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 public interface ManagerService {
 	//通过账号查找密码
@@ -22,4 +24,6 @@ public interface ManagerService {
 	boolean updateMessage(User manager, Info info);
 	//添加新的管理员
 	boolean addManager(User manager, Info info);
+	//登录
+	String login(User user, String codeValue, HttpSession session);
 }

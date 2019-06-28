@@ -1,17 +1,15 @@
 package com.hero.hotel.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hero.hotel.dao.CommentDao;
 import com.hero.hotel.pojo.Comment;
-import com.hero.hotel.pojo.User;
+
+import com.hero.hotel.dao.CommentDao;
 import com.hero.hotel.service.CommentService;
 @Service
 @Transactional
@@ -36,12 +34,11 @@ public class CommentServiceImpl implements CommentService {
 //总条数
 	@Override
 	public Integer findTotal() {
-		
 		return commentDao.findAllNumber();
 	}
 	
 	
-	//添加评论
+	/*//添加评论
 	@Override
 	public Boolean addComment(Comment comment, HttpSession session) {
 		//数据校验
@@ -65,6 +62,17 @@ public class CommentServiceImpl implements CommentService {
 		//添加到数据库中
 		Boolean b=commentDao.addComment(comment);
 		return b;
+	}*/
+
+	@Override
+	public List<Comment> findAllNow() {
+        System.out.println(commentDao.findAllNow(1)+"ertgyhjkm,");
+		return commentDao.findAllNow(1);
+	}
+
+	@Override
+	public Boolean deleteComment(Integer id) {
+		return commentDao.deleteCommentByid(id);
 	}
 
 }

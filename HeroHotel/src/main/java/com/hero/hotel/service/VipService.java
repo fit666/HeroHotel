@@ -1,8 +1,8 @@
 package com.hero.hotel.service;
 
-import java.util.List;
-
 import com.hero.hotel.pojo.Vip;
+
+import java.util.List;
 
 public interface VipService {
 	//获取所有的会员等级信息

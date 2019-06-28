@@ -1,10 +1,9 @@
 package com.hero.hotel.dao;
 
+import com.hero.hotel.pojo.Info;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
-import com.hero.hotel.pojo.Info;
 
 public interface InfoDao {
 	//根据id查找用户信息

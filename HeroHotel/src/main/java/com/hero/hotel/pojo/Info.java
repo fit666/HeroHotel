@@ -6,19 +6,22 @@ package com.hero.hotel.pojo;
 import java.util.List;
 
 public class Info {
-    private Integer infoid;//用户信息id
-    private Integer flag;
-    private String tel;//手机号
-    private String uname;//姓名
-    private String sex;//性别
-    private String idcard;//身份证号
-    private List<Order> orders;
-	@Override
-	public String toString() {
-		return "Info [infoid=" + infoid + ", flag=" + flag + ", tel=" + tel + ", uname=" + uname + ", sex=" + sex
-				+ ", idcard=" + idcard + ", orders=" + orders + "]";
+
+	private Integer infoid;
+	private String tel;
+	private String uname;
+	private String sex;
+	private String idcard;
+	private Integer userid;
+	private Integer flag;
+
+
+	public Info() {
+		super();
 	}
-	public Info(Integer infoid, Integer flag, String tel, String uname, String sex, String idcard, List<Order> orders) {
+
+
+	public Info(Integer infoid, String tel, String uname, String sex, String idcard, Integer userid, Integer flag) {
 		super();
 		this.infoid = infoid;
 		this.flag = flag;
@@ -26,53 +29,86 @@ public class Info {
 		this.uname = uname;
 		this.sex = sex;
 		this.idcard = idcard;
-		this.orders = orders;
+		this.userid = userid;
+		this.flag = flag;
 	}
-    
-public Info() {
-	// TODO Auto-generated constructor stub
-}
-public Integer getInfoid() {
-	return infoid;
-}
-public void setInfoid(Integer infoid) {
-	this.infoid = infoid;
-}
-public Integer getFlag() {
-	return flag;
-}
-public void setFlag(Integer flag) {
-	this.flag = flag;
-}
-public String getTel() {
-	return tel;
-}
-public void setTel(String tel) {
-	this.tel = tel;
-}
-public String getUname() {
-	return uname;
-}
-public void setUname(String uname) {
-	this.uname = uname;
-}
-public String getSex() {
-	return sex;
-}
-public void setSex(String sex) {
-	this.sex = sex;
-}
-public String getIdcard() {
-	return idcard;
-}
-public void setIdcard(String idcard) {
-	this.idcard = idcard;
-}
-public List<Order> getOrders() {
-	return orders;
-}
-public void setOrders(List<Order> orders) {
-	this.orders = orders;
-}
+
+
+	public Integer getInfoid() {
+		return infoid;
+	}
+
+
+	public void setInfoid(Integer infoid) {
+		this.infoid = infoid;
+	}
+
+
+	public String getTel() {
+		return tel;
+	}
+
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+
+	public String getUname() {
+		return uname;
+	}
+
+
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+
+	public String getSex() {
+		return sex;
+	}
+
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+
+	public String getIdcard() {
+		return idcard;
+	}
+
+
+	public void setIdcard(String idcard) {
+		this.idcard = idcard;
+	}
+
+
+	public Integer getUserid() {
+		return userid;
+	}
+
+
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
+
+
+	public Integer getFlag() {
+		return flag;
+	}
+
+
+	public void setFlag(Integer flag) {
+		this.flag = flag;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Info [infoid=" + infoid + ", tel=" + tel + ", uname=" + uname + ", sex=" + sex + ", idcard=" + idcard
+				+ ", userid=" + userid + ", flag=" + flag + "]";
+	}
+
 
 }

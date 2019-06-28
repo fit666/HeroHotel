@@ -1,14 +1,15 @@
 package com.hero.hotel.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.hero.hotel.pojo.User;
+import com.hero.hotel.pojo.Vip;
 import org.springframework.stereotype.Service;
 
 import com.hero.hotel.dao.UserDao;
-import com.hero.hotel.pojo.User;
-import com.hero.hotel.pojo.Vip;
 import com.hero.hotel.realm.CustomizedToken;
 import com.hero.hotel.service.UserService;
 
@@ -17,13 +18,9 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.hero.hotel.utils.JuHeDemo;
 import com.hero.hotel.utils.RegexUtil;
@@ -85,24 +82,11 @@ public class UserServiceImpl implements UserService {
 				result = "登录成功";
 				// 将用户所有信息存入session
 				// 查找用户对应的vip
-				Double monetary = realuser.getMonetary();
-				if (monetary <= 0.0) {
-					int i = 1;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 1000.0) {
-					int i = 2;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 2500.0) {
-					int i = 3;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 5000.0) {
-					int i = 4;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				}
+				BigDecimal monetary1 = realuser.getMonetary();
+				//查找数据库中vip等级
+				int i=userDao.findVipId(monetary1);
+				Vip vip = userDao.findVipByID(i);
+				realuser.setVip(vip);
 				session.setAttribute("user", realuser);
 				User user22 = (User) session.getAttribute("user");
 				System.out.println("session中的：" + user22);
@@ -157,24 +141,13 @@ public class UserServiceImpl implements UserService {
 				result = "登录成功";
 				// 将用户所有信息存入session
 				// 查找用户对应的vip
-				Double monetary = realuser.getMonetary();
-				if (monetary <= 0.0) {
-					int i = 1;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 1000.0) {
-					int i = 2;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 2500.0) {
-					int i = 3;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 5000.0) {
-					int i = 4;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				}
+
+				BigDecimal monetary1 = realuser.getMonetary();
+				//查找数据库中vip等级
+				int i=userDao.findVipId(monetary1);
+				Vip vip = userDao.findVipByID(i);
+				realuser.setVip(vip);
+
 				session.setAttribute("user", realuser);
 				System.out.println(result);
 				return result;

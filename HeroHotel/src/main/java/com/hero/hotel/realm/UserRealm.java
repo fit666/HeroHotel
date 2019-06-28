@@ -2,8 +2,8 @@ package com.hero.hotel.realm;
 
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
+import com.hero.hotel.pojo.User;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -13,13 +13,10 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.hero.hotel.dao.UserDao;
-import com.hero.hotel.pojo.User;
-import com.hero.hotel.service.UserService;
 import com.hero.hotel.utils.RegexUtil;
 
 public class UserRealm extends AuthorizingRealm {

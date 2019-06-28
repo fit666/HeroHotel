@@ -2,16 +2,12 @@ package com.hero.hotel.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-
 import com.hero.hotel.pojo.Role;
 import com.hero.hotel.pojo.RolePermission;
 import com.hero.hotel.pojo.ThePermission;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 public interface RolePermissionDao {
 	//获取所有权限

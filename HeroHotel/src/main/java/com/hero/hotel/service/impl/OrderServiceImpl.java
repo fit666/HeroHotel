@@ -3,6 +3,8 @@ package com.hero.hotel.service.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
+
+import com.hero.hotel.pojo.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,6 +44,12 @@ public class OrderServiceImpl implements OrderService {
 	public void addOrderItem(OrderItem orderItem) {
 		orderDao.addOrderItem(orderItem);
 	}
+	//查询订单id,根据订单编号查找
+	@Override
+	public List<Integer> findOrderItemByOrderid(Integer orderid) {		
+		return orderDao.findOrderItemByOrderid(orderid);
+	}
+
 
 	// 个人信息表插入数据
 	@Override
@@ -94,57 +102,51 @@ public class OrderServiceImpl implements OrderService {
 		return orderDao.findAllliveRoomsByTypeid(liveNotes);
 	}
 
-	// 查询
+
+	
+	
+	//查询所有
 	@Override
-	public Order findAllOrderItemByUserid(Integer id) {
-		return orderDao.findAllOrderItemByUserid(id);
+	public List<Info> findAllOrders() {
+		return orderDao.findAllInfo();
 	}
 
 	/*
-	 * 查询某个角色的所有订单 1.根据名字获取该角色的个人信息 2.根据个人信息id获取该角色的账号id信息 3.根据账号id获取该角色的订单id
-	 * 4.根据订单id获取所有的订单项id
+	 * 查询某个角色所有订单
 	 */
 	@Override
-	public ModelAndView findAllOrder(Info info) {
-		ModelAndView model = new ModelAndView();
 
-		Info info1 = orderDao.findInfo(info);
-		System.out.println("*****" + info1);
-		User user = orderDao.findUser(info1.getInfoid());
-		System.out.println("*******" + user);
-		Order order = orderDao.findOder(user.getId());
-		model.addObject("uname", info1.getUname());
-		model.addObject(order);
+	public List<Info> findOrder(Info info) {
+		
+		return orderDao.findInfo(info);
+	}
+	//查询需要修改的订单信息
+	@Override
+	public ModelAndView findUpdateOrder(Integer id) {
+		ModelAndView model = new ModelAndView();
+		OrderItem orderItem = orderDao.findOrderItem(id);
+		Order order = orderDao.findOrder(orderItem.getOrderid());
+		Info info = orderDao.findOneInfo(order.getInfoid());
+		model.addObject("info", info);
+		model.addObject("order", order);
+		model.addObject("orderItem", orderItem);
 		return model;
 	}
-
 
     //修改订单信息
 	@Override
 	public ModelAndView updateOrder(Info info, Order order, OrderItem orderItem) {
 		ModelAndView model = new ModelAndView();
-		orderDao.updateInfo(info);
+		System.out.println(info);
+		Boolean result = orderDao.updateInfo(info);
+		System.out.println(result);
 		orderDao.updateOrderItem(orderItem);
-		User user = orderDao.findUser(info.getInfoid());
-		Order order2 = orderDao.findOder(user.getId());
-		model.addObject("uname", info.getUname());
-		model.addObject(order2);
+
+		orderDao.updateOrder(order);
 		return model;
 	}
 
-	// 删除订单
-	@Override
-	public ModelAndView deleteOrder(LiveNotes liveNotes, OrderItem orderItem, Order order, Info info) {
-		ModelAndView model = new ModelAndView();
-		orderDao.updateLiveNotesFlag(liveNotes);
-		orderDao.updateOrderItemFlag(orderItem);
-		orderDao.updateOrderFlag(order);
-		User user = orderDao.findUser(info.getInfoid());
-		Order order2 = orderDao.findOder(user.getId());
-		model.addObject("uname", info.getUname());
-		model.addObject(order2);
-		return model;
-	}
+
 
 	// 结账
 	@Override
@@ -179,6 +181,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return flag;
 	}
+
 	
 	
 
@@ -262,5 +265,4 @@ public class OrderServiceImpl implements OrderService {
 
 
     }
-
 }

@@ -2,14 +2,13 @@ package com.hero.hotel.dao;
 
 import java.util.List;
 
+import com.hero.hotel.pojo.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
-import com.hero.hotel.pojo.User;
 
 
 public interface ManagerDao {
