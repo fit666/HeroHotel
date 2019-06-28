@@ -45,110 +45,70 @@ function openwindow(){
 }
 
 function reduce1() {
-	if($("#flight-depart").val()==""){
-		alert("请先选择入住时间段")
+	var number=parseInt($("#single").html())
+	if(number==0){
+		alert("非法操作~")
 	}else {
-		var number=parseInt($("#single").html())
-		if(number==0){
-			alert("非法操作~")
-		}else {
-			$("#single").html(number-1)
-		}
+		$("#single").html(number-1)
 	}
-
 }
 function add1() {
-	if($("#flight-depart").val()==""){
-		alert("请先选择入住时间段")
+	var singlenumber=parseInt($("#singlenumber").html())
+	var number=parseInt($("#single").html())
+	if(singlenumber==number){
+		alert("非法操作~")
 	}else {
-		var singlenumber=parseInt($("#singlenumber").html())
-		var number=parseInt($("#single").html())
-		if(singlenumber==number){
-			alert("非法操作~")
-		}else {
-			$("#single").html(number+1)
-		}
-	}
-
+		$("#single").html(number+1)
+	}double
 }
 function reduce2() {
-	if($("#flight-depart").val()==""){
-		alert("请先选择入住时间段")
+	var number=parseInt($("#double").html())
+	if(number==0){
+		alert("非法操作~")
 	}else {
-		var number=parseInt($("#double").html())
-		if(number==0){
-			alert("非法操作~")
-		}else {
-			$("#double").html(number-1)
-		}
+		$("#double").html(number-1)
 	}
-
 }
 function add2() {
-	if($("#flight-depart").val()==""){
-		alert("请先选择入住时间段")
+	var singlenumber=parseInt($("#doublenumber").html())
+	var number=parseInt($("#double").html())
+	if(singlenumber==number){
+		alert("非法操作~")
 	}else {
-		var singlenumber=parseInt($("#doublenumber").html())
-		var number=parseInt($("#double").html())
-		if(singlenumber==number){
-			alert("非法操作~")
-		}else {
-			$("#double").html(number+1)
-		}
+		$("#double").html(number+1)
 	}
-
 }
 function reduce3() {
-	if($("#flight-depart").val()==""){
-		alert("请先选择入住时间段")
+	var number=parseInt($("#tri").html())
+	if(number==0){
+		alert("非法操作~")
 	}else {
-		var number=parseInt($("#tri").html())
-		if(number==0){
-			alert("非法操作~")
-		}else {
-			$("#tri").html(number-1)
-		}
+		$("#tri").html(number-1)
 	}
-
 }
 function add3() {
-	if($("#flight-depart").val()==""){
-		alert("请先选择入住时间段")
+	var singlenumber=parseInt($("#trinumber").html())
+	var number=parseInt($("#tri").html())
+	if(singlenumber==number){
+		alert("非法操作~")
 	}else {
-		var singlenumber=parseInt($("#trinumber").html())
-		var number=parseInt($("#tri").html())
-		if(singlenumber==number){
-			alert("非法操作~")
-		}else {
-			$("#tri").html(number+1)
-		}
+		$("#tri").html(number+1)
 	}
-
 }
 function reduce4() {
-	if($("#flight-depart").val()==""){
-		alert("请先选择入住时间段")
+	var number=parseInt($("#four").html())
+	if(number==0){
+		alert("非法操作~")
 	}else {
-		var number=parseInt($("#four").html())
-		if(number==0){
-			alert("非法操作~")
-		}else {
-			$("#four").html(number-1)
-		}
+		$("#four").html(number-1)
 	}
-
 }
 function add4() {
-	if($("#flight-depart").val()==""){
-		alert("请先选择入住时间段")
+	var singlenumber=parseInt($("#fournumber").html())
+	var number=parseInt($("#four").html())
+	if(singlenumber==number){
+		alert("非法操作~")
 	}else {
-		var singlenumber=parseInt($("#fournumber").html())
-		var number=parseInt($("#four").html())
-		if(singlenumber==number){
-			alert("非法操作~")
-		}else {
-			$("#four").html(number+1)
-		}
+		$("#four").html(number+1)
 	}
-
 }

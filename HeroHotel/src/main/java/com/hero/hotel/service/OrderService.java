@@ -1,14 +1,11 @@
 package com.hero.hotel.service;
 
-
-
-
-import java.text.ParseException;
 import java.util.List;
 
+import com.hero.hotel.pojo.Order;
 
-import com.hero.hotel.dao.OrderDao;
-import org.apache.ibatis.annotations.Select;
+
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hero.hotel.pojo.HouseType;
@@ -20,6 +17,7 @@ import com.hero.hotel.pojo.User;
 import com.hero.hotel.pojo.Vip;
 
 public interface OrderService {
+	public List<Order> queryAllOrder(int uid);
 	//订单表插入数据
 	public void addOrder(Order order);
 	//订单项插入数据
@@ -35,25 +33,26 @@ public interface OrderService {
 	public Vip findDiscountByMonetary(double vmoney);
 	//查询订单id,根据订单编号查找
 	public Order findIdByOrderNumber(String orderNumber);
-	//根据订单id查询所有订单项
-	public List<Integer> findOrderItemByOrderid(Integer orderid);
 	//查找房间价格
 	public HouseType findPriceByTypeid(Integer typeid);
 	//查找该类型的所有房间，查找当天入住日志表中该类房间已经入住的房间，		
 	public List<Integer> findAllRoomsByTypeid(Integer typeid);
 	public List<Integer> findAllliveRoomsByTypeid(LiveNotes liveNotes);
-
-
+	/*
+	 * 删除订单
+	 * 1.进入订单页面，自动先查询该用户的所有订单和订单项，1的为可删，2则为不可删（flag为1的表示可以已定但还未入住的，
+	 * flag为2的表示已定已入住的的，3表示取消的订单）
+	 * 2点击删除按钮，后台将订单和订单项中的flag修改为3，之后再自动查询一次，显示给页面
+	 */
+	public Order findAllOrderItemByUserid(Integer id);
 	
-	//查询所有订单记录
-	public List<Info> findAllOrders();
-
+	
+	//删除订单
+	public ModelAndView deleteOrder(LiveNotes liveNotes,OrderItem orderItem,Order order,Info info);
+	
 	//查询某个角色的所有订单
-	public List<Info> findOrder(Info info);
+	public ModelAndView findAllOrder(Info info);
 	
-	//查询需要修改的订单信息
-	public ModelAndView findUpdateOrder(Integer id);
-
 	//修改订单信息
 	public ModelAndView updateOrder(Info info,Order order,OrderItem orderItem);
 
@@ -66,12 +65,8 @@ public interface OrderService {
 
 	public Integer findHouseNumberByTypeid(List<String> todays,Integer typeid);
 
-    public void orderSubmit(String id, String currenttime, String name, String sex, String tel, String idcard, List<String> todays, List<Integer> housenumber,Integer uid,Double discount,String message) throws ParseException;
+    public void orderSubmit(String id, String currenttime, String name, String sex, String tel, String idcard, List<String> todays, List<Integer> housenumber);
+	
+    public Order queryByOrderNumber(String ordernumber);
 
-
-	ModelAndView findAllOrder(Info info);
-
-	public Order findOrderByUserid(Integer userid);
-
-    public List<Integer> findFlagById(Integer id);
 }

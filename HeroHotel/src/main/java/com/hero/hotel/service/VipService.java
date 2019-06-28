@@ -5,6 +5,10 @@ import java.util.List;
 import com.hero.hotel.pojo.Vip;
 
 public interface VipService {
+
+	
+	public List<Vip> queryAllVip();
+
 	//获取所有的会员等级信息
 	List<Vip> findAllVips();
 	//修改vip信息
@@ -13,5 +17,5 @@ public interface VipService {
 	String vipDel(Vip vip);
 	//添加vip
 	boolean addVip(Vip vip);
-	
+
 }

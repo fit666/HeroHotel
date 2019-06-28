@@ -9,16 +9,47 @@
 <meta name="description" content="说明" />
 <meta name="keywords" content="关键字" />
 <link rel="stylesheet" href="css/login.css" type="text/css" />
+<link rel="stylesheet" href="shuaixinjie/css/style.css" />
 <script type="text/javascript" src="js/jquery.min.js"></script>
+	<style type="text/css">
+		ul li{
+		 list-style: none;
+		 }
+	</style>
 </head>
 
-<body>
+<body class="infor">
+<div id="slider-wrap">
+	    <div class="camera_overlayer"></div>
+	</div>
 	<!--HEADER-->
-	<% @include file="head.jsp"%>
+	<div id="wrapper">
+	<div id="container">
+        <header id="header">
+                    <div id="logo">
+                <a href="index.html"><strong>HERO</strong>酒店</a>
+            </div>
+            <div id="searchbox">
+                <form action="#">
+                    <input type="text" id="search" placeholder="Search" />
+                    <button type="submit"></button>
+                </form>
+            </div>
+            <div id="navigation">
+                <ul id="nav">
+                	<li class="selected"><a href="../login.html"  id="loginbox">登录/注册</a></li>
+                    <li ><a href="shuaixinjie/bookroom.html">在线预定</a></li>
+                    <li><a href="shuaixinjie/browse.html">酒店一览</a>
+                    </li>
+                    <li><a href="gd.html">酒店位置</a></li>
+                    <li ><a href="../share.html">留言</a></li>
+                </ul>
+            </div>
+        </header>
 	<!--HEADER-->
 
 	<!--身-->
-	<div class="container_wrap">
+	<div class="container_wrap" style="position: relative;">
 		<div class="container clearfix">
 			<!--左-->
 			<div class="container_l">
@@ -114,7 +145,8 @@
 	<!--尾部-->
 	<div class="footer">Copyright &copy; 2014 黄山 &middot; 醉温泉 All
 		Rights Reserved. 版权所有&nbsp;&nbsp;&nbsp;&nbsp;皖ICP备11009137号</div>
-
+</div>
+</div>
 	<script type="text/javascript" src="js/register.js"></script>
 </body>
 </html>

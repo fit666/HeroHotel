@@ -134,11 +134,5 @@ public class User {
 				+ createtime + ", rm=" + rm + ", info=" + info + ", vip=" + vip + ", code=" + code + ", role=" + role
 				+ "]";
 	}
-	
-
-	
 		
-  
-
-	
 }

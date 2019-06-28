@@ -3,11 +3,7 @@ package com.hero.hotel.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
-
-import org.apache.ibatis.annotations.Results;
-
 import org.apache.ibatis.annotations.Param;
-
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -26,31 +22,16 @@ public interface HouseDao {
 	public List<Integer> findOrderInforRid(String time);
 
 	// 修改 房间状态
-	@Update("UPDATE t_house SET flag = #{flag} WHERE id = #{houseid} ")
+	@Update("UPDATE t_house SET flag = #{flag} WHERE houseid = #{houseid} ")
 	public Boolean changeHouseTypeByHouseid(@Param("flag") Integer flag, @Param("houseid") Integer houseid);
 
-	@Select("select * from t_livenotes where typeid=#{typeid}")
+	@Select("select * from livenotes where typeid=#{typeid}")
 	List<LiveNotes> findHouseByType(Integer typeid);
 
-	@Select("select id from t_house where typeid=#{typeid}")
+	@Select("select id from house where typeid=#{typeid}")
 	List<Integer> findHouseidByType(Integer typeid);
 
-	@Insert("insert into t_livenotes(houseid,typeid,date,infoid,flag) values(#{houseid},#{typeid},#{s},#{infoid},1)")
-    public void addDay(Integer houseid, int typeid, String s, Integer infoid);
+	@Insert("insert into livenotes(houseid,typeid,date,infoid,flag) values(#{houseid},#{typeid},#{s},#{infoid},1)")
+	public void addDay(Integer houseid, int typeid, String s, Integer infoid);
 
-	//根据房间类型id查询所有对应的房间
-	@Select("select * from t_house where typeid=#{typeid}")
-	public List<House> findAllByTypeid(Integer typeid);
-
-	//下架房间
-	@Update("update t_house set flag=0 where id=#{id}")
-	public boolean stopRoom(Integer id);
-
-	//上架房间
-	@Update("update t_house set flag=1 where id=#{id}")
-	public boolean stertRoom(Integer id);
-
-	//根据房间类型添加房间
-	@Insert("insert into t_house(clean,maintenance,typeid) values(1,1,#{typeid}) ")
-	public boolean addRoom(Integer typeid);
 }

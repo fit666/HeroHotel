@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.hero.hotel.dao.UserInfoDao;
-import com.hero.hotel.pojo.NowUserInfo;
+
 import com.hero.hotel.service.UserInfoService;
 
 @Service("userInforService")
@@ -24,9 +24,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<NowUserInfo> findUserInfo() {
+	public List<String> findUserInfo() {
 
-		List<NowUserInfo> nowUserInfos = userInfoDao.findUserInfo();
+		List<String> nowUserInfos = userInfoDao.findUserInfo();
 		return nowUserInfos;
 	}
 

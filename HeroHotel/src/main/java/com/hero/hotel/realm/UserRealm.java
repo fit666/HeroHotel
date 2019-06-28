@@ -1,26 +1,25 @@
 package com.hero.hotel.realm;
 
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.hero.hotel.dao.UserDao;
 import com.hero.hotel.pojo.User;
+import com.hero.hotel.service.UserService;
 import com.hero.hotel.utils.RegexUtil;
 
 public class UserRealm extends AuthorizingRealm {
@@ -39,24 +38,7 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		System.out.println("正在授权");
-		//获取登录账号(手机号或账号)
-		String account=(String) principals.getPrimaryPrincipal();
-	       //判断账号是手机号或者账号
-		String role="";
-		if(account.matches(RegexUtil.REGEX_MOBILE)) {
-			//根据手机号查询账户角色
-			 role=userDao.findRoleByTel(account);
-			System.out.println("用户角色"+role);
-		}else {
-			//根据账号查询账户角色
-			 role=userDao.findRoleByAccount(account);
-			System.out.println("用户角色"+role);
-		}
-		
-		Set<String> roles = new HashSet<>();
-		roles.add(role);
-		SimpleAuthorizationInfo info=new SimpleAuthorizationInfo(roles);
-		  return info;
+		return null;
 	}
 
 	@Override
@@ -76,8 +58,6 @@ public class UserRealm extends AuthorizingRealm {
 			System.out.println("tpl_value:"+tpl_value);
 			//将验证码加密与realm保持一致
 			String code= new SimpleHash("MD5",tpl_value,null,1024).toString();
-			//加盐
-			/*ByteSource salt=ByteSource.Util.bytes("herohotel");*/
 			SimpleAuthenticationInfo info=
 		new SimpleAuthenticationInfo(account,code,getName());
 			return info;
@@ -89,8 +69,7 @@ public class UserRealm extends AuthorizingRealm {
 			User u=new User();
 			u.setAccount(account);
 			User user=userDao.findAccountByAccount(u);
-			//加盐
-		/*	ByteSource salt=ByteSource.Util.bytes("herohotel");*/
+			
 			SimpleAuthenticationInfo info=
 					new SimpleAuthenticationInfo(account,user.getPassword(),getName());
 			return info;

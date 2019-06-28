@@ -10,7 +10,9 @@ import com.hero.hotel.pojo.User;
 
 
 public interface UserService {
+	public User queryInfo(int account);
 
+	public int updatePwd(User user);
 	List<User> findAllVip();
 	//注册
 	public String register(User user,HttpSession session);

@@ -28,9 +28,12 @@ public class CommentServiceImpl implements CommentService {
 	//分页查询所有评论
 	@Override
 	public List<Comment> findAll(Integer PageNum) {
+		//当前页
 		System.out.println("PageNum:"+PageNum);
-		int page=(PageNum-1)*10;
-		List<Comment> comments=commentDao.findAll(page);
+		PageNum=(PageNum-1)*10;
+		System.out.println(PageNum);
+		List<Comment> comments=commentDao.findAll(PageNum);
+		System.out.println(comments);
 		return comments;
 	}
 //总条数
@@ -46,7 +49,7 @@ public class CommentServiceImpl implements CommentService {
 	public Boolean addComment(Comment comment, HttpSession session) {
 		//数据校验
 		
-		if(comment.getMessage()==""||comment.getMessage()==null||comment.getName()==""||comment.getName()==null) {
+		if(comment.getMessage()==""||comment.getMessage()==null) {
 			return false;
 		}
 		

@@ -2,6 +2,16 @@ package com.hero.hotel.controller;
 
 import java.util.List;
 
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.hero.hotel.pojo.Vip;
+import com.hero.hotel.service.VipService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +27,12 @@ import com.hero.hotel.service.VipService;
 public class VipController {
 	@Autowired
 	private VipService vipService;
+	@RequestMapping("/allVips")
+	@ResponseBody
+	private List<Vip> showAllVip() {
+		
+		return vipService.queryAllVip();
+	}
 	/*
 	 * 获取所有的vip信息
 	 */
@@ -58,5 +74,5 @@ public class VipController {
 		}
 		return mav;
 	}
-	
+
 }

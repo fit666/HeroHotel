@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import com.hero.hotel.pojo.Comment;
 
 public interface CommentDao {
+	
 	//查找所有评论,PageNum当前页
 	@Select("select * from t_comment where flag=1 order by id desc limit #{pageNum},10")
 	public List<Comment> findAll( Integer pageNum );
@@ -18,6 +19,6 @@ public interface CommentDao {
 	public Integer findAllNumber();
 	
 	//添加评论
-	@Insert("insert into t_comment(orderid,createtime,massage,userid,name) values(#{orderid},#{createtime},#{massage},#{name}) ")
+	@Insert("insert into t_comment(orderid,createtime,massage,userid) values(#{orderid},#{createtime},#{massage}) ")
 	public Boolean addComment(Comment comment);
 }

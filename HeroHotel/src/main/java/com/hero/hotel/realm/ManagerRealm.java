@@ -28,6 +28,7 @@ public class ManagerRealm extends AuthorizingRealm{
 		//获取账号
 		String account=(String)token.getPrincipal();
 		User manager=managerService.findManagerPwd(account);
+		System.out.println(manager);
 		if(manager==null){
 			return null;
 		}

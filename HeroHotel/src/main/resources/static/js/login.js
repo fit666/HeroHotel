@@ -30,7 +30,7 @@ function login(){
 			if(data!="登录成功"){
 				$("#message4").html(data);
 			}else{
-				location.href="index.html";
+				location.href="shuaixinjie/bookroom.html";
 		}
 		}
 		})
@@ -51,7 +51,7 @@ function login2(){
 	if(baccount==""||code==""){
 		alert("请完善信息");
 	}else if(baccount.length!=11){
-		$("#message1").html("手机号不合法");
+		$("#message4").html("手机号不合法");
 	}else {
 		$.ajax({
 			url:"/user/loginTel",

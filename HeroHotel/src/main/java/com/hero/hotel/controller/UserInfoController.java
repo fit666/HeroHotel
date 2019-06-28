@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hero.hotel.pojo.NowUserInfo;
+
 import com.hero.hotel.service.UserInfoService;
 
 @Controller
@@ -32,7 +32,7 @@ public class UserInfoController {
 	public ModelAndView findUserInfo() {
 
 		ModelAndView modelAndView = new ModelAndView();
-		List<NowUserInfo> nowUserInfos = userInforService.findUserInfo();
+		List<String> nowUserInfos = userInforService.findUserInfo();
 		modelAndView.addObject("nowUserInfos", nowUserInfos);
 		modelAndView.setViewName("backstage-html/nowUserInfo.html");
 		// System.out.println(nowUserInfos);

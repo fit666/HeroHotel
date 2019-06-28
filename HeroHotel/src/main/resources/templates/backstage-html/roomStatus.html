@@ -65,24 +65,14 @@
 				name="options" id="option2" onclick="okRooms()"> 显示可住
 			</label> <label class="btn btn-primary" id="no"> <input type="radio"
 				name="options" id="option3"> 显示已住
-			</label>
-			<label class="btn btn-primary" id="zang">
-			<input type="radio" name="options" id="option4"> 显示脏房
-			</label>
-			<label class="btn btn-primary" id="repair">
-				<input type="radio" name="options" id="option5"> 显示维修
+			</label> <label class="btn btn-primary" id="zang"> <input
+				type="radio" name="options" id="option4"> 显示脏房
 			</label>
 
 		</div>
 
+	</div>
 
-	</div>
-	<div style="text-align: center; margin-top: 10px;">
-		<form action="../room/addRepair" method="get">
-			<input type="text" name="houseid">
-			<input type="submit" value="添加维修房间">
-		</form>
-	</div>
 	<hr />
 
 
@@ -105,9 +95,6 @@
 					else if(rooms[i].flag == 2){
 						var div = $("<div id=room_"+rooms[i].id+" class='room_"+rooms[i].flag+"'></div>").html(rooms[i].id+"<br/>需要打扫");
 					}
-					else if(rooms[i].flag == 3){
-						var div = $("<div id=room_"+rooms[i].id+" class='room_"+rooms[i].flag+"'></div>").html(rooms[i].id+"<br/>需要维修");
-					}
 					
 					$("#rooms").append(div); 
 				}
@@ -128,9 +115,6 @@
 			   
 			  $("#zang").click(function(){
 				 location.href ="../room/findZangRooms"
-			   })
-				$("#repair").click(function(){
-				 location.href ="../room/findAepairRooms"
 			   })
 	
 			

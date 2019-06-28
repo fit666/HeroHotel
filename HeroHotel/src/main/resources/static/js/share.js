@@ -1,4 +1,3 @@
-
 function show(pcurrentpage){
 	 $.ajax({
 			url:"/comment/findAll",
@@ -10,8 +9,8 @@ function show(pcurrentpage){
 			 if(data==null||data==""){
 				 alert("暂无评论");
 			 }else{
+				 var div=$("<div  class='guestbook'></div>");
 				 for(var i=0;i<data.length;i++){
-					 var div=$("<div  class='guestbook'></div>");
 					 var divnr=$(" <div class='guestbook_nr'></br>");
 					var divid=$(" <div style='border-bottom:1px #ddd solid' id='id' >留言编号:"+data[i].id+"</div>");
 					 var divmessage=$("<div id='message' >"+data[i].comment+"</div>")
@@ -24,8 +23,8 @@ function show(pcurrentpage){
 					 divform.append(label);
 					 divform.append(time);
 					 div.append(divform);
-					 $("#msg").append(div); 
 				 }
+				 $("#msg").html(div); 
 				 $("#currentpage").html(pcurrentpage); 
 				 
 			 }
@@ -76,7 +75,7 @@ function nextpage(){
 	var currentpage=parseInt($("#currentpage").html());
 	var totalpage=parseInt($("#totalpage").html());
 	if(totalpage>currentpage){
-		showGoods(currentpage+1);
+		show(currentpage+1);
 	}
 }
 
@@ -84,7 +83,7 @@ function nextpage(){
 function backpage(){
 	var currentpage=parseInt($("#currentpage").html());
 	if(currentpage>1){
-		showGoods(currentpage-1);
+		show(currentpage-1);
 	}
 }
 /*首页*/
@@ -95,5 +94,5 @@ function firstpage(){
 /*末页*/
 function lastpage(){
 	var totalpage=parseInt($("#totalpage").html());
-	showGoods(totalpage);
-}	
+	show(totalpage);
+}

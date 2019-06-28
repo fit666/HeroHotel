@@ -10,10 +10,16 @@ import com.hero.hotel.dao.VipDao;
 import com.hero.hotel.pojo.Vip;
 import com.hero.hotel.service.VipService;
 
+
 @Service("/vipService")
 public class VipServiceImpl implements VipService{
 	@Resource
 	private VipDao vipDao;
+	@Override
+	public List<Vip> queryAllVip() {
+		// TODO Auto-generated method stub
+		return vipDao.queryAllVip();
+	}
 	/*
 	 * 获取所有的vip信息(non-Javadoc)
 	 * @see com.hero.hotel.service.VipService#findAllVips()
@@ -52,5 +58,5 @@ public class VipServiceImpl implements VipService{
 		
 		return vipDao.addVip(vip);
 	}
-	
+
 }

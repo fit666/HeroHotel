@@ -1,8 +1,11 @@
 package com.hero.hotel.pojo;
 
-public class RolePermission {
+
+
+public class RolePermission{
 	private Integer rid;//角色id
 	private Integer pid;//权限id
+	
 	public RolePermission(Integer rid, Integer pid) {
 		super();
 		this.rid = rid;

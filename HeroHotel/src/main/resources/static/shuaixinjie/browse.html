@@ -19,7 +19,7 @@
     <!-- CSS
     ================================================== -->
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- <link rel="stylesheet" href="css/responsive.css" /> -->
 
     <!-- Java Script
     ================================================== -->
@@ -36,7 +36,8 @@
     <script type="text/javascript" src="js/jquery.googlemaps.1.01.min.js"></script>
     <script type="text/javascript" src="js/theme.js"></script>
     <script type="text/javascript" src="js/BookRoom.js"></script>
-
+	<script type="text/javascript" src="js/showAll.js"></script>
+	<script type="text/javascript" src="js/landi.js"></script>
     <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -52,7 +53,7 @@
         <!--start header -->
         <header id="header">
             <div id="logo">
-                <a href="index.html"><strong>英雄</strong>酒店</a>
+                <a href="index.html"><strong>HERO</strong>酒店</a>
             </div>
             <div id="searchbox">
                 <form action="#">
@@ -62,14 +63,12 @@
             </div>
             <div id="navigation">
                 <ul id="nav">
-                    <li ><a href="register.html">登录/注册</a></li>
+                    <li ><a href="../login.html" style="display: none;" id="loginbox">登录/注册</a></li>
+                    <li ><a href="user_center.html" style="display: none;" id="infobox">个人信息</a></li>
                     <li ><a href="bookroom.html">在线预定</a></li>
-                    <li class="selected"><a href="browse.html">酒店一览</a>
-
-                    </li>
-
-                    <li><a href="index.html">酒店相关</a></li>
-                    <li><a href="#">留言</a></li>
+                    <li class="selected"><a href="browse.html">酒店一览</a></li>
+                    <li><a href="../gd.html">酒店位置</a></li>
+                    <li><a href="../share.html">留言</a></li>
                 </ul>
             </div>
 
@@ -96,76 +95,8 @@
                 </ul>
             </div>
 
-            <div class="tag-filter-container">
-                <div class="one-fourth travel">
-                    <div class="post-item">
-                        <div class="image-place">
-                            <img src="images/uploads/220x135/auckland-city.jpg" alt="image" />						</div>
-                        <div class="post-content">
-                            <h2 class="post-title"><a href="browse-detail.html">单人间</a></h2>
-                            <p class="post-excerpt">单人间客房</p>
-                        </div>
-                        <div class="post-meta">
-                            <span class="comment-count" id="room" >$:100</span>
-                            <a class="read-more" href="javascript:void(0);" onclick="bookroom()">立即预定</a>						</div>
-                    </div>
-                </div>
+            <div class="tag-filter-container" id="contain">
 
-                <div class="one-fourth travel">
-                    <div class="post-item">
-                        <div class="image-place">
-                            <img src="images/uploads/220x135/rio-de-jainero.jpg" alt="image" />						</div>
-                        <div class="post-content">
-                            <h2 class="post-title"><a href="browse-detail.html">总统套房</a></h2>
-                            <p class="post-excerpt">总统套房</p>
-                        </div>
-                        <div class="post-meta">
-                            <span class="comment-count" id="room">$:2000</span>
-                            <a class="read-more" href="javascript:void(0);" onclick="bookroom()">立即预定</a>						</div>
-                    </div>
-                </div>
-
-                <div class="one-fourth travel">
-                    <div class="post-item">
-                        <div class="image-place">
-                            <img src="images/uploads/220x135/stupa.jpg" alt="image" />						</div>
-                        <div class="post-content">
-                            <h2 class="post-title"><a href="browse-detail.html">商务套房</a></h2>
-                            <p class="post-excerpt">商务套房</p>
-                        </div>
-                        <div class="post-meta">
-                            <span class="comment-count" id="room">$:800</span>
-                            <a class="read-more" href="javascript:void(0);" onclick="bookroom()">立即预定</a>						</div>
-                    </div>
-                </div>
-
-                <div class="one-fourth travel">
-                    <div class="post-item">
-                        <div class="image-place">
-                            <img src="images/uploads/220x135/st-basil-2.jpg" alt="image" />						</div>
-                        <div class="post-content">
-                            <h2 class="post-title"><a href="browse-detail.html">双人间</a></h2>
-                            <p class="post-excerpt">双人间客房</p>
-                        </div>
-                        <div class="post-meta">
-                            <span class="comment-count" id="room">$:250</span>
-                            <a class="read-more" href="javascript:void(0);" onclick="bookroom()">立即预定</a>						</div>
-                    </div>
-                </div>
-
-                <div class="one-fourth travel">
-                    <div class="post-item">
-                        <div class="image-place">
-                            <img src="images/uploads/220x135/castle-schwerin.jpg" alt="image" />						</div>
-                        <div class="post-content">
-                            <h2 class="post-title"><a href="browse-detail.html">家庭套房</a></h2>
-                            <p class="post-excerpt">家庭套房</p>
-                        </div>
-                        <div class="post-meta">
-                            <span class="comment-count" id="room">$:380</span>
-                            <a class="read-more" href="javascript:void(0);" onclick="bookroom()">立即预定</a>						</div>
-                    </div>
-                </div>
 
                 <div class="one-fourth holidays">
                     <div class="post-item">
