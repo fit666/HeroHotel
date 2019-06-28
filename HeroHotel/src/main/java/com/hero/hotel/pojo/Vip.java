@@ -8,7 +8,7 @@ public class Vip {
     private double vmoney;//最低消费
     private Integer flag;
     private String vname;//会员等级名称
-    private Double discount;//折扣
+    private double discount;//折扣
 
     @Override
     public String toString() {

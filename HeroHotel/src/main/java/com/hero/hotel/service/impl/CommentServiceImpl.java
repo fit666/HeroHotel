@@ -46,7 +46,7 @@ public class CommentServiceImpl implements CommentService {
 	public Boolean addComment(Comment comment, HttpSession session) {
 		//数据校验
 		
-		if(comment.getMessage()==""||comment.getMessage()==null||comment.getName()==""||comment.getName()==null) {
+		if(comment.getMessage()==""||comment.getMessage()==null) {
 			return false;
 		}
 		

@@ -3,6 +3,9 @@ package com.hero.hotel.service.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
+
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,19 +27,15 @@ import com.hero.hotel.service.OrderService;
 public class OrderServiceImpl implements OrderService {
 	@Resource
 	private OrderDao orderDao;
-
 	@Resource
 	private HouseDao houseDao;
-
 	@Resource
 	private LiveNotesDao liveNotesDao;
-
 	// 订单表插入数据
 	@Override
 	public void addOrder(Order order) {
 		orderDao.addOrder(order);
 	}
-
 	// 订单项插入数据
 	@Override
 	public void addOrderItem(OrderItem orderItem) {
@@ -47,59 +46,48 @@ public class OrderServiceImpl implements OrderService {
 	public List<Integer> findOrderItemByOrderid(Integer orderid) {		
 		return orderDao.findOrderItemByOrderid(orderid);
 	}
-
-
 	// 个人信息表插入数据
 	@Override
 	public void addInfo(Info info) {
 		orderDao.addInfo(info);
 	}
-
 	// 查询个人信息id
 	@Override
 	public Info findId(String idcard) {
 		return orderDao.findId(idcard);
 	}
-
 	// 入住日志表插入数据
 	@Override
 	public void addLiveNotes(LiveNotes liveNotes) {
 		orderDao.addLiveNotes(liveNotes);
 	}
-
 	// 根据账号id获取消费金额，通过消费金额获取对应的会员折扣
 	@Override
 	public User findMonetaryByid(Integer id) {
 		return orderDao.findMonetaryByid(id);
 	}
-
 	@Override
 	public Vip findDiscountByMonetary(double vmoney) {
 		return orderDao.findDiscountByMonetary(vmoney);
 	}
-
 	// 查询订单id,根据订单编号查找
 	@Override
 	public Order findIdByOrderNumber(String orderNumber) {
 		return orderDao.findIdByOrderNumber(orderNumber);
 	}
-
 	@Override
 	public HouseType findPriceByTypeid(Integer typeid) {
 		return orderDao.findPriceByTypeid(typeid);
 	}
-
 	// 查找该类型的所有房间，查找当天入住日志表中该类房间已经入住的房间，
 	@Override
 	public List<Integer> findAllRoomsByTypeid(Integer typeid) {
 		return orderDao.findAllRoomsByTypeid(typeid);
 	}
-
 	@Override
 	public List<Integer> findAllliveRoomsByTypeid(LiveNotes liveNotes) {
 		return orderDao.findAllliveRoomsByTypeid(liveNotes);
 	}
-
 
 	
 	
@@ -113,9 +101,7 @@ public class OrderServiceImpl implements OrderService {
 	 * 查询某个角色所有订单
 	 */
 	@Override
-
-	public List<Info> findOrder(Info info) {
-		
+	public List<Info> findOrder(Info info) {		
 		return orderDao.findInfo(info);
 	}
 	//查询需要修改的订单信息
@@ -263,4 +249,5 @@ public class OrderServiceImpl implements OrderService {
 
 
     }
+	
 }

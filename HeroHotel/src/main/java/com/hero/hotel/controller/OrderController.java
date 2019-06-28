@@ -1,5 +1,6 @@
 package com.hero.hotel.controller;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +31,7 @@ public class OrderController {
 	private OrderService orderService;
 	//添加订单(订单中支付编号在支付完成后插入订单中)
 	@RequestMapping("/addorder")
-	public ModelAndView addOrder(Info info,Order order,OrderItem orderItem,@DateTimeFormat(pattern="yyyy-MM-dd") Date date1,@DateTimeFormat(pattern="yyyy-MM-dd") Date date2){
+	public ModelAndView addOrder(Double discount, Info info,Order order,OrderItem orderItem,@DateTimeFormat(pattern="yyyy-MM-dd") Date date1,@DateTimeFormat(pattern="yyyy-MM-dd") Date date2){
 		//入住时间
 		int day =(int)(date2.getTime()-date1.getTime())/(24*60*60*1000);
 		//计算总价:根据从前端获取的房间数量和房间价格，再从会员表中获取的折扣
@@ -43,29 +44,20 @@ public class OrderController {
 		order.setInfoid(info2.getInfoid());//存入个人信息id
 		order.setUserid(id);
 		User user = orderService.findMonetaryByid(id);
-		//从对象中获取对应的折扣
-		Vip vip = new Vip();
-		vip.setDiscount(1.0);
-		if (user != null) {	
-			if (user.getMonetary()<2000) {
-				vip.setDiscount(1.0);
-			} else if (user.getMonetary()>=2000 && user.getMonetary() < 5000) {
-				vip.setDiscount(0.9);
-			} else {
-				vip.setDiscount(0.8);
-			}
-		}
-		double total = 0.0;
+		//从前台查询顾客信息直接获取对应的折扣
+		double total1;
 		//总价
 		//查询房间单价
 		HouseType houseType = orderService.findPriceByTypeid(orderItem.getTypeid());
-		total = houseType.getPrice()*orderItem.getQuantity()*vip.getDiscount()*day+order.getDeposit();
+		BigDecimal b = houseType.getPrice();
+        int price = b.intValue();
+		total1 = price*orderItem.getQuantity()*discount*day+order.getDeposit();
+		BigDecimal total = new BigDecimal(total1); 
 		order.setTotal(total);//存入总价
 		//获取订单生成时间
 		Date date = new Date();
-		String orderTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-		order.setCreatetime(orderTime);//存入生成时间
-		order.setUpdatetime(orderTime);//存入修改时间
+		order.setCreatetime(date);//存入生成时间
+		order.setUpdatetime(date);//存入修改时间
 		//订单编号
 		String orderNumber = "" + System.currentTimeMillis()+id+new Random().nextInt(10);
 		order.setOrdernumber(orderNumber);//存入订单编号
@@ -124,8 +116,6 @@ public class OrderController {
 				orderService.addOrderItem(orderItem);
 				//订单根据订单id获取所有订单项id
 				List<Integer> orderItemids =orderService.findOrderItemByOrderid(order2.getOrderid());
-				System.out.println(roomIds.get(i)+"1111");
-				
 					liveNotes.setOrderItemid(orderItemids.get(i));
 					for (int k = 0; k < allDay.size(); k++) {
 						liveNotes.setDate(allDay.get(k));
@@ -134,7 +124,7 @@ public class OrderController {
 					}
 				}
 				
-			}	
+			}
 		model.setViewName("backstage-html/add-oder.html");
 		return model;
 	}
@@ -177,8 +167,8 @@ public class OrderController {
 		String endtime = sdf.format(date2);
 		orderItem.setStarttime(starttime);
 		orderItem.setEndtime(endtime);
-		String updatetime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());//获取当前修改订单时间
-		order.setUpdatetime(updatetime);
+		Date date = new Date();//获取当前修改订单时间
+		order.setUpdatetime(date);
 		model = orderService.updateOrder(info,order, orderItem);
 		List<Info> infos= orderService.findAllOrders();
 		model.addObject("infos", infos);

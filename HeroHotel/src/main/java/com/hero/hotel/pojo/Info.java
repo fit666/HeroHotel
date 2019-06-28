@@ -12,15 +12,17 @@ public class Info {
 	private String uname;// 姓名
 	private String sex;// 性别
 	private String idcard;// 身份证号
+	private Integer userid;
 	private List<Order> orders;
 
 	@Override
 	public String toString() {
 		return "Info [infoid=" + infoid + ", flag=" + flag + ", tel=" + tel + ", uname=" + uname + ", sex=" + sex
-				+ ", idcard=" + idcard + ", orders=" + orders + "]";
+				+ ", idcard=" + idcard + ", userid=" + userid + ", orders=" + orders + "]";
 	}
 
-	public Info(Integer infoid, Integer flag, String tel, String uname, String sex, String idcard, List<Order> orders) {
+	public Info(Integer infoid, Integer flag, String tel, String uname, String sex, String idcard, Integer userid,
+			List<Order> orders) {
 		super();
 		this.infoid = infoid;
 		this.flag = flag;
@@ -28,6 +30,7 @@ public class Info {
 		this.uname = uname;
 		this.sex = sex;
 		this.idcard = idcard;
+		this.userid = userid;
 		this.orders = orders;
 	}
 
@@ -81,6 +84,14 @@ public class Info {
 
 	public void setIdcard(String idcard) {
 		this.idcard = idcard;
+	}
+
+	public Integer getUserid() {
+		return userid;
+	}
+
+	public void setUserid(Integer userid) {
+		this.userid = userid;
 	}
 
 	public List<Order> getOrders() {

@@ -140,12 +140,7 @@ public class ManagerServiceImpl implements ManagerService{
 			if (!currentUser.isAuthenticated()) {
 				CustomizedToken customizedToken = new CustomizedToken(user.getAccount(),user.getPassword(),
 						MANAGER_LOGIN_TYPE);
-				Integer rm=user.getRm();
-				System.out.println(rm);
-				// 记住我
-				if (rm != null) {
-					customizedToken.setRememberMe(true);
-				}
+				
 				try {
 					currentUser.login(customizedToken);
 					//把当前manager的id存在session中

@@ -43,10 +43,6 @@
           <input type="radio" id="sex-2" name="sex">
           <label for="sex-2">女</label>
         </div>
-        <div class="radio-box">
-          <input type="radio" id="sex-3" name="sex">
-          <label for="sex-3">保密</label>
-        </div>
       </div>
       <div class="col-4"> </div>
     </div>
@@ -85,7 +81,8 @@
           <option value="" selected>请选择房间类型</option>
           <option value="1">单人间</option>
           <option value="2">标间</option>
-          <option value="3">大床房</option>
+          <option value="3">家庭房</option>
+          <option value="3">套房</option>
         </select>
         </span> </div>
       <div class="col-4"> </div>
@@ -100,7 +97,14 @@
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>押金：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" id="member-name" name="deposit" datatype="*2-16" nullmsg="用户名不能为空">
+        <input type="text" class="input-text" id="member-name" name="deposit">
+      </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>折扣：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" id="discount" name="discount">
       </div>
       <div class="col-4"> </div>
     </div>

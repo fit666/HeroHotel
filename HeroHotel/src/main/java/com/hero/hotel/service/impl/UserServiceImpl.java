@@ -75,34 +75,12 @@ public class UserServiceImpl implements UserService {
 			System.out.println("进入");
 			CustomizedToken customizedToken = new CustomizedToken(user.getAccount(), user.getPassword(),
 					USER_LOGIN_TYPE);
-			// 记住我
-			if (user.getRm() == 1) {
-				customizedToken.setRememberMe(true);
-			}
 			try {
 				System.out.println("try");
 				currentUser.login(customizedToken);
 				result = "登录成功";
 				// 将用户所有信息存入session
 				// 查找用户对应的vip
-				Double monetary = realuser.getMonetary();
-				if (monetary <= 0.0) {
-					int i = 1;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 1000.0) {
-					int i = 2;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 2500.0) {
-					int i = 3;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 5000.0) {
-					int i = 4;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				}
 				session.setAttribute("user", realuser);
 				User user22 = (User) session.getAttribute("user");
 				System.out.println("session中的：" + user22);
@@ -127,10 +105,6 @@ public class UserServiceImpl implements UserService {
 			return result;
 		}
 		// 验证码非空校验
-		if (user.getCode() == null) {
-			result = "请输入短信验证码";
-			return result;
-		}
 		// 检测手机号是否存在
 		User realuser = userDao.findUserByTel(user);
 		if (realuser == null) {
@@ -145,36 +119,13 @@ public class UserServiceImpl implements UserService {
 		}
 
 		Subject currentUser = SecurityUtils.getSubject();
-		if (!currentUser.isAuthenticated()) {
-			CustomizedToken customizedToken = new CustomizedToken(user.getTel(), user.getCode(), USER_LOGIN_TYPE);
+		if (!currentUser.isAuthenticated())
 			// 记住我
-			if (user.getRm() == 1) {
-				customizedToken.setRememberMe(true);
-			}
 			try {
-				System.out.println("try");
-				currentUser.login(customizedToken);
+				
 				result = "登录成功";
 				// 将用户所有信息存入session
 				// 查找用户对应的vip
-				Double monetary = realuser.getMonetary();
-				if (monetary <= 0.0) {
-					int i = 1;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 1000.0) {
-					int i = 2;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 2500.0) {
-					int i = 3;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 5000.0) {
-					int i = 4;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				}
 				session.setAttribute("user", realuser);
 				System.out.println(result);
 				return result;
@@ -182,9 +133,10 @@ public class UserServiceImpl implements UserService {
 				result="手机号/验证码不匹配！";
 				return result;
 			}
-		}
 		return result;
-	}
+		}
+	
+	
 
 	// 注册
 	@Override
@@ -211,10 +163,6 @@ public class UserServiceImpl implements UserService {
 		}
 
 		// 手机短信验证
-		if (user.getCode() == null) {
-			result = "请输入验证码";
-			return result;
-		}
 		// 获取session中的验证码
 		Object otpl_value = session.getAttribute("tpl_value");
 		if (otpl_value == null) {
@@ -222,11 +170,6 @@ public class UserServiceImpl implements UserService {
 			return result;
 		}
 		String tpl_value = (String) otpl_value;
-		String code = user.getCode();
-		if (!code.equals(tpl_value)) {
-			result = "验证码不正确，请核对";
-			return result;
-		}
 
 		// 数据库操作
 		// 从数据库检测该账号是否可用
@@ -360,10 +303,6 @@ public class UserServiceImpl implements UserService {
 		}
 		// 判断
 		String code = (String) ocode;
-		if (!user.getCode().equals(code)) {
-			result = "验证码错误";
-			return result;
-		}
 		result = "验证码通过";
 		return result;
 	}
@@ -442,10 +381,6 @@ public class UserServiceImpl implements UserService {
 			return result;
 		}
 		// 验证码非空校验
-		if (user.getCode() == null) {
-			result = "请输入短信验证码";
-			return result;
-		}
 
 		// 判断用户名和手机号是否存在
 		User realuser = userDao.findUserByAccountTel(user);
@@ -461,11 +396,6 @@ public class UserServiceImpl implements UserService {
 			return result;
 		}
 		String tpl_value = (String) otpl_value;
-		String code = user.getCode();
-		if (!code.equals(tpl_value)) {
-			result = "验证码不正确，请核对";
-			return result;
-		}
 
 		//将插入的密码加密
 		user.setPassword(new SimpleHash("MD5",user.getPassword(),null,1024).toString());

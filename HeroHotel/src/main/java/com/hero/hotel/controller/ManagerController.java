@@ -122,7 +122,7 @@ public class ManagerController {
 		info.setUname(uname);
 		info.setSex(sex);
 		info.setTel(tel);
-		manager.setInfo(info);
+		manager.setInfo(info);;
 		System.out.println(manager+","+info);
 		//更新管理员信息
 		boolean result=managerService.updateMessage(manager,info);

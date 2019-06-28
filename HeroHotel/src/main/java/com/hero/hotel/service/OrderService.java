@@ -39,8 +39,6 @@ public interface OrderService {
 	//查找该类型的所有房间，查找当天入住日志表中该类房间已经入住的房间，		
 	public List<Integer> findAllRoomsByTypeid(Integer typeid);
 	public List<Integer> findAllliveRoomsByTypeid(LiveNotes liveNotes);
-	  
-	
 	
 	//查询所有订单记录
 	public List<Info> findAllOrders();

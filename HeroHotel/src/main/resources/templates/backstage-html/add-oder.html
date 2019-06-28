@@ -28,7 +28,7 @@
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>姓名：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="" placeholder="" id="member-name" name="member-name" datatype="*2-16" nullmsg="用户名不能为空">
+        <input type="text" class="input-text" value="" placeholder="" id="member-name" name="uname" datatype="*2-16" nullmsg="用户名不能为空">
       </div>
       <div class="col-4"> </div>
     </div>
@@ -43,17 +43,13 @@
           <input type="radio" id="sex-2" name="sex">
           <label for="sex-2">女</label>
         </div>
-        <div class="radio-box">
-          <input type="radio" id="sex-3" name="sex">
-          <label for="sex-3">保密</label>
-        </div>
       </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>手机：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="" placeholder="" id="member-tel" name="member-tel"  datatype="m" nullmsg="手机不能为空">
+        <input type="text" class="input-text" value="" placeholder="" id="member-tel" name="tel"  datatype="m" nullmsg="手机不能为空">
       </div>
       <div class="col-4"> </div>
     </div>
@@ -67,40 +63,55 @@
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>入住时间：</label>
 			<div class="formControls col-5">
-				<input type="date" class="input-text" name="livedate" id="livedate" datatype="i" nullmsg="入住时间">
+				<input type="date" class="input-text" name="date1" id="livedate" datatype="i" nullmsg="入住时间">
 			</div>
 			<div class="col-4"> </div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>离开时间：</label>
 			<div class="formControls col-5">
-				<input type="date" class="input-text" name="leavedate" id="leavedate" datatype="i" nullmsg="离开时间">
+				<input type="date" class="input-text" name="date2" id="leavedate" datatype="i" nullmsg="离开时间">
 			</div>
 			<div class="col-4"> </div>
 		</div>
     <div class="row cl">
       <label class="form-label col-3">房间：</label>
       <div class="formControls col-5"> <span class="select-box">
-        <select class="select" size="1" name="demo1" datatype="*" nullmsg="请选择房间类型！">
+        <select class="select" size="1" name="typeid" datatype="*" nullmsg="请选择房间类型！">
           <option value="" selected>请选择房间类型</option>
           <option value="1">单人间</option>
           <option value="2">标间</option>
-          <option value="3">大床房</option>
+          <option value="3">家庭房</option>
+          <option value="3">套房</option>
         </select>
         </span> </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>房间数量：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" name="quantity" id="quantity" datatype="i" nullmsg="离开时间">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+    <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>押金：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" id="member-name" name="deposit" datatype="*2-16" nullmsg="用户名不能为空">
+        <input type="text" class="input-text" id="member-name" name="deposit">
+      </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>折扣：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" id="discount" name="discount">
       </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>留言：</label>
       <div class="formControls col-5">
-        <textarea cols="50" rows="10" class="input-text" name="message">如有需要，请留言</textarea>
+        <textarea cols="50" rows="10" class="input-text" name="message" datatype="*">如有需要，请留言</textarea>
       </div>
       <div class="col-4"> </div>
     </div>
