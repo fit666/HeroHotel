@@ -492,7 +492,7 @@ img.left{ margin:0 10px 10px 0; }
 .sprite-stars.star45{ background-position:0 -176px; }
 .sprite-stars.star5{ background-position:0 -195px; }
 .infor #slider-wrap{ 
-	background: url(../images/uploads/1280x800/moscow.jpg) no-repeat center top; background-size:cover; 
-	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/uploads/1280x800/moscow.jpg', sizingMethod='scale');
-	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/uploads/1280x800/moscow.jpg', sizingMethod='scale')";
+	background: url(../images/uploads/1280x800/v1.jpg) no-repeat center top; background-size:cover; 
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/uploads/1280x800/v1.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/uploads/1280x800/v1.jpg', sizingMethod='scale')";
 }

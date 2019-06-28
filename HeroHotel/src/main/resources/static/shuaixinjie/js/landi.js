@@ -7,7 +7,7 @@ $(function(){
 		type:"post",
 		data:{},
 		success:function(data){
-			if(data=="失败"){
+			if(data=="成功"){
 				$("#infobox").show();
 				$("#loginbox").hide();
 			}else{

@@ -23,27 +23,10 @@
 	</style>
 </head>
 
-<body class="infor">
+<body class="blog">
 	<div id="slider-wrap">
 	    <div class="camera_overlayer"></div>
 	</div>
-	<!--头-->
-<!-- 	<div class="top">
-		<div class="header clearfix">
-			<div class="header_l">
-				<a href="index.jsp"><img src="images/userlogo.png" /></a>
-				<h2>用户中心</h2>
-			</div>
-			<div class="header_r">
-				<div class="img_link" id="login_after">
-					欢迎您：<i>${sessionScope.USER.username}</i> <a href="room_order.jsp">[我的订单]</a> <a
-						href="index.jsp">[返回首页]</a> <a href="UserOutLoginServet">[退出登录]</a>
-				</div>
-			</div>
-
-			<div class="clears"></div>
-		</div>
-	</div> -->
 	<!--头-->
 <div id="wrapper">
 	<div id="container">
@@ -63,8 +46,8 @@
                     <li ><a href="bookroom.html">在线预定</a></li>
                     <li><a href="browse.html">酒店一览</a>
                     </li>
-                    <li><a href="index.html">酒店相关</a></li>
-                    <li><a href="#">留言</a></li>
+                    <li><a href="../gd.html">酒店位置</a></li>
+                    <li><a href="../share.html">留言</a></li>
                 </ul>
             </div>
         </header>
@@ -123,33 +106,34 @@
 					<caption><h2>个人资料</h2></caption>
 						<tr>
 							<th>账户名</th>
-							<td>22</td>
+							<td id="account">22</td>
 						</tr>
 						<tr>
 							<th>会员等级</th>
-							<td>44</td>
+							<td id="vip">44</td>
 						</tr>
 						<tr>
 							<th>消费金额</th>
-							<td>66</td>
+							<td id="money">66</td>
 						</tr>
 						<tr>
 							<th>手机号</th>
-							<td>66</td>
+							<td id="tel">66</td>
 						</tr>
 						<tr>
 							<th>姓名</th>
-							<td>66</td>
+							<td id="name">66</td>
 						</tr>
 						<tr>
 							<th>身份证号</th>
-							<td>66</td>
+							<td id="card">66</td>
 						</tr>
 						<tr>
 							<th>朋友信息</th>
 							<td>
-								<select>
+								<select id="option">
 									<option>朋友信息列</option>
+									
 								</select>
 							</td>
 						</tr>
@@ -158,12 +142,16 @@
 						</tr>
 						<tr>
 							<td>姓名</td>
-							<td><input type="text" id="name"></td>
+							<td><input type="text" id="uname"></td>
 						</tr>
 						<tr>
 							<td>性别</td>
 							<td>男<input type="radio" name="sex" checked="checked" value="男">
 							女<input type="radio" name="sex" value="女"></td>
+						</tr>
+						<tr>
+							<td>手机号</td>
+							<td><input type="text" id="utel"></td>
 						</tr>						
 						<tr>
 							<td>身份证号</td>
@@ -220,7 +208,32 @@
 		</div>
 
 	</div>
-
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					评论
+				</h4>
+			</div>
+			<div class="modal-body">
+			<input type="hidden" id="hid">
+				<textarea style="width:400px;" id="msg"></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-default" onclick='comment()'>
+					提交
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
 	<!---尾部-->
 		<div class="footer">
 			<div class="link">

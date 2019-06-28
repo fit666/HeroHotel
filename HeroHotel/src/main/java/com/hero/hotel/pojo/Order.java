@@ -2,108 +2,146 @@ package com.hero.hotel.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
-/*
- * 	订单表
- */
+
 public class Order {
-    private Integer orderid;//订单id
-    private Integer userid;//用户id
-    private Integer flag;
-    private Date createtime;//创建时间
-    private Date updatetime;//修改时间
-    private String ordernumber;//订单号
-    private String payway;//支付号
-    private BigDecimal total;//总价
+	
+	private Integer orderid;
+	private Date createtime;
+	private Date updatetime;
+	private String ordernumber;
+	private String paynumber;
+	private String payway;
+	private BigDecimal total;
+	private Integer userid;
+	private String message;
+	private Double deposit;
+	private Integer infoid;
+	private Integer flag;
+	
+	public Order() {
+		super();
+	}
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderid=" + orderid +
-                ", userid=" + userid +
-                ", flag=" + flag +
-                ", createtime=" + createtime +
-                ", updatetime=" + updatetime +
-                ", ordernumber='" + ordernumber + '\'' +
-                ", payway='" + payway + '\'' +
-                ", total=" + total +
-                '}';
-    }
+	public Order(Integer orderid, Date createtime, Date updatetime, String ordernumber, String paynumber, String payway,
+			BigDecimal total, Integer userid, String message, Double deposit, Integer infoid, Integer flag) {
+		super();
+		this.orderid = orderid;
+		this.createtime = createtime;
+		this.updatetime = updatetime;
+		this.ordernumber = ordernumber;
+		this.paynumber = paynumber;
+		this.payway = payway;
+		this.total = total;
+		this.userid = userid;
+		this.message = message;
+		this.deposit = deposit;
+		this.infoid = infoid;
+		this.flag = flag;
+	}
 
-    public Integer getOrderid() {
-        return orderid;
-    }
+	public Integer getOrderid() {
+		return orderid;
+	}
 
-    public void setOrderid(Integer orderid) {
-        this.orderid = orderid;
-    }
+	public void setOrderid(Integer orderid) {
+		this.orderid = orderid;
+	}
 
-    public Integer getUserid() {
-        return userid;
-    }
+	public Date getCreatetime() {
+		return createtime;
+	}
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
 
-    public Integer getFlag() {
-        return flag;
-    }
+	public Date getUpdatetime() {
+		return updatetime;
+	}
 
-    public void setFlag(Integer flag) {
-        this.flag = flag;
-    }
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
+	}
 
-    public Date getCreatetime() {
-        return createtime;
-    }
+	public String getOrdernumber() {
+		return ordernumber;
+	}
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
+	public void setOrdernumber(String ordernumber) {
+		this.ordernumber = ordernumber;
+	}
 
-    public Date getUpdatetime() {
-        return updatetime;
-    }
+	public String getPaynumber() {
+		return paynumber;
+	}
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
+	public void setPaynumber(String paynumber) {
+		this.paynumber = paynumber;
+	}
 
-    public String getOrdernumber() {
-        return ordernumber;
-    }
+	public String getPayway() {
+		return payway;
+	}
 
-    public void setOrdernumber(String ordernumber) {
-        this.ordernumber = ordernumber;
-    }
+	public void setPayway(String payway) {
+		this.payway = payway;
+	}
 
-    public String getPayway() {
-        return payway;
-    }
+	public BigDecimal getTotal() {
+		return total;
+	}
 
-    public void setPayway(String payway) {
-        this.payway = payway;
-    }
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
 
-    public BigDecimal getTotal() {
-        return total;
-    }
+	public Integer getUserid() {
+		return userid;
+	}
 
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
 
-    public Order(Integer orderid, Integer userid, Integer flag, Date createtime, Date updatetime, String ordernumber, String payway, BigDecimal total) {
-        this.orderid = orderid;
-        this.userid = userid;
-        this.flag = flag;
-        this.createtime = createtime;
-        this.updatetime = updatetime;
-        this.ordernumber = ordernumber;
-        this.payway = payway;
-        this.total = total;
-    }
+	public String getMessage() {
+		return message;
+	}
 
-    public Order() {
-    }
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Double getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(Double deposit) {
+		this.deposit = deposit;
+	}
+
+	public Integer getInfoid() {
+		return infoid;
+	}
+
+	public void setInfoid(Integer infoid) {
+		this.infoid = infoid;
+	}
+
+	public Integer getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Integer flag) {
+		this.flag = flag;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [orderid=" + orderid + ", createtime=" + createtime + ", updatetime=" + updatetime
+				+ ", ordernumber=" + ordernumber + ", paynumber=" + paynumber + ", payway=" + payway + ", total="
+				+ total + ", userid=" + userid + ", message=" + message + ", deposit=" + deposit + ", infoid=" + infoid
+				+ ", flag=" + flag + "]";
+	}
+	
+	
 }

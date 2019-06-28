@@ -1,4 +1,5 @@
 $(function() {
+	alert(3);
 	$("#textbody").load('usermsg.jsp');
 	$.ajax({
 		url:"../user/userInfo",
@@ -6,7 +7,27 @@ $(function() {
 		data:{},
 		dataTyoe:"json",
 		success:function(data){
-			alert(data);
+			if(data!=null){
+				var user=data.user;
+				var infos=data.infos;
+				var context="";
+				alert(user);
+				$("#account").html(user.account);
+				$("#vip").html(user.vip.vname);
+				$("#money").html(user.monetary);
+				$("#tel").html(user.tel);
+				for(var i=0;i<infos.length;i++){
+					if(infos[i].tel==user.tel){
+						$("#name").html(infos[i].uname);
+						$("#card").html(infos[i].idcard);
+					}else{
+					context+="<option>"+infos[i].uname+"--"+infos[i].sex+"--"+infos[i].tel+"--"+infos[i].idcard+"</option>"
+					}
+				}
+				$("#option").append(context);
+			}else{
+				alert("登录过期");
+			}
 		}
 	})
 })
@@ -31,8 +52,8 @@ function showOrders(){
 							+"<td>"+data[i].createtime+"</td>"
 							+"<td>"+data[i].total+"</td>"
 							+"<td>"+data[i].payway+"</td>"
-							+"<td><button type='button' class='btn btn-default' onclick='comment()'>评论</button></td>"
-						+"</tr>";
+							+"<td><button class='btn btn-default btn-lg' data-toggle='modal' data-target='#myModal' onclick='addorder("+data[i].ordernumber+")' >评论</button></td>"	
+							+"</tr>";
 			}
 			context=context+"<tr><td colspan='5'></td></tr>";
 			$("#orders").html(context);
@@ -42,6 +63,9 @@ function showOrders(){
 			showOrder();
 		}
 	})
+}
+function addorder(a){
+	$("#hid").val(a);
 }
 function reset(){
 	$.ajax({
@@ -60,11 +84,11 @@ function addInfo(){
 		url:"../info/addInfo",
 		type:"post",
 		data:{
-			"uname":$("#name").val(),
+			"uname":$("#uname").val(),
 			"sex":$(':radio[name="sex"]:checked').val(),
-			"idcard":$("#idcard").val()
+			"idcard":$("#idcard").val(),
+			"tel":$("#utel").val()
 		},
-
 		success:function(data){
 			alert(data);
 			if(data=="添加成功"){
@@ -98,7 +122,17 @@ function showVips(){
 	})
 }
 function comment(){
-	location.href="/share.html";
+	$.ajax({
+		url:"../comment/addComment",
+		type:"post",
+		data:{
+			"message":$("#msg").val(),
+			"orderid":$("#hid").val()
+		},
+		success:function(data){
+			alert(data);
+		}
+	})
 }
 function showOrder(){
 	$("#order").fadeIn("fast");

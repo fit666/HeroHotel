@@ -23,8 +23,12 @@ public class InfoController {
 	public String addInfo(Info info,HttpServletRequest request) {
 		String result ="添加失败";
 		Object obj = request.getSession().getAttribute("user");
+		System.out.println(info);
 		User user = (User) obj;
-		info.setTel(user.getTel());
+		if(obj==null) {
+			return null;
+		}
+		info.setUserid(user.getId());
 		if(infoService.addInfo(info)!=0) {
 			result="添加成功";
 		}

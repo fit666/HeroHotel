@@ -16,15 +16,21 @@ public class InfoServiceImpl implements InfoService{
 	@Resource
 	private InfoDao infoDao;
 	@Override
-	public List<Info> queryInfo(String tel) {
+	public List<Info> queryInfo(Integer id) {
 		// TODO Auto-generated method stub
-		return infoDao.queryInfoByTel(tel);
+		return infoDao.queryInfoByTel(id);
 	}
 
 	@Override
 	public int addInfo(Info info) {
 		// TODO Auto-generated method stub
 		return infoDao.addInfo(info);
+	}
+
+	@Override
+	public boolean addManagerInfo(Info info) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
