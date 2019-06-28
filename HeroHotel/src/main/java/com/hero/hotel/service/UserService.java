@@ -31,6 +31,7 @@ public interface UserService {
 	public String loginTel(User user,HttpSession session);
 	//忘记密码（修改密码）
 	public String forgetPass(User user, HttpSession session);
+	
 
 }
 

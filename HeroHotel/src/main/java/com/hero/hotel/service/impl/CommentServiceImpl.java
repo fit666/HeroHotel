@@ -31,6 +31,7 @@ public class CommentServiceImpl implements CommentService {
 		System.out.println("PageNum:"+PageNum);
 		int page=(PageNum-1)*10;
 		List<Comment> comments=commentDao.findAll(page);
+		System.out.println(comments);
 		return comments;
 	}
 //总条数

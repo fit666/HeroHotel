@@ -17,13 +17,9 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.hero.hotel.utils.JuHeDemo;
 import com.hero.hotel.utils.RegexUtil;
@@ -230,7 +226,9 @@ public class UserServiceImpl implements UserService {
 
 		// 数据库操作
 		// 从数据库检测该账号是否可用
-		User realuser = userDao.findAccountByAccount(user);
+		//查找用户
+		User realuser = userDao.findUserByAccountTel(user);
+		
 		if (realuser != null) {
 			result = "账号已存在";
 			return result;
@@ -477,5 +475,7 @@ public class UserServiceImpl implements UserService {
 		}
 		return result;
 	}
+	
+	
 
 }

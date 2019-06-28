@@ -123,4 +123,6 @@ public class UserController {
 		mav.setViewName("/backstage-html/vip-deleted.html");
 		return mav;
 	}
+	
+	
 }

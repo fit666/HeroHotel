@@ -100,6 +100,7 @@ public class ShiroConfiguration {
 		//配置无需认证的资源
 		map.put("/index.html","anon");
 		map.put("/login.html", "anon");
+		map.put("/login2.html", "authc,roles[user]");
 		map.put("/static/**", "anon");
 		map.put("/login.html", "anon");
 		map.put("/register", "anon");

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.hero.hotel.pojo.Role;
 import com.hero.hotel.pojo.User;
 import com.hero.hotel.pojo.Vip;
 
@@ -33,7 +34,7 @@ public interface UserDao {
 	public List<User> findAll();
 	
 	//查询数据库用户名（注册或登录时使用）
-	@Select("select * from t_user where account=#{account} and flag=1")
+	@Select("select * from t_user where account=#{account}  and flag=1")
 	public User findAccountByAccount(User user);
 	
 	//插入注册的信息到数据库（注册时使用）
@@ -81,4 +82,11 @@ public interface UserDao {
 	
 	@Update("update t_user set password=#{password} where account=#{account} and tel=#{tel} and flag=1 ")
 	public Boolean updatePass(User user);
+	
+	//查找用户名查找角色
+	@Select("select t_role.rolename from t_user inner join t_role on t_user.roleid=t_role.id where t_user.account=#{account} and t_user.flag=1 ")
+	public String findRoleByAccount(String account);
+	//根据手机号查找角色
+	@Select("select t_role.rolename from t_user inner join t_role on t_user.roleid=t_role.id where t_user.tel=#{tel} and t_user.flag=1 ")
+	public String findRoleByTel(String tel);
 }

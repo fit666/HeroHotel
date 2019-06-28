@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <title>酒店地图</title>
+    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
     <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
     <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
@@ -12,10 +13,12 @@
     <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
     <style>
        
-        html,body,#container{
+       
+        
+      #dd{
         margin:50px auto 15px;
             height:300px;
-            width: 500px;
+            width: 400px;
         }
 
         .content-window-card {
@@ -111,13 +114,51 @@
     </style>
 </head>
 <body>
-<div id='container'></div>
-<div class="info">
+<!-- <div id='container'></div> -->
+<div id="wrapper">
+	<div id="container">
+	
+		<!--start header -->
+		<header id="header">
+			<div id="logo">
+				<a href="index.html"><strong>英雄</strong>酒店</a>
+			</div>	
+			<div id="searchbox">
+				<form action="#">
+					<input type="text" id="search" placeholder="Search" />
+					<button type="submit" onclick="search1()"></button>
+				</form>
+			</div>
+			<div id="navigation">
+				<ul id="nav">
+					<li ><a href="user_center.html">个人信息</a></li>
+					<li ><a href="register.html">登录/注册</a></li>
+					<li class="selected"><a href="bookroom.html">在线预定</a></li>
+					<li><a href="browse.html">酒店一览</a>
+						<!--<ul>
+							<li><a href="browse-result.html">Browse Result</a></li>
+							<li><a href="browse-detail.html">Browse Detail</a></li>
+						</ul>-->
+					</li>
+					<!--<li><a href="blog.html">Blog</a></li>
+					<li><a href="contact.html">Contact</a></li>-->
+					<li><a href="index.html">酒店相关</a></li>
+					<li><a href="#">留言</a></li>
+				</ul>
+			</div>
+			
+	
+		</header>
+
+<div id="dd" ></div>
+<div style="top: 6rem;" class="info">
     <h4 id='status'></h4><hr>
     <p id='result'></p><hr>
 </div>
 <div id="panel"></div>
- <div id="container"><input type="button" onclick="mm()" value="酒店位置" > </div>
+ <div id="dd"><input type="button" onclick="mm()" value="酒店位置" > </div>
+ </div>
+ </div>
 <!-- </div> -->
 <!-- <div class="info">
     点击地图上的点标记，打开所添加的自定义信息窗体
@@ -127,7 +168,7 @@
         src="https://webapi.amap.com/maps?v=1.4.15&key=d8c2bbfa10fa624186f45cdb31fa3e30"></script>
 <script type="text/javascript">    //地图初始化时，在地图上添加一个marker标记,鼠标点击marker可弹出自定义的信息窗体
 var position = [104.063538, 30.573553]; //简写
-var map = new AMap.Map("container", {
+var map = new AMap.Map("dd", {
     resizeEnable: true,
 });
 
