@@ -1,20 +1,5 @@
-
 package com.hero.hotel.controller;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.hero.hotel.pojo.Order;
-import com.hero.hotel.pojo.User;
-import com.hero.hotel.service.OrderService;
-
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,28 +27,34 @@ import com.hero.hotel.service.OrderService;
 public class OrderController {
 	@Resource
 	private OrderService orderService;
-	@RequestMapping("allOrders")
-	@ResponseBody
-	public List<Order> queryOrder(HttpServletRequest request) {
-		Object obj =request.getSession().getAttribute("user");
-		User user = (User) obj;
-		List<Order> orders =orderService.queryAllOrder(1);
-		return orders;
-	}
+
+
 	// 添加订单(订单中支付编号在支付完成后插入订单中)
 	@RequestMapping("/addorder")
-	public ModelAndView addOrder(Info info, Order order, OrderItem orderItem,
-			@DateTimeFormat(pattern = "yyyy-MM-dd") Date date1, @DateTimeFormat(pattern = "yyyy-MM-dd") Date date2) {
-		// 入住时间
-		int day = (int) (date2.getTime() - date1.getTime()) / (24 * 60 * 60 * 1000);
-		// 计算总价:根据从前端获取的房间数量和房间价格，再从会员表中获取的折扣
-		// 从作用域中获取登录账号id
-		// 获取入住天数
-		int id = 1;// 还未获取
-		order.setUserid(id);// 存入账号id
+	public ModelAndView addOrder(Info info, Order order, OrderItem orderItem, @DateTimeFormat(pattern="yyyy-MM-dd") Date date1, @DateTimeFormat(pattern="yyyy-MM-dd") Date date2){
+		//入住时间
+		int day =(int)(date2.getTime()-date1.getTime())/(24*60*60*1000);
+		//计算总价:根据从前端获取的房间数量和房间价格，再从会员表中获取的折扣
+		//从作用域中获取登录账号id
+		//获取入住天数
+		int id = 1;//还未获取
+		//插入个人信息表
+		orderService.addInfo(info);
+		Info info2 = orderService.findId(info.getIdcard());
+		order.setInfoid(info2.getInfoid());//存入个人信息id
+		order.setUserid(id);
 		User user = orderService.findMonetaryByid(id);
-		// 从对象中获取对应的折扣
+		//从对象中获取对应的折扣
 		Vip vip = new Vip();
+		vip.setDiscount(1.0);
+		if (user != null) {
+			if (user.getMonetary()<2000) {
+				vip.setDiscount(1.0);
+			} else if (user.getMonetary()>=2000 && user.getMonetary() < 5000) {
+				vip.setDiscount(0.9);
+			} else {
+				vip.setDiscount(0.8);
+			}
 		if (user.getMonetary().doubleValue() < 2000) {
 			vip.setDiscount(1.0);
 		} else if (user.getMonetary().doubleValue() >= 2000 && user.getMonetary().doubleValue() < 5000) {
@@ -189,4 +180,3 @@ public class OrderController {
 	}
 
 }
-

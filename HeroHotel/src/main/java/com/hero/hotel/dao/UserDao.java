@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.hero.hotel.pojo.User;
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
@@ -18,7 +19,7 @@ import com.hero.hotel.pojo.Vip;
 public interface UserDao {
 	@Select("select account,password,tel,monetary,infoid from t_user where account=#{account} and flag=1")
 	public User querySelf(int account);
-	
+
 	@Update("update t_user set password=#{password} where tel=#{tel}")
 	public int updatePwd(User user);
 	//查询所有用户
@@ -87,5 +88,8 @@ public interface UserDao {
 	
 	@Update("update t_user set password=#{password} where account=#{account} and tel=#{tel} and flag=1 ")
 	public Boolean updatePass(User user);
-}
 
+	//查找vip
+	@Select("select max(id) from t_vip where vmoney<=#{money} and flag=1")
+	public Integer findVipId(BigDecimal money);
+}

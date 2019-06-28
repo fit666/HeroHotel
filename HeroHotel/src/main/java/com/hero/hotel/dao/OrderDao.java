@@ -179,7 +179,7 @@ public interface OrderDao {
 	// 添加订单，code by sxj
 	@Insert("insert into t_order(userid,createtime,ordernumber) values(#{userid},#{currenttime},#{ordernumber})")
 	public void addOrderInfo(Integer userid, String currenttime, String ordernumber);
-	
+
 	//根据订单号查询订单
 	@Select("select * from t_order where ordernumber=#{ordernumber}")
 	public Order findOrderByOrdernumber(String ordernumber);

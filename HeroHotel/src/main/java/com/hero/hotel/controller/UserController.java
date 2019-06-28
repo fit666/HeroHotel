@@ -42,7 +42,7 @@ public class UserController {
 	private UserService userService;
 	@Resource
 	private InfoService infoService;
-	
+
 	@RequestMapping("/userInfo")
 	@ResponseBody
 	public Map<String,Object> showInfo(HttpServletRequest request) {
@@ -66,7 +66,7 @@ public class UserController {
 
 	}
 
-	
+
 	@RequestMapping("/rpwd")
 	@ResponseBody
 	public String resetPwd(String pwd,HttpServletRequest request) {
@@ -195,5 +195,4 @@ public class UserController {
 		mav.setViewName("/backstage-html/vip-deleted.html");
 		return mav;
 	}
-
 }

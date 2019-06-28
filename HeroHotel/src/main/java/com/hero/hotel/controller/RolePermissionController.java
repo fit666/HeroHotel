@@ -3,14 +3,14 @@ package com.hero.hotel.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hero.hotel.pojo.Role;
+import com.hero.hotel.pojo.ThePermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hero.hotel.pojo.Role;
-import com.hero.hotel.pojo.ThePermission;
 import com.hero.hotel.service.RolePermissionService;
 import com.hero.hotel.service.RoleService;
 

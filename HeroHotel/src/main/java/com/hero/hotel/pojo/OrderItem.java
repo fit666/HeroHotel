@@ -2,9 +2,11 @@ package com.hero.hotel.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
-
+/*
+ * 	订单项表
+ */
 public class OrderItem {
-	
+
 	private Integer id;
 	private Integer houseid;
 	private Integer typeid;
@@ -14,12 +16,15 @@ public class OrderItem {
 	private Integer orderid;
 	private BigDecimal price;
 	private Integer flag;
-	
-	
+
+
 	public OrderItem() {
 		super();
 	}
 
+	public Integer getHouseid() {
+		return houseid;
+	}
 
 	public OrderItem(Integer id, Integer houseid, Integer typeid, String quantity, Date datetime, String day,
 			Integer orderid, BigDecimal price, Integer flag) {
@@ -35,6 +40,9 @@ public class OrderItem {
 		this.flag = flag;
 	}
 
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
 
 	public Integer getId() {
 		return id;
@@ -132,5 +140,5 @@ public class OrderItem {
 				+ ", datetime=" + datetime + ", day=" + day + ", orderid=" + orderid + ", price=" + price + ", flag="
 				+ flag + "]";
 	}
-	
+
 }

@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.hero.hotel.pojo.Role;
 import org.springframework.stereotype.Service;
 
 import com.hero.hotel.dao.RoleDao;
-import com.hero.hotel.pojo.Role;
 import com.hero.hotel.service.RoleService;
 
 @Service("roleService")

@@ -1,9 +1,9 @@
 package com.hero.hotel.service;
 
-import java.util.List;
-
 import com.hero.hotel.pojo.Role;
 import com.hero.hotel.pojo.ThePermission;
+
+import java.util.List;
 
 public interface RolePermissionService {
 

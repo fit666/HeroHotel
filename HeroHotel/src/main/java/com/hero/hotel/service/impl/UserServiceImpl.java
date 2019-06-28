@@ -1,5 +1,6 @@
 package com.hero.hotel.service.impl;
 
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService {
 	}
 	@Override
 	public User queryInfo(int account) {
-		
+
 		return userDao.querySelf(account);
 	}
 	@Override
@@ -120,6 +121,11 @@ public class UserServiceImpl implements UserService {
 					Vip vip = userDao.findVipByID(i);
 					realuser.setVip(vip);
 				}
+				BigDecimal monetary1 = realuser.getMonetary();
+				//查找数据库中vip等级
+				int i=userDao.findVipId(monetary1);
+				Vip vip = userDao.findVipByID(i);
+				realuser.setVip(vip);
 				session.setAttribute("user", realuser);
 				User user22 = (User) session.getAttribute("user");
 				System.out.println("session中的：" + user22);

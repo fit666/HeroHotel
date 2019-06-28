@@ -1,5 +1,7 @@
 package com.hero.hotel.service;
 
+import com.hero.hotel.pojo.User;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;

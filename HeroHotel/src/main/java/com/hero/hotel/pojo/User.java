@@ -1,6 +1,5 @@
 package com.hero.hotel.pojo;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /*
@@ -63,7 +62,7 @@ public class User {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	
+
 	public Date getCreatetime() {
 		return createtime;
 	}
@@ -134,5 +133,5 @@ public class User {
 				+ createtime + ", rm=" + rm + ", info=" + info + ", vip=" + vip + ", code=" + code + ", role=" + role
 				+ "]";
 	}
-		
+
 }

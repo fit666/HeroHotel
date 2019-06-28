@@ -276,7 +276,7 @@ public class OrderServiceImpl implements OrderService {
     }
 	@Override
 	public Order queryByOrderNumber(String ordernumber) {
-		
+
 		return orderDao.findOrderByOrdernumber(ordernumber);
 	}
 }

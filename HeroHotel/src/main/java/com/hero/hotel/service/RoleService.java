@@ -1,8 +1,8 @@
 package com.hero.hotel.service;
 
-import java.util.List;
-
 import com.hero.hotel.pojo.Role;
+
+import java.util.List;
 
 public interface RoleService {
 

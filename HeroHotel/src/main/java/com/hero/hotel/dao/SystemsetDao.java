@@ -1,9 +1,8 @@
 package com.hero.hotel.dao;
 
+import com.hero.hotel.pojo.SystemSet;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
-import com.hero.hotel.pojo.SystemSet;
 
 public interface SystemsetDao {
 	//获取系统设置表的信息

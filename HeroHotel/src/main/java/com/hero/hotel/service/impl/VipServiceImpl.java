@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.hero.hotel.pojo.Vip;
 import org.springframework.stereotype.Service;
 
 import com.hero.hotel.dao.VipDao;
-import com.hero.hotel.pojo.Vip;
 import com.hero.hotel.service.VipService;
 
 

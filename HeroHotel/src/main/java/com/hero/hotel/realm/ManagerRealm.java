@@ -1,5 +1,6 @@
 package com.hero.hotel.realm;
 
+import com.hero.hotel.pojo.User;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -10,7 +11,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-import com.hero.hotel.pojo.User;
 import com.hero.hotel.service.ManagerService;
 
 public class ManagerRealm extends AuthorizingRealm{

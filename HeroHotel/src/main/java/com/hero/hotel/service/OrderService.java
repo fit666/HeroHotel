@@ -1,5 +1,8 @@
 package com.hero.hotel.service;
 
+
+
+
 import java.util.List;
 
 import com.hero.hotel.pojo.Order;
@@ -66,7 +69,7 @@ public interface OrderService {
 	public Integer findHouseNumberByTypeid(List<String> todays,Integer typeid);
 
     public void orderSubmit(String id, String currenttime, String name, String sex, String tel, String idcard, List<String> todays, List<Integer> housenumber);
-	
+
     public Order queryByOrderNumber(String ordernumber);
 
 }

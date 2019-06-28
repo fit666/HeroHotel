@@ -1,8 +1,9 @@
 package com.hero.hotel.dao;
 
+import com.hero.hotel.pojo.Vip;
 import org.apache.ibatis.annotations.Select;
 
-import com.hero.hotel.pojo.Vip;;
+;
 
 public interface MembersDao {
 	//根据id查找vip信息

@@ -30,7 +30,7 @@ public class VipController {
 	@RequestMapping("/allVips")
 	@ResponseBody
 	private List<Vip> showAllVip() {
-		
+
 		return vipService.queryAllVip();
 	}
 	/*

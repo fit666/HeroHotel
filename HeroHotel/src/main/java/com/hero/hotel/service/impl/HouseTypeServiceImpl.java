@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.hero.hotel.pojo.HouseType;
 import org.springframework.stereotype.Service;
 
 import com.hero.hotel.dao.HouseTypeDao;
-import com.hero.hotel.pojo.HouseType;
 import com.hero.hotel.service.HouseTypeService;
 @Service
 public class HouseTypeServiceImpl implements HouseTypeService {
