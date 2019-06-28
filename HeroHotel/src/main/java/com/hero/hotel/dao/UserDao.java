@@ -23,7 +23,7 @@ public interface UserDao {
 		@Result(column="tel",property="tel"),
 		@Result(column="createtime",property="createtime"),
 		@Result(column="monetary",property="monetary"),
-		@Result(column="infoid",property="info",
+		@Result(column="tel",property="info",
 				one=@One(select="com.hero.hotel.dao.InfoDao.findById")
 		),
 		@Result(column="monetary",property="vip",
@@ -56,7 +56,7 @@ public interface UserDao {
 		@Result(column="tel",property="tel"),
 		@Result(column="createtime",property="createtime"),
 		@Result(column="monetary",property="monetary"),
-		@Result(column="infoid",property="info",
+		@Result(column="tel",property="info",
 				one=@One(select="com.hero.hotel.dao.InfoDao.findById")
 		),
 		@Result(column="monetary",property="vip",

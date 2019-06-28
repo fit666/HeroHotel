@@ -13,7 +13,7 @@
 <link href="/backstage/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
 <link href="/backstage/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
 
-<title>新增图片</title>
+<title>新增房间</title>
 </head>
 <body>
 <div class="pd-20">
@@ -83,7 +83,9 @@
 				<div class="uploader-list-container">
 					<div class="queueList">
 						<div id="dndArea" class="placeholder">
-							<div id="filePicker-2"></div>
+							<div id="filePicker-2">
+								
+							</div>
 							<p>或将照片拖到这里，单次最多可选3张</p>
 						</div>
 					</div>
@@ -120,7 +122,7 @@
 <script type="text/javascript" src="/backstage/js/H-ui.js"></script> 
 <script type="text/javascript" src="/backstage/js/H-ui.admin.js"></script> 
 <script type="text/javascript">
-$(function(){
+ $(function(){
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',
@@ -134,10 +136,10 @@ $(function(){
 
 	var uploader = WebUploader.create({
 		auto: true,
-		swf: 'lib/webuploader/0.1.5/Uploader.swf',
+		swf: '/backstage/lib/webuploader/0.1.5/Uploader.swf',
 	
 		// 文件接收服务端。
-		server: 'http://lib.h-ui.net/webuploader/0.1.5/server/fileupload.php',
+		server: '/picture/upload',
 	
 		// 选择文件的按钮。可选。
 		// 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -145,6 +147,9 @@ $(function(){
 	
 		// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
 		resize: false,
+		 formData: {                        
+             houseId:'@(Model)'
+         },
 		// 只允许选择图片文件。
 		accept: {
 			title: 'Images',
@@ -751,8 +756,8 @@ $(function(){
             updateTotalProgress();
 
         };
-
-        uploader.on( 'all', function( type ) {
+        /*获取服务器返回的数据*/
+       uploader.on( 'all', function( type ) {
             var stats;
             switch( type ) {
                 case 'uploadFinished':
@@ -800,11 +805,11 @@ $(function(){
         updateTotalProgress();
     });
 
-})( jQuery );
+})( jQuery ); 
 
-$(function(){
+ $(function(){
 	var ue = UE.getEditor('editor');
-});
+}); 
 </script>
 </body>
 </html>

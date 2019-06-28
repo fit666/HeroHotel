@@ -85,24 +85,7 @@ public class UserServiceImpl implements UserService {
 				result = "登录成功";
 				// 将用户所有信息存入session
 				// 查找用户对应的vip
-				Double monetary = realuser.getMonetary();
-				if (monetary <= 0.0) {
-					int i = 1;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 1000.0) {
-					int i = 2;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 2500.0) {
-					int i = 3;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 5000.0) {
-					int i = 4;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				}
+				
 				session.setAttribute("user", realuser);
 				User user22 = (User) session.getAttribute("user");
 				System.out.println("session中的：" + user22);
@@ -157,24 +140,7 @@ public class UserServiceImpl implements UserService {
 				result = "登录成功";
 				// 将用户所有信息存入session
 				// 查找用户对应的vip
-				Double monetary = realuser.getMonetary();
-				if (monetary <= 0.0) {
-					int i = 1;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 1000.0) {
-					int i = 2;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 2500.0) {
-					int i = 3;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				} else if (monetary < 5000.0) {
-					int i = 4;
-					Vip vip = userDao.findVipByID(i);
-					realuser.setVip(vip);
-				}
+			
 				session.setAttribute("user", realuser);
 				System.out.println(result);
 				return result;

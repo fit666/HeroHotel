@@ -16,8 +16,8 @@ public class DataServiceImpl implements DataService{
 		// 数据库导出
 		String user = "root"; // 数据库帐号
 		String password = "123456"; // 登陆密码
-		String database = "herohotel"; // 需要备份的数据库名
-		String filepath = "d:\\herohotel.sql"; // 备份的路径地址
+		String database = "sb"; // 需要备份的数据库名
+		String filepath = "d:\\sb.sql"; // 备份的路径地址
 		String stmt1 = "mysqldump " + database + " -u " + user + " -p"
 		+ password + " --result-file=" + filepath;
 		
@@ -37,10 +37,10 @@ public class DataServiceImpl implements DataService{
 	 */
 	@Override
 	public String dataReduction() {
-		String filepath = "d:\\herohotel.sql"; // 备份的路径地址
+		String filepath = "d:\\sb.sql"; // 备份的路径地址
 		//新建数据库test
-		String stmt1 = "mysqladmin -u root -p123456 create herohotel";
-		String stmt2 = "mysql -u root -p123456 herohotel< " + filepath;
+		String stmt1 = "mysqladmin -u root -p123456 create sb";
+		String stmt2 = "mysql -u root -p123456 sb< " + filepath;
 		String[] cmd = { "cmd", "/c", stmt2 };
 		try {
 			Runtime.getRuntime().exec(stmt1);

@@ -4,7 +4,7 @@ package com.hero.hotel.pojo;
  *  	居住记录表
  */
 public class LiveNotes {
-	private Integer id;// 记录id
+	/*private Integer id;// 记录id
 	private Integer houseid;// 房间id
 	private Integer typeid;// 房间类型id
 	private Integer infoid;// 个人信息id
@@ -12,7 +12,15 @@ public class LiveNotes {
 
 	private Integer flag;
 	private String date;// 居住时间
-
+*/	
+	private Integer id;
+	private Integer houseid;
+	private Integer typeid;
+	private String date;
+	private Integer infoid;
+	private Integer orderItemid;
+	private Integer flag;
+	
 	@Override
 	public String toString() {
 		return "LiveNotes{" + "id=" + id + ", houseid=" + houseid + ", typeid=" + typeid + ", infoid=" + infoid

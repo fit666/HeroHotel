@@ -181,7 +181,7 @@ public class ManagerController {
 		info.setSex(sex);
 		info.setTel(tel);
 		info.setUname(name);
-		//判断管理员是否已经注册
+		/*//判断管理员是否已经注册
 		User oldManager=managerService.findManagerPwd(tel);
 		if(oldManager!=null){
 			mav.addObject("result","添加失败，该手机号已经注册");
@@ -191,7 +191,7 @@ public class ManagerController {
 			mav.addObject("roles",roles);
 			mav.setViewName("/backstage-html/manager-add2.html");
 			return mav;
-		}
+		}*/
 		Date date=new Date();
 		manager.setCreatetime(date);
 		manager.setRoleid(roleid);
@@ -200,13 +200,15 @@ public class ManagerController {
 		boolean b1=managerService.addManager(manager,info);
 		if(b1){
 			List<User> managers=managerService.findAllManagers();
+			System.out.println(managers);
 			mav.addObject("managers",managers);
 			mav.setViewName("/backstage-html/manager-list.html");
 		}else{
-			mav.addObject("result","添加失败，请检查信息是否已经添加");
+			mav.addObject("result","添加失败，该账号已注册");
 			mav.addObject("manager", manager);
 			mav.addObject("info", info);
 			List<Role> roles=roleService.findAllRoles();
+			
 			mav.addObject("roles",roles);
 			mav.setViewName("/backstage-html/manager-add2.html");
 		}

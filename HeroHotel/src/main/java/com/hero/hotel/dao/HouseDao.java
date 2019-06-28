@@ -51,6 +51,6 @@ public interface HouseDao {
 	public boolean stertRoom(Integer id);
 
 	//根据房间类型添加房间
-	@Insert("insert into t_house(clean,maintenance,typeid) values(1,1,#{typeid}) ")
+	@Insert("insert into t_house(typeid) values(#{typeid}) ")
 	public boolean addRoom(Integer typeid);
 }

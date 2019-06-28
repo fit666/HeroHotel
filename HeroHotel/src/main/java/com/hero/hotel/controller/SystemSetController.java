@@ -29,6 +29,7 @@ public class SystemSetController {
 	 */
 	@RequestMapping("/updateSet")
 	public ModelAndView updateSet(SystemSet set1){
+		System.out.println(set1);
 		ModelAndView mav=new ModelAndView();
 		String result=null;
 		//判断数据是否正确
@@ -36,7 +37,10 @@ public class SystemSetController {
 				|| set1.getFindvipmessagebyname()==null
 				|| set1.getMoneytoint()==null){
 			result="选项不能为空";
-			return mav;
+			
+		}else if(set1.getAlldiscountrate()>=1 || set1.getAlldiscountrate()<0){
+			result="全场打折率不正确";
+			
 		}else{
 			boolean res=systemsetService.updateSet(set1);
 			if(res){
@@ -48,6 +52,8 @@ public class SystemSetController {
 			}
 		}
 		mav.addObject("result", result);
+		SystemSet set=systemsetService.findRules();
+		mav.addObject("set", set);
 		mav.setViewName("/backstage-html/system-billingrules2.html");
 		return mav;
 	}
