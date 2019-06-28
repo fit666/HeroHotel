@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import com.hero.hotel.utils.RegexUtil;
 import net.sf.json.JSONArray;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hero.hotel.pojo.HouseType;
@@ -30,126 +32,7 @@ import com.hero.hotel.service.OrderService;
 public class OrderController {
 	@Resource
 	private OrderService orderService;
-	//添加订单(订单中支付编号在支付完成后插入订单中)
-	@RequestMapping("/addorder")
-	public ModelAndView addOrder(Info info,Order order,OrderItem orderItem,@DateTimeFormat(pattern="yyyy-MM-dd") Date date1,@DateTimeFormat(pattern="yyyy-MM-dd") Date date2){
-		//入住时间
-		int day =(int)(date2.getTime()-date1.getTime())/(24*60*60*1000);
-		//计算总价:根据从前端获取的房间数量和房间价格，再从会员表中获取的折扣
-		//从作用域中获取登录账号id
-		//获取入住天数
-		int id = 1;//还未获取
-		//插入个人信息表
-		orderService.addInfo(info);
-		Info info2 = orderService.findId(info.getIdcard());
-		order.setInfoid(info2.getInfoid());//存入个人信息id
-		order.setUserid(id);
-		User user = orderService.findMonetaryByid(id);
-		//从对象中获取对应的折扣
-		Vip vip = new Vip();
-		vip.setDiscount(1.0);
-		if (user != null) {
-			if (user.getMonetary()<2000) {
-				vip.setDiscount(1.0);
-			} else if (user.getMonetary()>=2000 && user.getMonetary() < 5000) {
-				vip.setDiscount(0.9);
-			} else {
-				vip.setDiscount(0.8);
-			}
-		}
-		double total = 0.0;
-		//总价
-		//查询房间单价
-		HouseType houseType = orderService.findPriceByTypeid(orderItem.getTypeid());
-		total = houseType.getPrice()*orderItem.getQuantity()*vip.getDiscount()*day+order.getDeposit();
-		order.setTotal(total);//存入总价
-		//获取订单生成时间
-		Date date = new Date();
-		String orderTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-		order.setCreatetime(orderTime);//存入生成时间
-		order.setUpdatetime(orderTime);//存入修改时间
-		//订单编号
-		String orderNumber = "" + System.currentTimeMillis()+id+new Random().nextInt(10);
-		order.setOrdernumber(orderNumber);//存入订单编号
-		orderService.addOrder(order);
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-		//插入房间记录表
-		/*
-		 * 查询可用的房间
-		 */
-		//查询所有房间id
-		LiveNotes liveNotes = new LiveNotes();
-		liveNotes.setTypeid(orderItem.getTypeid());
-
-		List<String> allDay = new ArrayList<>();
-		//保留前端传入的入住时间
-		Date date3 = date1;
-		while(date1.getTime()!=date2.getTime()){
-
-			allDay.add(sdf.format(date1));
-			date1=new Date(date1.getTime()+24*60*60*1000);
-		}
-		//所有房间id
-		List<Integer> roomIds = orderService.findAllRoomsByTypeid(orderItem.getTypeid());
-		//将日期转换为字符串
-		for (int i = 0; i < allDay.size(); i++) {
-			liveNotes.setDate(allDay.get(i));
-			//查询已经入住的房间id
-			List<Integer> liveRoomIds = orderService.findAllliveRoomsByTypeid(liveNotes);
-			roomIds.removeAll(liveRoomIds);
-		}
-		ModelAndView model = new ModelAndView();
-		model.setViewName("backstage-html/add-oder.html");
-		if (roomIds.size() <= 0) {
-			return model ;
-		}
-		//查询个人信息id
-		Order order2 = orderService.findIdByOrderNumber(orderNumber);
-
-		//将个人信息id加入入住信息
-		if (roomIds.size() >= orderItem.getQuantity()) {
-
-			liveNotes.setInfoid(info2.getInfoid());
-			//将可入住房间加入入住信息表
-			int roomnumber=orderItem.getQuantity();
-			for (int i = 0; i < roomnumber; i++) {
-				liveNotes.setHouseid(roomIds.get(i));
-				orderItem.setPrice(houseType.getPrice());//插入价格
-				orderItem.setOrderid(order2.getOrderid());//存入订单id
-				orderItem.setStarttime(sdf.format(date3));//存入入住时间
-				orderItem.setEndtime(sdf.format(date2));
-				orderItem.setQuantity(1);
-				orderItem.setDay(day);//存入入住天数
-				orderItem.setHouseid(liveNotes.getHouseid());
-				orderService.addOrderItem(orderItem);
-				//订单根据订单id获取所有订单项id
-				List<Integer> orderItemids =orderService.findOrderItemByOrderid(order2.getOrderid());
-				System.out.println(roomIds.get(i)+"1111");
-
-				liveNotes.setOrderItemid(orderItemids.get(i));
-				for (int k = 0; k < allDay.size(); k++) {
-					liveNotes.setDate(allDay.get(k));
-					orderService.addLiveNotes(liveNotes);
-
-				}
-			}
-
-		}
-		model.setViewName("backstage-html/add-oder.html");
-		return model;
-	}
-
-	//查找某位客人的所有订单记录
-	@RequestMapping("/findorder")
-	public ModelAndView findOrder(Info info) {
-		ModelAndView model = new ModelAndView();
-		List<Info> infos = orderService.findOrder(info);
-		model.addObject("infos", infos);
-		model.setViewName("backstage-html/findOrder.html");
-		return model;
-	}
+	
 
 
 	//查询所有订单记录
@@ -206,30 +89,7 @@ public class OrderController {
 		return model;
 	}
 
-
-	// 取消订单   要跳 那些页面 你来定
-	@RequestMapping("/canceOrder")
-	public ModelAndView canceOrder(Integer id, Integer houseid) {
-		Boolean flag = orderService.settleAccounts(id, houseid);
-		ModelAndView model = new ModelAndView();
-		if (flag) {
-			List<Info> infos= orderService.findAllOrders();
-			model.addObject("infos", infos);
-			model.setViewName("backstage-html/findOrder.html");
-		}
-		return model;
-
-		//用一个简单的数组装，下标是房间类型
-        Integer[] houseNumberAbleIive = new Integer[5];
-		houseNumberAbleIive[0]=0;
-        for (int i = 1; i < 5 ; i++) {  //i是房间类型
-            Integer houseNumber=orderService.findHouseNumberByTypeid(todays,i);
-            houseNumberAbleIive[i]=houseNumber;
-        }
-		//把这个数组装下的日期传进session，订单用
-		session.setAttribute("timeslot",todays);
-		return houseNumberAbleIive;
-	}
+       
 	//提交用户的预订单，code by sxj
 	@RequestMapping("/createorder")
 	@ResponseBody
@@ -258,16 +118,20 @@ public class OrderController {
 		}
 		Integer id = user.getId();
 		System.out.println("用户的id:"+id);
-		Vip vip = (Vip) user.getVip();
-		System.out.println(vip.getDiscount());
-
+		//Vip vip = (Vip) user.getVip();
+		//System.out.println(vip.getDiscount());
+		
+		Double discount = 0.8;   //从session获得会员等级得到折扣
+		
 		//如果这个用户已经有订单了，需要先将这个订单处理了
 		List<Integer> flags = orderService.findFlagById(id);
 		System.out.println(flags);
-		for (int i = 0; i < flags.size(); i++) {
-			if(flags.get(i).equals(2)){
-				result="你还有订单未处理";
-				return result;
+		if(flags!=null) {
+			for (int i = 0; i < flags.size(); i++) {
+				if(flags.get(i).equals(2)){
+					result="你还有订单未处理";
+					return result;
+				}
 			}
 		}
 
@@ -275,7 +139,7 @@ public class OrderController {
 		//Integer id = 1;  //从session获得一个id
 
 
-		Double discount = vip.getDiscount();   //从session获得会员等级得到折扣
+		
 
 
 		if(!tel.matches(RegexUtil.REGEX_MOBILE)){

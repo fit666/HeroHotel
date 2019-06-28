@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
 	//查询订单id,根据订单编号查找
 	@Override
 	public List<Integer> findOrderItemByOrderid(Integer orderid) {
-		return orderDao.findOrderItemByOrderid(orderid);
+		return null;
 	}
 
 
@@ -167,21 +167,21 @@ public class OrderServiceImpl implements OrderService {
 	// 取消、退房
 
 	public Boolean OutAndCance(Integer orderItemid, Integer houseid,Integer type){
-		Boolean flag = false;
-		// 2表示 完结
-		flag = orderDao.settleAccounts(2, 1, orderItemid);
-		// 1 表示 可住
-		flag = houseDao.changeHouseTypeByHouseid(type, houseid);
-
-		liveNotesDao.changeType(2, orderItemid);
-
-		// 查询订单里的订单项 有没有 没有结账的id 1 表示是否有 订单项 未完结
-		List<Integer> ids = orderDao.isNoSettle(1, orderItemid);
-		// 判断 该订单 是否还有 未完成订单项
-		if (ids.size() == 0) {
-			flag = orderDao.changeOrderFlag(2, 1, orderItemid);
-		}
-		return flag;
+//		Boolean flag = false;
+//		// 2表示 完结
+//		flag = orderDao.settleAccounts(2, 1, orderItemid);
+//		// 1 表示 可住
+//		flag = houseDao.changeHouseTypeByHouseid(type, houseid);
+//
+//		liveNotesDao.changeType(2, orderItemid);
+//
+//		// 查询订单里的订单项 有没有 没有结账的id 1 表示是否有 订单项 未完结
+//		List<Integer> ids = orderDao.isNoSettle(1, orderItemid);
+//		// 判断 该订单 是否还有 未完成订单项
+//		if (ids.size() == 0) {
+//			flag = orderDao.changeOrderFlag(2, 1, orderItemid);
+//		}
+		return null;
 	}
 
 
@@ -302,5 +302,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<Integer> findFlagById(Integer id) {
 		return orderDao.findFlagById(id);
+	}
+
+	@Override
+	public ModelAndView findAllOrder(Info info) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

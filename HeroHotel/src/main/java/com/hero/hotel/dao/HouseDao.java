@@ -29,18 +29,14 @@ public interface HouseDao {
 	@Update("UPDATE t_house SET flag = #{flag} WHERE id = #{houseid} ")
 	public Boolean changeHouseTypeByHouseid(@Param("flag") Integer flag, @Param("houseid") Integer houseid);
 
-	@Select("select * from livenotes where typeid=#{typeid}")
 	@Select("select * from t_livenotes where typeid=#{typeid}")
 	List<LiveNotes> findHouseByType(Integer typeid);
 
-	@Select("select id from house where typeid=#{typeid}")
 	@Select("select id from t_house where typeid=#{typeid}")
 	List<Integer> findHouseidByType(Integer typeid);
 
 	@Insert("insert into t_livenotes(houseid,typeid,date,infoid,flag) values(#{houseid},#{typeid},#{s},#{infoid},1)")
     public void addDay(Integer houseid, int typeid, String s, Integer infoid);
-	@Insert("insert into livenotes(houseid,typeid,date,infoid,flag) values(#{houseid},#{typeid},#{s},#{infoid},1)")
-	public void addDay(Integer houseid, int typeid, String s, Integer infoid);
 
 	//根据房间类型id查询所有对应的房间
 	@Select("select * from t_house where typeid=#{typeid}")
