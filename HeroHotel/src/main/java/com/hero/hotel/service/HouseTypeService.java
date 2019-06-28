@@ -7,4 +7,8 @@ import java.util.List;
 public interface HouseTypeService {
 	
 	public List<HouseType> queryAllType();
+
+	public List<HouseType> findAllHouses();
+
+	public List<HouseType> findAllType();
 }

@@ -22,7 +22,7 @@ public interface ManagerDao {
 			@Result(column = "tel", property = "tel"), @Result(column = "createtime", property = "createtime"),
 			@Result(column = "monetary", property = "monetary"),
 			@Result(column = "infoid", property = "info",
-				one = @One(select = "com.hero.hotel.dao.InfoDao.findById")),
+				one = @One(select = "com.hero.hotel.dao.InfoDao.findByInfoid")),
 			@Result(column = "roleid", property = "role", 
 				one = @One(select = "com.hero.hotel.dao.RoleDao.findRoleById")) 
 	})
@@ -42,7 +42,7 @@ public interface ManagerDao {
 		@Result(column = "tel", property = "tel"), @Result(column = "createtime", property = "createtime"),
 		@Result(column = "monetary", property = "monetary"),
 		@Result(column = "infoid", property = "info",
-			one = @One(select = "com.hero.hotel.dao.InfoDao.findById")) 
+			one = @One(select = "com.hero.hotel.dao.InfoDao.findByInfoid")) 
 	})
 	public User findManagerById(Integer id);
 	//修改管理员的角色
@@ -51,4 +51,7 @@ public interface ManagerDao {
 	//插入新的管理员账号信息
 	@Insert("insert into t_user(account,password,tel,createtime,roleid,infoid) values (#{account},#{password},#{tel},#{createtime},#{roleid},#{infoid})")
 	public boolean addManager(User manager);
+	//在管理员表中添加个人信息id
+	@Update("update t_user set infoid=#{infoid} where id=#{id}")
+	public boolean updateManagerInfo(User manager);
 }

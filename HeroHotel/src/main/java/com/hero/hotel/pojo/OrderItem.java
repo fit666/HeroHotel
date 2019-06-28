@@ -1,3 +1,4 @@
+
 package com.hero.hotel.pojo;
 
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ public class OrderItem {
 	private Integer orderid;
 	private BigDecimal price;
 	private Integer flag;
+	private String endtime;
 
 
 	public OrderItem() {
@@ -54,10 +56,7 @@ public class OrderItem {
 	}
 
 
-	public Integer getHouseid() {
-		return houseid;
-	}
-
+	
 
 	public void setHouseid(Integer houseid) {
 		this.houseid = houseid;

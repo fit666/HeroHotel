@@ -26,5 +26,7 @@ public interface HouseTypeDao {
 	//获取所有的房间类型
 	@Select("select typeid,hname from t_housetype where flag!=0")
 	List<HouseType> findAllType();
+	
+	List<HouseType> queryAllType();
 
 }

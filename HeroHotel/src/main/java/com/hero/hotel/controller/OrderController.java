@@ -28,9 +28,8 @@ public class OrderController {
 	@Resource
 	private OrderService orderService;
 
-
 	// 添加订单(订单中支付编号在支付完成后插入订单中)
-	@RequestMapping("/addorder")
+/*	@RequestMapping("/addorder")
 	public ModelAndView addOrder(Info info, Order order, OrderItem orderItem, @DateTimeFormat(pattern="yyyy-MM-dd") Date date1, @DateTimeFormat(pattern="yyyy-MM-dd") Date date2){
 		//入住时间
 		int day =(int)(date2.getTime()-date1.getTime())/(24*60*60*1000);
@@ -48,13 +47,7 @@ public class OrderController {
 		Vip vip = new Vip();
 		vip.setDiscount(1.0);
 		if (user != null) {
-			if (user.getMonetary()<2000) {
-				vip.setDiscount(1.0);
-			} else if (user.getMonetary()>=2000 && user.getMonetary() < 5000) {
-				vip.setDiscount(0.9);
-			} else {
-				vip.setDiscount(0.8);
-			}
+		
 		if (user.getMonetary().doubleValue() < 2000) {
 			vip.setDiscount(1.0);
 		} else if (user.getMonetary().doubleValue() >= 2000 && user.getMonetary().doubleValue() < 5000) {
@@ -88,7 +81,7 @@ public class OrderController {
 		 * 查询可用的房间
 		 */
 		// 查询所有房间id
-		LiveNotes liveNotes = new LiveNotes();
+	/*	LiveNotes liveNotes = new LiveNotes();
 		liveNotes.setTypeid(orderItem.getTypeid());
 
 		List<String> allDay = new ArrayList<>();
@@ -132,7 +125,8 @@ public class OrderController {
 		orderService.addOrderItem(orderItem);
 		model.setViewName("backstage-html/add-oder.html");
 		return model;
-	}
+
+		}*/
 
 	// 查找某位客人的所有订单记录
 	@RequestMapping("/findorder")

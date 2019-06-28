@@ -18,5 +18,22 @@ public class HouseTypeServiceImpl implements HouseTypeService {
 		// TODO Auto-generated method stub
 		return houseTypeDao.queryAllType();
 	}
-
+	/*
+	 * 查询所有房间信息(non-Javadoc)
+	 * @see com.hero.hotel.service.HouseService#findAllHouses()
+	 */
+	@Override
+	public List<HouseType> findAllHouses() {
+		
+		return houseTypeDao.findAllHouses();
+	}
+	/*
+	 * 获取所有的房间类型(non-Javadoc)
+	 * @see com.hero.hotel.service.HouseTypeService#findAllType()
+	 */
+	@Override
+	public List<HouseType> findAllType() {
+		
+		return houseTypeDao.findAllType();
+	}
 }

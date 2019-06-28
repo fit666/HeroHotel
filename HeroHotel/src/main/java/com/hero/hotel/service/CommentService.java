@@ -17,4 +17,5 @@ public interface CommentService {
 	public List<Comment> findAllNow();
 
 	Boolean deleteComment(Integer id);
+	Boolean addComment(Comment comment, HttpSession session);
 }

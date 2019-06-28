@@ -102,6 +102,7 @@ public class UserServiceImpl implements UserService {
 				result = "登录成功";
 				// 将用户所有信息存入session
 				// 查找用户对应的vip
+
 				BigDecimal monetar = realuser.getMonetary();
 				Double monetary = monetar.doubleValue();
 				if (monetary <= 0.0) {
@@ -126,6 +127,7 @@ public class UserServiceImpl implements UserService {
 				int i=userDao.findVipId(monetary1);
 				Vip vip = userDao.findVipByID(i);
 				realuser.setVip(vip);
+
 				session.setAttribute("user", realuser);
 				User user22 = (User) session.getAttribute("user");
 				System.out.println("session中的：" + user22);
@@ -180,6 +182,7 @@ public class UserServiceImpl implements UserService {
 				result = "登录成功";
 				// 将用户所有信息存入session
 				// 查找用户对应的vip
+
 				BigDecimal monetar = realuser.getMonetary();
 				Double monetary = monetar.doubleValue();
 				if (monetary <= 0.0) {
@@ -199,6 +202,7 @@ public class UserServiceImpl implements UserService {
 					Vip vip = userDao.findVipByID(i);
 					realuser.setVip(vip);
 				}
+
 				session.setAttribute("user", realuser);
 				System.out.println(result);
 				return result;

@@ -1,3 +1,4 @@
+
 package com.hero.hotel.pojo;
 
 import java.util.Date;

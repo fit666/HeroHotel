@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Update;
 public interface VipDao {
 	//根据累计消费查找vip信息
 /*	@Select("SELECT * FROM t_vip WHERE id = (select MAX(id) from t_vip where id =(select MAX(id) from t_vip WHERE vmoney<#{monetary}) or id= (select MIN(id) from t_vip WHERE vmoney>#{monetary}))")*/
-	@Select("SELECT * FROM t_vip WHERE id =(select MAX(id) from t_vip WHERE vmoney<#{monetary})")
+	@Select("SELECT * FROM t_vip WHERE id =(select MAX(id) from t_vip WHERE vmoney<=#{monetary})")
 	public Vip findById(double monetary);
 	//获取所有的vip信息
 	@Select("select * from t_vip where flag=1")
