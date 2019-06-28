@@ -1,6 +1,7 @@
 package com.hero.hotel.controller;
 
 import com.hero.hotel.pojo.Order;
+import com.hero.hotel.pojo.User;
 import com.hero.hotel.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +22,12 @@ public class CrudController {
     @ResponseBody
     public Order showOrder(HttpSession session){
         //获取用户的id
-//        User user = (User) session.getAttribute("user");
-//        Integer userid = user.getId();
-        Integer userid = 1;
+         User user = (User) session.getAttribute("user");
+        Integer userid = user.getId();
         //根据uerid去找到订单相关所有信息
         Order order=orderService.findOrderByUserid(userid);
 
+        System.out.println(order);
 
         return order;
     }

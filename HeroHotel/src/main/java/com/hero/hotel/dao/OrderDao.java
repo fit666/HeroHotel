@@ -2,12 +2,7 @@ package com.hero.hotel.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Many;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import com.hero.hotel.pojo.HouseType;
 import com.hero.hotel.pojo.Info;
@@ -216,7 +211,7 @@ public interface OrderDao {
 
 	//添加订单项
     @Insert("insert into t_orderitem(houseid,starttime,endtime,typeid,day,orderid,quantity,price) values(#{integer},#{starttime},#{endtime},#{typeid},#{day},#{orderid},1,#{price})")
-    void addOrderitem(Integer integer, String starttime, String endtime, int typeid, int day, Integer orderid,Double price);
+	public void addOrderitem(Integer integer, String starttime, String endtime, int typeid, int day, Integer orderid,Double price);
 
 
 

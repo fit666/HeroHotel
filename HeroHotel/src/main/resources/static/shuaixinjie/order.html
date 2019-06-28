@@ -203,6 +203,7 @@ Copyright &copy; 2003-2014  黄山 &middot; 醉温泉&nbsp;&nbsp;All rights rese
             url:"../crud/showOrder",
             type:"post",
             success:function(data){
+                console.log(data)
                 $("#ordernumber").html(data.ordernumber)
                 if(data.flag==2){
                     $("#ispay").html("未支付")
