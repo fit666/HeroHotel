@@ -38,7 +38,7 @@ public interface UserDao {
 	public User findAccountByAccount(User user);
 	
 	//插入注册的信息到数据库（注册时使用）
-	@Insert("insert into t_user(account,password,tel,createtime,roleid) values(#{account},#{password},#{tel},#{createtime},#{roleid})")
+	@Insert("insert into t_user(account,password,tel,roleid) values(#{account},#{password},#{tel},#{roleid})")
 	public boolean insertAccount(User user);
 	//停用vip账号
 	@Update("update t_user set flag=2 where id=#{id}")

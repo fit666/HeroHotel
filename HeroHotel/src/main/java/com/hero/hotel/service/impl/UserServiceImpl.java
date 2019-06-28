@@ -12,6 +12,7 @@ import com.hero.hotel.pojo.Vip;
 import com.hero.hotel.realm.CustomizedToken;
 import com.hero.hotel.service.UserService;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -81,20 +82,22 @@ public class UserServiceImpl implements UserService {
 				result = "登录成功";
 				// 将用户所有信息存入session
 				// 查找用户对应的vip
-				Double monetary = realuser.getMonetary();
-				if (monetary <= 0.0) {
+				BigDecimal monetary1 = realuser.getMonetary();
+				Double monetary=monetary1.doubleValue();
+				System.out.println("monetary:"+monetary);
+				if (monetary <= 1000.0) {
 					int i = 1;
 					Vip vip = userDao.findVipByID(i);
 					realuser.setVip(vip);
-				} else if (monetary < 1000.0) {
+				} else if (monetary < 2500.0) {
 					int i = 2;
 					Vip vip = userDao.findVipByID(i);
 					realuser.setVip(vip);
-				} else if (monetary < 2500.0) {
+				} else if (monetary < 5000.0) {
 					int i = 3;
 					Vip vip = userDao.findVipByID(i);
 					realuser.setVip(vip);
-				} else if (monetary < 5000.0) {
+				} else {
 					int i = 4;
 					Vip vip = userDao.findVipByID(i);
 					realuser.setVip(vip);
@@ -153,20 +156,22 @@ public class UserServiceImpl implements UserService {
 				result = "登录成功";
 				// 将用户所有信息存入session
 				// 查找用户对应的vip
-				Double monetary = realuser.getMonetary();
-				if (monetary <= 0.0) {
+				BigDecimal monetary1 = realuser.getMonetary();
+				Double monetary=monetary1.doubleValue();
+				System.out.println("monetary:"+monetary);
+				if (monetary <= 1000.0) {
 					int i = 1;
 					Vip vip = userDao.findVipByID(i);
 					realuser.setVip(vip);
-				} else if (monetary < 1000.0) {
+				} else if (monetary < 2500.0) {
 					int i = 2;
 					Vip vip = userDao.findVipByID(i);
 					realuser.setVip(vip);
-				} else if (monetary < 2500.0) {
+				} else if (monetary < 5000.0) {
 					int i = 3;
 					Vip vip = userDao.findVipByID(i);
 					realuser.setVip(vip);
-				} else if (monetary < 5000.0) {
+				} else {
 					int i = 4;
 					Vip vip = userDao.findVipByID(i);
 					realuser.setVip(vip);
@@ -235,16 +240,7 @@ public class UserServiceImpl implements UserService {
 		}
 		// 给账号密码加密
 		user.setPassword(new SimpleHash("MD5", user.getPassword(), null, 1024).toString());
-		/*
-		 * // 生成创建时间 String createTime = new
-		 * SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new Date());
-		 */
-		user.setCreatetime(new Date());// 将信息插入到数据库
-		// 生成创建时间
-		// String createTime = new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new
-		// Date());
-		Date createTime = new Date();
-		user.setCreatetime(createTime);// 将信息插入到数据库
+		
 		// 默认角色为1，普通用户
 		user.setRoleid(1);
 		boolean b = userDao.insertAccount(user);
