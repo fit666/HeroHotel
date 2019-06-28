@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="pd-20">
-  <form action="" method="post" class="form form-horizontal" id="form-member-add">
+  <form action="/order/addorder" method="post" class="form form-horizontal" id="form-member-add">
   
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>姓名：</label>
@@ -88,6 +88,20 @@
           <option value="3">大床房</option>
         </select>
         </span> </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>押金：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" id="member-name" name="deposit" datatype="*2-16" nullmsg="用户名不能为空">
+      </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>留言：</label>
+      <div class="formControls col-5">
+        <textarea cols="50" rows="10" class="input-text" name="message">如有需要，请留言</textarea>
+      </div>
       <div class="col-4"> </div>
     </div>
       <div class="col-9 col-offset-3">
