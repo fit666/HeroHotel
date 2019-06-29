@@ -98,10 +98,15 @@ public class ShiroConfiguration {
 		//LinkedHashMap是一个根据某种规则有序的hashmap
 		Map<String,String> map=new LinkedHashMap<String,String>();
 		//配置无需认证的资源
-		map.put("/index.html","anon");
-		map.put("/login.html", "anon");
+		/*map.put("/index.html","anon");*/
+		map.put("/login.html", "anon");//匿名访问登录
+		map.put("/login2.html", "anon");//匿名访问登录2
+		map.put("/user/login", "anon");//匿名访问登录
+		map.put("/user/loginTel", "anon");//匿名访问登录
+		map.put("/user/register", "anon");//匿名注册
+		map.put("/user/code", "anon");//匿名发送验证码
+		map.put("/user/forget", "anon");//匿名忘记密码
 		map.put("/static/**", "anon");
-		map.put("/login.html", "anon");
 		map.put("/register", "anon");
 		map.put("/login", "anon");
 		map.put("/druid/**", "anon");
